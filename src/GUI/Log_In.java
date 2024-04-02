@@ -134,15 +134,15 @@ public class Log_In extends JFrame implements KeyListener {
                 if (tk.getTT() == 0) {
                     JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    if (passwordCheck.equals(tk.getMK())) {
-                        // try {
-                        //     this.dispose();
-                        //     Main main = new Main(tk);
-                        //     main.setVisible(true);
-                        // } 
-                        // catch (UnsupportedLookAndFeelException ex) {
-                        //     Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
-                        // }
+                    if (BCrypt.checkpw(passwordCheck, tk.getMK())) {
+                        try {
+                            this.dispose();
+                            Main main = new Main(tk);
+                            main.setVisible(true);
+                        } 
+                        catch (UnsupportedLookAndFeelException ex) {
+                            Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "Mật khẩu không khớp", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                     }
