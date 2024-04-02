@@ -152,11 +152,11 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){
                 int MNV = rs.getInt("MNV");
-                String username = rs.getString("TDN");
+                String TDN = rs.getString("TDN");
                 String MK = rs.getString("MK");
                 int MNQ = rs.getInt("MNQ");
                 int TT = rs.getInt("TT");
-                TaiKhoanDTO tk = new TaiKhoanDTO(MNV, username, MK, MNQ, TT);
+                TaiKhoanDTO tk = new TaiKhoanDTO(MNV, TDN, MK, MNQ, TT);
                 result.add(tk);
             }
             JDBCUtil.closeConnection(con);
