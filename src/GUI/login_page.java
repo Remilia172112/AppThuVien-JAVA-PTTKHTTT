@@ -35,7 +35,7 @@ public class login_page extends JFrame {
         login_nhap = new JPanel();
         login_nhap.setBackground(Color.WHITE);
         login_nhap.setLayout(new GridLayout(7 , 1 , 10 , 0));
-        // login_nhap.setBorder(new EmptyBorder(12 , 300 ,0 ,300));
+        login_nhap.setBorder(new EmptyBorder(0,0,0,15));
         login_nhap.setPreferredSize(new Dimension(400 , 500));
 
         lb1 = new JLabel("Đăng nhập vào BEST BOOK");
