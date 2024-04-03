@@ -343,7 +343,6 @@ VALUES
 INSERT INTO `SANPHAM` (`TENSP`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENN`, `TIENX`, `SL`, `ISBN`, `TT`)
 VALUES
 
-
 INSERT INTO `NHAXUATBAN` (`TENNXB`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
 VALUES
         ('Nhà xuất bản Kim Đồng', 'Số 55 Quang Trung, Nguyễn Du, Hai Bà Trưng, Hà Nội', '1900571595', 'cskh_online@nxbkimdong.com.vn', 1),

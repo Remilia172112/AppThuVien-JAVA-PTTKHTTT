@@ -1,6 +1,7 @@
 package DAO;
 
 import config.JDBCUtil;
+import helper.BCrypt;
 import DTO.TaiKhoanDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +26,7 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setInt(1, t.getMNV());
             pst.setString(2, t.getTDN());
-            pst.setString(3, t.getMK());
+            pst.setString(3, BCrypt.hashpw(t.getMK(), BCrypt.gensalt(12)));
             pst.setInt(4, t.getMNQ());
             pst.setInt(5, t.getTT());
             result = pst.executeUpdate();
@@ -60,7 +61,7 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
             Connection con = (Connection) JDBCUtil.getConnection();
             String sql = "UPDATE TAIKHOAN TK JOIN NHANVIEN NV ON TK.MNV = NV.MNV SET `MK` = ? WHERE `EMAIL` = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setString(1, password);
+            pst.setString(1, BCrypt.hashpw(password, BCrypt.gensalt(12)));
             pst.setString(2, email);
             pst.executeUpdate();
             JDBCUtil.closeConnection(con);
