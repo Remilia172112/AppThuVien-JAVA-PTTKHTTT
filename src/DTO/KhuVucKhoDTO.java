@@ -4,50 +4,50 @@ import java.util.Objects;
 
 public class KhuVucKhoDTO {
 
-    private int makhuvuc;
-    private String tenkhuvuc;
-    private String ghichu;
+    private int MKVK;
+    private String TEN;
+    private String GHICHU;
 
     public KhuVucKhoDTO() {
     }
 
-    public KhuVucKhoDTO(int makhuvuc, String tenkhuvuc, String ghichu) {
-        this.makhuvuc = makhuvuc;
-        this.tenkhuvuc = tenkhuvuc;
-        this.ghichu = ghichu;
+    public KhuVucKhoDTO(int MKVK, String TEN, String GHICHU) {
+        this.MKVK = MKVK;
+        this.TEN = TEN;
+        this.GHICHU = GHICHU;
     }
 
     public int getMakhuvuc() {
-        return makhuvuc;
+        return MKVK;
     }
 
-    public void setMakhuvuc(int makhuvuc) {
-        this.makhuvuc = makhuvuc;
+    public void setMakhuvuc(int MKVK) {
+        this.MKVK = MKVK;
     }
 
     public String getTenkhuvuc() {
-        return tenkhuvuc;
+        return TEN;
     }
 
-    public void setTenkhuvuc(String tenkhuvuc) {
-        this.tenkhuvuc = tenkhuvuc;
+    public void setTenkhuvuc(String TEN) {
+        this.TEN = TEN;
     }
 
     public String getGhichu() {
-        return ghichu;
+        return GHICHU;
     }
 
-    public void setGhichu(String ghichu) {
-        this.ghichu = ghichu;
+    public void setGhichu(String GHICHU) {
+        this.GHICHU = GHICHU;
     }
 
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.makhuvuc;
-        hash = 97 * hash + Objects.hashCode(this.tenkhuvuc);
-        hash = 97 * hash + Objects.hashCode(this.ghichu);
+        hash = 97 * hash + this.MKVK;
+        hash = 97 * hash + Objects.hashCode(this.TEN);
+        hash = 97 * hash + Objects.hashCode(this.GHICHU);
         return hash;
     }
 
@@ -63,12 +63,18 @@ public class KhuVucKhoDTO {
             return false;
         }
         final KhuVucKhoDTO other = (KhuVucKhoDTO) obj;
-        return true;
+        if (this.getMakhuvuc() != other.getMakhuvuc()) {
+            return false;
+        }
+        if (!Objects.equals(this.getTenkhuvuc(), other.getTenkhuvuc())) {
+            return false;
+        }
+        return Objects.equals(this.getGhichu(), other.getGhichu());
     }
 
     @Override
     public String toString() {
-        return "KhuVucKho{" + "makhuvuc=" + makhuvuc + ", tenkhuvuc=" + tenkhuvuc + ", ghichu=" + ghichu + '}';
+        return "KhuVucKho{" + "Ma khu vuc kho = " + MKVK + ", Ten khu vuc kho = " + TEN + ", Ghi chu = " + GHICHU + '}';
     }
     
 }

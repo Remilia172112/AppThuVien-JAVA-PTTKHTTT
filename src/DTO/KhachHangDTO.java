@@ -94,16 +94,13 @@ public class KhachHangDTO {
         if (other.getMaKH() != this.getMaKH()) {
             return false;
         }
-        if (other.getHoten() != this.getHoten()) {
+        if (!Objects.equals(other.getHoten(), this.getHoten())) {
             return false;
         }
-        if (other.getSdt() != this.getSdt()) {
+        if (!Objects.equals(other.getSdt(), this.getSdt())) {
             return false;
         }
-        if (other.getDiachi() != this.getDiachi()) {
-            return false;
-        }
-        if (other.getNgaythamgia() != this.getNgaythamgia()) {
+        if (!Objects.equals(other.getDiachi(),this.getDiachi())) {
             return false;
         }
         return true;

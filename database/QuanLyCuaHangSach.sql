@@ -35,7 +35,7 @@ CREATE TABLE `NHANVIEN` (
     `GIOITINH` INT(11) NOT NULL COMMENT 'Giới tính',
     `NGAYSINH` DATE NOT NULL COMMENT 'Ngày sinh',
     `SDT` VARCHAR(11) NOT NULL COMMENT 'Số điện thoại',
-    `EMAIL` VARCHAR(50) NOT NULL COMMENT 'Email',
+    `EMAIL` VARCHAR(50) NOT NULL UNIQUE COMMENT 'Email',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MNV)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -44,7 +44,7 @@ CREATE TABLE `NHANVIEN` (
 CREATE TABLE `TAIKHOAN` (
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
     `MK` VARCHAR(255) NOT NULL COMMENT 'Mật khẩu',
-    `TDN` VARCHAR(255) NOT NULL COMMENT 'Tên đăng nhập',
+    `TDN` VARCHAR(255) NOT NULL UNIQUE COMMENT 'Tên đăng nhập',
     `MNQ` INT(11) NOT NULL COMMENT 'Mã nhóm quyền',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     `OTP` VARCHAR(50) DEFAULT NULL COMMENT 'Mã OTP',
@@ -57,7 +57,7 @@ CREATE TABLE `KHACHHANG` (
     `NGAYTHAMGIA` DATE NOT NULL COMMENT 'Ngày tạo dữ liệu',
     `DIACHI` VARCHAR(255) NOT NULL COMMENT 'Địa chỉ',
     `SDT` VARCHAR(11) NOT NULL COMMENT 'Số điện thoại',
-    `EMAIL` VARCHAR(50) DEFAULT '' COMMENT 'Email',
+    `EMAIL` VARCHAR(50) DEFAULT '' UNIQUE COMMENT 'Email',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MKH)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -127,7 +127,7 @@ CREATE TABLE `CTPHIEUKIEMKE` (
 
 CREATE TABLE `SANPHAM` (
     `MSP` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã sản phẩm',
-    `TENSP` VARCHAR(255) NOT NULL COMMENT 'Tên sản phẩm',
+    `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên sản phẩm',
     `HINHANH` VARCHAR(255) NOT NULL COMMENT 'Hình sản phẩm',
     `DANHMUC` VARCHAR(255) NOT NULL COMMENT 'Danh mục',
     `NAMXB` INT(11) NOT NULL COMMENT 'Năm xuất bản',
@@ -143,7 +143,7 @@ CREATE TABLE `SANPHAM` (
 
 CREATE TABLE `NHAXUATBAN` (
     `MNXB` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhà xuất bản',
-    `TENNXB` VARCHAR(255) NOT NULL COMMENT 'Tên nhà xuất bản',
+    `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên nhà xuất bản',
     `DIACHI` VARCHAR(255) NOT NULL COMMENT 'Địa chỉ',
     `SDT` VARCHAR(11) NOT NULL COMMENT 'Số điện thoại',
     `EMAIL` VARCHAR(50) NOT NULL COMMENT 'Email',
@@ -153,7 +153,7 @@ CREATE TABLE `NHAXUATBAN` (
 
 CREATE TABLE `KHUVUCKHO` (
     `MKVK` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khu vực kho',
-    `TENKV` VARCHAR(255) NOT NULL COMMENT 'Tên khu vực kho',
+    `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên khu vực kho',
     `GHICHU` VARCHAR(255) DEFAULT '' COMMENT 'Ghi chú',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MKVK)
@@ -340,7 +340,7 @@ VALUES
         (2, 3, 2, 40000, ''),
         (2, 4, 2, 80000, '');
 
-INSERT INTO `SANPHAM` (`TENSP`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENN`, `TIENX`, `SL`, `ISBN`, `TT`)
+INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENN`, `TIENX`, `SL`, `ISBN`, `TT`)
 VALUES
 
 INSERT INTO `NHAXUATBAN` (`TENNXB`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
@@ -355,7 +355,7 @@ VALUES
         ('Nhà xuất bản Đinh Tị Book', 'Số 78, Đường số 1, P. 4, Q. Gò Vấp, TP. Hồ Chí Minh', '02473093388', 'contacts@dinhtibooks.vn', 1),
         ('Nhà xuất bản Nhã Nam', 'Số 59, Đỗ Quang, Trung Hoà, Cầu Giấy, Hà Nội', '02435146876', '', 1);
 
-INSERT INTO `KHUVUCKHO` (`TENKV`, `GHICHU`, `TT`)
+INSERT INTO `KHUVUCKHO` (`TEN`, `GHICHU`, `TT`)
 VALUES
         ('Khu vực A', 'Thiếu nhi', 1),
         ('Khu vực B', 'Khoa học', 1),
