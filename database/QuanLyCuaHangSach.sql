@@ -348,7 +348,46 @@ VALUES
         ('Bạn đắt giá bao nhiêu?', 'txq47334nnwj1cw5f5ux7egme8erj2k7.jpg', 'Sách dành cho giới trẻ', 2021,'NXB Nhã Nam' ,'Vãn Tình', 0, 107000, 1, 8936186543500, 0 ),
         ('Hãy gọi tên tôi', '90adcd1cc9b81aa80a272a653c7785e5.png', 'Sách dành cho giới trẻ', 2020,'NXB Văn hóa - Văn nghệ TP. HCM' ,'Chanel Miller', 0, 118000, 1, 9786046863748, 0 ),
         ('Đời ngắn đừng ngủ dài', 'q9rcr9y1ax8gb1u372kxb0eivlg2xegc.jpeg', 'Sách dành cho giới trẻ', 2020,'NXB Trẻ' ,'Robin Sharma', 0, 64000, 1, 8934974158691, 0 ),
-        (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        ('Tội ác sau những bức tranh', 'rl7k9yn47k492vlxrbbnx9jmdy3ps89x.jpeg', 'Văn học - Nghệ thuật', 2022,'NXB Phụ nữ Việt Nam' ,'Jason Rekulak', 0, 146000, 1, 8934974158692, 0 ),
+        ('Người rỗng', '93lh9xopdaqdtimbzosmo3n3h3evhmcv.jpeg', 'Văn học - Nghệ thuật', 2020,'NXB Văn học' ,'John Dickson Carr', 0, 70000, 1, 9786049847257, 0 ),
+        ('Tạp văn Nguyễn Ngọc Tư', '4b1ea768cbbef544c4ca16fe1967634b.jpg', 'Văn học - Nghệ thuật', 2021,'NXB Trẻ' ,'Nguyễn Ngọc Tư', 0, 72000, 1, 8934974168607, 0 ),
+        ('Bông sen vàng', 'ythnuw9ks3kk4l0lb1pa6fdtoo1tz32a.jpeg', 'Văn học - Nghệ thuật', 2022,'NXB Chính trị Quốc gia Sự thật' ,'Sơn Tùng', 0, 144000, 1, 8934974168617, 0 ),
+        ('Hoa tuylip đen', 'sbgtbeq0vz1dhnag0qf3jrp6enxjgw20.jpeg', 'Văn học - Nghệ thuật', 2017,'NXB Văn học' ,'Alexandre Dumas cha', 0, 49000, 1, 8936067597097, 0 ),
+        ('Truyện ngụ ngôn E Dốp', '883868zq1vtv4qqm7plgby2g8k0i2mkv.jpeg', 'Văn học - Nghệ thuật', 2019,'NXB Văn học' ,'Aesop', 0, 59000, 1, 9786049633198, 0 ),
+        ('Nhật ký trong tù', 'cd19aa6163295ef2dff24012f78b9aec.jpg', 'Văn học - Nghệ thuật', 2021,'NXB Chính trị Quốc gia Sự thật' ,'Hồ Chí Minh', 0, 105000, 1, 9786043238112, 0 ),
+        ('Phận liễu', 'detep2imksxnh97om03avji0q1p47clp.jpeg', 'Văn học - Nghệ thuật', 2020,'NXB Công an nhân dân' ,'Chu Thanh Hương', 0, 162000, 1, 9786047244300, 0 ),
+        ('Phận liễu', '6619719473f6f132a18182f019364abf.jpg', 'Văn học - Nghệ thuật', 2020,'NXB Đại Học Kinh Tế Quốc Dân' ,'Ken Honda', 0, 85500, 1, 8935095629664, 0 ),
+        ('Lũ trẻ thủy tinh', 'rnwjyi3x3zzxzjxlq4ba0zaeqpu0lugk.jpeg', 'Văn học thiếu nhi', 2021,'NXB Kim Đồng' ,'Kristina Ohlsson', 0, 28000, 1, 9786042190862, 0 ),
+        ('Lũ trẻ đường ray', '22znw9gr4514dul0lc5rgisvc47qxfw6.jpeg', 'Văn học thiếu nhi', 2020,'NXB Văn học' ,'Edith Nesbit', 0, 63000, 1, 9786049693465, 0 ),
+        ('Tớ sợ cái đồng hồ', 'fs2xgxjq2yswm6l33gfv50mwg6mgu4qm.jpeg', 'Văn học thiếu nhi', 2018,'NXB Đông Tây' ,'Nguyễn Quỳnh Mai', 0, 52000, 1, 9786045653012, 0 ),
+        ('Khu rừng trong thành phố', 'cmpq0o6lb0jqmna7f9n2k7y61z84if0u.jpeg', 'Văn học thiếu nhi', 2018,'NXB Đông Tây' ,'Nguyễn Quỳnh Mai', 0, 58000, 1, 9786045653005, 0 ),
+        ('Đảo ngàn sao', '5hghrc3synmydygcyzwsl7noz3pt7u31.jpeg', 'Văn học thiếu nhi', 2021,'NXB Kim Đồng' ,'Emma Karinsdotter', 0, 48000, 1, 9786042221603, 0 ),
+        ('Cậu bé bạc', 'ivssbyx4axf57c2tsww8kqyt1a4xauhv.jpeg', 'Văn học thiếu nhi', 2020,'NXB Kim Đồng' ,'Kristina Ohlsson', 0, 30000, 1, 9786042186315, 0 ),
+        ('Ngựa ô yêu dấu', 'wf05ukmavgsdar1a772qc24c1iawtcfg.jpeg', 'Văn học thiếu nhi', 2022,'NXB Dân Trí' ,'Anna Sewell', 0, 109000, 1, 9786043565027, 0 ),
+        ('Chuyện con mèo dạy hải âu bay', 'iuj2x3gbldratw5xzjg9s1aterb66k8t.jpeg', 'Văn học thiếu nhi', 2019,'NXB Hội Nhà Văn' ,'Luis Sepúlveda', 0, 42000, 1, 8935235222113, 0 ),
+        ('Chú bé mang Pyjama sọc', 'o53krzx7g5du11thdcme6xl2uqd2s8gp.jpeg', 'Văn học thiếu nhi', 2018,'NXB Hội Nhà Văn' ,'John Boyne', 0, 58000, 1, 8935235217898, 0 ),
+        ('Những lá thư thời chiến Việt Nam (Tuyển tập)', '25ac83e2311e9fcaf146c655f672d6eb.jpg', 'Sách Chính trị - Xã hội', 2023,'NXB Chính trị Quốc gia Sự thật' ,'Đặng Vương Hưng', 0, 144000, 1, 8935279148646, 0 ),
+        ('Kỷ yếu Hoàng Sa', 'kry3vs4zab398dch1jc23zycidl0jvaq.jpeg', 'Sách Chính trị - Xã hội', 2014,'NXB Thông tin & Truyền thông' ,'UBND Huyện Hoàng Sa', 0, 153000, 1, 9786048002930, 0 ),
+        ('Dấu ấn Việt Nam trên Biển Đông', '1odzbcuzqspuou03uwdnstegf6pe4jp6.jpeg', 'Sách Chính trị - Xã hội', 2012,'NXB Thông tin & Truyền thông' ,'TS. Trần Công Trục', 0, 191000, 1, 9786048018740, 0 ),
+        ('Chân dung Ngô Tất Tố', 'ytja13yxd96huojklmyy1cadwq4rykoi.jpeg', 'Sách Chính trị - Xã hội', 2014,'NXB Thông tin & Truyền thông' ,'Cao Đắc Điểm - Ngô Thị Thanh Lịch', 0, 38000, 1, 9786048005214, 0 ),
+        ('Chính sách đối ngoại đổi mới của Việt Nam (1986 - 2015)', 'eplg2rc40dd1zfp0wzp4zo5s0aok0khp.jpeg', 'Sách Chính trị - Xã hội', 2018,'NXB Thế Giới' ,'PGS. TS. Phạm Quang Minh', 0, 56000, 1, 9786047744749, 0 ),
+        ('Đặc trưng và vai trò của tầng lớp trung lưu ở Việt Nam', 'v4e1gkm2jgz2b7tdktk504lsgemrff59.jpeg', 'Sách Chính trị - Xã hội', 2022,'NXB Khoa học xã hội' ,'TS. Lê Kim Sa', 0, 81000, 1, 9786043089585, 0 ),
+        ('Sức mạnh mềm văn hóa Trung Quốc thời Tập Cận Bình và ứng xử của Việt Nam', 'qkphoffa38djvveox22613t5qx00ha8c.jpeg', 'Sách Chính trị - Xã hội', 2022,'NXB Khoa học xã hội' ,'Ths.Chử Thị Bích Thu - TS.Trần Thị Thủy (Đồng chủ biên)', 0, 99000, 1, 97860430839493, 0 ),
+        ('Đường tới Điện Biên Phủ', 'dbd44e00c80b8c79694bc2a87a36c20f.jpg', 'Sách Chính trị - Xã hội', 2018,'NXB Thông tin & Truyền thông' ,'Đại tướng Võ Nguyên Giáp', 0, 47000, 1, 9786048030759, 0 ),
+        ('Đường tới Truông Bồn huyền thoại', 'wofawcrdyttsuu37j3mh06i2m6ii0lq0.jpeg', 'Sách Chính trị - Xã hội', 2019,'NXB Nghệ An' ,'Văn Hiền', 0, 150000, 1, 9786049642937, 0 ),
+        ('Vương Dương Minh toàn thư', '8b90cf59071f3ed109d17770a0ec50ed.jpg', 'Sách Chính trị - Xã hội', 2023,'NXB Thông tin & Truyền thông' ,'Túc Dịch Minh - Nguyễn Thanh Hải', 0, 443000, 1, 9786048083021, 0 ),
+        ('Thoát khỏi địa ngục Khmer đỏ - Hồi ký của một người còn sống', '7lmy4xhmjhgiqap0p6b2mt8ft12ju5pu.png', 'Sách Chính trị - Xã hội', 2019,'NXB Chính trị Quốc gia - Sự thật' ,'Denise Affonco', 0, 74000, 1, 9786045751718, 0 ),
+        ('Điện Biên Phủ - Điểm hẹn lịch sử', '240bb8a0096e82c9769587fdb0ccfe2a.jpg', 'Sách Chính trị - Xã hội', 2018,'NXB Thông tin & Truyền thông' ,'Đại tướng Võ Nguyên Giáp', 0, 53000, 1, 9786048030742, 0 ),
+        ('Sử liệu cổ nhạc Việt Nam', 'kzaj4gc27vz9pguxepwe3uoz630caym2.jpeg', 'Sách Chính trị - Xã hội', 2020,'NXB Văn hóa dân tộc' ,'Đặng Hoành Loan', 0, 405000, 1, 9786047029396, 0 ),
+        ('Sự sinh thành Việt Nam', '7p1zz1z2gdgxk3f7p62nrd0xdn24sn0x.jpeg', 'Sách Chính trị - Xã hội', 2018,'NXB Thế Giới' ,'GS. Hà Văn Tấn', 0, 96000, 1, 9786047730087, 0 ),
+        ('Người Dao Tiền ở Việt Nam', 'lc205cd61ud39xfvfom6lqxbeu8rklw5.jpeg', 'Sách Chính trị - Xã hội', 2021,'NXB Khoa học xã hội' ,'Lý Hành Sơn', 0, 157000, 1, 9786043086072, 0 ),
+        ('Tôn tử binh pháp', 'wufet92dnkp0jt7yzehtazcyvrpnhll3.jpeg', 'Sách Chính trị - Xã hội', 2019,'NXB Hồng Đức' ,'Tôn Tử', 0, 64000, 1, 8935235222564, 0 ),
+        ('5 đường mòn Hồ Chí Minh', '48a0hx2ovces506vnslpveb0qjcy6gi9.jpeg', 'Sách Chính trị - Xã hội', 2020,'NXB Thông tin & Truyền thông' ,'Đặng Phong', 0, 161000, 1, 9786048049669, 0 ),
+        ('Việt Nam bản hùng ca giữ nước', '363454f37c5e79344b2a87e4d0155e7e.png', 'Sách Chính trị - Xã hội', 2021,'NXB Thông tin & Truyền thông' ,'Đặng Văn Việt', 0, 256000, 1, 9786048052508, 0 ),
+        ('Bất khuất Mường Lò', 'w1xynsdkve2rv9k58gdkn8eixbvulr5y.jpeg', 'Sách Chính trị - Xã hội', 2023,'NXB Văn hóa dân tộc' ,'Trần Cao Đàm', 0, 108000, 1, 9786047035649, 0 ),
+        ('Nếm trải Điện Biên', 'hgnpj4w7mbutt0tg9pjbsa8eu15q9k3a.jpeg', 'Sách Chính trị - Xã hội', 2018,'NXB Thông tin & Truyền thông' ,'Cao Tiến Lê', 0, 33000, 1, 9786048032661, 0 ),
+        ('Đường Bác Hồ Đi Cứu Nước', 'oqzeqlleza3c8550w5jjg54kvloow7oy.jpeg', 'Sách Chính trị - Xã hội', 2021,'NXB Chính trị Quốc gia Sự thật' ,'GS.TS. Trình Quang Phú', 0, 148000, 1, 9786045767559, 0 ),
+        ('Ký ức chiến trận - Quảng Trị 1972 - 2022 (Bìa cứng) - Nguyễn Xuân Vượng', 'ds7l546w53f0otq26c67em4mle8xoszq.jpeg', 'NXB Đông Tây', 2022,'NXB Thông tin & Truyền thông' ,'Nguyễn Xuân Vượng', 0, 160000, 1, 9786043566628, 0 );
 
 
 INSERT INTO `NHAXUATBAN` (`TENNXB`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
@@ -365,6 +404,15 @@ VALUES
         /*
          NXB Nhà xuất bản Dân Trí
         NXB Văn hóa - Văn nghệ TP. HCM
+        NXB Công an nhân dân
+        NXB Đại Học Kinh Tế Quốc Dân
+        NXB Đông Tây
+        NXB Thông tin & Truyền thông
+        NXB Thế Giới
+        NXB Khoa học xã hội
+        NXB Nghệ An
+        NXB Văn hóa dân tộc
+        NXB Hồng Đức
         */
 
 INSERT INTO `KHUVUCKHO` (`TEN`, `GHICHU`, `TT`)
