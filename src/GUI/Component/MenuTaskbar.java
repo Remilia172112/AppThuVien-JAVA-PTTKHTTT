@@ -89,9 +89,9 @@ public class MenuTaskbar extends JPanel {
     public MenuTaskbar(Main main, TaiKhoanDTO tk) {
         this.main = main;
         this.user = tk;
-        this.nhomQuyenDTO = NhomQuyenDAO.getInstance().selectById(Integer.toString(tk.getManhomquyen()));
-        this.nhanVienDTO = NhanVienDAO.getInstance().selectById(Integer.toString(tk.getManv()));
-        listQuyen = ChiTietQuyenDAO.getInstance().selectAll(Integer.toString(tk.getManhomquyen()));
+        this.nhomQuyenDTO = NhomQuyenDAO.getInstance().selectById(Integer.toString(tk.getMNQ()));
+        this.nhanVienDTO = NhanVienDAO.getInstance().selectById(Integer.toString(tk.getMNV()));
+        listQuyen = ChiTietQuyenDAO.getInstance().selectAll(Integer.toString(tk.getMNQ()));
         initComponent();
     }
 
@@ -332,7 +332,7 @@ public class MenuTaskbar extends JPanel {
         info.add(pnlIcon, BorderLayout.WEST);
         JLabel lblIcon = new JLabel();
         lblIcon.setPreferredSize(new Dimension(50, 70));
-        if (nhanVienDTO.getGioitinh() == 1) {
+        if (nhanVienDTO.getGIOITINH() == 1) {
             lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
         } else {
             lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
@@ -345,7 +345,7 @@ public class MenuTaskbar extends JPanel {
         pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
         info.add(pnlInfo, BorderLayout.CENTER);
 
-        lblUsername = new JLabel(nhanVienDTO.getHoten());
+        lblUsername = new JLabel(nhanVienDTO.getHOTEN());
         lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
         pnlInfo.add(lblUsername);
 

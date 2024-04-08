@@ -37,10 +37,6 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PlainDocument;
 
-/**
- *
- * @author robot
- */
 public class NhanVienDialog extends JDialog {
 
     private NhanVienBUS nv;
