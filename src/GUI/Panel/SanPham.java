@@ -1,10 +1,8 @@
 package GUI.Panel;
 
 import BUS.SanPhamBUS;
-import DAO.HeDieuHanhDAO;
 import DAO.KhuVucKhoDAO;
-import DAO.ThuongHieuDAO;
-import DAO.XuatXuDAO;
+import DAO.NhaXuatBanDAO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
 import GUI.Main;
@@ -51,7 +49,7 @@ public final class SanPham extends JPanel implements ActionListener {
         tableSanPham = new JTable();
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn","Thương hiệu", "Hệ điều hành", "Kích thước màn","Chip xử lý","Dung lượng pin","Xuất xứ", "Khu vực kho"};
+        String[] header = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn", "Tên tác giả", "Danh mục", "Năm xuất bản", "Nhà xuất bản", "Khu vực kho"};
         tblModel.setColumnIdentifiers(header);
         tableSanPham.setModel(tblModel);
         scrollTableSanPham.setViewportView(tableSanPham);
@@ -82,7 +80,7 @@ public final class SanPham extends JPanel implements ActionListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "detail", "phone", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "sanpham", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "sanpham", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
@@ -125,14 +123,11 @@ public final class SanPham extends JPanel implements ActionListener {
 
     public void loadDataTalbe(ArrayList<DTO.SanPhamDTO> result) {
         tblModel.setRowCount(0);
+
         for (DTO.SanPhamDTO sp : result) {
-            tblModel.addRow(new Object[]{sp.getMasp(), sp.getTensp(), 
-                sp.getSoluongton(), ThuongHieuDAO.getInstance().selectById(sp.getThuonghieu()+"").getTenthuonghieu(), 
-                HeDieuHanhDAO.getInstance().selectById(sp.getHedieuhanh()+"").getTenhdh(),
-                sp.getKichthuocman() + " inch", 
-                sp.getChipxuly(),sp.getDungluongpin() +"mAh",
-                XuatXuDAO.getInstance().selectById(sp.getXuatxu()+"").getTenxuatxu(), 
-                KhuVucKhoDAO.getInstance().selectById(sp.getKhuvuckho()+"").getTenkhuvuc()
+            tblModel.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL(), sp.getTENTG(), sp.getNAMXB()
+                , NhaXuatBanDAO.getInstance().selectById(sp.getMNXB() + "").getTennxb()
+                , KhuVucKhoDAO.getInstance().selectById(sp.getMKVK() + " ").getTenkhuvuc()
             });
         }
     }

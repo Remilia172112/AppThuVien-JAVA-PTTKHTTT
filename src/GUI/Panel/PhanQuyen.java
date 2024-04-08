@@ -58,7 +58,7 @@ public class PhanQuyen extends JPanel implements ActionListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "detail", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "nhomquyen", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "nhomquyen", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }

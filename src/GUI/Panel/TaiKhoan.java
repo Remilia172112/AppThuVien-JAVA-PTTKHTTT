@@ -118,7 +118,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "detail", "import", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "taikhoan", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "taikhoan", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
@@ -151,7 +151,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
     public void loadTable(ArrayList<TaiKhoanDTO> list) {
         tblModel.setRowCount(0);
         for (TaiKhoanDTO taiKhoanDTO : list) {
-            int tt = taiKhoanDTO.getTrangthai();
+            int tt = taiKhoanDTO.getTT();
             String trangthaiString = "";
             switch (tt) {
                 case 1 -> {
@@ -162,7 +162,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
                 }
             }
             tblModel.addRow(new Object[]{
-                taiKhoanDTO.getManv(), taiKhoanDTO.getUsername(), taiKhoanBus.getNhomQuyenDTO(taiKhoanDTO.getManhomquyen()).getTennhomquyen(), trangthaiString
+                taiKhoanDTO.getMNV(), taiKhoanDTO.getTDN(), taiKhoanBus.getNhomQuyenDTO(taiKhoanDTO.getMNQ()).getTennhomquyen(), trangthaiString
             });
         }
     }
@@ -200,7 +200,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
                         "Bạn có chắc chắn muốn xóa tài khoản :)!", "Xóa xóa tài khoản",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    TaiKhoanDAO.getInstance().delete(listTk.get(index).getManv() + "");
+                    TaiKhoanDAO.getInstance().delete(listTk.get(index).getMNV() + "");
                     loadTable(taiKhoanBus.getTaiKhoanAll());
                 }
             }
@@ -254,7 +254,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
                     NhanVienBUS nvbus = new NhanVienBUS();
                     ArrayList<NhanVienDTO> nvlist = nvbus.getAll();
                     for (NhanVienDTO nv : nvlist) {
-                        if (nv.getManv() == manv) {
+                        if (nv.getMNV() == manv) {
                             check2 = 0;
                             break;
                         } else {
@@ -263,7 +263,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
                     }
                     ArrayList<TaiKhoanDTO> curlist = taiKhoanBus.getTaiKhoanAll();
                     for (TaiKhoanDTO tk : curlist) {
-                        if (tk.getUsername().equals(tendangnhap)) {
+                        if (tk.getTDN().equals(tendangnhap)) {
                             check3 = 1;
                             break;
                         } else {

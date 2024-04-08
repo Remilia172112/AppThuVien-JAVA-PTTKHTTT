@@ -109,7 +109,7 @@ public class KhuVucKho extends JPanel implements ActionListener, ItemListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "import", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "khuvuckho", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "khuvuckho", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
@@ -229,8 +229,8 @@ public class KhuVucKho extends JPanel implements ActionListener, ItemListener {
         itemTaskbar listItem[] = new itemTaskbar[result.size()];
         int i = 0;
         for (SanPhamDTO sp : result) {
-            if (sp.getSoluongton() != 0) {
-                listItem[i] = new itemTaskbar(sp.getHinhanh(), sp.getTensp(), sp.getSoluongton());
+            if (sp.getSL() != 0) {
+                listItem[i] = new itemTaskbar(sp.getHINHANH(), sp.getTEN(), sp.getSL());
                 right.add(listItem[i]);
                 i++;
             }
@@ -276,7 +276,7 @@ public class KhuVucKho extends JPanel implements ActionListener, ItemListener {
                 if (input == 0) {
                     int check = 0;
                     for (SanPhamDTO i : listSP) {
-                        if (listKVK.get(index).getMakhuvuc() == i.getKhuvuckho()) {
+                        if (listKVK.get(index).getMakhuvuc() == i.getMKVK()) {
                             check++;
                             break;
                         }

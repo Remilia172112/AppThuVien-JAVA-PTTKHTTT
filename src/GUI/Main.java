@@ -5,13 +5,9 @@ import GUI.Panel.TrangChu;
 import java.awt.*;
 import javax.swing.*;
 import GUI.Component.MenuTaskbar;
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.border.EmptyBorder;
 
 public class Main extends JFrame {
@@ -27,7 +23,7 @@ public class Main extends JFrame {
         this.setSize(new Dimension(1400, 800));
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout(0, 0));
-        this.setTitle("Hệ thống quản lý kho hàng ");
+        this.setTitle("Hệ thống quản lý cửa hàng sách");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         if (user != null) {

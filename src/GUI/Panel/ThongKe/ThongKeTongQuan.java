@@ -4,7 +4,6 @@ import BUS.ThongKeBUS;
 import DAO.KhachHangDAO;
 import DAO.NhanVienDAO;
 import DAO.SanPhamDAO;
-import DTO.ThongKe.ThongKeDoanhThuDTO;
 import DTO.ThongKe.ThongKeTungNgayTrongThangDTO;
 import GUI.Component.TableSorter;
 import GUI.Component.itemTaskbar;
@@ -25,10 +24,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class ThongKeTongQuan extends JPanel {
 
     ThongKeBUS thongkebus;

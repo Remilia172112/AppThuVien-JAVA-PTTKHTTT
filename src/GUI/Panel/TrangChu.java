@@ -33,7 +33,7 @@ public class TrangChu extends JPanel {
         top.setLayout(new FlowLayout(1, 0, 10));
 
         JLabel slogan = new JLabel();
-        slogan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/slogan1.png")));
+        slogan.setIcon(new javax.swing.ImageIcon(getClass().getResource("./img/slogan.png")));
         top.add(slogan);
 
         this.add(top, BorderLayout.NORTH);

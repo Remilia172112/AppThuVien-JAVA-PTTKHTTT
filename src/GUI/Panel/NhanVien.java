@@ -68,7 +68,7 @@ public final class NhanVien extends JPanel {
         contentCenter.add(functionBar, BorderLayout.NORTH);
 
         String[] action = {"create", "update", "delete", "detail", "import", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "nhanvien", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "nhanvien", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(nvBus);
         }
@@ -130,7 +130,7 @@ public final class NhanVien extends JPanel {
         tblModel.setRowCount(0);
         for (DTO.NhanVienDTO nhanVien : listnv) {
             tblModel.addRow(new Object[]{
-                nhanVien.getManv(), nhanVien.getHoten(), nhanVien.getGioitinh() == 1 ? "Nam" : "Nữ", nhanVien.getNgaysinh(), nhanVien.getSdt(), nhanVien.getEmail()
+                nhanVien.getMNV(), nhanVien.getHOTEN(), nhanVien.getGIOITINH() == 1 ? "Nam" : "Nữ", nhanVien.getNGAYSINH(), nhanVien.getSDT(), nhanVien.getEMAIL()
             });
         }
     }

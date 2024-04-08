@@ -131,10 +131,10 @@ public class Log_In extends JFrame implements KeyListener {
             if (tk == null) {
                 JOptionPane.showMessageDialog(this, "Tài khoản của bạn không tồn tại trên hệ thống", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (tk.getTrangthai() == 0) {
+                if (tk.getTT() == 0) {
                     JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    if (BCrypt.checkpw(passwordCheck, tk.getMatkhau())) {
+                    if (BCrypt.checkpw(passwordCheck, tk.getMK())) {
                         try {
                             this.dispose();
                             Main main = new Main(tk);

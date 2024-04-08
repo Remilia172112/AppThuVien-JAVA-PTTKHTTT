@@ -71,15 +71,15 @@ public class NhanVienDialog extends JDialog {
         this.nv = nv;
         this.nhanVien = nhanVien;
         init(title, type);
-        name.setText(nhanVien.getHoten());
-        sdt.setText(nhanVien.getSdt());
-        email.setText(nhanVien.getEmail());
-        if (nhanVien.getGioitinh() == 1) {
+        name.setText(nhanVien.getHOTEN());
+        sdt.setText(nhanVien.getSDT());
+        email.setText(nhanVien.getEMAIL());
+        if (nhanVien.getGIOITINH() == 1) {
             male.setSelected(true);
         } else {
             female.setSelected(true);
         }
-        jcBd.setDate(nhanVien.getNgaysinh());
+        jcBd.setDate(nhanVien.getNGAYSINH());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -201,7 +201,7 @@ public class NhanVienDialog extends JDialog {
                             String txtEmail = email.getText();
                             Date birthDay = jcBd.getDate();
                             java.sql.Date sqlDate = new java.sql.Date(birthDay.getTime());
-                            NhanVienDTO nV = new NhanVienDTO(nhanVien.getManv(), txtName, txt_gender, sqlDate, txtSdt, 1, txtEmail);
+                            NhanVienDTO nV = new NhanVienDTO(nhanVien.getMNV(), txtName, txt_gender, sqlDate, txtSdt, 1, txtEmail);
                             NhanVienDAO.getInstance().update(nV);
                             System.out.println("Index:" + nv.getIndex());
                             nv.listNv.set(nv.getIndex(), nV);

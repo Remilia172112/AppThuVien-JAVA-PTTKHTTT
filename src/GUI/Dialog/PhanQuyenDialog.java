@@ -78,7 +78,7 @@ public final class PhanQuyenDialog extends JDialog implements ActionListener {
         dmcnl.setFont(new Font(FlatRobotoFont.FAMILY, Font.BOLD, 15));
         jpLeft.add(dmcnl);
         for (DanhMucChucNangDTO i : dmcn) {
-            JLabel lblTenchucnang = new JLabel(i.getTenchucnang());
+            JLabel lblTenchucnang = new JLabel(i.getTEN());
             jpLeft.add(lblTenchucnang);
         }
         // Hiển thị chức năng CRUD        
@@ -177,7 +177,7 @@ public final class PhanQuyenDialog extends JDialog implements ActionListener {
         for (int i = 0; i < sizeDmCn; i++) {
             for (int j = 0; j < sizeHanhdong; j++) {
                 if (listCheckBox[i][j].isSelected()) {
-                    result.add(new ChiTietQuyenDTO(manhomquyen, dmcn.get(i).getMachucnang(), mahanhdong[j]));
+                    result.add(new ChiTietQuyenDTO(manhomquyen, dmcn.get(i).getMCN(), mahanhdong[j]));
                 }
             }
         }
@@ -190,7 +190,7 @@ public final class PhanQuyenDialog extends JDialog implements ActionListener {
         for (ChiTietQuyenDTO k : ctQuyen) {
             for (int i = 0; i < sizeDmCn; i++) {
                 for (int j = 0; j < sizeHanhdong; j++) {
-                    if(k.getHanhdong().equals(mahanhdong[j]) && k.getMachucnang().equals(dmcn.get(i).getMachucnang())) {
+                    if(k.getHanhdong().equals(mahanhdong[j]) && k.getMachucnang().equals(dmcn.get(i).getMCN())) {
                         listCheckBox[i][j].setSelected(true);
                     }
                 }

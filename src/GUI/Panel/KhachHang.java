@@ -3,7 +3,6 @@ package GUI.Panel;
 import DTO.KhachHangDTO;
 import BUS.KhachHangBUS;
 import DAO.KhachHangDAO;
-import DTO.KhuVucKhoDTO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
 import java.awt.*;
@@ -29,7 +28,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -111,7 +109,7 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "detail", "import", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "khachhang", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "khachhang", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }

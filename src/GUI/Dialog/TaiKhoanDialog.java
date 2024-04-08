@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Dialog;
 
 import DAO.NhomQuyenDAO;
@@ -59,12 +55,12 @@ public class TaiKhoanDialog extends JDialog {
     public TaiKhoanDialog(TaiKhoan taiKhoan, JFrame owner, String title, boolean modal, String type, TaiKhoanDTO tk) {
         super(owner, title, modal);
         init(title, type);
-        this.manv = tk.getManv();
+        this.manv = tk.getMNV();
         this.taiKhoan = taiKhoan;
-        username.setText(tk.getUsername());
-        password.setPass(tk.getMatkhau());
-        maNhomQuyen.setSelectedItem(NhomQuyenDAO.getInstance().selectById(tk.getManhomquyen() + "").getTennhomquyen());
-        trangthai.setSelectedIndex(tk.getTrangthai());
+        username.setText(tk.getTDN());
+        password.setPass(tk.getMK());
+        maNhomQuyen.setSelectedItem(NhomQuyenDAO.getInstance().selectById(tk.getMNQ() + "").getTennhomquyen());
+        trangthai.setSelectedIndex(tk.getTT());
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -97,7 +93,7 @@ public class TaiKhoanDialog extends JDialog {
                     String tendangnhap = username.getText();
                     int check = 0;
                     for (TaiKhoanDTO i : listTK) {
-                        if (i.getUsername().equals(username.getText())) {
+                        if (i.getTDN().equals(username.getText())) {
                             check++;
                             break;
                         }
