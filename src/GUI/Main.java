@@ -84,4 +84,7 @@ public class Main extends JFrame {
         MainContent.repaint();
         MainContent.validate();
     }
+    public static void main(String[] args) {
+        
+    }
 }

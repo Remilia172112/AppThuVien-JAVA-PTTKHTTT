@@ -340,10 +340,10 @@ VALUES
         (2, 3, 2, 40000, ''),
         (2, 4, 2, 80000, '');
 
-INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENN`, `TIENX`, `SL`, `ISBN`, `TT`) 
+INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENX`, `SL`, `ISBN`, `TT`) 
 VALUES
         ('Ám thị tâm lý', 'kogoiob1cgjlqhndkc0dcw1hzj1kqook.png', 'Sách dành cho giới trẻ', 2022,'NXB Công thương' ,'Patrick King - Huy Nguyễn', 0, 134000, 1, 9786046863748, 0 ),
-        ('Không gì là không thể', 'xtx0d0apioa66abawbnpybv4v8wsb54p.png', 'Sách dành cho giới trẻ', 2020,'NXB Tổng hợp thành phố Hồ Chí Minh' ,'George Matthew Adams', 0, 63500, 1, 0, 0 ),
+        ('Không gì là không thể', 'xtx0d0apioa66abawbnpybv4v8wsb54p.png', 'Sách dành cho giới trẻ', 2020,'NXB Tổng hợp thành phố Hồ Chí Minh' ,'George Matthew Adams', 0, 63500, 1, 8935086837665, 0 ),
         ('Tư duy ngược', '050d67e2d58f5e291cbf25da53f55ef7.jpg', 'Sách dành cho giới trẻ', 2020,'NXB Nhà xuất bản Dân Trí' ,'Nguyễn Anh Dũng', 0, 125000, 1, 9786043440287, 0 ),
         ('Bạn đắt giá bao nhiêu?', 'txq47334nnwj1cw5f5ux7egme8erj2k7.jpg', 'Sách dành cho giới trẻ', 2021,'NXB Nhã Nam' ,'Vãn Tình', 0, 107000, 1, 8936186543500, 0 ),
         ('Hãy gọi tên tôi', '90adcd1cc9b81aa80a272a653c7785e5.png', 'Sách dành cho giới trẻ', 2020,'NXB Văn hóa - Văn nghệ TP. HCM' ,'Chanel Miller', 0, 118000, 1, 9786046863748, 0 ),
@@ -387,7 +387,7 @@ VALUES
         ('Bất khuất Mường Lò', 'w1xynsdkve2rv9k58gdkn8eixbvulr5y.jpeg', 'Sách Chính trị - Xã hội', 2023,'NXB Văn hóa dân tộc' ,'Trần Cao Đàm', 0, 108000, 1, 9786047035649, 0 ),
         ('Nếm trải Điện Biên', 'hgnpj4w7mbutt0tg9pjbsa8eu15q9k3a.jpeg', 'Sách Chính trị - Xã hội', 2018,'NXB Thông tin & Truyền thông' ,'Cao Tiến Lê', 0, 33000, 1, 9786048032661, 0 ),
         ('Đường Bác Hồ Đi Cứu Nước', 'oqzeqlleza3c8550w5jjg54kvloow7oy.jpeg', 'Sách Chính trị - Xã hội', 2021,'NXB Chính trị Quốc gia Sự thật' ,'GS.TS. Trình Quang Phú', 0, 148000, 1, 9786045767559, 0 ),
-        ('Ký ức chiến trận - Quảng Trị 1972 - 2022 (Bìa cứng) - Nguyễn Xuân Vượng', 'ds7l546w53f0otq26c67em4mle8xoszq.jpeg', 'NXB Đông Tây', 2022,'NXB Thông tin & Truyền thông' ,'Nguyễn Xuân Vượng', 0, 160000, 1, 9786043566628, 0 );
+        ('Ký ức chiến trận - Quảng Trị 1972 - 2022 (Bìa cứng) - Nguyễn Xuân Vượng', 'ds7l546w53f0otq26c67em4mle8xoszq.jpeg', 'Sách Chính trị - Xã hội', 2022,'NXB Nhà xuất bản Dân Trí' ,'Nguyễn Xuân Vượng', 0, 160000, 1, 9786043566628, 0 );
 
 
 INSERT INTO `NHAXUATBAN` (`TENNXB`, `DIACHI`, `SDT`, `EMAIL`, `TT`)

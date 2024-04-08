@@ -166,17 +166,17 @@ public class Log_In extends JFrame implements KeyListener {
         pnlLogIn.setForeground(Color.white);
     }
 
-    public static void main(String[] args) {
-        FlatRobotoFont.install();
-        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
-        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
-        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
-        FlatIntelliJLaf.registerCustomDefaultsSource("style");
-        FlatIntelliJLaf.setup();
-        UIManager.put("PasswordField.showRevealButton", true);
-        Log_In login = new Log_In();
-        login.setVisible(true);
-    }
+    // public static void main(String[] args) {
+    //     FlatRobotoFont.install();
+    //     FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+    //     FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+    //     FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+    //     FlatIntelliJLaf.registerCustomDefaultsSource("style");
+    //     FlatIntelliJLaf.setup();
+    //     UIManager.put("PasswordField.showRevealButton", true);
+    //     Log_In login = new Log_In();
+    //     login.setVisible(true);
+    // }
 
     public void imgIntro() {
         JPanel bo = new JPanel();
