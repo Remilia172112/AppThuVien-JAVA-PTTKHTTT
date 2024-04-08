@@ -7,6 +7,8 @@ package GUI.Dialog;
 import BUS.NhanVienBUS;
 import DAO.NhanVienDAO;
 import DTO.NhanVienDTO;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
 import GUI.Component.InputDate;
@@ -37,6 +39,10 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PlainDocument;
 
+/**
+ *
+ * @author robot
+ */
 public class NhanVienDialog extends JDialog {
 
     private NhanVienBUS nv;
@@ -65,15 +71,15 @@ public class NhanVienDialog extends JDialog {
         this.nv = nv;
         this.nhanVien = nhanVien;
         init(title, type);
-        name.setText(nhanVien.getHOTEN());
-        sdt.setText(nhanVien.getSDT());
-        email.setText(nhanVien.getEMAIL());
-        if (nhanVien.getGIOITINH() == 1) {
+        name.setText(nhanVien.getHoten());
+        sdt.setText(nhanVien.getSdt());
+        email.setText(nhanVien.getEmail());
+        if (nhanVien.getGioitinh() == 1) {
             male.setSelected(true);
         } else {
             female.setSelected(true);
         }
-        jcBd.setDate(nhanVien.getNGAYSINH());
+        jcBd.setDate(nhanVien.getNgaysinh());
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -195,7 +201,7 @@ public class NhanVienDialog extends JDialog {
                             String txtEmail = email.getText();
                             Date birthDay = jcBd.getDate();
                             java.sql.Date sqlDate = new java.sql.Date(birthDay.getTime());
-                            NhanVienDTO nV = new NhanVienDTO(nhanVien.getMNV(), txtName, txt_gender, sqlDate, txtSdt, 1, txtEmail);
+                            NhanVienDTO nV = new NhanVienDTO(nhanVien.getManv(), txtName, txt_gender, sqlDate, txtSdt, 1, txtEmail);
                             NhanVienDAO.getInstance().update(nV);
                             System.out.println("Index:" + nv.getIndex());
                             nv.listNv.set(nv.getIndex(), nV);
@@ -265,8 +271,8 @@ public class NhanVienDialog extends JDialog {
     
     public boolean checkEmail(String email){
         if(!(NhanVienDAO.getInstance().selectByEmail(email)==null)){
-            JOptionPane.showMessageDialog(this, "Tài khoản email này đã được sử dụng trong hệ thống!");
-            return false;
+          JOptionPane.showMessageDialog(this, "Tài khoản email này đã được sử dụng trong hệ thống!");
+          return false;
         }
         return true;
     }

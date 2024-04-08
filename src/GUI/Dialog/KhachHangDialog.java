@@ -6,6 +6,7 @@ import GUI.Component.ButtonCustom;
 import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
 import GUI.Panel.KhachHang;
+import BUS.KhachHangBUS;
 import GUI.Component.NumericDocumentFilter;
 import helper.Validation;
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PlainDocument;
+import org.apache.commons.codec.language.bm.Rule;
 
 public class KhachHangDialog extends JDialog implements MouseListener {
 

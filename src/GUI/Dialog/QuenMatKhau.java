@@ -3,6 +3,7 @@ package GUI.Dialog;
 import DAO.TaiKhoanDAO;
 import DTO.TaiKhoanDTO;
 import helper.SendEmailSMTP;
+import com.formdev.flatlaf.FlatLightLaf;
 import helper.BCrypt;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -23,7 +24,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ *
+ * @author Tran Nhat Sinh
+ */
 public class QuenMatKhau extends JDialog implements ActionListener {
 
     private JButton btnSendMail, btnConfirmOTP, btnChangePass;
@@ -35,11 +42,11 @@ public class QuenMatKhau extends JDialog implements ActionListener {
 
     public QuenMatKhau(Frame parent, boolean modal) {
         super(parent, modal);
-        init();
+        initComponents();
         setLocationRelativeTo(null);
     }
 
-    public void init() {
+    public void initComponents() {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Quên mật khẩu");
         this.setSize(new Dimension(500, 200));
@@ -47,12 +54,14 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         this.setLayout(new BorderLayout());
 
         jpTop = new JPanel(new BorderLayout());
-        jpTop.setBackground(new Color(52 ,52 ,106));
+        jpTop.setBackground(new Color(22, 122, 198));
         jpTop.setPreferredSize(new Dimension(400, 60));
 
-        lblTitle = new JLabel("QUÊN MẬT KHẨU" ,JLabel.CENTER );
+        lblTitle = new JLabel();
         lblTitle.setFont(new Font("Segoe UI", 1, 18));
         lblTitle.setForeground(new Color(255, 255, 255));
+        lblTitle.setHorizontalAlignment(JLabel.CENTER);
+        lblTitle.setText("QUÊN MẬT KHẨU");
         lblTitle.setPreferredSize(new Dimension(400, 50));
         jpTop.add(lblTitle, BorderLayout.CENTER);
 
@@ -62,9 +71,11 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         // Step 1
         jpCard_1 = new JPanel(new FlowLayout(2, 10, 10));
         jpCard_1.setBackground(new Color(255, 255, 255));
-        lblNhapEmail = new JLabel("Nhập địa chỉ email", Label.LEFT);
+        lblNhapEmail = new JLabel();
+        lblNhapEmail.setText("Nhập địa chỉ email");
+        lblNhapEmail.setHorizontalAlignment(Label.LEFT);
         txtEmail = new JTextField();
-        txtEmail.setPreferredSize(new Dimension(350, 35));
+        txtEmail.setPreferredSize(new java.awt.Dimension(350, 35));
 
         btnSendMail = new JButton("Gửi mã");
         btnSendMail.setPreferredSize(new Dimension(100, 35));
@@ -80,9 +91,9 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         lblNhapOTP.setText("Nhập mã OTP");
 
         txtOTP = new JTextField();
-        txtOTP.setPreferredSize(new Dimension(350, 35));
+        txtOTP.setPreferredSize(new java.awt.Dimension(350, 35));
 
-        btnConfirmOTP = new JButton("Xác nhận ma OTP");
+        btnConfirmOTP = new JButton("Xác nhận");
         btnConfirmOTP.setPreferredSize(new Dimension(100, 35));
         btnConfirmOTP.addActionListener(this);
         jpCard_2.add(lblNhapOTP);
@@ -96,7 +107,7 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         lblNhapPassword.setText("Nhập mật khẩu mới");
 
         txtPassword = new JPasswordField();
-        txtPassword.setPreferredSize(new Dimension(350, 35));
+        txtPassword.setPreferredSize(new java.awt.Dimension(350, 35));
 
         btnChangePass = new JButton("Xác nhận");
         btnChangePass.setPreferredSize(new Dimension(100, 35));
@@ -155,12 +166,12 @@ public class QuenMatKhau extends JDialog implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập mã OTP có 6 chữ số!");
                 } else {
                     boolean check = TaiKhoanDAO.getInstance().checkOtp(this.emailCheck, otp);
-                if(check){
-                    CardLayout c = (CardLayout) jpMain.getLayout();
-                    c.next(jpMain);
-                } else{
-                    JOptionPane.showMessageDialog(this, "Mã OTP không khớp");
-                }
+                   if(check){
+                       CardLayout c = (CardLayout) jpMain.getLayout();
+                       c.next(jpMain);
+                   } else{
+                       JOptionPane.showMessageDialog(this, "Mã OTP không khớp");
+                   }
                 }
             }
         } else if (e.getSource() == btnChangePass){
@@ -171,8 +182,8 @@ public class QuenMatKhau extends JDialog implements ActionListener {
                 String password = BCrypt.hashpw(pass, BCrypt.gensalt(12));
                 TaiKhoanDAO.getInstance().updatePass(this.emailCheck, password);
                 TaiKhoanDAO.getInstance().sendOpt(emailCheck, "null");
-                JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công");
-                this.dispose();
+               JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công");
+               this.dispose();
             }
         }
     }

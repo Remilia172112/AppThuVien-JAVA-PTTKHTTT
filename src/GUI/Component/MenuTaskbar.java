@@ -279,7 +279,6 @@ public class MenuTaskbar extends JPanel {
         listitem[11].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-           
                 // phanQuyen = new PhanQuyen(main);
                 // main.setPanel(phanQuyen);
             }
@@ -338,19 +337,12 @@ public class MenuTaskbar extends JPanel {
         info.add(pnlIcon, BorderLayout.WEST);
         JLabel lblIcon = new JLabel();
         lblIcon.setPreferredSize(new Dimension(50, 70));
-<<<<<<< HEAD
         if (nhanVienDTO.getGIOITINH() == 1) {
             lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
         } else {
             lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
         }
-=======
-        // if (nhanVienDTO.getGioitinh() == 1) {
-            // lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
-        // } else {
-            // lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
-        // }
->>>>>>> 88b623cef0409ad47cbf63feccc7714823543256
+
         pnlIcon.add(lblIcon);
 
         JPanel pnlInfo = new JPanel();
@@ -358,13 +350,7 @@ public class MenuTaskbar extends JPanel {
         pnlInfo.setLayout(new FlowLayout(0, 10, 5));
         pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
         info.add(pnlInfo, BorderLayout.CENTER);
-
-<<<<<<< HEAD
         lblUsername = new JLabel(nhanVienDTO.getHOTEN());
-=======
-        // lblUsername = new JLabel(nhanVienDTO.getHoten());
-        lblUsername = new JLabel("MinhMinh");//xoa
->>>>>>> 88b623cef0409ad47cbf63feccc7714823543256
         lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
         pnlInfo.add(lblUsername);
 

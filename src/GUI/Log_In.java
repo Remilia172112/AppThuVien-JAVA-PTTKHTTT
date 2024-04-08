@@ -30,7 +30,7 @@ public class Log_In extends JFrame implements KeyListener {
 
     public Log_In() {
         initComponent();
-        txtUsername.setText("admin");
+        txtUsername.setText("hgbaodev");
         txtPassword.setPass("123456");
     }
 
@@ -131,16 +131,15 @@ public class Log_In extends JFrame implements KeyListener {
             if (tk == null) {
                 JOptionPane.showMessageDialog(this, "Tài khoản của bạn không tồn tại trên hệ thống", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (tk.getTT() == 0) {
+                if (tk.getTrangthai() == 0) {
                     JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    if (BCrypt.checkpw(passwordCheck, tk.getMK())) {
+                    if (BCrypt.checkpw(passwordCheck, tk.getMatkhau())) {
                         try {
                             this.dispose();
                             Main main = new Main(tk);
                             main.setVisible(true);
-                        } 
-                        catch (UnsupportedLookAndFeelException ex) {
+                        } catch (UnsupportedLookAndFeelException ex) {
                             Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
@@ -187,7 +186,8 @@ public class Log_In extends JFrame implements KeyListener {
         this.add(bo, BorderLayout.WEST);
 
         lblImage = new JLabel();
-        lblImage.setIcon(new FlatSVGIcon("./img/nguyen.svg"));
+//        lblImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/phone2.jpg")));
+        lblImage.setIcon(new FlatSVGIcon("./img/login-image.svg"));
         bo.add(lblImage);
     }
 

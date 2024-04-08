@@ -1,81 +1,80 @@
 package GUI.Panel;
 
-import DTO.KhachHangDTO;
-import BUS.KhachHangBUS;
-import DAO.KhachHangDAO;
-import DTO.KhuVucKhoDTO;
+import GUI.Dialog.NhaCungCapDialog;
+import BUS.NhaCungCapBUS;
+import DAO.NhaCungCapDAO;
+import DTO.NhaCungCapDTO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.PanelBorderRadius;
-import GUI.Component.TableSorter;
-import GUI.Dialog.KhachHangDialog;
 import GUI.Main;
-import java.util.logging.Logger;
-import java.util.logging.Level;
 import helper.JTableExporter;
 import helper.Validation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class KhachHang extends JPanel implements ActionListener, ItemListener {
+public final class NhaCungCap extends JPanel implements ActionListener, ItemListener {
 
     PanelBorderRadius main, functionBar;
     JPanel pnlBorder1, pnlBorder2, pnlBorder3, pnlBorder4, contentCenter;
-    JTable tableKhachHang;
-    JScrollPane scrollTableKhachHang;
+    JTable tableNhaCungCap;
+    JScrollPane scrollTableSanPham;
     MainFunction mainFunction;
-    JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
     IntegratedSearch search;
-    DefaultTableModel tblModel;
-    public KhachHangBUS khachhangBUS = new KhachHangBUS();
-    public ArrayList<KhachHangDTO> listkh = khachhangBUS.getAll();
-    KhachHangDTO kh = new KhachHangDTO();
-    Main m;
+    JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
     Color BackgroundColor = new Color(240, 247, 250);
+    DefaultTableModel tblModel;
+    Main m;
+    public NhaCungCapBUS nccBUS = new NhaCungCapBUS();
+    public ArrayList<NhaCungCapDTO> listncc = nccBUS.getAll();
 
     private void initComponent() {
+        //Set model table
+        tableNhaCungCap = new JTable();
+        scrollTableSanPham = new JScrollPane();
+        tblModel = new DefaultTableModel();
+        String[] header = new String[]{"Mã NCC", "Tên nhà cung cấp", "Địa chỉ", "Email", "Số điện thoại"};
+        tblModel.setColumnIdentifiers(header);
+        tableNhaCungCap.setModel(tblModel);
+        tableNhaCungCap.setFocusable(false);
+        scrollTableSanPham.setViewportView(tableNhaCungCap);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumnModel columnModel = tableNhaCungCap.getColumnModel();
+        columnModel.getColumn(0).setCellRenderer(centerRenderer);
+        columnModel.getColumn(0).setPreferredWidth(2);
+        columnModel.getColumn(2).setPreferredWidth(300);
+        columnModel.getColumn(4).setCellRenderer(centerRenderer);
+
         this.setBackground(BackgroundColor);
         this.setLayout(new BorderLayout(0, 0));
         this.setOpaque(true);
-
-        tableKhachHang = new JTable();
-        scrollTableKhachHang = new JScrollPane();
-        tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại", "Ngày tham gia"};
-        tblModel.setColumnIdentifiers(header);
-        tableKhachHang.setModel(tblModel);
-        tableKhachHang.setFocusable(false);
-        scrollTableKhachHang.setViewportView(tableKhachHang);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tableKhachHang.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
-        tableKhachHang.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
-
-        tableKhachHang.setAutoCreateRowSorter(true);
-        TableSorter.configureTableColumnSorter(tableKhachHang, 0, TableSorter.INTEGER_COMPARATOR);
 
         // pnlBorder1, pnlBorder2, pnlBorder3, pnlBorder4 chỉ để thêm contentCenter ở giữa mà contentCenter không bị dính sát vào các thành phần khác
         pnlBorder1 = new JPanel();
@@ -111,65 +110,59 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "detail", "import", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "khachhang", action);
+        mainFunction = new MainFunction(m.user.getManhomquyen(), "nhacungcap", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
         functionBar.add(mainFunction);
 
-        search = new IntegratedSearch(new String[]{"Tất cả", "Mã khách hàng", "Tên khách hàng", "Địa chỉ", "Số điện thoại"});
+        search = new IntegratedSearch(new String[]{"Tất cả", "Mã nhà cung cấp", "Tên nhà cung cấp", "Địa chỉ", "Email", "Số điện thoại"});
         search.cbxChoose.addItemListener(this);
         search.txtSearchForm.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 String type = (String) search.cbxChoose.getSelectedItem();
                 String txt = search.txtSearchForm.getText();
-                listkh = khachhangBUS.search(txt, type);
-                loadDataTable(listkh);
+                listncc = nccBUS.search(txt, type);
+                loadDataTable(listncc);
             }
         });
 
-        search.btnReset.addActionListener((ActionEvent e) -> {
-            search.txtSearchForm.setText("");
-            listkh = khachhangBUS.getAll();
-            loadDataTable(listkh);
-        });
+        search.btnReset.addActionListener(this);
         functionBar.add(search);
-
         contentCenter.add(functionBar, BorderLayout.NORTH);
-
         // main là phần ở dưới để thống kê bảng biểu
         main = new PanelBorderRadius();
         BoxLayout boxly = new BoxLayout(main, BoxLayout.Y_AXIS);
         main.setLayout(boxly);
 //        main.setBorder(new EmptyBorder(20, 20, 20, 20));
         contentCenter.add(main, BorderLayout.CENTER);
-
-        main.add(scrollTableKhachHang);
+        main.add(scrollTableSanPham);
     }
 
-    public KhachHang(Main m) {
+    public NhaCungCap(Main m) {
         this.m = m;
         initComponent();
-        tableKhachHang.setDefaultEditor(Object.class, null);
-        loadDataTable(listkh);
+        tableNhaCungCap.setDefaultEditor(Object.class, null);
+        loadDataTable(listncc);
     }
 
-    public void loadDataTable(ArrayList<KhachHangDTO> result) {
+    public void loadDataTable(ArrayList<NhaCungCapDTO> result) {
         tblModel.setRowCount(0);
-        for (DTO.KhachHangDTO khachHang : result) {
+        for (NhaCungCapDTO ncc : result) {
             tblModel.addRow(new Object[]{
-                khachHang.getMaKH(), khachHang.getHoten(), khachHang.getDiachi(), khachHang.getSdt(), khachHang.getNgaythamgia()
+                ncc.getMancc(), ncc.getTenncc(), ncc.getDiachi(), ncc.getEmail(), ncc.getSdt()
             });
         }
     }
 
-    public int getRowSelected() {
-        int index = tableKhachHang.getSelectedRow();
-        if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng");
+    public void openFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        return index;
     }
 
     public void importExcel() {
@@ -177,7 +170,7 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelJTableImport = null;
-        ArrayList<KhachHangDTO> listExcel = new ArrayList<KhachHangDTO>();
+        ArrayList<DTO.NhaCungCapDTO> listExcel = new ArrayList<DTO.NhaCungCapDTO>();
         JFileChooser jf = new JFileChooser();
         int result = jf.showOpenDialog(null);
         jf.setDialogTitle("Open file");
@@ -193,31 +186,83 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
                 for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                     int check = 1;
                     XSSFRow excelRow = excelSheet.getRow(row);
-                    int id = KhachHangDAO.getInstance().getAutoIncrement();
-                    String tenkh = excelRow.getCell(0).getStringCellValue();
-                    String sdt = excelRow.getCell(1).getStringCellValue();
-                    String diachi = excelRow.getCell(2).getStringCellValue();
-                    if (Validation.isEmpty(tenkh) || Validation.isEmpty(sdt)
-                            || !isPhoneNumber(sdt) || sdt.length() != 10 || Validation.isEmpty(diachi)) {
+                    int id = NhaCungCapDAO.getInstance().getAutoIncrement();
+                    String tenNCC = excelRow.getCell(0).getStringCellValue();
+                    String diachi = excelRow.getCell(1).getStringCellValue();
+                    String email = excelRow.getCell(2).getStringCellValue();
+                    String sdt = excelRow.getCell(3).getStringCellValue();
+                    if (Validation.isEmpty(tenNCC) || Validation.isEmpty(email)
+                            || !Validation.isEmail(email) || Validation.isEmpty(sdt) || !isPhoneNumber(sdt)
+                            || sdt.length() != 10 || Validation.isEmpty(diachi)) {
                         check = 0;
                     }
-                    if (check == 1) {
-                        khachhangBUS.add(new KhachHangDTO(id, tenkh, sdt, diachi));
-                    } else {
+                    if (check == 0) {
                         k += 1;
+                    } else {
+                        nccBUS.add(new NhaCungCapDTO(id, tenNCC, diachi, email, sdt));
                     }
                 }
-                JOptionPane.showMessageDialog(this, "Nhập thành công");
+                if (k != 0) {
+                    JOptionPane.showMessageDialog(this, "Những dữ liệu không chuẩn không được thêm vào");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập dữ liệu thành công");
+                }
             } catch (FileNotFoundException ex) {
                 System.out.println("Lỗi đọc file");
             } catch (IOException ex) {
                 System.out.println("Lỗi đọc file");
             }
         }
-        if (k != 0) {
-            JOptionPane.showMessageDialog(this, "Những dữ liệu không hợp lệ không được thêm vào");
+
+        loadDataTable(listncc);
+    }
+
+    public int getRowSelected() {
+        int index = tableNhaCungCap.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn nhà cung cấp");
         }
-        loadDataTable(listkh);
+        return index;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == mainFunction.btn.get("create")) {
+            NhaCungCapDialog dvtDialog = new NhaCungCapDialog(this, owner, "Thêm nhà cung cấp", true, "create");
+        } else if (e.getSource() == mainFunction.btn.get("update")) {
+            int index = getRowSelected();
+            if (index != -1) {
+                NhaCungCapDialog nccDialog = new NhaCungCapDialog(this, owner, "Chỉnh sửa nhà cung cấp", true, "update", listncc.get(index));
+            }
+        } else if (e.getSource() == mainFunction.btn.get("delete")) {
+            int index = getRowSelected();
+            if (index != -1) {
+                int input = JOptionPane.showConfirmDialog(null,
+                        "Bạn có chắc chắn muốn xóa nhà cung cấp!", "Xóa nhà cung cấp",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (input == 0) {
+                    nccBUS.delete(listncc.get(index), index);
+                    loadDataTable(listncc);
+                }
+            }
+        } else if (e.getSource() == mainFunction.btn.get("detail")) {
+            int index = getRowSelected();
+            if (index != -1) {
+                NhaCungCapDialog nccDialog = new NhaCungCapDialog(this, owner, "Chi tiết nhà cung cấp", true, "view", listncc.get(index));
+            }
+        } else if (e.getSource() == search.btnReset) {
+            search.txtSearchForm.setText("");
+            listncc = nccBUS.getAll();
+            loadDataTable(listncc);
+        } else if (e.getSource() == mainFunction.btn.get("import")) {
+            importExcel();
+        } else if (e.getSource() == mainFunction.btn.get("export")) {
+            try {
+                JTableExporter.exportJTableToExcel(tableNhaCungCap);
+            } catch (IOException ex) {
+                Logger.getLogger(NhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public static boolean isPhoneNumber(String str) {
@@ -237,48 +282,10 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == mainFunction.btn.get("create")) {
-            System.out.println("ok");
-
-            KhachHangDialog khDialog = new KhachHangDialog(this, owner, "Thêm khách hàng", true, "create");
-        } else if (e.getSource() == mainFunction.btn.get("update")) {
-            int index = getRowSelected();
-            if (index != -1) {
-                KhachHangDialog khDialog = new KhachHangDialog(this, owner, "Chỉnh sửa khách hàng", true, "update", listkh.get(index));
-            }
-        } else if (e.getSource() == mainFunction.btn.get("delete")) {
-            int index = getRowSelected();
-            if (index != -1) {
-                int input = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc chắn muốn xóa khách hàng ?", "Xóa khách hàng",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                if (input == 0) {
-                    khachhangBUS.delete(listkh.get(index));
-                    loadDataTable(listkh);
-                }
-            }
-        } else if (e.getSource() == mainFunction.btn.get("detail")) {
-            int index = getRowSelected();
-            if (index != -1) {
-                KhachHangDialog khDialog = new KhachHangDialog(this, owner, "Xem khách hàng", true, "view", listkh.get(index));
-            }
-        } else if (e.getSource() == mainFunction.btn.get("import")) {
-            importExcel();
-        } else if (e.getSource() == mainFunction.btn.get("export")) {
-            try {
-                JTableExporter.exportJTableToExcel(tableKhachHang);
-            } catch (IOException ex) {
-                Logger.getLogger(KhachHang.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    @Override
     public void itemStateChanged(ItemEvent e) {
         String type = (String) search.cbxChoose.getSelectedItem();
         String txt = search.txtSearchForm.getText();
-        listkh = khachhangBUS.search(txt, type);
-        loadDataTable(listkh);
+        listncc = nccBUS.search(txt, type);
+        loadDataTable(listncc);
     }
 }
