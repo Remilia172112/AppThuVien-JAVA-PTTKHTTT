@@ -85,6 +85,6 @@ public class Main extends JFrame {
         MainContent.validate();
     }
     public static void main(String[] args) {
-        
+        new Main();
     }
 }

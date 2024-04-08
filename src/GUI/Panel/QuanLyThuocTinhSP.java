@@ -80,21 +80,21 @@ public class QuanLyThuocTinhSP extends JPanel {
         listitem[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                th = new ThuongHieuDialog(owner, QuanLyThuocTinhSP.this, "Quản lý thương hiệu", true,m.user.getManhomquyen());
+                th = new ThuongHieuDialog(owner, QuanLyThuocTinhSP.this, "Quản lý thương hiệu", true,m.user.getMNQ());
                 th.setVisible(true);
             }
         });
         listitem[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                xs = new XuatXuDialog(owner, QuanLyThuocTinhSP.this, "Quản lý xuất xứ sản phẩm", true,m.user.getManhomquyen());
+                xs = new XuatXuDialog(owner, QuanLyThuocTinhSP.this, "Quản lý xuất xứ sản phẩm", true,m.user.getMNQ());
                 xs.setVisible(true);
             }
         });
         listitem[2].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                hdh = new HeDieuHanhDialog(owner, QuanLyThuocTinhSP.this, "Quản lý hệ điều hành", true,m.user.getManhomquyen());
+                hdh = new HeDieuHanhDialog(owner, QuanLyThuocTinhSP.this, "Quản lý hệ điều hành", true,m.user.getMNQ());
                 hdh.setVisible(true);
             }
         });
@@ -102,7 +102,7 @@ public class QuanLyThuocTinhSP extends JPanel {
         listitem[3].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                dlram = new DungLuongRamDialog(owner, QuanLyThuocTinhSP.this, "Quản lý dung lượng RAM", true,m.user.getManhomquyen());
+                dlram = new DungLuongRamDialog(owner, QuanLyThuocTinhSP.this, "Quản lý dung lượng RAM", true,m.user.getMNQ());
                 dlram.setVisible(true);
             }
         });
@@ -110,14 +110,14 @@ public class QuanLyThuocTinhSP extends JPanel {
         listitem[4].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                dlrom = new DungLuongRomDialog(owner, QuanLyThuocTinhSP.this, "Quản lý dung lượng ROM", true,m.user.getManhomquyen());
+                dlrom = new DungLuongRomDialog(owner, QuanLyThuocTinhSP.this, "Quản lý dung lượng ROM", true,m.user.getMNQ());
                 dlrom.setVisible(true);
             }
         });
         listitem[5].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                mausac = new MauSacDialog(owner, QuanLyThuocTinhSP.this, "Quản lý màu sắc", true,m.user.getManhomquyen());
+                mausac = new MauSacDialog(owner, QuanLyThuocTinhSP.this, "Quản lý màu sắc", true,m.user.getMNQ());
                 mausac.setVisible(true);
             }
         });

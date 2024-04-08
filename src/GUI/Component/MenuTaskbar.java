@@ -348,7 +348,6 @@ public class MenuTaskbar extends JPanel {
         pnlInfo.add(lblUsername);
 
         lblTenNhomQuyen = new JLabel(nhomQuyenDTO.getTennhomquyen());
-        lblTenNhomQuyen = new JLabel("Test1");//xoa
         lblTenNhomQuyen.putClientProperty("FlatLaf.style", "font: 120% $light.font");
         lblTenNhomQuyen.setForeground(Color.GRAY);
         pnlInfo.add(lblTenNhomQuyen);
