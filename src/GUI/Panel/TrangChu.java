@@ -12,11 +12,11 @@ public class TrangChu extends JPanel {
     JPanel info[];
     JLabel title, subTit, infoDetail[], objDetail[], objDetail1[], infoIcon[];
         String[][] getSt = {
-        {"Tính chính xác", "tinhchinhxac_128px.svg", "<html>Mã IMEI là một số duy nhất được <br>gán cho từng thiết bị điện thoại,<br> do đó hệ thống quản lý điện thoại<br> theo mã IMEI sẽ đảm bảo tính <br>chính xác và độ tin cậy cao.</html>"},
-        {"Tính bảo mật", "tinhbaomat_128px.svg", "<html>Ngăn chặn việc sử dụng các thiết bị<br> điện thoại giả mạo hoặc bị đánh cắp.<br> Điều này giúp tăng tính bảo mật cho <br>các hoạt động quản lý điện thoại.</html>"},
-        {"Tính hiệu quả", "tinhhieuqua_128px.svg", "<html>Dễ dàng xác định được thông tin <br>về từng thiết bị điện thoại một cách <br>nhanh chóng và chính xác, giúp <br>cho việc quản lý điện thoại được <br>thực hiện một cách hiệu quả hơn.</html>"},
+        {"Tính tiện lợi", "tinhchinhxac_128px.svg", "<html>Có tính năng tìm kiếm nhanh chóng,<br> <br>giúp người dùng dễ dàng tìm sách <br><br>theo tiêu chí cụ thể như tiêu đề, <br><br>tác giả hoặc thể loại.</html>"},
+        {"Tính bảo mật", "tinhbaomat_128px.svg", "<html>Thông tin cá nhân và thông tin liên <br><br>quan đến sách mượn thường được<br><br> bảo mật và chỉ được truy cập bởi<br><br> người dùng hoặc những người được<br><br> ủy quyền.</html>"},
+        {"Tính hiệu quả", "tinhhieuqua_128px.svg", "<html>Dễ dàng xác định được thông tin <br><br>về từng cuốn sách một cách <br><br>nhanh chóng và chính xác, giúp <br><br>cho việc quản lý sách được <br><br>thực hiện một cách hiệu quả hơn.</html>"},
     };
-    Color MainColor = new Color(255, 255, 255);
+    Color MainColor = new Color(96 , 96 , 169);
     Color FontColor = new Color(96, 125, 139);
     Color BackgroundColor = new Color(240, 247, 250);
     Color HowerFontColor = new Color(225, 230, 232);
@@ -30,10 +30,10 @@ public class TrangChu extends JPanel {
         top = new JPanel();
         top.setBackground(MainColor);
         top.setPreferredSize(new Dimension(1100, 200));
-        top.setLayout(new FlowLayout(1, 0, 10));
+        top.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel slogan = new JLabel();
-        slogan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/slogan1.png")));
+        slogan.setIcon(new ImageIcon(getClass().getResource("/img/slogan.png")));
         top.add(slogan);
 
         this.add(top, BorderLayout.NORTH);
@@ -48,7 +48,6 @@ public class TrangChu extends JPanel {
         infoDetail = new JLabel[3];
         objDetail = new JLabel[3];
         objDetail1 = new JLabel[3];
-
         infoIcon = new JLabel[3];
 
         for (int i = 0; i < getSt.length; i++) {  
@@ -99,6 +98,6 @@ public class TrangChu extends JPanel {
         FlatIntelliJLaf.registerCustomDefaultsSource("style");
         FlatIntelliJLaf.setup();
     }
-
+    
 
 }

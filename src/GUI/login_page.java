@@ -79,13 +79,13 @@ public class login_page extends JFrame {
         login_nhap.add(buttonPanel); 
         this.add(login_nhap , BorderLayout.CENTER);
 
-        lb_img_1 = new JLabel(new ImageIcon("./img/gai.png"));
+        lb_img_1 = new JLabel(new ImageIcon("./src/img/gai.png"));
         // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
         lb_img_1.setBackground(Color.WHITE);
         lb_img_1.setPreferredSize(new Dimension(300,50));
         this.add(lb_img_1 , BorderLayout.WEST);
 
-        lb_img_2 = new JLabel(new ImageIcon("./img/trai.png"));
+        lb_img_2 = new JLabel(new ImageIcon("./src/img/trai.png"));
         // lb_img_2.setBorder(new EmptyBorder(30,300,30,1));
         lb_img_2.setBackground(Color.WHITE);
         lb_img_2.setPreferredSize(new Dimension(300,50));
@@ -93,15 +93,15 @@ public class login_page extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        FlatRobotoFont.install();
-        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
-        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
-        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
-        FlatIntelliJLaf.registerCustomDefaultsSource("style");
-        FlatIntelliJLaf.setup();
+    // public static void main(String[] args) {
+        // FlatRobotoFont.install();
+        // FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+        // FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+        // FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+        // FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        // FlatIntelliJLaf.setup();
 
-        UIManager.put("PasswordField.showRevealButton", true);
-        new login_page();
-    }
+        // UIManager.put("PasswordField.showRevealButton", true);
+        // new login_page();
+    // }
 }

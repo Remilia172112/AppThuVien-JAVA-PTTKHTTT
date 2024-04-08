@@ -1,25 +1,25 @@
 package GUI.Component;
 
 import DAO.ChiTietQuyenDAO;
-import DAO.NhanVienDAO;
+// import DAO.NhanVienDAO;
 import DAO.NhomQuyenDAO;
 import DTO.ChiTietQuyenDTO;
-import DTO.NhanVienDTO;
+// import DTO.NhanVienDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.Log_In;
 import GUI.Main;
-import GUI.Panel.ChuyenKho;
-import GUI.Panel.KhachHang;
-import GUI.Panel.KhuVucKho;
-import GUI.Panel.NhaCungCap;
-import GUI.Panel.NhanVien;
-import GUI.Panel.PhanQuyen;
-import GUI.Panel.PhieuNhap;
-import GUI.Panel.PhieuXuat;
-import GUI.Panel.QuanLyThuocTinhSP;
-import GUI.Panel.SanPham;
-import GUI.Panel.TaiKhoan;
+// import GUI.Panel.ChuyenKho;
+// import GUI.Panel.KhachHang;
+// import GUI.Panel.KhuVucKho;
+// import GUI.Panel.NhaCungCap;
+// import GUI.Panel.NhanVien;
+// import GUI.Panel.PhanQuyen;
+// import GUI.Panel.PhieuNhap;
+// import GUI.Panel.PhieuXuat;
+// import GUI.Panel.QuanLyThuocTinhSP;
+// import GUI.Panel.SanPham;
+// import GUI.Panel.TaiKhoan;
 import GUI.Panel.TrangChu;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.*;
@@ -28,24 +28,24 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import GUI.Dialog.MyAccount;
-import GUI.Panel.PhieuKiemKe;
-import GUI.Panel.ThongKe.ThongKe;
+// import GUI.Dialog.MyAccount;
+// import GUI.Panel.PhieuKiemKe;
+// import GUI.Panel.ThongKe.ThongKe;
 //import GUI.Component.itemTaskbar;
 public class MenuTaskbar extends JPanel {
 
     TrangChu trangChu;
-    SanPham sanPham;
-    QuanLyThuocTinhSP quanLyThuocTinhSP;
-    KhuVucKho quanLyKho;
-    PhieuNhap phieuNhap;
-    PhieuXuat phieuXuat;
-    KhachHang khachHang;
-    NhaCungCap nhacungcap;
-    NhanVien nhanVien;
-    TaiKhoan taiKhoan;
-    PhanQuyen phanQuyen;
-    ThongKe thongKe;
+    // SanPham sanPham;
+    // QuanLyThuocTinhSP quanLyThuocTinhSP;
+    // KhuVucKho quanLyKho;
+    // PhieuNhap phieuNhap;
+    // PhieuXuat phieuXuat;
+    // KhachHang khachHang;
+    // NhaCungCap nhacungcap;
+    // NhanVien nhanVien;
+    // TaiKhoan taiKhoan;
+    // PhanQuyen phanQuyen;
+    // ThongKe thongKe;
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
         {"Sản phẩm", "product.svg", "sanpham"},
@@ -78,7 +78,7 @@ public class MenuTaskbar extends JPanel {
     Color HowerBackgroundColor = new Color(187, 222, 251);
     private ArrayList<ChiTietQuyenDTO> listQuyen;
     NhomQuyenDTO nhomQuyenDTO;
-    public NhanVienDTO nhanVienDTO;
+    // public NhanVienDTO nhanVienDTO;
     JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     public MenuTaskbar(Main main) {
@@ -89,9 +89,9 @@ public class MenuTaskbar extends JPanel {
     public MenuTaskbar(Main main, TaiKhoanDTO tk) {
         this.main = main;
         this.user = tk;
-        this.nhomQuyenDTO = NhomQuyenDAO.getInstance().selectById(Integer.toString(tk.getManhomquyen()));
-        this.nhanVienDTO = NhanVienDAO.getInstance().selectById(Integer.toString(tk.getManv()));
-        listQuyen = ChiTietQuyenDAO.getInstance().selectAll(Integer.toString(tk.getManhomquyen()));
+        // this.nhomQuyenDTO = NhomQuyenDAO.getInstance().selectById(Integer.toString(tk.getManhomquyen()));
+        // this.nhanVienDTO = NhanVienDAO.getInstance().selectById(Integer.toString(tk.getManv()));
+        // listQuyen = ChiTietQuyenDAO.getInstance().selectAll(Integer.toString(tk.getManhomquyen()));
         initComponent();
     }
 
@@ -129,7 +129,7 @@ public class MenuTaskbar extends JPanel {
         pnlCenter = new JPanel();
         pnlCenter.setPreferredSize(new Dimension(230, 600));
         pnlCenter.setBackground(DefaultColor);
-//        pnlCenter.setBorder(new EmptyBorder(0,15,0,35));
+//        pnlCenter.setBorder(new EmptyBorder(0,15,0,35));koc
         pnlCenter.setLayout(new FlowLayout(0, 0, 5));
 
         bar3 = new JPanel();
@@ -160,11 +160,11 @@ public class MenuTaskbar extends JPanel {
             } else {
                 listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
                 pnlCenter.add(listitem[i]);
-                if (i != 0) {
-                    if (!checkRole(getSt[i][2])) {
-                        listitem[i].setVisible(false);
-                    }
-                }
+                // if (i != 0) {
+                    // if (!checkRole(getSt[i][2])) {
+                        // listitem[i].setVisible(false);
+                    // }
+                // }
             }
         }
 
@@ -192,26 +192,26 @@ public class MenuTaskbar extends JPanel {
         listitem[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                sanPham = new SanPham(main);
-                main.setPanel(sanPham);
+                // sanPham = new SanPham(main);
+                // main.setPanel(sanPham);
 
             }
         });
         listitem[2].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                quanLyThuocTinhSP = new QuanLyThuocTinhSP(main);
-                main.setPanel(quanLyThuocTinhSP);
+                // quanLyThuocTinhSP = new QuanLyThuocTinhSP(main);
+                // main.setPanel(quanLyThuocTinhSP);
             }
         });
         listitem[3].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                quanLyKho = new KhuVucKho(main);
-                main.setPanel(quanLyKho);
+                // quanLyKho = new KhuVucKho(main);
+                // main.setPanel(quanLyKho);
             }
         });
-//        listitem[4].addMouseListener(new MouseAdapter() {
+//        listitem[4].addMouseListener(new MouseAdapter() { koc
 //            @Override
 //            public void mousePressed(MouseEvent evt) {
 //                PhieuKiemKe kiemKe = new PhieuKiemKe(main, nhanVienDTO);
@@ -222,51 +222,51 @@ public class MenuTaskbar extends JPanel {
         listitem[4].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                phieuNhap = new PhieuNhap(main, nhanVienDTO);
-                main.setPanel(phieuNhap);
+                // phieuNhap = new PhieuNhap(main, nhanVienDTO);
+                // main.setPanel(phieuNhap);
             }
         });
         listitem[5].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                phieuXuat = new PhieuXuat(main, user);
-                main.setPanel(phieuXuat);
+                // phieuXuat = new PhieuXuat(main, user);
+                // main.setPanel(phieuXuat);
             }
         });
         listitem[6].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                khachHang = new KhachHang(main);
-                main.setPanel(khachHang);
+                // khachHang = new KhachHang(main);
+                // main.setPanel(khachHang);
             }
         });
         listitem[7].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                nhacungcap = new NhaCungCap(main);
-                main.setPanel(nhacungcap);
+                // nhacungcap = new NhaCungCap(main);
+                // main.setPanel(nhacungcap);
             }
         });
 
         listitem[8].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                nhanVien = new NhanVien(main);
-                main.setPanel(nhanVien);
+                // nhanVien = new NhanVien(main);
+                // main.setPanel(nhanVien);
             }
         });
         listitem[9].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                taiKhoan = new TaiKhoan(main);
-                main.setPanel(taiKhoan);
+                // taiKhoan = new TaiKhoan(main);
+                // main.setPanel(taiKhoan);
             }
         });
         listitem[10].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                thongKe = new ThongKe();
-                main.setPanel(thongKe);
+                // thongKe = new ThongKe();
+                // main.setPanel(thongKe);
             }
         });
 
@@ -274,8 +274,8 @@ public class MenuTaskbar extends JPanel {
             @Override
             public void mousePressed(MouseEvent evt) {
            
-                phanQuyen = new PhanQuyen(main);
-                main.setPanel(phanQuyen);
+                // phanQuyen = new PhanQuyen(main);
+                // main.setPanel(phanQuyen);
             }
         });
 
@@ -295,18 +295,18 @@ public class MenuTaskbar extends JPanel {
         });
     }
 
-    public boolean checkRole(String s) {
-        boolean check = false;
-        for (int i = 0; i < listQuyen.size(); i++) {
-            if (listQuyen.get(i).getHanhdong().equals("view")) {
-                if (s.equals(listQuyen.get(i).getMachucnang())) {
-                    check = true;
-                    return check;
-                }
-            }
-        }
-        return check;
-    }
+    // public boolean checkRole(String s) {
+        // boolean check = false;
+        // for (int i = 0; i < listQuyen.size(); i++) {
+            // if (listQuyen.get(i).getHanhdong().equals("view")) {
+                // if (s.equals(listQuyen.get(i).getMachucnang())) {
+                    // check = true;
+                    // return check;
+                // }
+            // }
+        // }
+        // return check;
+    // }
 
     public void pnlMenuTaskbarMousePress(MouseEvent evt) {
 
@@ -323,7 +323,7 @@ public class MenuTaskbar extends JPanel {
         }
     }
     public void resetChange(){
-        this.nhanVienDTO = new NhanVienDAO().selectById(String.valueOf(nhanVienDTO.getManv()));
+        // this.nhanVienDTO = new NhanVienDAO().selectById(String.valueOf(nhanVienDTO.getManv()));
     }
     public void in4(JPanel info) {
         JPanel pnlIcon = new JPanel(new FlowLayout());
@@ -332,11 +332,11 @@ public class MenuTaskbar extends JPanel {
         info.add(pnlIcon, BorderLayout.WEST);
         JLabel lblIcon = new JLabel();
         lblIcon.setPreferredSize(new Dimension(50, 70));
-        if (nhanVienDTO.getGioitinh() == 1) {
-            lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
-        } else {
-            lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
-        }
+        // if (nhanVienDTO.getGioitinh() == 1) {
+            // lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
+        // } else {
+            // lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
+        // }
         pnlIcon.add(lblIcon);
 
         JPanel pnlInfo = new JPanel();
@@ -345,11 +345,13 @@ public class MenuTaskbar extends JPanel {
         pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
         info.add(pnlInfo, BorderLayout.CENTER);
 
-        lblUsername = new JLabel(nhanVienDTO.getHoten());
+        // lblUsername = new JLabel(nhanVienDTO.getHoten());
+        lblUsername = new JLabel("MinhMinh");//xoa
         lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
         pnlInfo.add(lblUsername);
 
-        lblTenNhomQuyen = new JLabel(nhomQuyenDTO.getTennhomquyen());
+        // lblTenNhomQuyen = new JLabel(nhomQuyenDTO.getTennhomquyen());
+        lblTenNhomQuyen = new JLabel("Test1");//xoa
         lblTenNhomQuyen.putClientProperty("FlatLaf.style", "font: 120% $light.font");
         lblTenNhomQuyen.setForeground(Color.GRAY);
         pnlInfo.add(lblTenNhomQuyen);
@@ -357,7 +359,7 @@ public class MenuTaskbar extends JPanel {
         lblIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                MyAccount ma = new MyAccount(owner, MenuTaskbar.this, "Chỉnh sửa thông tin tài khoản", true);
+                // MyAccount ma = new MyAccount(owner, MenuTaskbar.this, "Chỉnh sửa thông tin tài khoản", true);
             }
         });
     }
