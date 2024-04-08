@@ -35,11 +35,11 @@ public class QuenMatKhau extends JDialog implements ActionListener {
 
     public QuenMatKhau(Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
+        init();
         setLocationRelativeTo(null);
     }
 
-    public void initComponents() {
+    public void init() {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         this.setTitle("Quên mật khẩu");
         this.setSize(new Dimension(500, 200));
@@ -47,14 +47,12 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         this.setLayout(new BorderLayout());
 
         jpTop = new JPanel(new BorderLayout());
-        jpTop.setBackground(new Color(22, 122, 198));
+        jpTop.setBackground(new Color(52 ,52 ,106));
         jpTop.setPreferredSize(new Dimension(400, 60));
 
-        lblTitle = new JLabel();
+        lblTitle = new JLabel("QUÊN MẬT KHẨU" ,JLabel.CENTER );
         lblTitle.setFont(new Font("Segoe UI", 1, 18));
         lblTitle.setForeground(new Color(255, 255, 255));
-        lblTitle.setHorizontalAlignment(JLabel.CENTER);
-        lblTitle.setText("QUÊN MẬT KHẨU");
         lblTitle.setPreferredSize(new Dimension(400, 50));
         jpTop.add(lblTitle, BorderLayout.CENTER);
 
@@ -64,11 +62,9 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         // Step 1
         jpCard_1 = new JPanel(new FlowLayout(2, 10, 10));
         jpCard_1.setBackground(new Color(255, 255, 255));
-        lblNhapEmail = new JLabel();
-        lblNhapEmail.setText("Nhập địa chỉ email");
-        lblNhapEmail.setHorizontalAlignment(Label.LEFT);
+        lblNhapEmail = new JLabel("Nhập địa chỉ email", Label.LEFT);
         txtEmail = new JTextField();
-        txtEmail.setPreferredSize(new java.awt.Dimension(350, 35));
+        txtEmail.setPreferredSize(new Dimension(350, 35));
 
         btnSendMail = new JButton("Gửi mã");
         btnSendMail.setPreferredSize(new Dimension(100, 35));
@@ -84,9 +80,9 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         lblNhapOTP.setText("Nhập mã OTP");
 
         txtOTP = new JTextField();
-        txtOTP.setPreferredSize(new java.awt.Dimension(350, 35));
+        txtOTP.setPreferredSize(new Dimension(350, 35));
 
-        btnConfirmOTP = new JButton("Xác nhận");
+        btnConfirmOTP = new JButton("Xác nhận ma OTP");
         btnConfirmOTP.setPreferredSize(new Dimension(100, 35));
         btnConfirmOTP.addActionListener(this);
         jpCard_2.add(lblNhapOTP);
@@ -100,7 +96,7 @@ public class QuenMatKhau extends JDialog implements ActionListener {
         lblNhapPassword.setText("Nhập mật khẩu mới");
 
         txtPassword = new JPasswordField();
-        txtPassword.setPreferredSize(new java.awt.Dimension(350, 35));
+        txtPassword.setPreferredSize(new Dimension(350, 35));
 
         btnChangePass = new JButton("Xác nhận");
         btnChangePass.setPreferredSize(new Dimension(100, 35));
