@@ -3,7 +3,6 @@ package GUI.Panel;
 import java.awt.*;
 import javax.swing.*;
 import GUI.Component.PanelShadow;
-import java.net.URL;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
 public class TrangChu extends JPanel {
@@ -34,7 +33,7 @@ public class TrangChu extends JPanel {
         top.setLayout(new FlowLayout(1, 0, 10));
 
         JLabel slogan = new JLabel();
-        slogan.setIcon(new javax.swing.ImageIcon(getClass().getResource("./img/slogan_real.png")));
+        slogan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/slogan.png")));
         
         top.add(slogan);
 
