@@ -8,12 +8,10 @@ import java.util.ArrayList;
 
 public class TaiKhoanBUS {
     private ArrayList<TaiKhoanDTO> listTaiKhoan;
-    private ArrayList<NhomQuyenDTO> listNhomQuyen;
     private NhomQuyenDAO nhomQuyenDAO = NhomQuyenDAO.getInstance();
     
     public TaiKhoanBUS(){
         this.listTaiKhoan  = TaiKhoanDAO.getInstance().selectAll();
-        this.listNhomQuyen = NhomQuyenDAO.getInstance().selectAll();
     }
     
     public ArrayList<TaiKhoanDTO> getTaiKhoanAll(){

@@ -1,16 +1,7 @@
 package GUI.Dialog;
 
-import BUS.PhienBanSanPhamBUS;
-import BUS.DungLuongRamBUS;
-import BUS.DungLuongRomBUS;
-import BUS.HeDieuHanhBUS;
 import BUS.KhuVucKhoBUS;
-import BUS.MauSacBUS;
-import BUS.ThuongHieuBUS;
-import BUS.XuatXuBUS;
-import DAO.PhienBanSanPhamDAO;
 import DAO.SanPhamDAO;
-import DTO.PhienBanSanPhamDTO;
 import DTO.SanPhamDTO;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;

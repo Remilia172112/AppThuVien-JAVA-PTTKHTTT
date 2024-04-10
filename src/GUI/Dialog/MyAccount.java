@@ -36,7 +36,7 @@ public class MyAccount extends JDialog implements ActionListener {
     ButtonCustom save, cancel;
     HeaderTitle title;
     JPanel top, center, top_center, main_center, bottom;
-    InputForm current_pwd, phone, email, new_pwd, confirm;
+    InputForm current_pwd, phone, EMAIL, new_pwd, confirm;
     NhanVienDTO nv;
     TaiKhoanBUS tkbus;
     NhanVienBUS nvbus;
@@ -74,7 +74,7 @@ public class MyAccount extends JDialog implements ActionListener {
         main_center.setBackground(Color.WHITE);
 
         ButtonGroup bg = new ButtonGroup();
-        String opt[] = {"Số điện thoại", "Email", "Mật khẩu"};
+        String opt[] = {"Số điện thoại", "EMAIL", "Mật khẩu"};
         jbr = new JRadioButton[3];
         for (int i = 0; i < jbr.length; i++) {
             jbr[i] = new JRadioButton();
@@ -96,14 +96,14 @@ public class MyAccount extends JDialog implements ActionListener {
         phone = new InputForm("Số điện thoại");
         PlainDocument phonex = (PlainDocument) phone.getTxtForm().getDocument();
         phonex.setDocumentFilter((new NumericDocumentFilter()));
-        phone.setText(nv.getSdt());
+        phone.setText(nv.getSDT());
         panel[0].add(phone);
 
         panel[1] = new JPanel(new GridLayout(1, 1));
         panel[1].setPreferredSize(new Dimension(400, 100));
-        email = new InputForm("Email");
-        email.setText(nv.getEmail());
-        panel[1].add(email);
+        EMAIL = new InputForm("EMAIL");
+        EMAIL.setText(nv.getEMAIL());
+        panel[1].add(EMAIL);
         main_center.add(panel[0]);
 
         panel[2] = new JPanel(new GridLayout(3, 1));
@@ -156,8 +156,8 @@ public class MyAccount extends JDialog implements ActionListener {
                 if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
                     JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và phải có 10 ký tự sô", "Chỉnh sửa số điện thoại", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    String sdt = phone.getText();
-                    NhanVienDTO nvdto = new NhanVienDTO(nv.getManv(), nv.getHoten(), nv.getGioitinh(), nv.getNgaysinh(), sdt, nv.getTrangthai(), nv.getEmail());
+                    String SDT = phone.getText();
+                    NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), SDT, nv.getTT(), nv.getEMAIL());
                     NhanVienDAO.getInstance().update(nvdto);
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 }
@@ -166,11 +166,11 @@ public class MyAccount extends JDialog implements ActionListener {
 
         if (jbr[1].isSelected()) {
             if (e.getSource() == save) {
-                if (Validation.isEmpty(email.getText()) || !Validation.isEmail(email.getText())) {
-                    JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa email", JOptionPane.WARNING_MESSAGE);
+                if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
+                    JOptionPane.showMessageDialog(this, "EMAIL không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
                 } else {
-                    String emailString = email.getText();
-                    NhanVienDTO nvdto = new NhanVienDTO(nv.getManv(), nv.getHoten(), nv.getGioitinh(), nv.getNgaysinh(), nv.getSdt(), nv.getTrangthai(), emailString);
+                    String EMAILString = EMAIL.getText();
+                    NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), nv.getSDT(), nv.getTT(), EMAILString);
                     NhanVienDAO.getInstance().update(nvdto);
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công");
 
@@ -180,7 +180,7 @@ public class MyAccount extends JDialog implements ActionListener {
         if (jbr[2].isSelected()) {
             if (e.getSource() == save) {
 
-                TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(nv.getManv()));
+                TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(nv.getMNV()));
                 if (Validation.isEmpty(current_pwd.getPass())) {
                     JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                 } else if (Validation.isEmpty(new_pwd.getPass())||new_pwd.getPass().length()<6) {
@@ -192,9 +192,9 @@ public class MyAccount extends JDialog implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp với mật khẩu mới", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                     return;
                 } else {
-                    if (BCrypt.checkpw(current_pwd.getPass(), tkdto.getMatkhau())) {
+                    if (BCrypt.checkpw(current_pwd.getPass(), tkdto.getMK())) {
                         String pass = BCrypt.hashpw(confirm.getPass(), BCrypt.gensalt(12));
-                        TaiKhoanDAO.getInstance().updatePass(nv.getEmail(), pass);
+                        TaiKhoanDAO.getInstance().updatePass(nv.getEMAIL(), pass);
                         JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                         current_pwd.setPass("");
                         new_pwd.setPass("");

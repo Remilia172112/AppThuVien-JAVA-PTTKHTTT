@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Dialog;
 
 import com.github.sarxos.webcam.Webcam;
@@ -37,10 +33,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-/**
- *
- * @author robot
- */
 public class QRCode_Dialog extends JDialog {
 
     private final Dimension ds = new Dimension(700, 500);
