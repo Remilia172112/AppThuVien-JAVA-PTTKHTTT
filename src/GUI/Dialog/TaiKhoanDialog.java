@@ -31,7 +31,6 @@ import javax.swing.border.EmptyBorder;
 public class TaiKhoanDialog extends JDialog {
 
     private TaiKhoan taiKhoan;
-    private TaiKhoan jbTaiKhoan;
     private HeaderTitle titlePage;
     private JPanel pnmain, pnbottom;
     private ButtonCustom btnThem, btnCapNhat, btnHuyBo;

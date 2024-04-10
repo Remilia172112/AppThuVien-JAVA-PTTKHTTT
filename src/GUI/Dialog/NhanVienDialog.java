@@ -7,8 +7,6 @@ package GUI.Dialog;
 import BUS.NhanVienBUS;
 import DAO.NhanVienDAO;
 import DTO.NhanVienDTO;
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
 import GUI.Component.InputDate;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Dialog;
 
 import DAO.NhanVienDAO;
@@ -25,7 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,10 +28,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author robot
- */
 public class ListNhanVien extends JDialog implements MouseListener {
 
     private TaiKhoan guiTaiKhoan;
@@ -80,7 +71,7 @@ public class ListNhanVien extends JDialog implements MouseListener {
                 "Vui lòng chọn nhân viên!:)", "Thông báo", JOptionPane.DEFAULT_OPTION);
                 } else{
                     dispose();
-                    TaiKhoanDialog tkd = new TaiKhoanDialog(guiTaiKhoan, guiTaiKhoan.owner, "Thêm nhân viên", true, "create", listnv.get(getRow()).getManv());
+                    TaiKhoanDialog tkd = new TaiKhoanDialog(guiTaiKhoan, guiTaiKhoan.owner, "Thêm nhân viên", true, "create", listnv.get(getRow()).getMNV());
                 }
             }
             
@@ -125,7 +116,7 @@ public class ListNhanVien extends JDialog implements MouseListener {
         tblModel.setRowCount(0);
         for (DTO.NhanVienDTO nhanVien : listnv) {
             tblModel.addRow(new Object[]{
-                nhanVien.getManv(),nhanVien.getHoten(),nhanVien.getGioitinh()==1?"Nam":"Nữ",nhanVien.getNgaysinh(),nhanVien.getSdt(),nhanVien.getEmail()
+                nhanVien.getMNV(),nhanVien.getHOTEN(),nhanVien.getGIOITINH()==1?"Nam":"Nữ",nhanVien.getNGAYSINH(),nhanVien.getSDT(),nhanVien.getEMAIL()
             });
         }
     }
@@ -136,8 +127,8 @@ public class ListNhanVien extends JDialog implements MouseListener {
         ArrayList<NhanVienDTO> result = new ArrayList<>();
         System.out.println(text);
         for(NhanVienDTO i : listnv) {
-           if(i.getHoten().toLowerCase().contains(text) || i.getEmail().toLowerCase().contains(text)
-                   || i.getSdt().toLowerCase().contains(text)){
+           if(i.getHOTEN().toLowerCase().contains(text) || i.getEMAIL().toLowerCase().contains(text)
+                   || i.getSDT().toLowerCase().contains(text)){
                result.add(i);
            }
         }
