@@ -11,7 +11,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.TableSorter;
-import GUI.Dialog.ChiTietSanPhamDialog;
 import GUI.Dialog.SanPhamDialog;
 import helper.JTableExporter;
 import java.awt.event.ActionEvent;
@@ -56,7 +55,7 @@ public final class SanPham extends JPanel implements ActionListener {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         TableColumnModel columnModel = tableSanPham.getColumnModel();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < header.length; i++) {
             if (i != 1) {
                 columnModel.getColumn(i).setCellRenderer(centerRenderer);
             }
@@ -79,7 +78,7 @@ public final class SanPham extends JPanel implements ActionListener {
         functionBar.setLayout(new GridLayout(1, 2, 50, 0));
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        String[] action = {"create", "update", "delete", "detail", "phone", "export"};
+        String[] action = {"create", "update", "delete", "detail", "export"};
         mainFunction = new MainFunction(m.user.getMNQ(), "sanpham", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
@@ -125,7 +124,7 @@ public final class SanPham extends JPanel implements ActionListener {
         tblModel.setRowCount(0);
 
         for (DTO.SanPhamDTO sp : result) {
-            tblModel.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL(), sp.getTENTG(), sp.getNAMXB()
+            tblModel.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL(), sp.getTENTG(), sp.getDANHMUC(), sp.getNAMXB()
                 , NhaXuatBanDAO.getInstance().selectById(sp.getMNXB() + "").getTennxb()
                 , KhuVucKhoDAO.getInstance().selectById(sp.getMKVK() + " ").getTenkhuvuc()
             });
@@ -154,11 +153,6 @@ public final class SanPham extends JPanel implements ActionListener {
             int index = getRowSelected();
             if (index != -1) {
                 SanPhamDialog spDialog = new SanPhamDialog(this, owner, "Xem chi tiết sản phẩm", true, "view", listSP.get(index));
-            }
-        } else if (e.getSource() == mainFunction.btn.get("phone")) {
-            int index = getRowSelected();
-            if (index != -1) {
-                ChiTietSanPhamDialog ct = new ChiTietSanPhamDialog(owner, "Tất cả sản phẩm", true, listSP.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("export")) {
             try {

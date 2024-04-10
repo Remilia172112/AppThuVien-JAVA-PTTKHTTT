@@ -3,13 +3,12 @@ package GUI.Component;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class IntegratedSearch extends JPanel {
 
-    public JComboBox<String> cbxChoose;
+    public JComboBox<String> cbxChoose = new JComboBox<>();
     public JButton btnReset;
     public JTextField txtSearchForm;
 
@@ -22,7 +21,6 @@ public class IntegratedSearch extends JPanel {
         JPanel jpSearch = new JPanel(new BorderLayout(5,10));
         jpSearch.setBorder(new EmptyBorder(18,15,18,15));
         jpSearch.setBackground(Color.white);
-        cbxChoose = new JComboBox();
         cbxChoose.setModel(new DefaultComboBoxModel<>(str));
         cbxChoose.setPreferredSize(new Dimension(140, 0));
         cbxChoose.setFont(new java.awt.Font(FlatRobotoFont.FAMILY, 0, 13));

@@ -82,9 +82,9 @@ CREATE TABLE `CTPHIEUXUAT` (
 CREATE TABLE `NHACUNGCAP` (
     `MNCC` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã nhà cung cấp',
     `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên NCC',
-    `DIACHI` VARCHAR(255) NOT NULL COMMENT 'Địa chỉ',
-    `SDT` VARCHAR(11) NOT NULL COMMENT 'Số điện thoại',
-    `EMAIL` VARCHAR(50) NOT NULL COMMENT 'Email',
+    `DIACHI` VARCHAR(255) COMMENT 'Địa chỉ',
+    `SDT` VARCHAR(12) COMMENT 'Số điện thoại',
+    `EMAIL` VARCHAR(50) COMMENT 'Email',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MNCC)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -317,52 +317,52 @@ VALUES
 
 INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENX`, `SL`, `ISBN`, `TT`) 
 VALUES
-        ('Ám thị tâm lý', 'kogoiob1cgjlqhndkc0dcw1hzj1kqook.png', 'Sách dành cho giới trẻ', 2022, 21,'Patrick King - Huy Nguyễn', 0, 134000, 1, 9786046863748, 1),
-        ('Không gì là không thể', 'xtx0d0apioa66abawbnpybv4v8wsb54p.png', 'Sách dành cho giới trẻ', 2020, 3,'George Matthew Adams', 0, 63500, 1, 8935086837665, 1),
-        ('Tư duy ngược', '050d67e2d58f5e291cbf25da53f55ef7.jpg', 'Sách dành cho giới trẻ', 2020, 10,'Nguyễn Anh Dũng', 0, 125000, 1, 9786043440287, 1),
-        ('Bạn đắt giá bao nhiêu?', 'txq47334nnwj1cw5f5ux7egme8erj2k7.jpg', 'Sách dành cho giới trẻ', 2021,9 ,'Vãn Tình', 0, 107000, 1, 8936186543500, 1),
-        ('Hãy gọi tên tôi', '90adcd1cc9b81aa80a272a653c7785e5.png', 'Sách dành cho giới trẻ', 2020,11 ,'Chanel Miller', 0, 118000, 1, 9786046863748, 1),
-        ('Đời ngắn đừng ngủ dài', 'q9rcr9y1ax8gb1u372kxb0eivlg2xegc.jpeg', 'Sách dành cho giới trẻ', 2020,2 ,'Robin Sharma', 0, 64000, 1, 8934974158691, 1),
-        ('Tội ác sau những bức tranh', 'rl7k9yn47k492vlxrbbnx9jmdy3ps89x.jpeg', 'Văn học - Nghệ thuật', 2022,6 ,'Jason Rekulak', 0, 146000, 1, 8934974158692, 1),
-        ('Người rỗng', '93lh9xopdaqdtimbzosmo3n3h3evhmcv.jpeg', 'Văn học - Nghệ thuật', 2020,22 ,'John Dickson Carr', 0, 70000, 1, 9786049847257, 1),
-        ('Tạp văn Nguyễn Ngọc Tư', '4b1ea768cbbef544c4ca16fe1967634b.jpg', 'Văn học - Nghệ thuật', 2021,2 ,'Nguyễn Ngọc Tư', 0, 72000, 1, 8934974168607, 1),
-        ('Bông sen vàng', 'ythnuw9ks3kk4l0lb1pa6fdtoo1tz32a.jpeg', 'Văn học - Nghệ thuật', 2022,5 ,'Sơn Tùng', 0, 144000, 1, 8934974168617, 1),
-        ('Hoa tuylip đen', 'sbgtbeq0vz1dhnag0qf3jrp6enxjgw20.jpeg', 'Văn học - Nghệ thuật', 2017,22 ,'Alexandre Dumas cha', 0, 49000, 1, 8936067597097, 1),
-        ('Truyện ngụ ngôn E Dốp', '883868zq1vtv4qqm7plgby2g8k0i2mkv.jpeg', 'Văn học - Nghệ thuật', 2019,22 ,'Aesop', 0, 59000, 1, 9786049633198, 1),
-        ('Nhật ký trong tù', 'cd19aa6163295ef2dff24012f78b9aec.jpg', 'Văn học - Nghệ thuật', 2021,5 ,'Hồ Chí Minh', 0, 105000, 1, 9786043238112, 1),
-        ('Phận liễu', 'detep2imksxnh97om03avji0q1p47clp.jpeg', 'Văn học - Nghệ thuật', 2020,12 ,'Chu Thanh Hương', 0, 162000, 1, 9786047244300, 1),
-        ('Phận liễu', '6619719473f6f132a18182f019364abf.jpg', 'Văn học - Nghệ thuật', 2020,13 ,'Ken Honda', 0, 85500, 1, 8935095629664, 1),
-        ('Lũ trẻ thủy tinh', 'rnwjyi3x3zzxzjxlq4ba0zaeqpu0lugk.jpeg', 'Văn học thiếu nhi', 2021,1 ,'Kristina Ohlsson', 0, 28000, 1, 9786042190862, 1),
-        ('Lũ trẻ đường ray', '22znw9gr4514dul0lc5rgisvc47qxfw6.jpeg', 'Văn học thiếu nhi', 2020,22 ,'Edith Nesbit', 0, 63000, 1, 9786049693465, 1),
-        ('Tớ sợ cái đồng hồ', 'fs2xgxjq2yswm6l33gfv50mwg6mgu4qm.jpeg', 'Văn học thiếu nhi', 2018,14 ,'Nguyễn Quỳnh Mai', 0, 52000, 1, 9786045653012, 1),
-        ('Khu rừng trong thành phố', 'cmpq0o6lb0jqmna7f9n2k7y61z84if0u.jpeg', 'Văn học thiếu nhi', 2018,14 ,'Nguyễn Quỳnh Mai', 0, 58000, 1, 9786045653005, 1),
-        ('Đảo ngàn sao', '5hghrc3synmydygcyzwsl7noz3pt7u31.jpeg', 'Văn học thiếu nhi', 2021,1 ,'Emma Karinsdotter', 0, 48000, 1, 9786042221603, 1),
-        ('Cậu bé bạc', 'ivssbyx4axf57c2tsww8kqyt1a4xauhv.jpeg', 'Văn học thiếu nhi', 2020,1 ,'Kristina Ohlsson', 0, 30000, 1, 9786042186315, 1),
-        ('Ngựa ô yêu dấu', 'wf05ukmavgsdar1a772qc24c1iawtcfg.jpeg', 'Văn học thiếu nhi', 2022,23 ,'Anna Sewell', 0, 109000, 1, 9786043565027, 1),
-        ('Chuyện con mèo dạy hải âu bay', 'iuj2x3gbldratw5xzjg9s1aterb66k8t.jpeg', 'Văn học thiếu nhi', 2019,4 ,'Luis Sepúlveda', 0, 42000, 1, 8935235222113, 1),
-        ('Chú bé mang Pyjama sọc', 'o53krzx7g5du11thdcme6xl2uqd2s8gp.jpeg', 'Văn học thiếu nhi', 2018,4 ,'John Boyne', 0, 58000, 1, 8935235217898, 1),
-        ('Những lá thư thời chiến Việt Nam (Tuyển tập)', '25ac83e2311e9fcaf146c655f672d6eb.jpg', 'Sách Chính trị - Xã hội', 2023,5 ,'Đặng Vương Hưng', 0, 144000, 1, 8935279148646, 1),
-        ('Kỷ yếu Hoàng Sa', 'kry3vs4zab398dch1jc23zycidl0jvaq.jpeg', 'Sách Chính trị - Xã hội', 2014,15 ,'UBND Huyện Hoàng Sa', 0, 153000, 1, 9786048002930, 1),
-        ('Dấu ấn Việt Nam trên Biển Đông', '1odzbcuzqspuou03uwdnstegf6pe4jp6.jpeg', 'Sách Chính trị - Xã hội', 2012,15 ,'TS. Trần Công Trục', 0, 191000, 1, 9786048018740, 1),
-        ('Chân dung Ngô Tất Tố', 'ytja13yxd96huojklmyy1cadwq4rykoi.jpeg', 'Sách Chính trị - Xã hội', 2014,15 ,'Cao Đắc Điểm - Ngô Thị Thanh Lịch', 0, 38000, 1, 9786048005214, 1),
-        ('Chính sách đối ngoại đổi mới của Việt Nam (1986 - 2015)', 'eplg2rc40dd1zfp0wzp4zo5s0aok0khp.jpeg', 'Sách Chính trị - Xã hội', 2018,16 ,'PGS. TS. Phạm Quang Minh', 0, 56000, 1, 9786047744749, 1),
-        ('Đặc trưng và vai trò của tầng lớp trung lưu ở Việt Nam', 'v4e1gkm2jgz2b7tdktk504lsgemrff59.jpeg', 'Sách Chính trị - Xã hội', 2022,17 ,'TS. Lê Kim Sa', 0, 81000, 1, 9786043089585, 1),
-        ('Sức mạnh mềm văn hóa Trung Quốc thời Tập Cận Bình và ứng xử của Việt Nam', 'qkphoffa38djvveox22613t5qx00ha8c.jpeg', 'Sách Chính trị - Xã hội', 2022,17 ,'Ths.Chử Thị Bích Thu - TS.Trần Thị Thủy (Đồng chủ biên)', 0, 99000, 1, 97860430839493, 1),
-        ('Đường tới Điện Biên Phủ', 'dbd44e00c80b8c79694bc2a87a36c20f.jpg', 'Sách Chính trị - Xã hội', 2018,15 ,'Đại tướng Võ Nguyên Giáp', 0, 47000, 1, 9786048030759, 1),
-        ('Đường tới Truông Bồn huyền thoại', 'wofawcrdyttsuu37j3mh06i2m6ii0lq0.jpeg', 'Sách Chính trị - Xã hội', 2019,18 ,'Văn Hiền', 0, 150000, 1, 9786049642937, 1),
-        ('Vương Dương Minh toàn thư', '8b90cf59071f3ed109d17770a0ec50ed.jpg', 'Sách Chính trị - Xã hội', 2023,15 ,'Túc Dịch Minh - Nguyễn Thanh Hải', 0, 443000, 1, 9786048083021, 1),
-        ('Thoát khỏi địa ngục Khmer đỏ - Hồi ký của một người còn sống', '7lmy4xhmjhgiqap0p6b2mt8ft12ju5pu.png', 'Sách Chính trị - Xã hội', 2019,5 ,'Denise Affonco', 0, 74000, 1, 9786045751718, 1),
-        ('Điện Biên Phủ - Điểm hẹn lịch sử', '240bb8a0096e82c9769587fdb0ccfe2a.jpg', 'Sách Chính trị - Xã hội', 2018,15 ,'Đại tướng Võ Nguyên Giáp', 0, 53000, 1, 9786048030742, 1),
-        ('Sử liệu cổ nhạc Việt Nam', 'kzaj4gc27vz9pguxepwe3uoz630caym2.jpeg', 'Sách Chính trị - Xã hội', 2020,19 ,'Đặng Hoành Loan', 0, 405000, 1, 9786047029396, 1),
-        ('Sự sinh thành Việt Nam', '7p1zz1z2gdgxk3f7p62nrd0xdn24sn0x.jpeg', 'Sách Chính trị - Xã hội', 2018,16 ,'GS. Hà Văn Tấn', 0, 96000, 1, 9786047730087, 1),
-        ('Người Dao Tiền ở Việt Nam', 'lc205cd61ud39xfvfom6lqxbeu8rklw5.jpeg', 'Sách Chính trị - Xã hội', 2021,17 ,'Lý Hành Sơn', 0, 157000, 1, 9786043086072, 1),
-        ('Tôn tử binh pháp', 'wufet92dnkp0jt7yzehtazcyvrpnhll3.jpeg', 'Sách Chính trị - Xã hội', 2019,20 ,'Tôn Tử', 0, 64000, 1, 8935235222564, 1),
-        ('5 đường mòn Hồ Chí Minh', '48a0hx2ovces506vnslpveb0qjcy6gi9.jpeg', 'Sách Chính trị - Xã hội', 2020,15 ,'Đặng Phong', 0, 161000, 1, 9786048049669, 1),
-        ('Việt Nam bản hùng ca giữ nước', '363454f37c5e79344b2a87e4d0155e7e.png', 'Sách Chính trị - Xã hội', 2021,15 ,'Đặng Văn Việt', 0, 256000, 1, 9786048052508, 1),
-        ('Bất khuất Mường Lò', 'w1xynsdkve2rv9k58gdkn8eixbvulr5y.jpeg', 'Sách Chính trị - Xã hội', 2023,19 ,'Trần Cao Đàm', 0, 108000, 1, 9786047035649, 1),
-        ('Nếm trải Điện Biên', 'hgnpj4w7mbutt0tg9pjbsa8eu15q9k3a.jpeg', 'Sách Chính trị - Xã hội', 2018,15 ,'Cao Tiến Lê', 0, 33000, 1, 9786048032661, 1),
-        ('Đường Bác Hồ Đi Cứu Nước', 'oqzeqlleza3c8550w5jjg54kvloow7oy.jpeg', 'Sách Chính trị - Xã hội', 2021,5 ,'GS.TS. Trình Quang Phú', 0, 148000, 1, 9786045767559, 1),
-        ('Ký ức chiến trận - Quảng Trị 1972 - 2022 (Bìa cứng) - Nguyễn Xuân Vượng', 'ds7l546w53f0otq26c67em4mle8xoszq.jpeg', 'Sách Chính trị - Xã hội', 2022, 10,'Nguyễn Xuân Vượng', 0, 160000, 1, 9786043566628, 1);
+        ('Ám thị tâm lý', 'kogoiob1cgjlqhndkc0dcw1hzj1kqook.png', 'Sách dành cho giới trẻ', 2022, 21,'Patrick King - Huy Nguyễn', 1, 134000, 1, 9786046863748, 1),
+        ('Không gì là không thể', 'xtx0d0apioa66abawbnpybv4v8wsb54p.png', 'Sách dành cho giới trẻ', 2020, 3,'George Matthew Adams', 1, 63500, 1, 8935086837665, 1),
+        ('Tư duy ngược', '050d67e2d58f5e291cbf25da53f55ef7.jpg', 'Sách dành cho giới trẻ', 2020, 10,'Nguyễn Anh Dũng', 1, 125000, 1, 9786043440287, 1),
+        ('Bạn đắt giá bao nhiêu?', 'txq47334nnwj1cw5f5ux7egme8erj2k7.jpg', 'Sách dành cho giới trẻ', 2021,9 ,'Vãn Tình', 1, 107000, 1, 8936186543500, 1),
+        ('Hãy gọi tên tôi', '90adcd1cc9b81aa80a272a653c7785e5.png', 'Sách dành cho giới trẻ', 2020,11 ,'Chanel Miller', 1, 118000, 1, 9786046863748, 1),
+        ('Đời ngắn đừng ngủ dài', 'q9rcr9y1ax8gb1u372kxb0eivlg2xegc.jpeg', 'Sách dành cho giới trẻ', 2020,2 ,'Robin Sharma', 1, 64000, 1, 8934974158691, 1),
+        ('Tội ác sau những bức tranh', 'rl7k9yn47k492vlxrbbnx9jmdy3ps89x.jpeg', 'Văn học - Nghệ thuật', 2022,6 ,'Jason Rekulak', 1, 146000, 1, 8934974158692, 1),
+        ('Người rỗng', '93lh9xopdaqdtimbzosmo3n3h3evhmcv.jpeg', 'Văn học - Nghệ thuật', 2020,22 ,'John Dickson Carr', 1, 70000, 1, 9786049847257, 1),
+        ('Tạp văn Nguyễn Ngọc Tư', '4b1ea768cbbef544c4ca16fe1967634b.jpg', 'Văn học - Nghệ thuật', 2021,2 ,'Nguyễn Ngọc Tư', 1, 72000, 1, 8934974168607, 1),
+        ('Bông sen vàng', 'ythnuw9ks3kk4l0lb1pa6fdtoo1tz32a.jpeg', 'Văn học - Nghệ thuật', 2022,5 ,'Sơn Tùng', 1, 144000, 1, 8934974168617, 1),
+        ('Hoa tuylip đen', 'sbgtbeq0vz1dhnag0qf3jrp6enxjgw20.jpeg', 'Văn học - Nghệ thuật', 2017,22 ,'Alexandre Dumas cha', 1, 49000, 1, 8936067597097, 1),
+        ('Truyện ngụ ngôn E Dốp', '883868zq1vtv4qqm7plgby2g8k0i2mkv.jpeg', 'Văn học - Nghệ thuật', 2019,22 ,'Aesop', 1, 59000, 1, 9786049633198, 1),
+        ('Nhật ký trong tù', 'cd19aa6163295ef2dff24012f78b9aec.jpg', 'Văn học - Nghệ thuật', 2021,5 ,'Hồ Chí Minh', 1, 105000, 1, 9786043238112, 1),
+        ('Phận liễu', 'detep2imksxnh97om03avji0q1p47clp.jpeg', 'Văn học - Nghệ thuật', 2020,12 ,'Chu Thanh Hương', 1, 162000, 1, 9786047244300, 1),
+        ('Phận liễu', '6619719473f6f132a18182f019364abf.jpg', 'Văn học - Nghệ thuật', 2020,13 ,'Ken Honda', 1, 85500, 1, 8935095629664, 1),
+        ('Lũ trẻ thủy tinh', 'rnwjyi3x3zzxzjxlq4ba0zaeqpu0lugk.jpeg', 'Văn học thiếu nhi', 2021,1 ,'Kristina Ohlsson', 1, 28000, 1, 9786042190862, 1),
+        ('Lũ trẻ đường ray', '22znw9gr4514dul0lc5rgisvc47qxfw6.jpeg', 'Văn học thiếu nhi', 2020,22 ,'Edith Nesbit', 1, 63000, 1, 9786049693465, 1),
+        ('Tớ sợ cái đồng hồ', 'fs2xgxjq2yswm6l33gfv50mwg6mgu4qm.jpeg', 'Văn học thiếu nhi', 2018,14 ,'Nguyễn Quỳnh Mai', 1, 52000, 1, 9786045653012, 1),
+        ('Khu rừng trong thành phố', 'cmpq0o6lb0jqmna7f9n2k7y61z84if0u.jpeg', 'Văn học thiếu nhi', 2018,14 ,'Nguyễn Quỳnh Mai', 1, 58000, 1, 9786045653005, 1),
+        ('Đảo ngàn sao', '5hghrc3synmydygcyzwsl7noz3pt7u31.jpeg', 'Văn học thiếu nhi', 2021,1 ,'Emma Karinsdotter', 1, 48000, 1, 9786042221603, 1),
+        ('Cậu bé bạc', 'ivssbyx4axf57c2tsww8kqyt1a4xauhv.jpeg', 'Văn học thiếu nhi', 2020,1 ,'Kristina Ohlsson', 1, 30000, 1, 9786042186315, 1),
+        ('Ngựa ô yêu dấu', 'wf05ukmavgsdar1a772qc24c1iawtcfg.jpeg', 'Văn học thiếu nhi', 2022,23 ,'Anna Sewell', 1, 109000, 1, 9786043565027, 1),
+        ('Chuyện con mèo dạy hải âu bay', 'iuj2x3gbldratw5xzjg9s1aterb66k8t.jpeg', 'Văn học thiếu nhi', 2019,4 ,'Luis Sepúlveda', 1, 42000, 1, 8935235222113, 1),
+        ('Chú bé mang Pyjama sọc', 'o53krzx7g5du11thdcme6xl2uqd2s8gp.jpeg', 'Văn học thiếu nhi', 2018,4 ,'John Boyne', 1, 58000, 1, 8935235217898, 1),
+        ('Những lá thư thời chiến Việt Nam (Tuyển tập)', '25ac83e2311e9fcaf146c655f672d6eb.jpg', 'Sách Chính trị - Xã hội', 2023,5 ,'Đặng Vương Hưng', 1, 144000, 1, 8935279148646, 1),
+        ('Kỷ yếu Hoàng Sa', 'kry3vs4zab398dch1jc23zycidl0jvaq.jpeg', 'Sách Chính trị - Xã hội', 2014,15 ,'UBND Huyện Hoàng Sa', 1, 153000, 1, 9786048002930, 1),
+        ('Dấu ấn Việt Nam trên Biển Đông', '1odzbcuzqspuou03uwdnstegf6pe4jp6.jpeg', 'Sách Chính trị - Xã hội', 2012,15 ,'TS. Trần Công Trục', 1, 191000, 1, 9786048018740, 1),
+        ('Chân dung Ngô Tất Tố', 'ytja13yxd96huojklmyy1cadwq4rykoi.jpeg', 'Sách Chính trị - Xã hội', 2014,15 ,'Cao Đắc Điểm - Ngô Thị Thanh Lịch', 1, 38000, 1, 9786048005214, 1),
+        ('Chính sách đối ngoại đổi mới của Việt Nam (1986 - 2015)', 'eplg2rc40dd1zfp0wzp4zo5s0aok0khp.jpeg', 'Sách Chính trị - Xã hội', 2018,16 ,'PGS. TS. Phạm Quang Minh', 1, 56000, 1, 9786047744749, 1),
+        ('Đặc trưng và vai trò của tầng lớp trung lưu ở Việt Nam', 'v4e1gkm2jgz2b7tdktk504lsgemrff59.jpeg', 'Sách Chính trị - Xã hội', 2022,17 ,'TS. Lê Kim Sa', 1, 81000, 1, 9786043089585, 1),
+        ('Sức mạnh mềm văn hóa Trung Quốc thời Tập Cận Bình và ứng xử của Việt Nam', 'qkphoffa38djvveox22613t5qx00ha8c.jpeg', 'Sách Chính trị - Xã hội', 2022,17 ,'Ths.Chử Thị Bích Thu - TS.Trần Thị Thủy (Đồng chủ biên)', 1, 99000, 1, 97860430839493, 1),
+        ('Đường tới Điện Biên Phủ', 'dbd44e00c80b8c79694bc2a87a36c20f.jpg', 'Sách Chính trị - Xã hội', 2018,15 ,'Đại tướng Võ Nguyên Giáp', 1, 47000, 1, 9786048030759, 1),
+        ('Đường tới Truông Bồn huyền thoại', 'wofawcrdyttsuu37j3mh06i2m6ii0lq0.jpeg', 'Sách Chính trị - Xã hội', 2019,18 ,'Văn Hiền', 1, 150000, 1, 9786049642937, 1),
+        ('Vương Dương Minh toàn thư', '8b90cf59071f3ed109d17770a0ec50ed.jpg', 'Sách Chính trị - Xã hội', 2023,15 ,'Túc Dịch Minh - Nguyễn Thanh Hải', 1, 443000, 1, 9786048083021, 1),
+        ('Thoát khỏi địa ngục Khmer đỏ - Hồi ký của một người còn sống', '7lmy4xhmjhgiqap0p6b2mt8ft12ju5pu.png', 'Sách Chính trị - Xã hội', 2019,5 ,'Denise Affonco', 1, 74000, 1, 9786045751718, 1),
+        ('Điện Biên Phủ - Điểm hẹn lịch sử', '240bb8a0096e82c9769587fdb0ccfe2a.jpg', 'Sách Chính trị - Xã hội', 2018,15 ,'Đại tướng Võ Nguyên Giáp', 1, 53000, 1, 9786048030742, 1),
+        ('Sử liệu cổ nhạc Việt Nam', 'kzaj4gc27vz9pguxepwe3uoz630caym2.jpeg', 'Sách Chính trị - Xã hội', 2020,19 ,'Đặng Hoành Loan', 1, 405000, 1, 9786047029396, 1),
+        ('Sự sinh thành Việt Nam', '7p1zz1z2gdgxk3f7p62nrd0xdn24sn0x.jpeg', 'Sách Chính trị - Xã hội', 2018,16 ,'GS. Hà Văn Tấn', 1, 96000, 1, 9786047730087, 1),
+        ('Người Dao Tiền ở Việt Nam', 'lc205cd61ud39xfvfom6lqxbeu8rklw5.jpeg', 'Sách Chính trị - Xã hội', 2021,17 ,'Lý Hành Sơn', 1, 157000, 1, 9786043086072, 1),
+        ('Tôn tử binh pháp', 'wufet92dnkp0jt7yzehtazcyvrpnhll3.jpeg', 'Sách Chính trị - Xã hội', 2019,20 ,'Tôn Tử', 1, 64000, 1, 8935235222564, 1),
+        ('5 đường mòn Hồ Chí Minh', '48a0hx2ovces506vnslpveb0qjcy6gi9.jpeg', 'Sách Chính trị - Xã hội', 2020,15 ,'Đặng Phong', 1, 161000, 1, 9786048049669, 1),
+        ('Việt Nam bản hùng ca giữ nước', '363454f37c5e79344b2a87e4d0155e7e.png', 'Sách Chính trị - Xã hội', 2021,15 ,'Đặng Văn Việt', 1, 256000, 1, 9786048052508, 1),
+        ('Bất khuất Mường Lò', 'w1xynsdkve2rv9k58gdkn8eixbvulr5y.jpeg', 'Sách Chính trị - Xã hội', 2023,19 ,'Trần Cao Đàm', 1, 108000, 1, 9786047035649, 1),
+        ('Nếm trải Điện Biên', 'hgnpj4w7mbutt0tg9pjbsa8eu15q9k3a.jpeg', 'Sách Chính trị - Xã hội', 2018,15 ,'Cao Tiến Lê', 1, 33000, 1, 9786048032661, 1),
+        ('Đường Bác Hồ Đi Cứu Nước', 'oqzeqlleza3c8550w5jjg54kvloow7oy.jpeg', 'Sách Chính trị - Xã hội', 2021,5 ,'GS.TS. Trình Quang Phú', 1, 148000, 1, 9786045767559, 1),
+        ('Ký ức chiến trận - Quảng Trị 1972 - 2022 (Bìa cứng) - Nguyễn Xuân Vượng', 'ds7l546w53f0otq26c67em4mle8xoszq.jpeg', 'Sách Chính trị - Xã hội', 2022, 10,'Nguyễn Xuân Vượng', 1, 160000, 1, 9786043566628, 1);
 
 
 INSERT INTO `NHAXUATBAN` (`TEN`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
@@ -422,37 +422,3 @@ ALTER TABLE `CTPHIEUNHAP` ADD CONSTRAINT FK_MSP_CTPHIEUNHAP FOREIGN KEY (MSP) RE
 
 ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MNXB_SANPHAM FOREIGN KEY (MNXB) REFERENCES `NHAXUATBAN`(MNXB) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MKVK_SANPHAM FOREIGN KEY (MKVK) REFERENCES `KHUVUCKHO`(MKVK) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*Xóa bảng*/
-
-DROP TABLE `DANHMUCCHUCNANG`;
-
-DROP TABLE `CTQUYEN`;
-
-DROP TABLE `NHOMQUYEN`;
-
-DROP TABLE `NHANVIEN`;
-
-DROP TABLE `TAIKHOAN`;
-
-DROP TABLE `KHACHHANG`;
-
-DROP TABLE `PHIEUXUAT`;
-
-DROP TABLE `CTPHIEUXUAT`;
-
-DROP TABLE `NHACUNGCAP`;
-
-DROP TABLE `PHIEUNHAP`;
-
-DROP TABLE `CTPHIEUNHAP`;
-
-DROP TABLE `PHIEUKIEMKE`;
-
-DROP TABLE `CTPHIEUKIEMKE`;
-
-DROP TABLE `SANPHAM`;
-
-DROP TABLE `NHAXUATBAN`;
-
-DROP TABLE `KHUVUCKHO`;

@@ -55,7 +55,7 @@ public final class NhaXuatBan extends JPanel implements ActionListener, ItemList
         tableNhaXuatBan = new JTable();
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Mã NCC", "Tên nxb", "Địa chỉ", "Email", "Số điện thoại"};
+        String[] header = new String[]{"Mã NXB", "Tên nhà xuất bản", "Địa chỉ", "Email", "Số điện thoại"};
         tblModel.setColumnIdentifiers(header);
         tableNhaXuatBan.setModel(tblModel);
         tableNhaXuatBan.setFocusable(false);

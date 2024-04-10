@@ -95,7 +95,7 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
                 int madm = rs.getInt("MSP");
-                String tendm = rs.getString("tensp");
+                String tendm = rs.getString("TEN");
                 String HINHANH = rs.getString("HINHANH");
                 String DANHMUC = rs.getString("DANHMUC");
                 int NAMXB = rs.getInt("NAMXB");
@@ -125,7 +125,7 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
                 int madm = rs.getInt("MSP");
-                String tendm = rs.getString("tensp");
+                String tendm = rs.getString("TEN");
                 String HINHANH = rs.getString("HINHANH");
                 String DANHMUC = rs.getString("DANHMUC");
                 int NAMXB = rs.getInt("NAMXB");
@@ -153,7 +153,7 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
                 int madm = rs.getInt("MSP");
-                String tendm = rs.getString("tensp");
+                String tendm = rs.getString("TEN");
                 String HINHANH = rs.getString("HINHANH");
                 String DANHMUC = rs.getString("DANHMUC");
                 int NAMXB = rs.getInt("NAMXB");
