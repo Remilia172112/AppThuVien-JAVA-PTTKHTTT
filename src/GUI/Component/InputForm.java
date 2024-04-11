@@ -69,7 +69,8 @@ public final class InputForm extends JPanel {
 
     
     public String getPass() {
-        return txtPass.getText();
+        char[] passChars = txtPass.getPassword();
+        return new String(passChars);
     }
 
     public JLabel getLblTitle() {

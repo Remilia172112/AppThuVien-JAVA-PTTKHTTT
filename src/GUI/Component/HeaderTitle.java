@@ -34,4 +34,7 @@ public class HeaderTitle extends JPanel{
     public HeaderTitle(String title) {
         initComponent(title);
     }
+    public void setText (String title) {
+        lblTitle.setText(title);
+    }
 }
