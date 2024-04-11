@@ -180,7 +180,7 @@ public class MyAccount extends JDialog implements ActionListener {
                             } else if (Validation.isEmpty(confirm_pass.getPass())) {
                                 JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                                 return;
-                            } else if (!new_pass.getPass().equals(confirm.getPass()) ) {
+                            } else if (!new_pass.getPass().equals(confirm_pass.getPass()) ) {
                                 JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp với mật khẩu mới", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                                 return;
                             } else {
