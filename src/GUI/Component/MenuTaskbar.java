@@ -9,6 +9,7 @@ import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.Log_In;
 import GUI.Main;
+import GUI.login_page;
 import GUI.Panel.KhachHang;
 import GUI.Panel.KhuVucKho;
 import GUI.Panel.NhaCungCap;
@@ -274,7 +275,7 @@ public class MenuTaskbar extends JPanel {
                         "Bạn có chắc chắn muốn đăng xuất?", "Đăng xuất",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    Log_In login = new Log_In();
+                    login_page login = new login_page();
                     main.dispose();
                     login.setVisible(true);
                 }
