@@ -78,7 +78,7 @@ public class MyAccount extends JDialog implements ActionListener {
         center.setBorder(new EmptyBorder(20, 10, 0, 10));
         center.setBackground(Color.WHITE);
 
-        String opt[] = {"Số điện thoại", "EMAIL", "Mật khẩu"};
+        String opt[] = {"Số điện thoại", "Email", "Mật khẩu"};
 
         panel = new JPanel[3];
         panel[0] = new JPanel(new GridLayout(1, 1));
@@ -170,7 +170,7 @@ public class MyAccount extends JDialog implements ActionListener {
             this.dispose();
         }
         if(e.getSource() == save) {
-             if(check)  {
+            if(check)  {
                 System.out.println("22222222222222");
                             TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(nv.getMNV()));
                             if (Validation.isEmpty(current_pass.getPass())) {
@@ -212,7 +212,7 @@ public class MyAccount extends JDialog implements ActionListener {
                 }
                 else if (text_email != nv.getEMAIL()) {
                     if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
-                        JOptionPane.showMessageDialog(this, "EMAIL không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
                     } else {
                         String EMAILString = EMAIL.getText();
                         NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), nv.getSDT(), nv.getTT(), EMAILString);
@@ -223,32 +223,6 @@ public class MyAccount extends JDialog implements ActionListener {
                 }
             }
         } 
-          
-
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
         menuTaskbar.resetChange();
     }
 }

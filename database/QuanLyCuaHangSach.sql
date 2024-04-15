@@ -201,10 +201,6 @@ VALUES
         (1, 'thongke', 'delete'),
         (1, 'thongke', 'update'),
         (1, 'thongke', 'view'),
-        (1, 'thuoctinh', 'create'),
-        (1, 'thuoctinh', 'delete'),
-        (1, 'thuoctinh', 'update'),
-        (1, 'thuoctinh', 'view'),
         (1, 'xuathang', 'create'),
         (1, 'xuathang', 'delete'),
         (1, 'xuathang', 'update'),
@@ -221,10 +217,6 @@ VALUES
         (2, 'sanpham', 'create'),
         (2, 'sanpham', 'update'),
         (2, 'sanpham', 'view'),
-        (2, 'thuoctinh', 'create'),
-        (2, 'thuoctinh', 'delete'),
-        (2, 'thuoctinh', 'update'),
-        (2, 'thuoctinh', 'view'),
         (3, 'khachhang', 'create'),
         (3, 'khachhang', 'update'),
         (3, 'khachhang', 'view'),
@@ -249,7 +241,7 @@ VALUES
 
 INSERT INTO `NHANVIEN` (`HOTEN`, `GIOITINH`, `NGAYSINH`, `SDT`, `EMAIL`, `TT`)
 VALUES
-        ('Lê Thế Minh', 1, '2077-01-01', '0505555505', 'Mingey0101@gmail.com', 1),
+        ('Lê Thế Minh', 1, '2077-01-01', '0505555505', 'remchan.com@gmail.com', 1),
         ('Hoàng Gia Bảo', 1, '2023-04-11', '0355374322', 'musicanime2501@gmail.com', 1),
         ('Đỗ Nam Công Chính', 1, '2003-04-11', '0123456789', 'chinchin@gmail.com', 1),
         ('Đinh Ngọc Ân', 1, '2003-04-03', '0123456789', 'ngocan@gmail.com', 1),
@@ -422,3 +414,5 @@ ALTER TABLE `CTPHIEUNHAP` ADD CONSTRAINT FK_MSP_CTPHIEUNHAP FOREIGN KEY (MSP) RE
 
 ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MNXB_SANPHAM FOREIGN KEY (MNXB) REFERENCES `NHAXUATBAN`(MNXB) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MKVK_SANPHAM FOREIGN KEY (MKVK) REFERENCES `KHUVUCKHO`(MKVK) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+COMMIT;

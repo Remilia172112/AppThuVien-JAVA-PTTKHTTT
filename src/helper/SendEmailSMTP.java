@@ -13,12 +13,14 @@ public class SendEmailSMTP {
     }
     
     public static void sendOTP(String emailTo, String otp) {
-        String username = "tsinh11111@gmail.com";
-        String password = "ojldjxeqzmdxznbh";
+        final String username = "chamsockhachhangbestbook@gmail.com";
+        final String password = "bestbook123";
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.socketFactory.port", "465");
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
         Session session = Session.getInstance(prop,
@@ -40,7 +42,7 @@ public class SendEmailSMTP {
 "                    <a href=\"#\" style=\"font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600\">WarehouseManagement</a>" +
 "                </div>" +
 "                <p style=\"font-size:1.1em\">Hi,</p>" +
-"                <p>Thank you for choosing Your Brand. Use the following OTP to complete your Sign Up procedures. OTP is valid for 5 minutes</p>" +
+"                <p>Thank you for choosing Your Brand. Use the following OTP to complete your Sign Up procedures</p>" +
 "                <h2 style=\"background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;\">" + otp + "</h2>" +
 "                <p style=\"font-size:0.9em;\">Regards,<br />QA</p>" +
 "                <hr style=\"border:none;border-top:1px solid #eee\" />" +

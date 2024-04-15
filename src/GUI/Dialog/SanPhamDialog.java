@@ -127,12 +127,6 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         pnbottom.setBorder(new EmptyBorder(20, 0, 10, 0));
         pnbottom.setBackground(Color.white);
         
-
-        btnHuyBo = new ButtonCustom("Huỷ bỏ", "danger", 14);
-        btnHuyBo.addActionListener(this);
-        pnbottom.add(btnHuyBo);
-        pnCenter.add(pnbottom, BorderLayout.SOUTH);
-
         switch (type) {
             case "update" -> {
                 btnSaveCH = new ButtonCustom("Lưu thông tin", "success", 14);
@@ -145,6 +139,11 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
                 pnbottom.add(btnAddSanPham);
             }
         }
+
+        btnHuyBo = new ButtonCustom("Huỷ bỏ", "danger", 14);
+        btnHuyBo.addActionListener(this);
+        pnbottom.add(btnHuyBo);
+        pnCenter.add(pnbottom, BorderLayout.SOUTH);
     }
 
     public void initComponents(String title, String type) {
