@@ -40,12 +40,12 @@ public class NhaXuatBanBUS {
     public boolean update(NhaXuatBanDTO ncc) {
         boolean check = NxbDAO.update(ncc) != 0;
         if (check) {
-            this.listNxb.set(getIndexByMaNCC(ncc.getManxb()), ncc);
+            this.listNxb.set(getIndexByMaNXB(ncc.getManxb()), ncc);
         }
         return check;
     }
 
-    public int getIndexByMaNCC(int mancc) {
+    public int getIndexByMaNXB(int mancc) {
         int i = 0;
         int vitri = -1;
         while (i < this.listNxb.size() && vitri == -1) {
@@ -118,7 +118,7 @@ public class NhaXuatBanBUS {
     }
 
     public String getTenNhaXuatBan(int mancc) {
-        return this.listNxb.get(getIndexByMaNCC(mancc)).getTennxb();
+        return this.listNxb.get(getIndexByMaNXB(mancc)).getTennxb();
     }
 
     public NhaXuatBanDTO findCT(ArrayList<NhaXuatBanDTO> ncc, String tenncc) {
