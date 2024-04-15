@@ -29,11 +29,11 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             Connection con = (Connection) JDBCUtil.getConnection();
             String sql = "INSERT INTO `PHIEUNHAP` (`MNV`, `MNCC`, `TIEN`, `TG`, `TT`) VALUES (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(4, t.getMNV());
-            pst.setInt(3, t.getMNCC());
-            pst.setDouble(5, t.getTIEN());
-            pst.setTimestamp(2, t.getTG());
-            pst.setInt(1, t.getTT());
+            pst.setInt(1, t.getMNV());
+            pst.setInt(2, t.getMNCC());
+            pst.setDouble(3, t.getTIEN());
+            pst.setTimestamp(4, t.getTG());
+            pst.setInt(5, t.getTT());
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -52,8 +52,8 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
             pst.setTimestamp(1, t.getTG());
             pst.setInt(2, t.getMNCC());
             pst.setLong(3, t.getTIEN());
-            pst.setInt(4, t.getTrangthai());
-            pst.setInt(5, t.getMaphieu());
+            pst.setInt(4, t.getTT());
+            pst.setInt(5, t.getMP());
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -158,7 +158,7 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         int result = -1;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND TABLE_NAME   = 'phieunhap'";
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND TABLE_NAME   = 'PHIEUNHAP'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
             if (!rs2.isBeforeFirst()) {
