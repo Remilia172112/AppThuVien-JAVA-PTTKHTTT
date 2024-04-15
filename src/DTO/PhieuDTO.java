@@ -72,7 +72,6 @@ public class PhieuDTO {
         hash = 59 * hash + this.trangthai;
         return hash;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -102,7 +101,7 @@ public class PhieuDTO {
 
     @Override
     public String toString() {
-        return "PhieuDTO{" + "maphieu=" + maphieu + ", manguoitao=" + manguoitao + ", thoigiantao=" + thoigiantao + ", tongTien=" + tongTien + ", trangthai=" + trangthai + '}';
+        return "PhieuDTO{" + "Ma phieu=" + maphieu + ", manguoitao=" + manguoitao + ", thoigiantao=" + thoigiantao + ", tongTien=" + tongTien + ", trangthai=" + trangthai + '}';
     }
 
     

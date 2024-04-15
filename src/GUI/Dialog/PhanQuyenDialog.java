@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Dialog;
 
 import BUS.NhomQuyenBUS;
@@ -32,10 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public final class PhanQuyenDialog extends JDialog implements ActionListener {
 
     private JLabel lblTennhomquyen;
