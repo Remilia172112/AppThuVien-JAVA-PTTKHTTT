@@ -146,18 +146,17 @@ CREATE TABLE `KHUVUCKHO` (
 
 INSERT INTO `DANHMUCCHUCNANG`(`MCN`, `TEN`, `TT`)
 VALUES 
+        ('sanpham', 'Quản lý sản phẩm', 0),
         ('khachhang', 'Quản lý khách hàng', 0),
-        ('khuvuckho', 'Quản lý khu vực kho', 0),
         ('nhacungcap', 'Quản lý nhà cung cấp', 0),
+        ('nhaxuatban', 'Quản lý nhà xuất bản', 0),
         ('nhanvien', 'Quản lý nhân viên', 0),
         ('nhaphang', 'Quản lý nhập hàng', 0),
-        ('nhomquyen', 'Quản lý nhóm quyền', 0),
-        ('sanpham', 'Quản lý sản phẩm', 0),
-        ('taikhoan', 'Quản lý tài khoản', 0),
-        ('thongke', 'Quản lý thống kê', 0),
-        ('thuoctinh', 'Quản lý thuộc tính', 0),
         ('xuathang', 'Quản lý xuất hàng', 0),
-        ('nhaxuatban', 'Quản lý nhà xuất bản', 0);
+        ('khuvuckho', 'Quản lý khu vực kho', 0),
+        ('nhomquyen', 'Quản lý nhóm quyền', 0),
+        ('taikhoan', 'Quản lý tài khoản', 0),
+        ('thongke', 'Quản lý thống kê', 0);
 
 INSERT INTO `CTQUYEN` (`MNQ`, `MCN`, `HANHDONG`)
 VALUES
