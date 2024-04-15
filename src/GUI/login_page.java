@@ -45,7 +45,7 @@ public class login_page extends JFrame implements KeyListener{
         login_nhap.setBackground(Color.WHITE);
         login_nhap.setLayout(new GridLayout(7 , 1 , 10 , 0));
         login_nhap.setBorder(new EmptyBorder(0,0,0,15));
-        login_nhap.setPreferredSize(new Dimension(500 , 500));
+        login_nhap.setPreferredSize(new Dimension(400 , 500));
 
         lb1 = new JLabel("Đăng nhập vào BEST BOOK");
         lb1.setFont(new Font("Arial", Font.BOLD , 28));
