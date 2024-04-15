@@ -3,7 +3,6 @@ package GUI.Dialog;
 import DAO.TaiKhoanDAO;
 import DTO.TaiKhoanDTO;
 import helper.SendEmailSMTP;
-import com.formdev.flatlaf.FlatLightLaf;
 import helper.BCrypt;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -24,13 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class QuenMatKhau extends JDialog implements ActionListener {
 
     private JButton btnSendMail, btnConfirmOTP, btnChangePass;

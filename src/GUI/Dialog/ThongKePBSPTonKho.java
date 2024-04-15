@@ -18,10 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public final class ThongKePBSPTonKho extends JDialog{
 
     HeaderTitle titlePage;

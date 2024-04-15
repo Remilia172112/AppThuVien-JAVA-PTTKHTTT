@@ -1,8 +1,6 @@
 package GUI.Panel.ThongKe;
 
 import BUS.ThongKeBUS;
-import DAO.ThongKeDAO;
-import DTO.ThongKe.ThongKeKhachHangDTO;
 import DTO.ThongKe.ThongKeNhaCungCapDTO;
 import GUI.Component.ButtonCustom;
 import GUI.Component.InputDate;

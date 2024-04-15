@@ -97,7 +97,9 @@ public class MyAccount extends JDialog implements ActionListener {
 
         panel[2] = new JPanel(new GridLayout(1, 1));
         panel[2].setPreferredSize(new Dimension(400, 100));
-        current_pwd = new InputForm(opt[2], "password");
+        current_pwd = new InputForm(opt[2]);
+        current_pwd.setText("********");
+        current_pwd.setDisable();
         panel[2].add(current_pwd);
 
         change = new JLabel("<html><p style = 'font-size : 11px;'>Thay đổi</p></html>" , JLabel.RIGHT);

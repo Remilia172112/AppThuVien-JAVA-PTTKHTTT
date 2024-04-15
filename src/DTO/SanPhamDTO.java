@@ -13,6 +13,7 @@ public class SanPhamDTO {
     private String TENTG;
     private int MKVK;
     private int TIENX;
+    private int TIENN;
     private int SL;
     private String ISBN;
 
@@ -21,7 +22,7 @@ public class SanPhamDTO {
     }
     
     public SanPhamDTO(int mSP, String tEN, String hINHANH, String dANHMUC, int nAMXB, int mNXB, String tENTG, int mKVK,
-            int tIENX, int sL, String iSBN) {
+            int tIENX, int tIENN, int sL, String iSBN) {
         MSP = mSP;
         TEN = tEN;
         HINHANH = hINHANH;
@@ -31,6 +32,7 @@ public class SanPhamDTO {
         TENTG = tENTG;
         MKVK = mKVK;
         TIENX = tIENX;
+        TIENN = tIENN;
         SL = sL;
         ISBN = iSBN;
     }
@@ -108,6 +110,14 @@ public class SanPhamDTO {
         TIENX = tIENX;
     }
 
+    public int getTIENN() {
+        return TIENN;
+    }
+
+    public void setTIENN(int tienn) {
+        TIENN = tienn;
+    }
+
     public int getSL() {
         return SL;
     }
@@ -171,6 +181,9 @@ public class SanPhamDTO {
         if (this.TIENX != other.TIENX) {
             return false;
         }
+        if (this.TIENN != other.TIENN) {
+            return false;
+        }
         if (this.ISBN != other.ISBN) {
             return false;
         }
@@ -189,6 +202,6 @@ public class SanPhamDTO {
     @Override
     
     public String toString() {
-        return "SanPhamDTO{" + "Ma san pham = " + MSP + ", Ten san pham = " + TEN + ", Hinh anh = " + HINHANH + ", Danh muc = " + DANHMUC + ", Nam xuat ban = " + NAMXB + ", Ma nha xuat ban = " + MNXB  + ", Ten tac gia = " + TENTG + ", Ma khu vuc kho = " + MKVK + ", Tien xuat = " + TIENX + ", So luong = " + SL + ", ISBN=" + ISBN + ", MKVK=" + MKVK + ", TIENX=" + TIENX + ", ISBN=" + ISBN + '}';
+        return "SanPhamDTO{" + "Ma san pham = " + MSP + ", Ten san pham = " + TEN + ", Hinh anh = " + HINHANH + ", Danh muc = " + DANHMUC + ", Nam xuat ban = " + NAMXB + ", Ma nha xuat ban = " + MNXB  + ", Ten tac gia = " + TENTG + ", Ma khu vuc kho = " + MKVK + ", Tien xuat = " + TIENX + ", Tien nhap = " + TIENN + ", So luong = " + SL + ", ISBN=" + ISBN + ", MKVK=" + MKVK + ", TIENX=" + TIENX + ", ISBN=" + ISBN + '}';
     }
 }
