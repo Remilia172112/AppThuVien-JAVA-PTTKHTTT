@@ -1,6 +1,6 @@
 package DAO;
 
-import DTO.ChiTietPhieuNhapDTO;
+import DTO.ChiTietPhieuDTO;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,32 +10,43 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 
+/**
+ *
+ * @author Tran Nhat Sinh
+ */
+public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
 
-public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO> {
-
-    public static ChiTietPhieuNhapDAO getInstance() {
-        return new ChiTietPhieuNhapDAO();
+    public static ChiTietPhieuXuatDAO getInstance() {
+        return new ChiTietPhieuXuatDAO();
     }
 
     @Override
-    public int insert(ArrayList<ChiTietPhieuNhapDTO> t) {
+    public int insert(ArrayList<ChiTietPhieuDTO> t) {
         int result = 0;
         for (int i = 0; i < t.size(); i++) {
             try {
                 Connection con = (Connection) JDBCUtil.getConnection();
-                String sql = "INSERT INTO `CTPHIEUNHAP` (`MPN`, `MSP`, `SL`, `TIENNHAP`, `HINHTHUC`) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`) VALUES (?,?,?)";
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1, t.get(i).getMP());
                 pst.setInt(2, t.get(i).getMSP());
+                int SL = -(t.get(i).getSL());
                 pst.setInt(3, t.get(i).getSL());
-                pst.setInt(4, t.get(i).getTIENNHAP());
-                pst.setInt(5, t.get(i).getHINHTHUC());
+                int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
             } catch (SQLException ex) {
-                Logger.getLogger(ChiTietPhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ChiTietPhieuXuatDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), t.get(i).getSL());
+        }
+        return result;
+    }
+    
+    public int reset(ArrayList<ChiTietPhieuDTO> t){
+        int result = 0;
+        for (int i = 0; i < t.size(); i++) {
+        SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), +(t.get(i).getSL()));
+        delete(t.get(i).getMP()+"");
         }
         return result;
     }
@@ -45,19 +56,19 @@ public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "DELETE FROM CTPHIEUNHAP WHERE MPN = ?";
+            String sql = "DELETE FROM CTPHIEUNHAP WHERE MPX = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
-            Logger.getLogger(ChiTietPhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChiTietPhieuXuatDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
 
     @Override
-    public int update(ArrayList<ChiTietPhieuNhapDTO> t, String pk) {
+    public int update(ArrayList<ChiTietPhieuDTO> t, String pk) {
         int result = this.delete(pk);
         if (result != 0) {
             result = this.insert(t);
@@ -66,21 +77,19 @@ public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO
     }
 
     @Override
-    public ArrayList<ChiTietPhieuNhapDTO> selectAll(String t) {
-        ArrayList<ChiTietPhieuNhapDTO> result = new ArrayList<>();
+    public ArrayList<ChiTietPhieuDTO> selectAll(String t) {
+        ArrayList<ChiTietPhieuDTO> result = new ArrayList<>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM CTPHIEUNHAP WHERE MPN = ?";
+            String sql = "SELECT * FROM CTPHIEUNHAP WHERE MPX = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
-                int maphieu = rs.getInt("MPN");
-                int masp = rs.getInt("MSP");
-                int dongia = rs.getInt("TIEN");
-                int soluong = rs.getInt("SL");
-                int hinhthucnhap = rs.getInt("HINHTHUC");
-                ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieu, masp, dongia, soluong,hinhthucnhap);
+                int maphieu = rs.getInt("MPX");
+                int MSP = rs.getInt("MSP");
+                int SL = rs.getInt("SL");
+                ChiTietPhieuDTO ctphieu = new ChiTietPhieuDTO(maphieu, MSP, SL);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);
