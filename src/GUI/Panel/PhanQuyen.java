@@ -2,7 +2,6 @@ package GUI.Panel;
 
 import BUS.NhomQuyenBUS;
 import DTO.NhomQuyenDTO;
-import DTO.SanPhamDTO;
 import GUI.Dialog.PhanQuyenDialog;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;

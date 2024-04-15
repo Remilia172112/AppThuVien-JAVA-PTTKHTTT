@@ -1,35 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
 import java.sql.Timestamp;
 
 public class PhieuNhapDTO extends PhieuDTO{
-    private int manhacungcap;
+    private int MNCC;
 
-    public PhieuNhapDTO(int manhacungcap) {
-        this.manhacungcap = manhacungcap;
+    public PhieuNhapDTO(int MNCC) {
+        this.MNCC = MNCC;
     }
 
-    public PhieuNhapDTO(int manhacungcap, int maphieu, int manguoitao, Timestamp thoigiantao, long tongTien, int trangthai) {
-        super(maphieu, manguoitao, thoigiantao, tongTien, trangthai);
-        this.manhacungcap = manhacungcap;
+    public PhieuNhapDTO(int MNCC, int MP, int MNV, Timestamp TG, long TIEN, int TT) {
+        super(MP, MNV, TG, TIEN, TT);
+        this.MNCC = MNCC;
     }
 
-    public int getManhacungcap() {
-        return manhacungcap;
+    public int getMNCC() {
+        return MNCC;
     }
 
-    public void setManhacungcap(int manhacungcap) {
-        this.manhacungcap = manhacungcap;
+    public void setMNCC(int MNCC) {
+        this.MNCC = MNCC;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.manhacungcap;
+        hash = 67 * hash + this.MNCC;
         return hash;
     }
 
@@ -45,11 +41,11 @@ public class PhieuNhapDTO extends PhieuDTO{
             return false;
         }
         final PhieuNhapDTO other = (PhieuNhapDTO) obj;
-        return this.manhacungcap == other.manhacungcap;
+        return this.MNCC == other.MNCC;
     }
 
     @Override
     public String toString() {
-        return "PhieuNhapDTO{" + "manhacungcap=" + manhacungcap +'}'+super.toString();
+        return "PhieuNhapDTO{" + "MNCC=" + MNCC +'}'+super.toString();
     }
 }
