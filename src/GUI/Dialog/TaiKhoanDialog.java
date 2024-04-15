@@ -24,10 +24,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author robot
- */
 public class TaiKhoanDialog extends JDialog {
 
     private TaiKhoan taiKhoan;

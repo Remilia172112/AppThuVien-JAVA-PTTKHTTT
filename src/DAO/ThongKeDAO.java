@@ -17,10 +17,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Date;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class ThongKeDAO {
 
     public static ThongKeDAO getInstance() {

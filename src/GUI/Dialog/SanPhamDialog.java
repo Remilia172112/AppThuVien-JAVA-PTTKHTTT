@@ -2,6 +2,7 @@ package GUI.Dialog;
 
 import BUS.KhuVucKhoBUS;
 import BUS.NhaXuatBanBUS;
+import BUS.SanPhamBUS;
 import DAO.SanPhamDAO;
 import DTO.SanPhamDTO;
 import GUI.Component.ButtonCustom;
@@ -41,7 +42,7 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
 
     private HeaderTitle titlePage;
     private JPanel pninfosanpham, pnbottom, pnCenter, pninfosanphamright, pnmain;
-    private ButtonCustom btnThemCHMS, btnHuyBo, btnAddSanPham;
+    private ButtonCustom btnHuyBo, btnAddSanPham;
     InputForm tenSP, tenTG, namXB, danhmuc, isbn;
     InputForm txtgianhap, txtgiaxuat;
     SelectForm  cbNXB;
@@ -55,6 +56,8 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
     
     KhuVucKhoBUS kvkhoBus = new KhuVucKhoBUS();
     NhaXuatBanBUS nxbBus = new NhaXuatBanBUS();
+    SanPhamBUS spBus = new SanPhamBUS();
+
     SanPhamDTO sp;
     String[] arrkhuvuc;
     String[] arrnxb;
@@ -129,11 +132,13 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         
         switch (type) {
             case "update" -> {
+                initView();
                 btnSaveCH = new ButtonCustom("Lưu thông tin", "success", 14);
                 btnSaveCH.addActionListener(this);
                 pnbottom.add(btnSaveCH);
             }
             case "create" -> {
+                initCreate();
                 btnAddSanPham = new ButtonCustom("Thêm sản phẩm", "success", 14);
                 btnAddSanPham.addActionListener(this);
                 pnbottom.add(btnAddSanPham);
@@ -190,13 +195,15 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source == btnThemCHMS && validateCardOne()) {
-            CardLayout c = (CardLayout) pnmain.getLayout();
-            c.next(pnmain);
-        } else if (source == btnAddSanPham) {
+        if(source == btnHuyBo){
+            dispose();
+        }
+        else if (source == btnAddSanPham && checkCreate()) {
             eventAddSanPham();
-        }  else if(source == btnSaveCH){
+        }  
+        else if(source == btnSaveCH){
             SanPhamDTO snNew = getInfo();
+            snNew.setSL(spBus.getSPbyISBN(snNew.getISBN()).getSL());
             if(!snNew.getHINHANH().equals(this.sp.getHINHANH())){
                 snNew.setHINHANH(addImage(snNew.getHINHANH()));
             }
@@ -204,10 +211,9 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
             SanPhamDAO.getInstance().update(sp);
             this.jpSP.spBUS.update(snNew);
             this.jpSP.loadDataTalbe(this.jpSP.spBUS.getAll());
+            JOptionPane.showMessageDialog(this, "Sửa thông tin sản phẩm thành công !");
         }
-        if(source == btnHuyBo){
-            dispose();
-        }
+        
     }
 
     public void eventAddSanPham() {
@@ -227,11 +233,11 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         int naMXB  = Integer.parseInt(namXB.getText());
         int MNXB = nxbBus.getAll().get(this.cbNXB.getSelectedIndex()).getManxb();
         String TenTG = tenTG.getText();
-        int MKVK = kvkhoBus.getAll().get(this.cbNXB.getSelectedIndex()).getMakhuvuc();
+        int MKVK = kvkhoBus.getAll().get(this.khuvuc.getSelectedIndex()).getMakhuvuc();
         int tIENX = Integer.parseInt(txtgiaxuat.getText());
         int tIENN = Integer.parseInt(txtgianhap.getText());
         String ISBN = isbn.getText();
-        SanPhamDTO result = new SanPhamDTO(masp, vtensp, hinhanh, danhMuc, naMXB, MNXB, TenTG, MKVK, tIENX, 0, ISBN);
+        SanPhamDTO result = new SanPhamDTO(masp, vtensp, hinhanh, danhMuc, naMXB, MNXB, TenTG, MKVK, tIENX, tIENN, 0, ISBN);
         return result;
     }
 
@@ -244,12 +250,12 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         tenTG.setText(sp.getTENTG());
         khuvuc.setSelectedIndex(kvkhoBus.getIndexByMaKVK(sp.getMKVK()));
         txtgiaxuat.setText(Integer.toString(sp.getTIENX()));
-        txtgianhap.setText(Integer.toString(sp.getTIENX()));
+        txtgianhap.setText(Integer.toString(sp.getTIENN()));
         isbn.setText(sp.getISBN());
     }
 
 
-    public boolean validateCardOne() {
+    public boolean checkCreate() {
         boolean check = true;
         if (Validation.isEmpty(tenSP.getText()) || Validation.isEmpty((String) cbNXB.getSelectedItem())
                 || Validation.isEmpty(danhmuc.getText()) || Validation.isEmpty(namXB.getText())
@@ -257,10 +263,41 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
                 || Validation.isEmpty(txtgiaxuat.getText()) || Validation.isEmpty(isbn.getText())) {
             check = false;
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
-        } else {
-            // Check number 
-        }
+        } else if(!spBus.checkISBN(isbn.getText())) {
+                JOptionPane.showMessageDialog(this, "Mã ISBN đã tồn tại!"); 
+                check = false;
+            }
+            else {
+                if(hinhanh.getUrl_img() == null) {
+                    JOptionPane.showMessageDialog(this, "Chưa thêm ảnh sản phẩm!"); 
+                    check = false;
+                }
+            }
         return check;
+    }
+
+    public boolean checkUpdate() {
+        boolean check = true;
+        if (Validation.isEmpty(tenSP.getText()) || Validation.isEmpty((String) cbNXB.getSelectedItem())
+                || Validation.isEmpty(danhmuc.getText()) || Validation.isEmpty(namXB.getText())
+                || Validation.isEmpty(tenTG.getText()) || Validation.isEmpty(txtgianhap.getText())
+                || Validation.isEmpty(txtgiaxuat.getText()) || Validation.isEmpty(isbn.getText())) {
+            check = false;
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
+        }
+            else {
+                if(hinhanh.getUrl_img() == null) {
+                    JOptionPane.showMessageDialog(this, "Chưa thêm ảnh sản phẩm!"); 
+                    check = false;
+                }
+            }
+        return check;
+    }
+    public void initView() {
+        isbn.setEditable(false);
+    }
+    public void initCreate() {
+        isbn.setEditable(true);
     }
 }
 
