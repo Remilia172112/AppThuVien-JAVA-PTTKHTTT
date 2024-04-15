@@ -8,29 +8,29 @@ import java.sql.Timestamp;
 // import java.util.ArrayList;
 
 public class PhieuXuatDTO extends PhieuDTO{
-    private int makh;
+    private int MKH;
 
-    public PhieuXuatDTO(int makh) {
-        this.makh = makh;
+    public PhieuXuatDTO(int MKH) {
+        this.MKH = MKH;
     }
 
-    public PhieuXuatDTO(int makh, int maphieu, int manguoitao, Timestamp thoigiantao, long tongTien, int trangthai) {
-        super(maphieu, manguoitao, thoigiantao, tongTien, trangthai);
-        this.makh = makh;
+    public PhieuXuatDTO(int MKH, int MP, int MNV, Timestamp TG, long TIEN, int TT) {
+        super(MP, MNV, TG, TIEN, TT);
+        this.MKH = MKH;
     }
 
-    public int getMakh() {
-        return makh;
+    public int getMKH() {
+        return MKH;
     }
 
-    public void setMakh(int makh) {
-        this.makh = makh;
+    public void setMKH(int MKH) {
+        this.MKH = MKH;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + this.makh;
+        hash = 23 * hash + this.MKH;
         return hash;
     }
 
@@ -46,12 +46,12 @@ public class PhieuXuatDTO extends PhieuDTO{
             return false;
         }
         final PhieuXuatDTO other = (PhieuXuatDTO) obj;
-        return this.makh == other.makh;
+        return this.MKH == other.MKH;
     }
 
     @Override
     public String toString() {
-        return "PhieuXuatDTO{" + "makh=" + makh + '}';
+        return "PhieuXuatDTO{" + "MKH=" + MKH + '}';
     }
 
     
