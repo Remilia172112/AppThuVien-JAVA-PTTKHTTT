@@ -91,7 +91,7 @@ public class login_page extends JFrame implements KeyListener{
                 try {
                     checkLogin();
                 } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(login_page.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
@@ -135,7 +135,7 @@ public class login_page extends JFrame implements KeyListener{
                             Main main = new Main(tk);
                             main.setVisible(true);
                         } catch (UnsupportedLookAndFeelException ex) {
-                            Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(login_page.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Mật khẩu không khớp", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
@@ -163,7 +163,7 @@ public class login_page extends JFrame implements KeyListener{
             try {
                 checkLogin();
             } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(Log_In.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(login_page.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
