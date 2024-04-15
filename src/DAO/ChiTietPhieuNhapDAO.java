@@ -77,10 +77,10 @@ public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO
             while (rs.next()) {
                 int maphieu = rs.getInt("MPN");
                 int masp = rs.getInt("MSP");
-                int dongia = rs.getInt("TIEN");
                 int soluong = rs.getInt("SL");
+                int dongia = rs.getInt("TIEN");
                 int hinhthucnhap = rs.getInt("HINHTHUC");
-                ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieu, masp, dongia, soluong,hinhthucnhap);
+                ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieu, masp,  soluong, dongia, hinhthucnhap);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);

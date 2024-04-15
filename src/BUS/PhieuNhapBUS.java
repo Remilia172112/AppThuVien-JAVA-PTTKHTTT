@@ -1,11 +1,11 @@
 package BUS;
 
 import DAO.ChiTietPhieuNhapDAO;
-import DAO.ChiTietSanPhamDAO;
+import DAO.SanPhamDAO;
 import DAO.PhieuNhapDAO;
 import DTO.ChiTietPhieuDTO;
 import DTO.ChiTietPhieuNhapDTO;
-import DTO.ChiTietSanPhamDTO;
+import DTO.SanPhamDTO;
 import DTO.PhieuNhapDTO;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,15 +13,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class PhieuNhapBUS {
 
     public final PhieuNhapDAO phieunhapDAO = new PhieuNhapDAO();
     public final ChiTietPhieuNhapDAO ctPhieuNhapDAO = new ChiTietPhieuNhapDAO();
-    public final ChiTietSanPhamDAO chitietsanphamDAO = new ChiTietSanPhamDAO();
+    public final SanPhamDAO chitietsanphamDAO = new SanPhamDAO();
 
     NhaCungCapBUS nccBUS = new NhaCungCapBUS();
     NhanVienBUS nvBUS = new NhanVienBUS();
@@ -40,9 +37,9 @@ public class PhieuNhapBUS {
         return this.listPhieuNhap;
     }
 
-    public ArrayList<ChiTietSanPhamDTO> convertHashMapToArray(HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> chitietsanpham) {
-        ArrayList<ChiTietSanPhamDTO> result = new ArrayList<>();
-        for (ArrayList<ChiTietSanPhamDTO> ctsp : chitietsanpham.values()) {
+    public ArrayList<SanPhamDTO> convertHashMapToArray(HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham) {
+        ArrayList<SanPhamDTO> result = new ArrayList<>();
+        for (ArrayList<SanPhamDTO> ctsp : chitietsanpham.values()) {
             result.addAll(ctsp);
         }
         return result;
@@ -61,7 +58,7 @@ public class PhieuNhapBUS {
         return result;
     }
 
-    public boolean add(PhieuNhapDTO phieu, ArrayList<ChiTietPhieuNhapDTO> ctPhieu, HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> chitietsanpham) {
+    public boolean add(PhieuNhapDTO phieu, ArrayList<ChiTietPhieuNhapDTO> ctPhieu, HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham) {
         boolean check = phieunhapDAO.insert(phieu) != 0;
         if (check) {
             check = ctPhieuNhapDAO.insert(ctPhieu) != 0;
@@ -70,11 +67,11 @@ public class PhieuNhapBUS {
         return check;
     }
 
-    public ChiTietPhieuNhapDTO findCT(ArrayList<ChiTietPhieuNhapDTO> ctphieu, int mapb) {
+    public ChiTietPhieuNhapDTO findCT(ArrayList<ChiTietPhieuNhapDTO> ctphieu, int masp) {
         ChiTietPhieuNhapDTO p = null;
         int i = 0;
         while (i < ctphieu.size() && p == null) {
-            if (ctphieu.get(i).getMaphienbansp() == mapb) {
+            if (ctphieu.get(i).getMSP() == masp) {
                 p = ctphieu.get(i);
             } else {
                 i++;
@@ -83,10 +80,10 @@ public class PhieuNhapBUS {
         return p;
     }
 
-    public long getTongTien(ArrayList<ChiTietPhieuNhapDTO> ctphieu) {
+    public long getTIEN(ArrayList<ChiTietPhieuNhapDTO> ctphieu) {
         long result = 0;
         for (ChiTietPhieuNhapDTO item : ctphieu) {
-            result += item.getDongia() * item.getSoluong();
+            result += item.getTIENNHAP() * item.getSL();
         }
         return result;
     }
@@ -108,36 +105,36 @@ public class PhieuNhapBUS {
         for (PhieuNhapDTO phieuNhap : getAllList()) {
             boolean match = false;
             switch (type) {
-                case 0 -> {
-                    if (Integer.toString(phieuNhap.getMaphieu()).contains(input)
-                            || nccBUS.getTenNhaCungCap(phieuNhap.getManhacungcap()).toLowerCase().contains(input)
-                            || nvBUS.getNameById(phieuNhap.getManguoitao()).toLowerCase().contains(input)) {
+                case 0 -> { 
+                    if (Integer.toString(phieuNhap.getMP()).contains(input)
+                            || nccBUS.getTenNhaCungCap(phieuNhap.getMNCC()).toLowerCase().contains(input)
+                            || nvBUS.getNameById(phieuNhap.getMNV()).toLowerCase().contains(input)) {
                         match = true;
                     }
                 }
                 case 1 -> {
-                    if (Integer.toString(phieuNhap.getMaphieu()).contains(input)) {
+                    if (Integer.toString(phieuNhap.getMP()).contains(input)) {
                         match = true;
                     }
                 }
                 case 2 -> {
-                    if (nccBUS.getTenNhaCungCap(phieuNhap.getManhacungcap()).toLowerCase().contains(input)) {
+                    if (nccBUS.getTenNhaCungCap(phieuNhap.getMNCC()).toLowerCase().contains(input)) {
                         match = true;
                     }
                 }
                 case 3 -> {
-                    if (nvBUS.getNameById(phieuNhap.getManguoitao()).toLowerCase().contains(input)) {
+                    if (nvBUS.getNameById(phieuNhap.getMNV()).toLowerCase().contains(input)) {
                         match = true;
                     }
                 }
             }
 
             if (match
-                    && (manv == 0 || phieuNhap.getManguoitao() == manv) && (mancc == 0 || phieuNhap.getManhacungcap() == mancc)
-                    && (phieuNhap.getThoigiantao().compareTo(time_start) >= 0)
-                    && (phieuNhap.getThoigiantao().compareTo(time_end) <= 0)
-                    && phieuNhap.getTongTien() >= price_min
-                    && phieuNhap.getTongTien() <= price_max) {
+                    && (manv == 0 || phieuNhap.getMNV() == manv) && (mancc == 0 || phieuNhap.getMNCC() == mancc)
+                    && (phieuNhap.getTG().compareTo(time_start) >= 0)
+                    && (phieuNhap.getTG().compareTo(time_end) <= 0)
+                    && phieuNhap.getTIEN() >= price_min
+                    && phieuNhap.getTIEN() <= price_max) {
                 result.add(phieuNhap);
             }
         }
@@ -145,12 +142,12 @@ public class PhieuNhapBUS {
         return result;
     }
 
-    public boolean checkCancelPn(int maphieu) {
-        return phieunhapDAO.checkCancelPn(maphieu);
-    }
+    // public boolean checkCancelPn(int maphieu) {
+    //     return phieunhapDAO.checkCancelPn(maphieu);
+    // }
 
-    public int cancelPhieuNhap(int maphieu) {
-        return phieunhapDAO.cancelPhieuNhap(maphieu);
-    }
+    // public int cancelPhieuNhap(int maphieu) {
+    //     return phieunhapDAO.cancelPhieuNhap(maphieu);
+    // }
 
 }
