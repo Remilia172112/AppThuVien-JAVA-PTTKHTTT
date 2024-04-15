@@ -331,7 +331,7 @@ VALUES
         ('Truyện ngụ ngôn E Dốp', '883868zq1vtv4qqm7plgby2g8k0i2mkv.jpeg', 'Văn học - Nghệ thuật', 2019,22 ,'Aesop', 1, 59000, 1, 9786049633198, 1),
         ('Nhật ký trong tù', 'cd19aa6163295ef2dff24012f78b9aec.jpg', 'Văn học - Nghệ thuật', 2021,5 ,'Hồ Chí Minh', 1, 105000, 1, 9786043238112, 1),
         ('Phận liễu', 'detep2imksxnh97om03avji0q1p47clp.jpeg', 'Văn học - Nghệ thuật', 2020,12 ,'Chu Thanh Hương', 1, 162000, 1, 9786047244300, 1),
-        ('Phận liễu', '6619719473f6f132a18182f019364abf.jpg', 'Văn học - Nghệ thuật', 2020,13 ,'Ken Honda', 1, 85500, 1, 8935095629664, 1),
+        ('Đồng tiền hạnh phúc', '6619719473f6f132a18182f019364abf.jpg', 'Văn học - Nghệ thuật', 2020,13 ,'Ken Honda', 1, 85500, 1, 8935095629664, 1),
         ('Lũ trẻ thủy tinh', 'rnwjyi3x3zzxzjxlq4ba0zaeqpu0lugk.jpeg', 'Văn học thiếu nhi', 2021,1 ,'Kristina Ohlsson', 1, 28000, 1, 9786042190862, 1),
         ('Lũ trẻ đường ray', '22znw9gr4514dul0lc5rgisvc47qxfw6.jpeg', 'Văn học thiếu nhi', 2020,22 ,'Edith Nesbit', 1, 63000, 1, 9786049693465, 1),
         ('Tớ sợ cái đồng hồ', 'fs2xgxjq2yswm6l33gfv50mwg6mgu4qm.jpeg', 'Văn học thiếu nhi', 2018,14 ,'Nguyễn Quỳnh Mai', 1, 52000, 1, 9786045653012, 1),

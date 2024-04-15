@@ -5,71 +5,71 @@ import java.util.Objects;
 
 
 public class PhieuDTO {
-    private int maphieu;
-    private int manguoitao;
-    private Timestamp thoigiantao;
-    private long tongTien;
-    private int trangthai;
+    private int MP;
+    private int MNV;
+    private Timestamp TG;
+    private long TIEN;
+    private int TT;
 
     public PhieuDTO() {
     }
 
-    public PhieuDTO(int maphieu, int manguoitao, Timestamp thoigiantao, long tongTien, int trangthai) {
-        this.maphieu = maphieu;
-        this.manguoitao = manguoitao;
-        this.thoigiantao = thoigiantao;
-        this.tongTien = tongTien;
-        this.trangthai = trangthai;
+    public PhieuDTO(int MP, int MNV, Timestamp TG, long TIEN, int TT) {
+        this.MP = MP;
+        this.MNV = MNV;
+        this.TG = TG;
+        this.TIEN = TIEN;
+        this.TT = TT;
     }
     
-    public int getMaphieu() {
-        return maphieu;
+    public int getMP() {
+        return MP;
     }
 
-    public void setMaphieu(int maphieu) {
-        this.maphieu = maphieu;
+    public void setMP(int MP) {
+        this.MP = MP;
     }
 
-    public int getManguoitao() {
-        return manguoitao;
+    public int getMNV() {
+        return MNV;
     }
 
-    public void setManguoitao(int manguoitao) {
-        this.manguoitao = manguoitao;
+    public void setMNV(int MNV) {
+        this.MNV = MNV;
     }
 
-    public Timestamp getThoigiantao() {
-        return thoigiantao;
+    public Timestamp getTG() {
+        return TG;
     }
 
-    public void setThoigiantao(Timestamp thoigiantao) {
-        this.thoigiantao = thoigiantao; 
+    public void setTG(Timestamp TG) {
+        this.TG = TG; 
     }
 
-    public long getTongTien() {
-        return tongTien;
+    public long getTIEN() {
+        return TIEN;
     }
 
-    public void setTongTien(long tongTien) {
-        this.tongTien = tongTien;
+    public void setTIEN(long TIEN) {
+        this.TIEN = TIEN;
     }
 
-    public int getTrangthai() {
-        return trangthai;
+    public int getTT() {
+        return TT;
     }
 
-    public void setTrangthai(int trangthai) {
-        this.trangthai = trangthai;
+    public void setTT(int TT) {
+        this.TT = TT;
     }
 
         @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.maphieu;
-        hash = 59 * hash + this.manguoitao;
-        hash = 59 * hash + Objects.hashCode(this.thoigiantao);
-        hash = 59 * hash + (int) (this.tongTien ^ (this.tongTien >>> 32));
-        hash = 59 * hash + this.trangthai;
+        hash = 59 * hash + this.MP;
+        hash = 59 * hash + this.MNV;
+        hash = 59 * hash + Objects.hashCode(this.TG);
+        hash = 59 * hash + (int) (this.TIEN ^ (this.TIEN >>> 32));
+        hash = 59 * hash + this.TT;
         return hash;
     }
     @Override
@@ -84,25 +84,23 @@ public class PhieuDTO {
             return false;
         }
         final PhieuDTO other = (PhieuDTO) obj;
-        if (this.maphieu != other.maphieu) {
+        if (this.MP != other.MP) {
             return false;
         }
-        if (this.manguoitao != other.manguoitao) {
+        if (this.MNV != other.MNV) {
             return false;
         }
-        if (this.tongTien != other.tongTien) {
+        if (this.TIEN != other.TIEN) {
             return false;
         }
-        if (this.trangthai != other.trangthai) {
+        if (this.TT != other.TT) {
             return false;
         }
-        return Objects.equals(this.thoigiantao, other.thoigiantao);
+        return Objects.equals(this.TG, other.TG);
     }
 
     @Override
     public String toString() {
-        return "PhieuDTO{" + "Ma phieu=" + maphieu + ", manguoitao=" + manguoitao + ", thoigiantao=" + thoigiantao + ", tongTien=" + tongTien + ", trangthai=" + trangthai + '}';
+        return "PhieuDTO{" + "MP=" + MP + ", MNV=" + MNV + ", TG=" + TG + ", TIEN=" + TIEN + ", TT=" + TT + '}';
     }
-
-    
 }
