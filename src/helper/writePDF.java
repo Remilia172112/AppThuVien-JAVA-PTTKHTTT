@@ -1,19 +1,14 @@
 package helper;
 
-import BUS.DungLuongRamBUS;
-import BUS.DungLuongRomBUS;
-import BUS.MauSacBUS;
 import DAO.ChiTietPhieuNhapDAO;
 import DAO.ChiTietPhieuXuatDAO;
 import DAO.KhachHangDAO;
 import DAO.NhaCungCapDAO;
 import DAO.NhanVienDAO;
-import DAO.PhienBanSanPhamDAO;
 import DAO.PhieuNhapDAO;
 import DAO.PhieuXuatDAO;
 import DAO.SanPhamDAO;
 import DTO.ChiTietPhieuDTO;
-import DTO.PhienBanSanPhamDTO;
 import DTO.PhieuNhapDTO;
 import DTO.PhieuXuatDTO;
 import DTO.SanPhamDTO;
@@ -58,9 +53,6 @@ public class writePDF {
     Font fontBold25;
     Font fontBoldItalic15;
 
-    DungLuongRomBUS romBus = new DungLuongRomBUS();
-    DungLuongRamBUS ramBus = new DungLuongRamBUS();
-    MauSacBUS mausacBus = new MauSacBUS();
 
     public writePDF() {
         try {

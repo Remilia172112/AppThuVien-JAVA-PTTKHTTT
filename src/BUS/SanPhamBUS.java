@@ -82,14 +82,33 @@ public class SanPhamBUS {
         return result;
     }
 
-    public ArrayList<SanPhamDTO> search(String text) {
+    public ArrayList<SanPhamDTO> search(String text, String type) {
         text = text.toLowerCase();
         ArrayList<SanPhamDTO> result = new ArrayList<>();
-        for (SanPhamDTO i : this.listSP) {
-            if (Integer.toString(i.getMSP()).toLowerCase().contains(text) || i.getTEN().toLowerCase().contains(text)) {
-                result.add(i);
+        switch (type) {
+            case "Tất cả" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (Integer.toString(i.getMSP()).toLowerCase().contains(text) || i.getTEN().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Mã sản phẩm" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (Integer.toString(i.getMSP()).toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Tên sản phẩm" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (i.getTEN().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
             }
         }
+        
         return result;
     }
 
@@ -105,5 +124,20 @@ public class SanPhamBUS {
             }
         }
         return n;
+    }
+
+    public boolean checkISBN(String ISBN) {
+        for(SanPhamDTO i : this.listSP) {
+            if(i.getISBN().equals(ISBN)) return false;
+        }
+        System.out.println(ISBN);
+        return true;
+    }
+
+    public SanPhamDTO getSPbyISBN(String ISBN) {
+        for(SanPhamDTO i : this.listSP) {
+            if(i.getISBN().equals(ISBN)) return i;
+        }
+        return null;
     }
 }

@@ -85,12 +85,13 @@ public final class SanPham extends JPanel implements ActionListener {
         }
         functionBar.add(mainFunction);
 
-        search = new IntegratedSearch(new String[]{"Tất cả"});
+        search = new IntegratedSearch(new String[]{"Tất cả", "Mã sản phẩm", "Tên sản phẩm"});
         search.txtSearchForm.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
+                String type = (String) search.cbxChoose.getSelectedItem();
                 String txt = search.txtSearchForm.getText();
-                listSP = spBUS.search(txt);
+                listSP = spBUS.search(txt, type);
                 loadDataTalbe(listSP);
             }
 
