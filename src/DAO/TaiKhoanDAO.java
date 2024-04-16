@@ -26,7 +26,7 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setInt(1, t.getMNV());
             pst.setString(2, t.getTDN());
-            pst.setString(3, BCrypt.hashpw(t.getMK(), BCrypt.gensalt(12)));
+            pst.setString(3, t.getMK());
             pst.setInt(4, t.getMNQ());
             pst.setInt(5, t.getTT());
             result = pst.executeUpdate();
@@ -55,6 +55,22 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
         }
         return result;
     }
+
+    public int updateTTCXL(String t) {
+        int result = 0 ;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "UPDATE TAIKHOAN TK JOIN NHANVIEN NV ON TK.MNV = NV.MNV SET TK.TT = 2 WHERE `EMAIL` = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            result = pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+}
+    
     
     public void updatePass(String email, String password){
         try {
@@ -148,7 +164,7 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
         ArrayList<TaiKhoanDTO> result = new ArrayList<TaiKhoanDTO>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM taikhoan WHERE TT = '0' OR TT = '1'";
+            String sql = "SELECT * FROM taikhoan WHERE TT = '0' OR TT = '1' OR TT = '2'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){

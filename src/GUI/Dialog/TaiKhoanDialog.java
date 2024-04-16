@@ -37,6 +37,7 @@ public class TaiKhoanDialog extends JDialog {
     int manv;
     private ArrayList<NhomQuyenDTO> listNq = NhomQuyenDAO.getInstance().selectAll();
     private ArrayList<TaiKhoanDTO> listTK = TaiKhoanDAO.getInstance().selectAll();
+    TaiKhoanDTO tk;
 
     public TaiKhoanDialog(TaiKhoan taiKhoan, JFrame owner, String title, boolean modal, String type, int manv) {
         super(owner, title, modal);
@@ -50,10 +51,11 @@ public class TaiKhoanDialog extends JDialog {
     public TaiKhoanDialog(TaiKhoan taiKhoan, JFrame owner, String title, boolean modal, String type, TaiKhoanDTO tk) {
         super(owner, title, modal);
         init(title, type);
+        this.tk = tk;
         this.manv = tk.getMNV();
         this.taiKhoan = taiKhoan;
         username.setText(tk.getTDN());
-        password.setPass(tk.getMK());
+        password.setPass("");
         maNhomQuyen.setSelectedItem(NhomQuyenDAO.getInstance().selectById(tk.getMNQ() + "").getTennhomquyen());
         trangthai.setSelectedIndex(tk.getTT());
         setLocationRelativeTo(null);
@@ -69,7 +71,7 @@ public class TaiKhoanDialog extends JDialog {
         username = new InputForm("Tên đăng nhập");
         password = new InputForm("Mật khẩu", "password");
         maNhomQuyen = new SelectForm("Nhóm quyền", getNhomQuyen());
-        trangthai = new SelectForm("Trạng thái", new String[]{"Ngưng hoạt động", "Hoạt động"});
+        trangthai = new SelectForm("Trạng thái", new String[]{"Ngưng hoạt động", "Hoạt động", "Chờ xử lý"});
         pnmain.add(username);
         pnmain.add(password);
         pnmain.add(maNhomQuyen);
@@ -101,6 +103,7 @@ public class TaiKhoanDialog extends JDialog {
                         TaiKhoanDAO.getInstance().insert(tk);
                         taiKhoan.taiKhoanBus.addAcc(tk);
                         taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
+                        JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!");
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Tên tài khoản đã tồn tại. Vui lòng đổi tên khác!", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
@@ -115,13 +118,16 @@ public class TaiKhoanDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (!(username.getText().length() == 0)) {
                     String tendangnhap = username.getText();
-                    String pass = BCrypt.hashpw(password.getPass(), BCrypt.gensalt(12));
+                    String pass;
+                    if(password.getPass().equals("")) pass = BCrypt.hashpw(tk.getMK(), BCrypt.gensalt(12));
+                    else pass = BCrypt.hashpw(password.getPass(), BCrypt.gensalt(12));
                     int manhom = listNq.get(maNhomQuyen.getSelectedIndex()).getManhomquyen();
                     int tt = trangthai.getSelectedIndex();
                     TaiKhoanDTO tk = new TaiKhoanDTO(manv, tendangnhap, pass, manhom, tt);
                     TaiKhoanDAO.getInstance().update(tk);
                     taiKhoan.taiKhoanBus.updateAcc(taiKhoan.getRowSelected(), tk);
                     taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
+                    JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Vui lòng không để trống tên");
@@ -139,14 +145,11 @@ public class TaiKhoanDialog extends JDialog {
             case "create" ->
                 pnbottom.add(btnThem);
             case "update" -> {
-                pnmain.remove(password);
                 pnbottom.add(btnCapNhat);
-                password.setDisablePass();
             }
             case "view" -> {
-                pnmain.remove(password);
                 username.setEditable(false);
-//                password.setEditable(false);
+                pnmain.remove(password);
                 maNhomQuyen.setDisable();
                 trangthai.setDisable();
                 this.setSize(new Dimension(500, 550));

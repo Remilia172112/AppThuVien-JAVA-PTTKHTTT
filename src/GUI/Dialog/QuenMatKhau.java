@@ -139,12 +139,14 @@ public class QuenMatKhau extends JDialog implements ActionListener {
                     if (tk == null) {
                         JOptionPane.showMessageDialog(this, "Tài khoản của email này không tồn tại trên hệ thống");
                     } else {
-                        CardLayout c = (CardLayout) jpMain.getLayout();
-                        c.next(jpMain);
-                        this.emailCheck = email;
-                        String opt = SendEmailSMTP.getOTP();
-                        SendEmailSMTP.sendOTP(email, opt);
-                        TaiKhoanDAO.getInstance().sendOpt(email, opt);
+                        // CardLayout c = (CardLayout) jpMain.getLayout();
+                        // c.next(jpMain);
+                        // this.emailCheck = email;
+                        // String opt = SendEmailSMTP.getOTP();
+                        // SendEmailSMTP.sendOTP(email, opt);
+                        // TaiKhoanDAO.getInstance().sendOpt(email, opt);
+                        TaiKhoanDAO.getInstance().updateTTCXL(email);
+                        JOptionPane.showMessageDialog(this, "Đã gửi thông tin đến admin! Hãy chờ phản hồi từ gmail.");
                     }
                 }
             }

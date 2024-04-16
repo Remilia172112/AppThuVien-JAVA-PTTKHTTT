@@ -46,7 +46,7 @@ public class MenuTaskbar extends JPanel {
     ThongKe thongKe;
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
-        {"Sản phẩm", "product.svg", "sanpham"},
+        {"Sản phẩm", "products.svg", "sanpham"},
         {"Khu vực kho", "area.svg", "khuvuckho"},
         {"Phiếu nhập", "import.svg", "nhaphang"},
         {"Phiếu xuất", "export.svg", "xuathang"},
