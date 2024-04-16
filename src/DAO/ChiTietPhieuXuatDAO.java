@@ -10,10 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
 
     public static ChiTietPhieuXuatDAO getInstance() {

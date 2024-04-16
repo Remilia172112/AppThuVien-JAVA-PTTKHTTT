@@ -43,6 +43,14 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
         return result;
     }
 
+    public int insert_mutiple(ArrayList<SanPhamDTO> list) {
+        int result = 0;
+        for(SanPhamDTO sp : list) {
+            result += this.insert(sp);
+        }
+        return result;
+    }
+
     @Override
     public int update(SanPhamDTO t) {
         int result = 0;
