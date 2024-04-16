@@ -70,87 +70,11 @@ public class MyAccount extends JDialog implements ActionListener {
         top = new JPanel();
         top.setBackground(Color.WHITE);
         top.setLayout(new FlowLayout(0, 0, 0));
-        title = new HeaderTitle("CHỈNH SỬA THÔNG TIN");
+        title = new HeaderTitle("");
         top.add(title);
         this.add(top, BorderLayout.NORTH);
 
-        center = new JPanel(new GridLayout(4,1));
-        center.setBorder(new EmptyBorder(20, 10, 0, 10));
-        center.setBackground(Color.WHITE);
-
-        String opt[] = {"Số điện thoại", "Email", "Mật khẩu"};
-
-        panel = new JPanel[3];
-        panel[0] = new JPanel(new GridLayout(1, 1));
-        panel[0].setPreferredSize(new Dimension(400, 100));
-        phone = new InputForm(opt[0]);
-        PlainDocument phonex = (PlainDocument) phone.getTxtForm().getDocument();
-        phonex.setDocumentFilter((new NumericDocumentFilter()));
-        phone.setText(nv.getSDT());
-        panel[0].add(phone);
-
-        panel[1] = new JPanel(new GridLayout(1, 1));
-        panel[1].setPreferredSize(new Dimension(400, 100));
-        EMAIL = new InputForm(opt[1]);
-        EMAIL.setText(nv.getEMAIL());
-        panel[1].add(EMAIL);
-
-        panel[2] = new JPanel(new GridLayout(1, 1));
-        panel[2].setPreferredSize(new Dimension(400, 100));
-        current_pwd = new InputForm(opt[2]);
-        current_pwd.setText("********");
-        current_pwd.setDisable();
-        panel[2].add(current_pwd);
-
-        change = new JLabel("<html><p style = 'font-size : 11px;'>Thay đổi</p></html>" , JLabel.RIGHT);
-        change.setPreferredSize(new Dimension(25,25));
-        change.setBorder(new EmptyBorder(0 , 0 , 30,20));
-        change.addMouseListener(new MouseAdapter() {
-
-            @Override 
-            public void mouseEntered(MouseEvent e) {
-                change.setForeground(new Color(173, 216, 230));
-            }
-
-            @Override 
-            public void mouseClicked(MouseEvent e) {
-                check = true;
-                title.setText("Chỉnh sửa mật khẩu");
-                center.removeAll();
-                center.setLayout(new GridLayout(3,1));
-                center.setBorder(new EmptyBorder(10,10,20,10));
-                pn_1 = new JPanel();
-                pn_1.setLayout(new GridLayout(1,1));
-                current_pass = new InputForm("Nhập mật khẩu hiện tại :","password");
-                pn_1.add(current_pass);
-                pn_2 = new JPanel();
-                pn_2.setLayout(new GridLayout(1,1));
-                new_pass = new InputForm("Nhập mật khẩu mới :","password");
-                pn_2.add(new_pass);
-                pn_3 = new JPanel();
-                pn_3.setLayout(new GridLayout(1,1));
-                confirm_pass = new InputForm("Nhập lại mật khẩu mới :","password");
-                pn_3.add(confirm_pass);
-                
-                center.add(pn_1);
-                center.add(pn_2);
-                center.add(pn_3);
-                center.repaint();
-                center.validate();
-                
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                change.setForeground(Color.BLACK);
-            }
-        });
-
-        center.add(panel[0]);
-        center.add(panel[1]);
-        center.add(panel[2]);
-        center.add(change);
-        this.add(center, BorderLayout.CENTER);
+        center_1();
 
         bottom = new JPanel(new FlowLayout(1, 20, 10));
         bottom.setBackground(Color.WHITE);
@@ -165,11 +89,92 @@ public class MyAccount extends JDialog implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+    public void center_1() {
+        check =  false;
+        title.setText("CHỈNH SỬA THÔNG TIN");
+        center = new JPanel(new GridLayout(4,1));
+        center.setBorder(new EmptyBorder(20, 10, 0, 10));
+        center.setBackground(Color.WHITE);
+        String opt[] = {"Số điện thoại", "Email", "Mật khẩu"};
+        panel = new JPanel[3];
+        panel[0] = new JPanel(new GridLayout(1, 1));
+        panel[0].setPreferredSize(new Dimension(400, 100));
+        phone = new InputForm(opt[0]);
+        PlainDocument phonex = (PlainDocument) phone.getTxtForm().getDocument();
+        phonex.setDocumentFilter((new NumericDocumentFilter()));
+        phone.setText(nv.getSDT());
+        panel[0].add(phone);
+        panel[1] = new JPanel(new GridLayout(1, 1));
+        panel[1].setPreferredSize(new Dimension(400, 100));
+        EMAIL = new InputForm(opt[1]);
+        EMAIL.setText(nv.getEMAIL());
+        panel[1].add(EMAIL);
+        panel[2] = new JPanel(new GridLayout(1, 1));
+        panel[2].setPreferredSize(new Dimension(400, 100));
+        current_pwd = new InputForm(opt[2]);
+        current_pwd.setText("********");
+        current_pwd.setDisable();
+        panel[2].add(current_pwd);
+        change = new JLabel("<html><p style = 'font-size : 11px;'>Thay đổi</p></html>" , JLabel.RIGHT);
+        change.setPreferredSize(new Dimension(25,25));
+        change.setBorder(new EmptyBorder(0 , 0 , 30,20));
+        change.addMouseListener(new MouseAdapter() {
+            @Override 
+            public void mouseEntered(MouseEvent e) {
+                change.setForeground(new Color(173, 216, 230));
+            }
+            @Override 
+            public void mouseClicked(MouseEvent e) { 
+                center_2();
+           }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                change.setForeground(Color.BLACK);
+            }
+        });
+        center.add(panel[0]);
+        center.add(panel[1]);
+        center.add(panel[2]);
+        center.add(change);
+        this.add(center, BorderLayout.CENTER);
+    }
+
+    public void center_2() {
+        check = true;
+        title.setText("Chỉnh sửa mật khẩu");
+        center.removeAll();
+        center.setLayout(new GridLayout(3,1));
+        center.setBorder(new EmptyBorder(10,10,20,10));
+        pn_1 = new JPanel();
+        pn_1.setLayout(new GridLayout(1,1));
+        current_pass = new InputForm("Nhập mật khẩu hiện tại :","password");
+        pn_1.add(current_pass);
+        pn_2 = new JPanel();
+        pn_2.setLayout(new GridLayout(1,1));
+        new_pass = new InputForm("Nhập mật khẩu mới :","password");
+        pn_2.add(new_pass);
+        pn_3 = new JPanel();
+        pn_3.setLayout(new GridLayout(1,1));
+        confirm_pass = new InputForm("Nhập lại mật khẩu mới :","password");
+        pn_3.add(confirm_pass);
+
+        center.add(pn_1);
+        center.add(pn_2);
+        center.add(pn_3);
+        center.repaint();
+        center.validate();
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cancel) {
-            this.dispose();
+            if(check ) {
+                center.removeAll();
+                center_1();
+            } else {
+                this.dispose();
+            }
         }
         if(e.getSource() == save) {
             if(check)  {
@@ -193,6 +198,8 @@ public class MyAccount extends JDialog implements ActionListener {
                                     current_pass.setPass("");
                                     new_pass.setPass("");
                                     confirm_pass.setPass("");
+                                    center.removeAll();
+                                    center_1();
                                 } else {
                                     JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                                 }
@@ -203,25 +210,29 @@ public class MyAccount extends JDialog implements ActionListener {
                 String text_phone = phone.getText(); 
                 String text_email = EMAIL.getText(); 
                 
-                if (text_phone != nv.getSDT()) {
-                    if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
+                if(text_phone.equals(nv.getSDT()) &&  text_email.equals(nv.getEMAIL()) ) JOptionPane.showMessageDialog(this, "Đã sửa gì đâu mà lưu ?" , "Chỉnh sửa PHONE and EMAIL", JOptionPane.WARNING_MESSAGE);
+                else {
+                    boolean changed = false;
+                    if (!text_phone.equals(nv.getSDT()) ) {
+                        if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
                         JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và phải có 10 ký tự sô", "Chỉnh sửa số điện thoại", JOptionPane.WARNING_MESSAGE);
                     } else {
                         NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), text_phone, nv.getTT(), nv.getEMAIL());
                         NhanVienDAO.getInstance().update(nvdto);
-                        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                        changed = true;
+                        }
                     }
-                }
-                else if (text_email != nv.getEMAIL()) {
-                    if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
+
+                    if (!text_email.equals(nv.getEMAIL()) ) {
+                        if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
                         JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        String EMAILString = EMAIL.getText();
-                        NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), nv.getSDT(), nv.getTT(), EMAILString);
-                        NhanVienDAO.getInstance().update(nvdto);
-                        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                    
+                        } else {
+                            NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), nv.getSDT(), nv.getTT(), text_email);
+                            NhanVienDAO.getInstance().update(nvdto);
+                            changed = true;
+                        }
                     }
+                    if(changed) JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 }
             }
         } 
