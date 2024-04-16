@@ -23,7 +23,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
         for (int i = 0; i < t.size(); i++) {
             try {
                 Connection con = (Connection) JDBCUtil.getConnection();
-                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`) VALUES (?,?,?)";
+                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`,  `TIENXUAT`) VALUES (?,?,?,?)";
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1, t.get(i).getMP());
                 pst.setInt(2, t.get(i).getMSP());
@@ -53,7 +53,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "DELETE FROM CTPHIEUNHAP WHERE MPX = ?";
+            String sql = "DELETE FROM CTPHIEUXUAT WHERE MPX = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
@@ -78,7 +78,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
         ArrayList<ChiTietPhieuDTO> result = new ArrayList<>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM CTPHIEUNHAP WHERE MPX = ?";
+            String sql = "SELECT * FROM CTPHIEUXUAT WHERE MPX = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();
@@ -86,7 +86,8 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
                 int maphieu = rs.getInt("MPX");
                 int MSP = rs.getInt("MSP");
                 int SL = rs.getInt("SL");
-                ChiTietPhieuDTO ctphieu = new ChiTietPhieuDTO(maphieu, MSP, SL);
+                int tienxuat = rs.getInt("TIENXUAT");
+                ChiTietPhieuDTO ctphieu = new ChiTietPhieuDTO(maphieu, MSP, SL, tienxuat);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);

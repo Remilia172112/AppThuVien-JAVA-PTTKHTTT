@@ -279,12 +279,12 @@ VALUES
         (1, 1, 100000, '2023-04-01 17:34:12', 1),
         (1, 2, 200000, '2023-04-04 18:19:51', 1);
 
-INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`)
+INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`,  `TIENXUAT`)
 VALUES
-        (1, 1, 2),
-        (1, 2, 2),
-        (2, 3, 2),
-        (2, 4, 2);
+        (1, 1, 2, 100000),
+        (1, 2, 2, 200000),
+        (2, 3, 2, 300000),
+        (2, 4, 2, 400000);
 
 INSERT INTO `NHACUNGCAP` (`TEN`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
 VALUES

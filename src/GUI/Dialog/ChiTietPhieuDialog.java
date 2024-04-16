@@ -58,14 +58,14 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
 
     ArrayList<ChiTietPhieuDTO> chitietphieu;
 
-    HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham = new HashMap<>();
+    // HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham = new HashMap<>();
     //phieu nhap
     public ChiTietPhieuDialog(JFrame owner, String title, boolean modal, PhieuNhapDTO phieunhapDTO) {
         super(owner, title, modal);
         this.phieunhap = phieunhapDTO;
         phieunhapBus = new PhieuNhapBUS();
         chitietphieu = phieunhapBus.getChiTietPhieu_Type(phieunhapDTO.getMP());
-        chitietsanpham = ctspBus.getByMaSP(phieunhapDTO.getMP());
+        // chitietsanpham = ctspBus.getByMaSP(phieunhapDTO.getMP());
         initComponent(title);
         initPhieuNhap();
         loadDataTableChiTietPhieu(chitietphieu);
@@ -76,8 +76,8 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         super(owner, title, modal);
         this.phieuxuat = phieuxuatDTO;
         phieuxuatBus = new PhieuXuatBUS();
-        chitietphieu = phieuxuatBus.selectCTP(phieuxuatDTO.getMaphieu());
-        chitietsanpham = ctspBus.getChiTietSanPhamFromMaPX(phieuxuatDTO.getMaphieu());
+        chitietphieu = phieuxuatBus.selectCTP(phieuxuatDTO.getMP());
+        // chitietsanpham = ctspBus.getChiTietSanPhamFromMaPX(phieuxuatDTO.getMaphieu());
         initComponent(title);
         initPhieuXuat();
         loadDataTableChiTietPhieu(chitietphieu);
@@ -85,32 +85,37 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
     }
 
     public void initPhieuNhap() {
-        txtMaPhieu.setText("PN" + Integer.toString(this.phieunhap.getMaphieu()));
-        txtNhaCungCap.setText(NhaCungCapDAO.getInstance().selectById(phieunhap.getManhacungcap() + "").getTenncc());
-        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieunhap.getManguoitao() + "").getHoten());
-        txtThoiGian.setText(Formater.FormatTime(phieunhap.getThoigiantao()));
+        txtMaPhieu.setText("PN" + Integer.toString(this.phieunhap.getMP()));
+        txtNhaCungCap.setText(NhaCungCapDAO.getInstance().selectById(phieunhap.getMNCC() + "").getTenncc());
+        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieunhap.getMNV() + "").getHOTEN());
+        txtThoiGian.setText(Formater.FormatTime(phieunhap.getTG()));
     }
 
     public void initPhieuXuat() {
-        txtMaPhieu.setText("PX" + Integer.toString(this.phieuxuat.getMaphieu()));
+        txtMaPhieu.setText("PX" + Integer.toString(this.phieuxuat.getMP()));
         txtNhaCungCap.setTitle("Khách hàng");
-        txtNhaCungCap.setText(KhachHangDAO.getInstance().selectById(phieuxuat.getMakh() + "").getHoten());
-        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieuxuat.getManguoitao() + "").getHoten());
-        txtThoiGian.setText(Formater.FormatTime(phieuxuat.getThoigiantao()));
+        txtNhaCungCap.setText(KhachHangDAO.getInstance().selectById(phieuxuat.getMKH() + "").getHoten());
+        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieuxuat.getMNV() + "").getHOTEN());
+        txtThoiGian.setText(Formater.FormatTime(phieuxuat.getTG()));
     }
 
     public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuDTO> ctPhieu) {
         tblModel.setRowCount(0);
         int size = ctPhieu.size();
         for (int i = 0; i < size; i++) {
-            PhienBanSanPhamDTO pb = phienbanBus.getByMaPhienBan(ctPhieu.get(i).getMaphienbansp());
+            SanPhamDTO sp = ctspBus.getByMaSP(ctPhieu.get(i).getMP());
             tblModel.addRow(new Object[]{
-                i + 1, pb.getMasp(), SanPhamDAO.getInstance().selectById(pb.getMasp()+"").getTensp(), 
-                DungLuongRamDAO.getInstance().selectById(pb.getRam()+"").getDungluongram() + "GB",
-                DungLuongRomDAO.getInstance().selectById(pb.getRom()+"").getDungluongrom() + "GB", 
-                MauSacDAO.getInstance().selectById(pb.getMausac()+"").getTenmau(),
-                Formater.FormatVND(ctPhieu.get(i).getDongia()), ctPhieu.get(i).getSoluong()
+                i + 1, sp.getMSP(), SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTEN(), 
+                Formater.FormatVND(SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTIENN()), ctPhieu.get(i).getSL()
             });
+            // PhienBanSanPhamDTO pb = phienbanBus.getByMaPhienBan(ctPhieu.get(i).getMaphienbansp());
+            // tblModel.addRow(new Object[]{
+            //     i + 1, pb.getMasp(), SanPhamDAO.getInstance().selectById(pb.getMasp()+"").getTensp(), 
+            //     DungLuongRamDAO.getInstance().selectById(pb.getRam()+"").getDungluongram() + "GB",
+            //     DungLuongRomDAO.getInstance().selectById(pb.getRom()+"").getDungluongrom() + "GB", 
+            //     MauSacDAO.getInstance().selectById(pb.getMausac()+"").getTenmau(),
+            //     Formater.FormatVND(ctPhieu.get(i).getDongia()), ctPhieu.get(i).getSoluong()
+            // });
         }
     }
 

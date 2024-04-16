@@ -28,7 +28,7 @@ public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO
                 pst.setInt(1, t.get(i).getMP());
                 pst.setInt(2, t.get(i).getMSP());
                 pst.setInt(3, t.get(i).getSL());
-                pst.setInt(4, t.get(i).getTIENNHAP());
+                pst.setInt(4, t.get(i).getTIEN());
                 pst.setInt(5, t.get(i).getHINHTHUC());
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
@@ -78,9 +78,9 @@ public class ChiTietPhieuNhapDAO implements ChiTietInterface<ChiTietPhieuNhapDTO
                 int maphieu = rs.getInt("MPN");
                 int masp = rs.getInt("MSP");
                 int soluong = rs.getInt("SL");
-                int dongia = rs.getInt("TIEN");
+                int tiennhap = rs.getInt("TIENNHAP");
                 int hinhthucnhap = rs.getInt("HINHTHUC");
-                ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieu, masp,  soluong, dongia, hinhthucnhap);
+                ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieu, masp,  soluong, tiennhap, hinhthucnhap);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);

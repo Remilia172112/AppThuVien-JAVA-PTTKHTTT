@@ -4,26 +4,15 @@ package DTO;
 // import DTO.ChiTietPhieuDTO;
 
 public class ChiTietPhieuNhapDTO extends ChiTietPhieuDTO{
-    private int TIENNHAP;
     private int HINHTHUC;
 
     public ChiTietPhieuNhapDTO(int TIENNHAP, int HINHTHUC) {
-        this.TIENNHAP = TIENNHAP;
         this.HINHTHUC = HINHTHUC;
     }
 
     public ChiTietPhieuNhapDTO(int MP, int MSP, int SL, int TIENNHAP, int HINHTHUC) {
-        super(MP, MSP, SL);
-        this.TIENNHAP = TIENNHAP;
+        super(MP, MSP, SL, TIENNHAP);
         this.HINHTHUC = HINHTHUC;
-    }
-
-    public int getTIENNHAP() {
-        return HINHTHUC;
-    }
-
-    public void setTIENHHAP(int TIENNHAP) {
-        this.TIENNHAP = TIENNHAP;
     }
 
     public int getHINHTHUC() {
@@ -53,9 +42,6 @@ public class ChiTietPhieuNhapDTO extends ChiTietPhieuDTO{
             return false;
         }
         final ChiTietPhieuNhapDTO other = (ChiTietPhieuNhapDTO) obj;
-        if (this.TIENNHAP != other.TIENNHAP) {
-            return false;
-        }
         return this.HINHTHUC == other.HINHTHUC;
     }
 } 
