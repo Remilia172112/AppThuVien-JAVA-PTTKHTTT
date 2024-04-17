@@ -41,45 +41,59 @@ public class login_page extends JFrame implements KeyListener{
         this.setLayout(new BorderLayout(0 , 0));
         JFrame jf = this ;
 
+        imgIntro();
+        
         login_nhap = new JPanel();
-        login_nhap.setLayout(new BoxLayout(login_nhap, BoxLayout.Y_AXIS)); // Vertical BoxLayout
+        // login_nhap.setLayout(new BoxLayout(login_nhap, BoxLayout.Y_AXIS)); // Vertical BoxLayout
         login_nhap.setBackground(Color.WHITE);
-        login_nhap.setLayout(new GridLayout(5 , 2 , 5 , 5));
-        login_nhap.setBorder(new EmptyBorder(0,0,0,15));
-        login_nhap.setPreferredSize(new Dimension(400 , 500));
+        login_nhap.setLayout(new FlowLayout(1 , 0 , 10 ));
+        login_nhap.setBorder(new EmptyBorder(20,0,0,0));
+        login_nhap.setPreferredSize(new Dimension(500 , 740));
         
         GridBagConstraints gbc = new GridBagConstraints();
-        lb1 = new JLabel("LOGIN FORM");
-        lb1.setFont(new Font("Tahoma", Font.BOLD , 24));
+        lb1 = new JLabel("ĐĂNG NHẬP VÀO HỆ THỐNG");
+        lb1.setFont(new Font("Tahoma", Font.BOLD , 20));
         lb1.setForeground(Color.BLACK); // Set text color
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2; // Span across two columns
         gbc.fill = GridBagConstraints.HORIZONTAL; // Center horizontally
-        lb1.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the text horizontally
+        // lb1.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the text horizontally
         login_nhap.add(lb1);
-        txtUsername = new InputForm("Tên đăng nhập");
-        txtUsername.setPreferredSize(new Dimension(300, 40)); // Adjust dimensions
-        txtUsername.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Add borde
-        gbc.gridx++;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         
-        login_nhap.add(txtUsername);
-        txtPassword = new InputForm("Mật khẩu", "password");
+        JPanel paneldn = new JPanel();
+        paneldn.setBackground(Color.BLACK);
+        paneldn.setPreferredSize(new Dimension(400, 200));
+        paneldn.setLayout(new GridLayout(2, 1));
+ 
+    
+        txtUsername = new InputForm(" Tên đăng nhập");
+        // txtUsername.setPreferredSize(new Dimension(400, 200)); // Adjust dimensions
+        txtUsername.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Add borde
+        // gbc.gridx++;
+        // gbc.fill = GridBagConstraints.HORIZONTAL;
+        paneldn.add(txtUsername);
+
+        // login_nhap.add(txtUsername);
+        txtPassword = new InputForm(" Mật khẩu", "password");
         txtPassword.setPreferredSize(new Dimension(300, 40)); // Adjust dimensions
         txtPassword.setBorder(BorderFactory.createLineBorder(Color.GRAY)); // Add border
         gbc.gridy++;
         gbc.gridx = 0;
+        paneldn.add(txtPassword);
 
-        login_nhap.add(txtPassword);
+        // login_nhap.add(txtPassword);
         txtUsername.getTxtForm().addKeyListener(this);
         txtPassword.getTxtPass().addKeyListener(this);
-        lb2 = new JLabel("<html><u><i style='font-size: 14px;'>Quên mật khẩu ?</i></u></html>", JLabel.RIGHT);
-        lb2.setPreferredSize(new Dimension(300,30));
-        lb2.setForeground(Color.BLUE); // Set text color
-        lb2.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        
+        login_nhap.add(paneldn);
+
+        lb2 = new JLabel("<html><u><i style='font-size: 12px;'>Quên mật khẩu ?</i></u></html>", JLabel.RIGHT);
+        lb2.setPreferredSize(new Dimension(400,50));
+        lb2.setForeground(Color.BLACK); // Set text color
+        // lb2.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
         lb2.addMouseListener(new MouseAdapter() {
-            @Override
+            @Override   
             public void mouseEntered(MouseEvent e) {
                 lb2.setForeground(new Color(255, 48, 48));
             }
@@ -98,11 +112,13 @@ public class login_page extends JFrame implements KeyListener{
         JPanel buttonPanel = new JPanel(); 
         buttonPanel.setBackground(Color.WHITE);   
         bt = new JButton("Đăng nhập");
-        bt.setPreferredSize(new Dimension(300, 50));
+        bt.setPreferredSize(new Dimension(300, 40));
+        bt.setLayout(new FlowLayout(1, 0, 15));
         bt.setBackground(new Color(0,153,255));
         bt.setFont(new Font("Tahoma", Font.BOLD, 16)); // Adjust font and size
         bt.setForeground(Color.WHITE);
         buttonPanel.add(bt);
+        
         bt.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -122,15 +138,14 @@ public class login_page extends JFrame implements KeyListener{
         });
 
         login_nhap.add(buttonPanel); 
-        this.add(login_nhap , BorderLayout.CENTER);
+        this.add(login_nhap , BorderLayout.EAST);
 
-        lb_img_1 = new JLabel(new ImageIcon("./src/img/trai.png"));
-        // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
-        
-        lb_img_1.setBackground(Color.WHITE);
-        lb_img_1.setPreferredSize(new Dimension(400,150));
-        lb_img_1.setAlignmentX(Component.CENTER_ALIGNMENT); // Centerr
-        this.add(lb_img_1 , BorderLayout.WEST);
+        // lb_img_1 = new JLabel(new ImageIcon("./src/img/23.png"));
+        // // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
+        // lb_img_1.setBackground(Color.WHITE);
+        // lb_img_1.setPreferredSize(new Dimension(400,150));
+        // // lb_img_1.setAlignmentX(Component.CENTER_ALIGNMENT); // Centerr
+        // this.add(lb_img_1 , BorderLayout.WEST);
 
         // lb_img_2 = new JLabel(new ImageIcon("./src/img/tra.png"));
         // // lb_img_2.setBorder(new EmptyBorder(30,300,30,1));
@@ -180,6 +195,22 @@ public class login_page extends JFrame implements KeyListener{
         UIManager.put("PasswordField.showRevealButton", true);
         new login_page();
     }
+
+    public void imgIntro() {
+        JPanel bo = new JPanel();
+        bo.setBorder(new EmptyBorder(3, 10, 5, 5));
+        bo.setPreferredSize(new Dimension(410, 740));
+        bo.setBackground(Color.white);
+        this.add(bo, BorderLayout.WEST);
+
+        lb_img_1 = new JLabel(new ImageIcon("./src/img/1.png"));
+        // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
+        // lb_img_1.setBackground(Color.WHITE);
+        // lb_img_1.setPreferredSize(new Dimension(400,150));
+        // lb_img_1.setAlignmentX(Component.CENTER_ALIGNMENT); // Centerr
+        bo.add(lb_img_1);
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
