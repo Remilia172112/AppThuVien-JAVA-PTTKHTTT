@@ -6,15 +6,16 @@ public class ChiTietPhieuDTO {
     private int MP;
     private int MSP;
     private int SL;
-    
+    private int TIEN;
 
     public ChiTietPhieuDTO() {
     }
 
-    public ChiTietPhieuDTO(int MP, int MSP, int SL) {
+    public ChiTietPhieuDTO(int MP, int MSP, int SL, int TIEN) {
         this.MP = MP;
         this.MSP = MSP;
         this.SL = SL;
+        this.TIEN = TIEN;
     }
 
     public int getMP() {
@@ -39,6 +40,14 @@ public class ChiTietPhieuDTO {
 
     public void setSL(int SL) {
         this.SL = SL;
+    }
+
+    public int getTIEN() {
+        return TIEN;
+    }
+
+    public void setTIEN(int TIEN) {
+        this.TIEN = TIEN;
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ChiTietPhieuDTO {
 
     @Override
     public String toString() {
-        return "ChiTietPhieuDTO{" + "MP=" + MP + ", MSP=" + MSP + ", SL=" + SL + '}';
+        return "ChiTietPhieuDTO{" + "MP=" + MP + ", MSP=" + MSP + ", SL=" + SL + ", TIEN=" + TIEN +'}';
     }
 
     

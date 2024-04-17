@@ -83,7 +83,7 @@ public class PhieuNhapBUS {
     public long getTIEN(ArrayList<ChiTietPhieuNhapDTO> ctphieu) {
         long result = 0;
         for (ChiTietPhieuNhapDTO item : ctphieu) {
-            result += item.getTIENNHAP() * item.getSL();
+            result += item.getTIEN() * item.getSL();
         }
         return result;
     }

@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.ChiTietPhieuNhapDTO;
 // import DTO.SanPhamDTO;
 import DTO.PhieuNhapDTO;
 import config.JDBCUtil;
@@ -12,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Date;
+// import java.util.Date;
 
 
 public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
@@ -91,9 +90,9 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
                 Timestamp TG = rs.getTimestamp("TG");
                 int MNCC = rs.getInt("MNCC");
                 int MNV = rs.getInt("MNV");
-                long TIEN = rs.getLong("TIEN");
+                long TIENN = rs.getLong("TIEN");
                 int TT = rs.getInt("TT");
-                PhieuNhapDTO phieunhap = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIEN, TT);
+                PhieuNhapDTO phieunhap = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIENN, TT);
                 result.add(phieunhap);
             }
             JDBCUtil.closeConnection(con);
@@ -116,9 +115,9 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
                 Timestamp TG = rs.getTimestamp("TG");
                 int MNCC = rs.getInt("MNCC");
                 int MNV = rs.getInt("MNV");
-                long TIEN = rs.getLong("TIEN");
+                long TIENN = rs.getLong("TIEN");
                 int TT = rs.getInt("TT");
-                result = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIEN, TT);
+                result = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIENN, TT);
             }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -141,9 +140,9 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
                 Timestamp TG = rs.getTimestamp("TG");
                 int MNCC = rs.getInt("MNCC");
                 int MNV = rs.getInt("MNV");
-                long TIEN = rs.getLong("TIEN");
+                long TIENN = rs.getLong("TIEN");
                 int TT = rs.getInt("TT");
-                PhieuNhapDTO phieunhap = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIEN, TT);
+                PhieuNhapDTO phieunhap = new PhieuNhapDTO(MNCC, MPN, MNV, TG, TIENN, TT);
                 result.add(phieunhap);
             }
             JDBCUtil.closeConnection(con);
