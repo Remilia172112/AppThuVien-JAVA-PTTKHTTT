@@ -1,7 +1,7 @@
 package DAO;
 
 import DTO.ChiTietPhieuDTO;
-import DTO.SanPhamDTO;
+// import DTO.SanPhamDTO;
 import DTO.PhieuXuatDTO;
 import config.JDBCUtil;
 import java.sql.Connection;

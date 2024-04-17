@@ -4,13 +4,12 @@ import java.sql.Timestamp;
 
 public class PhieuNhapDTO extends PhieuDTO{
     private int MNCC;
-
-    public PhieuNhapDTO(int MNCC) {
+    public PhieuNhapDTO(int MNCC, long TIENN) {
         this.MNCC = MNCC;
     }
 
-    public PhieuNhapDTO(int MNCC, int MP, int MNV, Timestamp TG, long TIEN, int TT) {
-        super(MP, MNV, TG, TIEN, TT);
+    public PhieuNhapDTO(int MNCC, int MP, int MNV, Timestamp TG, long TIENN, int TT) {
+        super(MP, MNV, TG, TIENN, TT);
         this.MNCC = MNCC;
     }
 
@@ -21,6 +20,7 @@ public class PhieuNhapDTO extends PhieuDTO{
     public void setMNCC(int MNCC) {
         this.MNCC = MNCC;
     }
+
 
     @Override
     public int hashCode() {
@@ -46,6 +46,6 @@ public class PhieuNhapDTO extends PhieuDTO{
 
     @Override
     public String toString() {
-        return "PhieuNhapDTO{" + "MNCC=" + MNCC +'}'+super.toString();
+        return "PhieuNhapDTO{" + "MNCC=" + MNCC +  '}'+super.toString();
     }
 }

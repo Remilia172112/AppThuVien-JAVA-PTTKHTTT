@@ -8,7 +8,7 @@ import BUS.NhaCungCapBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
 import DTO.PhienBanSanPhamDTO;
-import DTO.ChiTietPhieuNhapDTO;
+import DTO.ChiTietPhieuXuatDTO;
 import DTO.ChiTietSanPhamDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuNhapDTO;
@@ -79,7 +79,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
 
     ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
     ArrayList<PhienBanSanPhamDTO> ch = new ArrayList<>();
-    ArrayList<ChiTietPhieuNhapDTO> chitietphieu;
+    ArrayList<ChiTietPhieuXuatDTO> chitietphieu;
     HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> chitietsanpham = new HashMap<>();
     ArrayList<String> listmaimei = new ArrayList<>();
     int maphieunhap;
@@ -176,7 +176,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
                 if (index != -1) {
                     resetForm();
                     setInfoSanPham(listSP.get(index));
-                    ChiTietPhieuNhapDTO ctp = checkTonTai();
+                    ChiTietPhieuXuatDTO ctp = checkTonTai();
                     if (ctp == null) {
                         actionbtn("add");
                     } else {
@@ -405,7 +405,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         }
     }
 
-    public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuNhapDTO> ctPhieu) {
+    public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuXuatDTO> ctPhieu) {
         tblModel.setRowCount(0);
         int size = ctPhieu.size();
         for (int i = 0; i < size; i++) {
@@ -427,7 +427,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         this.txtDongia.setText(Integer.toString(ch.get(0).getGianhap()));
     }
 
-    public ChiTietPhieuNhapDTO getInfoChiTietPhieu() {
+    public ChiTietPhieuXuatDTO getInfoChiTietPhieu() {
         
         int masp = Integer.parseInt(txtMaSp.getText());
         int maphienbansp = ch.get(cbxCauhinh.cbb.getSelectedIndex()).getMaphienbansp();
@@ -436,7 +436,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         ArrayList<ChiTietSanPhamDTO> ctSP = getChiTietSanPham();
         int soluong = ctSP.size();
         chitietsanpham.put(maphienbansp, getChiTietSanPham());
-        ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(phuongthucnhap, maphieunhap, maphienbansp, soluong, gianhap);
+        ChiTietPhieuXuatDTO ctphieu = new ChiTietPhieuXuatDTO(phuongthucnhap, maphieunhap, maphienbansp, soluong, gianhap);
         return ctphieu;
     }
     
@@ -512,7 +512,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         if (source == cbxCauhinh.cbb) {
             int index = cbxCauhinh.cbb.getSelectedIndex();
             this.txtDongia.setText(Integer.toString(ch.get(index).getGianhap()));
-            ChiTietPhieuNhapDTO ctp = checkTonTai();
+            ChiTietPhieuXuatDTO ctp = checkTonTai();
             if (ctp == null) {
                 actionbtn("add");
                 this.txtSoLuongImei.setText("");
@@ -537,8 +537,8 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     }
 
     public void addCtPhieu() {
-        ChiTietPhieuNhapDTO ctphieu = getInfoChiTietPhieu();
-        ChiTietPhieuNhapDTO p = phieunhapBus.findCT(chitietphieu, ctphieu.getMaphienbansp());
+        ChiTietPhieuXuatDTO ctphieu = getInfoChiTietPhieu();
+        ChiTietPhieuXuatDTO p = phieunhapBus.findCT(chitietphieu, ctphieu.getMaphienbansp());
         if (p == null) {
             chitietphieu.add(ctphieu);
             loadDataTableChiTietPhieu(chitietphieu);
@@ -551,9 +551,9 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         }
     }
 
-    public ChiTietPhieuNhapDTO checkTonTai() {
+    public ChiTietPhieuXuatDTO checkTonTai() {
         int mapb = ch.get(cbxCauhinh.cbb.getSelectedIndex()).getMaphienbansp();
-        ChiTietPhieuNhapDTO p = phieunhapBus.findCT(chitietphieu, mapb);
+        ChiTietPhieuXuatDTO p = phieunhapBus.findCT(chitietphieu, mapb);
         return p;
     }
 
@@ -568,7 +568,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         content_btn.repaint();
     }
 
-    public void setImei(ChiTietPhieuNhapDTO phieu) {
+    public void setImei(ChiTietPhieuXuatDTO phieu) {
         ArrayList<ChiTietSanPhamDTO> ctsp = findMaPhienBan(phieu.getMaphienbansp());
         this.cbxPtNhap.setSelectedIndex(phieu.getPhuongthucnnhap());
         if (phieu.getPhuongthucnnhap() == 0) {
@@ -581,7 +581,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         }
     }
 
-    public void setFormChiTietPhieu(ChiTietPhieuNhapDTO phieu) {
+    public void setFormChiTietPhieu(ChiTietPhieuXuatDTO phieu) {
         PhienBanSanPhamDTO pb = phienbanBus.getByMaPhienBan(phieu.getMaphienbansp());
         this.txtMaSp.setText(Integer.toString(pb.getMasp()));
         this.txtTenSp.setText(spBUS.getByMaSP(pb.getMasp()).getTensp());

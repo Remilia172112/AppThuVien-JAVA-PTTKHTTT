@@ -95,7 +95,7 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "detail", "cancel", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "xuathang", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "xuathang", action);
         functionBar.add(mainFunction);
 
         //Add Event MouseListener
@@ -223,7 +223,7 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
                 int n = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa phiếu này?", "Xóa phiếu", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
                     PhieuXuatDTO px = pxBUS.getSelect(tablePhieuXuat.getSelectedRow());
-                    pxBUS.cancel(px.getMaphieu());
+                    pxBUS.cancel(px.getMP());
                     pxBUS.remove(tablePhieuXuat.getSelectedRow());
                     loadDataTalbe(pxBUS.getAll());
                     Notification notification = new Notification(m, Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Hủy phiếu thành công");
@@ -247,11 +247,11 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
         for (int i = 0; i < size; i++) {
             tblModel.addRow(new Object[]{
                 i + 1,
-                listphieuxuat.get(i).getMaphieu(),
-                khachHangBUS.getTenKhachHang(listphieuxuat.get(i).getMakh()),
-                nvBUS.getNameById(listphieuxuat.get(i).getManguoitao()),
-                Formater.FormatTime(listphieuxuat.get(i).getThoigiantao()),
-                Formater.FormatVND(listphieuxuat.get(i).getTongTien()),});
+                listphieuxuat.get(i).getMP(),
+                khachHangBUS.getTenKhachHang(listphieuxuat.get(i).getMKH()),
+                nvBUS.getNameById(listphieuxuat.get(i).getMNV()),
+                Formater.FormatTime(listphieuxuat.get(i).getTG()),
+                Formater.FormatVND(listphieuxuat.get(i).getTIEN()),});
         }
     }
 
@@ -263,7 +263,7 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
         if (validateSelectDate()) {
             int type = search.cbxChoose.getSelectedIndex();
             int makh = cbxKhachHang.getSelectedIndex() == 0 ? 0 : khachHangBUS.getByIndex(cbxKhachHang.getSelectedIndex() - 1).getMaKH();
-            int manv = cbxNhanVien.getSelectedIndex() == 0 ? 0 : nvBUS.getByIndex(cbxNhanVien.getSelectedIndex() - 1).getManv();
+            int manv = cbxNhanVien.getSelectedIndex() == 0 ? 0 : nvBUS.getByIndex(cbxNhanVien.getSelectedIndex() - 1).getMNV();
             String input = search.txtSearchForm.getText() != null ? search.txtSearchForm.getText() : "";
             Date time_start = dateStart.getDate() != null ? dateStart.getDate() : new Date(0);
             Date time_end = dateEnd.getDate() != null ? dateEnd.getDate() : new Date(System.currentTimeMillis());

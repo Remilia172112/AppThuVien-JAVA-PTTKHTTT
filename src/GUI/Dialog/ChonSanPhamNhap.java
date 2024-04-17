@@ -6,10 +6,7 @@ package GUI.Dialog;
 
 import javax.swing.JDialog;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ChonSanPhamNhap extends JDialog{
     
 }

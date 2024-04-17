@@ -1,23 +1,15 @@
 package GUI.Dialog;
 
-import BUS.ChiTietSanPhamBUS;
-import BUS.DungLuongRamBUS;
-import BUS.DungLuongRomBUS;
-import BUS.MauSacBUS;
-import BUS.PhienBanSanPhamBUS;
+import BUS.SanPhamBUS;
 import BUS.PhieuNhapBUS;
 import BUS.PhieuXuatBUS;
 import BUS.SanPhamBUS;
-import DAO.DungLuongRamDAO;
-import DAO.DungLuongRomDAO;
 import DAO.KhachHangDAO;
-import DAO.MauSacDAO;
 import DAO.NhaCungCapDAO;
 import DAO.NhanVienDAO;
 import DAO.SanPhamDAO;
 import DTO.ChiTietPhieuDTO;
-import DTO.ChiTietSanPhamDTO;
-import DTO.PhienBanSanPhamDTO;
+import DTO.SanPhamDTO;
 import DTO.PhieuNhapDTO;
 import DTO.PhieuXuatDTO;
 import GUI.Component.ButtonCustom;
@@ -49,7 +41,7 @@ import javax.swing.table.DefaultTableModel;
 public final class ChiTietPhieuDialog extends JDialog implements ActionListener {
 
     HeaderTitle titlePage;
-    JPanel pnmain, pnmain_top, pnmain_bottom, pnmain_bottom_right, pnmain_bottom_left, pnmain_btn;
+    JPanel pnmain, pnmain_top, pnmain_bottom, pnmain_btn; //bỏ pnmain_bottom_right, pnmain_bottom_left 
     InputForm txtMaPhieu, txtNhanVien, txtNhaCungCap, txtThoiGian;
     DefaultTableModel tblModel, tblModelImei;
     JTable table, tblImei;
@@ -57,8 +49,8 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
 
     PhieuNhapDTO phieunhap;
     PhieuXuatDTO phieuxuat;
-    PhienBanSanPhamBUS phienbanBus = new PhienBanSanPhamBUS();
-    ChiTietSanPhamBUS ctspBus = new ChiTietSanPhamBUS();
+    // PhienBanSanPhamBUS phienbanBus = new PhienBanSanPhamBUS();
+    SanPhamBUS ctspBus = new SanPhamBUS();
     PhieuNhapBUS phieunhapBus;
     PhieuXuatBUS phieuxuatBus;
 
@@ -66,26 +58,26 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
 
     ArrayList<ChiTietPhieuDTO> chitietphieu;
 
-    HashMap<Integer, ArrayList<ChiTietSanPhamDTO>> chitietsanpham = new HashMap<>();
-
+    // HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham = new HashMap<>();
+    //phieu nhap
     public ChiTietPhieuDialog(JFrame owner, String title, boolean modal, PhieuNhapDTO phieunhapDTO) {
         super(owner, title, modal);
         this.phieunhap = phieunhapDTO;
         phieunhapBus = new PhieuNhapBUS();
-        chitietphieu = phieunhapBus.getChiTietPhieu_Type(phieunhapDTO.getMaphieu());
-        chitietsanpham = ctspBus.getChiTietSanPhamFromMaPN(phieunhapDTO.getMaphieu());
+        chitietphieu = phieunhapBus.getChiTietPhieu_Type(phieunhapDTO.getMP());
+        // chitietsanpham = ctspBus.getByMaSP(phieunhapDTO.getMP());
         initComponent(title);
         initPhieuNhap();
         loadDataTableChiTietPhieu(chitietphieu);
         this.setVisible(true);
     }
-
+    //phieu xuat
     public ChiTietPhieuDialog(JFrame owner, String title, boolean modal, PhieuXuatDTO phieuxuatDTO) {
         super(owner, title, modal);
         this.phieuxuat = phieuxuatDTO;
         phieuxuatBus = new PhieuXuatBUS();
-        chitietphieu = phieuxuatBus.selectCTP(phieuxuatDTO.getMaphieu());
-        chitietsanpham = ctspBus.getChiTietSanPhamFromMaPX(phieuxuatDTO.getMaphieu());
+        chitietphieu = phieuxuatBus.selectCTP(phieuxuatDTO.getMP());
+        // chitietsanpham = ctspBus.getChiTietSanPhamFromMaPX(phieuxuatDTO.getMaphieu());
         initComponent(title);
         initPhieuXuat();
         loadDataTableChiTietPhieu(chitietphieu);
@@ -93,44 +85,49 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
     }
 
     public void initPhieuNhap() {
-        txtMaPhieu.setText("PN" + Integer.toString(this.phieunhap.getMaphieu()));
-        txtNhaCungCap.setText(NhaCungCapDAO.getInstance().selectById(phieunhap.getManhacungcap() + "").getTenncc());
-        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieunhap.getManguoitao() + "").getHoten());
-        txtThoiGian.setText(Formater.FormatTime(phieunhap.getThoigiantao()));
+        txtMaPhieu.setText("PN" + Integer.toString(this.phieunhap.getMP()));
+        txtNhaCungCap.setText(NhaCungCapDAO.getInstance().selectById(phieunhap.getMNCC() + "").getTenncc());
+        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieunhap.getMNV() + "").getHOTEN());
+        txtThoiGian.setText(Formater.FormatTime(phieunhap.getTG()));
     }
 
     public void initPhieuXuat() {
-        txtMaPhieu.setText("PX" + Integer.toString(this.phieuxuat.getMaphieu()));
+        txtMaPhieu.setText("PX" + Integer.toString(this.phieuxuat.getMP()));
         txtNhaCungCap.setTitle("Khách hàng");
-        txtNhaCungCap.setText(KhachHangDAO.getInstance().selectById(phieuxuat.getMakh() + "").getHoten());
-        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieuxuat.getManguoitao() + "").getHoten());
-        txtThoiGian.setText(Formater.FormatTime(phieuxuat.getThoigiantao()));
+        txtNhaCungCap.setText(KhachHangDAO.getInstance().selectById(phieuxuat.getMKH() + "").getHoten());
+        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(phieuxuat.getMNV() + "").getHOTEN());
+        txtThoiGian.setText(Formater.FormatTime(phieuxuat.getTG()));
     }
 
     public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuDTO> ctPhieu) {
         tblModel.setRowCount(0);
         int size = ctPhieu.size();
         for (int i = 0; i < size; i++) {
-            PhienBanSanPhamDTO pb = phienbanBus.getByMaPhienBan(ctPhieu.get(i).getMaphienbansp());
+            SanPhamDTO sp = ctspBus.getByMaSP(ctPhieu.get(i).getMP());
             tblModel.addRow(new Object[]{
-                i + 1, pb.getMasp(), SanPhamDAO.getInstance().selectById(pb.getMasp()+"").getTensp(), 
-                DungLuongRamDAO.getInstance().selectById(pb.getRam()+"").getDungluongram() + "GB",
-                DungLuongRomDAO.getInstance().selectById(pb.getRom()+"").getDungluongrom() + "GB", 
-                MauSacDAO.getInstance().selectById(pb.getMausac()+"").getTenmau(),
-                Formater.FormatVND(ctPhieu.get(i).getDongia()), ctPhieu.get(i).getSoluong()
+                i + 1, sp.getMSP(), SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTEN(), 
+                Formater.FormatVND(SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTIENN()), ctPhieu.get(i).getSL()
             });
+            // PhienBanSanPhamDTO pb = phienbanBus.getByMaPhienBan(ctPhieu.get(i).getMaphienbansp());
+            // tblModel.addRow(new Object[]{
+            //     i + 1, pb.getMasp(), SanPhamDAO.getInstance().selectById(pb.getMasp()+"").getTensp(), 
+            //     DungLuongRamDAO.getInstance().selectById(pb.getRam()+"").getDungluongram() + "GB",
+            //     DungLuongRomDAO.getInstance().selectById(pb.getRom()+"").getDungluongrom() + "GB", 
+            //     MauSacDAO.getInstance().selectById(pb.getMausac()+"").getTenmau(),
+            //     Formater.FormatVND(ctPhieu.get(i).getDongia()), ctPhieu.get(i).getSoluong()
+            // });
         }
     }
 
-    public void loadDataTableImei(ArrayList<ChiTietSanPhamDTO> dssp) {
-        tblModelImei.setRowCount(0);
-        int size = dssp.size();
-        for (int i = 0; i < size; i++) {
-            tblModelImei.addRow(new Object[]{
-                i + 1, dssp.get(i).getImei()
-            });
-        }
-    }
+    // public void loadDataTableImei(ArrayList<ChiTietSanPhamDTO> dssp) {
+    //     tblModelImei.setRowCount(0);
+    //     int size = dssp.size();
+    //     for (int i = 0; i < size; i++) {
+    //         tblModelImei.addRow(new Object[]{
+    //             i + 1, dssp.get(i).getImei()
+    //         });
+    //     }
+    // }
 
     public void initComponent(String title) {
         this.setSize(new Dimension(1100, 500));
@@ -155,49 +152,49 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         pnmain_top.add(txtNhaCungCap);
         pnmain_top.add(txtThoiGian);
 
-        pnmain_bottom = new JPanel(new BorderLayout(5, 5));
-        pnmain_bottom.setBorder(new EmptyBorder(5, 5, 5, 5));
+        pnmain_bottom = new JPanel(new GridLayout(1, 5));
+        // pnmain_bottom.setBorder(new EmptyBorder(5, 5, 5, 5));
         pnmain_bottom.setBackground(Color.WHITE);
 
-        pnmain_bottom_left = new JPanel(new GridLayout(1, 1));
+        // pnmain_bottom_left = new JPanel(new GridLayout(1, 1));
         table = new JTable();
         scrollTable = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"STT", "Mã SP", "Tên SP", "RAM", "ROM", "Màu sắc", "Đơn giá", "Số lượng"};
-        tblModel.setColumnIdentifiers(header);
-        table.setModel(tblModel);
-        table.setFocusable(false);
-        scrollTable.setViewportView(table);
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        table.setDefaultRenderer(Object.class, centerRenderer);
-        table.getColumnModel().getColumn(2).setPreferredWidth(200);
-        table.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                int index = table.getSelectedRow();
-                if (index != -1) {
-                    loadDataTableImei(chitietsanpham.get(chitietphieu.get(index).getMaphienbansp()));
-                }
-            }
-        });
-        pnmain_bottom_left.add(scrollTable);
+        String[] header = new String[]{"STT", "Mã SP", "Tên SP", "Đơn giá", "Số lượng"};
+        // tblModel.setColumnIdentifiers(header);
+        // table.setModel(tblModel);
+        // table.setFocusable(false);
+        // scrollTable.setViewportView(table);
+        // DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        // centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        // table.setDefaultRenderer(Object.class, centerRenderer);
+        // table.getColumnModel().getColumn(2).setPreferredWidth(200);
+        // table.addMouseListener(new MouseAdapter() {
+        //     @Override
+        //     public void mousePressed(MouseEvent e) {
+        //         int index = table.getSelectedRow();
+        //         if (index != -1) {
+        //             loadDataTableImei(chitietsanpham.get(chitietphieu.get(index).getMaphienbansp()));
+        //         }
+        //     }
+        // });
+        pnmain_bottom.add(scrollTable);
 
-        pnmain_bottom_right = new JPanel(new GridLayout(1, 1));
-        pnmain_bottom_right.setPreferredSize(new Dimension(200, 10));
-        tblImei = new JTable();
-        scrollTableImei = new JScrollPane();
-        tblModelImei = new DefaultTableModel();
-        tblModelImei.setColumnIdentifiers(new String[]{"STT", "Mã Imei"});
-        tblImei.setModel(tblModelImei);
-        tblImei.setFocusable(false);
-        tblImei.setDefaultRenderer(Object.class, centerRenderer);
-        tblImei.getColumnModel().getColumn(1).setPreferredWidth(170);
-        scrollTableImei.setViewportView(tblImei);
-        pnmain_bottom_right.add(scrollTableImei);
+        // pnmain_bottom_right = new JPanel(new GridLayout(1, 1));
+        // pnmain_bottom_right.setPreferredSize(new Dimension(200, 10));
+        // tblImei = new JTable();
+        // scrollTableImei = new JScrollPane();
+        // tblModelImei = new DefaultTableModel();
+        // tblModelImei.setColumnIdentifiers(new String[]{"STT", "Mã Imei"});
+        // tblImei.setModel(tblModelImei);
+        // tblImei.setFocusable(false);
+        // tblImei.setDefaultRenderer(Object.class, centerRenderer);
+        // tblImei.getColumnModel().getColumn(1).setPreferredWidth(170);
+        // scrollTableImei.setViewportView(tblImei);
+        // pnmain_bottom_right.add(scrollTableImei);
 
-        pnmain_bottom.add(pnmain_bottom_left, BorderLayout.CENTER);
-        pnmain_bottom.add(pnmain_bottom_right, BorderLayout.EAST);
+        // pnmain_bottom.add(pnmain_bottom_left, BorderLayout.CENTER);
+        // pnmain_bottom.add(pnmain_bottom_right, BorderLayout.EAST);
 
         pnmain_btn = new JPanel(new FlowLayout());
         pnmain_btn.setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -227,10 +224,10 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         if (source == btnPdf) {
             writePDF w = new writePDF();
             if (this.phieuxuat != null) {
-                w.writePX(phieuxuat.getMaphieu());
+                w.writePX(phieuxuat.getMP());
             }
             if (this.phieunhap != null) {
-                w.writePN(phieunhap.getMaphieu());
+                w.writePN(phieunhap.getMP());
             }
         }
     }

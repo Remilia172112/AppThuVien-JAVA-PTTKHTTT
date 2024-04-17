@@ -139,7 +139,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "detail", "cancel", "export"};
-        mainFunction = new MainFunction(m.user.getManhomquyen(), "nhaphang", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "nhaphang", action);
 
         //Add Event MouseListener
         for (String ac : action) {
@@ -211,11 +211,11 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
         int size = listphieunhap.size();
         for (int i = 0; i < size; i++) {
             tblModel.addRow(new Object[]{
-                i + 1, (int) listphieunhap.get(i).getMaphieu(),
-                nccBUS.getTenNhaCungCap(listphieunhap.get(i).getManhacungcap()),
-                nvBUS.getNameById(listphieunhap.get(i).getManguoitao()),
-                Formater.FormatTime(listphieunhap.get(i).getThoigiantao()),
-                Formater.FormatVND(listphieunhap.get(i).getTongTien())
+                i + 1, (int) listphieunhap.get(i).getMP(),
+                nccBUS.getTenNhaCungCap(listphieunhap.get(i).getMNCC()),
+                nvBUS.getNameById(listphieunhap.get(i).getMNV()),
+                Formater.FormatTime(listphieunhap.get(i).getTG()),
+                Formater.FormatVND(listphieunhap.get(i).getTIEN())
             });
         }
     }
@@ -232,7 +232,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
         if (validateSelectDate()) {
             int type = search.cbxChoose.getSelectedIndex();
             int mancc = cbxNhaCungCap.getSelectedIndex() == 0 ? 0 : nccBUS.getByIndex(cbxNhaCungCap.getSelectedIndex() - 1).getMancc();
-            int manv = cbxNhanVien.getSelectedIndex() == 0 ? 0 : nvBUS.getByIndex(cbxNhanVien.getSelectedIndex() - 1).getManv();
+            int manv = cbxNhanVien.getSelectedIndex() == 0 ? 0 : nvBUS.getByIndex(cbxNhanVien.getSelectedIndex() - 1).getMNV();
             String input = search.txtSearchForm.getText() != null ? search.txtSearchForm.getText() : "";
             Date time_start = dateStart.getDate() != null ? dateStart.getDate() : new Date(0);
             Date time_end = dateEnd.getDate() != null ? dateEnd.getDate() : new Date(System.currentTimeMillis());
@@ -299,17 +299,21 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
                 if (input == 0) {
                     PhieuNhapDTO pn = listPhieu.get(index);
                     System.out.println(pn);
-                    if (!phieunhapBUS.checkCancelPn(pn.getMaphieu())) {
-                        JOptionPane.showMessageDialog(null, "Sản phẩm trong phiếu này đã được xuất đi không thể hủy phiếu này!");
-                    } else {
-                        int c = phieunhapBUS.cancelPhieuNhap(pn.getMaphieu());
-                        if (c == 0) {
-                            JOptionPane.showMessageDialog(null, "Hủy phiếu không thành công!");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
-                            loadDataTalbe(phieunhapBUS.getAll());
-                        }
-                    }
+                    JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
+                    loadDataTalbe(phieunhapBUS.getAll());
+                    
+                    // if (!phieunhapBUS.checkCancelPn(pn.getMaphieu())) {
+                    //     JOptionPane.showMessageDialog(null, "Sản phẩm trong phiếu này đã được xuất đi không thể hủy phiếu này!");
+                    // } else {
+                    //     int c = phieunhapBUS.cancelPhieuNhap(pn.getMaphieu());
+                    //     if (c == 0) {
+                    //         JOptionPane.showMessageDialog(null, "Hủy phiếu không thành công!");
+                    //     } else {
+                    //         JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
+                    //         loadDataTalbe(phieunhapBUS.getAll());
+                    //     }
+                    // }
+                    
                 }
             }
         } else if (source == search.btnReset) {

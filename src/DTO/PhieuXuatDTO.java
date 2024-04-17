@@ -10,8 +10,8 @@ public class PhieuXuatDTO extends PhieuDTO{
         this.MKH = MKH;
     }
 
-    public PhieuXuatDTO(int MKH, int MP, int MNV, Timestamp TG, long TIEN, int TT) {
-        super(MP, MNV, TG, TIEN, TT);
+    public PhieuXuatDTO(int MKH, int MP, int MNV, Timestamp TG, long TIENX, int TT) {
+        super(MP, MNV, TG, TIENX, TT);
         this.MKH = MKH;
     }
 
