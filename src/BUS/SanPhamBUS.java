@@ -75,7 +75,7 @@ public class SanPhamBUS {
     public ArrayList<SanPhamDTO> getByMakhuvuc(int makv) {
         ArrayList<SanPhamDTO> result = new ArrayList<>();
         for (SanPhamDTO i : this.listSP) {
-            if (i.getMKVK() == makv) {
+            if (i.getMKVS() == makv) {
                 result.add(i);
             }
         }

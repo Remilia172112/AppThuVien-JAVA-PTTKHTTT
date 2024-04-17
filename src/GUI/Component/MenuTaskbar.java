@@ -11,7 +11,7 @@ import GUI.Log_In;
 import GUI.Main;
 import GUI.login_page;
 import GUI.Panel.KhachHang;
-import GUI.Panel.KhuVucKho;
+import GUI.Panel.KhuVucSach;
 import GUI.Panel.NhaCungCap;
 import GUI.Panel.NhaXuatBan;
 import GUI.Panel.NhanVien;
@@ -35,7 +35,7 @@ public class MenuTaskbar extends JPanel {
     TrangChu trangChu;
     SanPham sanPham;
     NhaXuatBan Nhaxuatban;
-    KhuVucKho quanLyKho;
+    KhuVucSach quanLyKho;
     PhieuNhap phieuNhap;
     PhieuXuat phieuXuat;
     KhachHang khachHang;
@@ -47,7 +47,7 @@ public class MenuTaskbar extends JPanel {
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
         {"Sản phẩm", "products.svg", "sanpham"},
-        {"Khu vực kho", "area.svg", "khuvuckho"},
+        {"Khu vực sách", "area.svg", "khuvucsach"},
         {"Phiếu nhập", "import.svg", "nhaphang"},
         {"Phiếu xuất", "export.svg", "xuathang"},
         {"Khách hàng", "customer.svg", "khachhang"},
@@ -198,7 +198,7 @@ public class MenuTaskbar extends JPanel {
         listitem[2].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                quanLyKho = new KhuVucKho(main);
+                quanLyKho = new KhuVucSach(main);
                 main.setPanel(quanLyKho);
             }
         });

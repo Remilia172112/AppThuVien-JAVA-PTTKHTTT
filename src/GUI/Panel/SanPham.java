@@ -1,7 +1,7 @@
 package GUI.Panel;
 
 import BUS.SanPhamBUS;
-import DAO.KhuVucKhoDAO;
+import DAO.KhuVucSachDAO;
 import DAO.NhaXuatBanDAO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
@@ -48,7 +48,7 @@ public final class SanPham extends JPanel implements ActionListener {
         tableSanPham = new JTable();
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn", "Tên tác giả", "Danh mục", "Năm xuất bản", "Nhà xuất bản", "Khu vực kho"};
+        String[] header = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn", "Tên tác giả", "Danh mục", "Năm xuất bản", "Nhà xuất bản", "Khu vực sách"};
         tblModel.setColumnIdentifiers(header);
         tableSanPham.setModel(tblModel);
         scrollTableSanPham.setViewportView(tableSanPham);
@@ -127,7 +127,7 @@ public final class SanPham extends JPanel implements ActionListener {
         for (DTO.SanPhamDTO sp : result) {
             tblModel.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL(), sp.getTENTG(), sp.getDANHMUC(), sp.getNAMXB()
                 , NhaXuatBanDAO.getInstance().selectById(sp.getMNXB() + "").getTennxb()
-                , KhuVucKhoDAO.getInstance().selectById(sp.getMKVK() + " ").getTenkhuvuc()
+                , KhuVucSachDAO.getInstance().selectById(sp.getMKVS() + " ").getTenkhuvuc()
             });
         }
     }

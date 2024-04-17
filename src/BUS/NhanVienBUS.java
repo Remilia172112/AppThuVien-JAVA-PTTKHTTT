@@ -36,10 +36,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- *
- * @author robot
- */
 public class NhanVienBUS implements ActionListener, DocumentListener {
 
     public GUI.Panel.NhanVien nv;
