@@ -1,6 +1,6 @@
 package GUI.Dialog;
 
-import BUS.KhuVucKhoBUS;
+import BUS.KhuVucSachBUS;
 import BUS.NhaXuatBanBUS;
 import BUS.SanPhamBUS;
 import DAO.SanPhamDAO;
@@ -54,7 +54,7 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
     GUI.Panel.SanPham jpSP;
 
     
-    KhuVucKhoBUS kvkhoBus = new KhuVucKhoBUS();
+    KhuVucSachBUS kvkhoBus = new KhuVucSachBUS();
     NhaXuatBanBUS nxbBus = new NhaXuatBanBUS();
     SanPhamBUS spBus = new SanPhamBUS();
 
@@ -248,7 +248,7 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         namXB.setText(Integer.toString(sp.getNAMXB()));
         cbNXB.setSelectedIndex(nxbBus.getIndexByMaNXB(sp.getMNXB()));
         tenTG.setText(sp.getTENTG());
-        khuvuc.setSelectedIndex(kvkhoBus.getIndexByMaKVK(sp.getMKVK()));
+        khuvuc.setSelectedIndex(kvkhoBus.getIndexByMaKVK(sp.getMKVS()));
         txtgiaxuat.setText(Integer.toString(sp.getTIENX()));
         txtgianhap.setText(Integer.toString(sp.getTIENN()));
         isbn.setText(sp.getISBN());

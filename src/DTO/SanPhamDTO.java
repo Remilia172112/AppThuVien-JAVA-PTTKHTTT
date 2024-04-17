@@ -11,7 +11,7 @@ public class SanPhamDTO {
     private int NAMXB;
     private int MNXB;
     private String TENTG;
-    private int MKVK;
+    private int MKVS;
     private int TIENX;
     private int TIENN;
     private int SL;
@@ -21,7 +21,7 @@ public class SanPhamDTO {
 
     }
     
-    public SanPhamDTO(int mSP, String tEN, String hINHANH, String dANHMUC, int nAMXB, int mNXB, String tENTG, int mKVK,
+    public SanPhamDTO(int mSP, String tEN, String hINHANH, String dANHMUC, int nAMXB, int mNXB, String tENTG, int mKVS,
             int tIENX, int tIENN, int sL, String iSBN) {
         MSP = mSP;
         TEN = tEN;
@@ -30,7 +30,7 @@ public class SanPhamDTO {
         NAMXB = nAMXB;
         MNXB = mNXB;
         TENTG = tENTG;
-        MKVK = mKVK;
+        MKVS = mKVS;
         TIENX = tIENX;
         TIENN = tIENN;
         SL = sL;
@@ -94,12 +94,12 @@ public class SanPhamDTO {
         TENTG = tENTG;
     }
 
-    public int getMKVK() {
-        return MKVK;
+    public int getMKVS() {
+        return MKVS;
     }
 
-    public void setMKVK(int mKVK) {
-        MKVK = mKVK;
+    public void setMKVS(int MKVS) {
+        this.MKVS = MKVS;
     }
 
     public int getTIENX() {
@@ -144,7 +144,7 @@ public class SanPhamDTO {
         hash = 53 * hash + this.NAMXB;
         hash = 53 * hash + this.MNXB;
         hash = 53 * hash + Objects.hashCode(this.TENTG);
-        hash = 53 * hash + this.MKVK;
+        hash = 53 * hash + this.MKVS;
         hash = 53 * hash + this.TIENX;
         hash = 53 * hash + this.SL;
         hash = 53 * hash + Objects.hashCode(this.ISBN);
@@ -172,7 +172,7 @@ public class SanPhamDTO {
         if (this.MNXB != other.MNXB) {
             return false;
         }
-        if (this.MKVK != other.MKVK) {
+        if (this.MKVS != other.MKVS) {
             return false;
         }
         if (this.SL != other.SL) {
@@ -202,6 +202,6 @@ public class SanPhamDTO {
     @Override
     
     public String toString() {
-        return "SanPhamDTO{" + "Ma san pham = " + MSP + ", Ten san pham = " + TEN + ", Hinh anh = " + HINHANH + ", Danh muc = " + DANHMUC + ", Nam xuat ban = " + NAMXB + ", Ma nha xuat ban = " + MNXB  + ", Ten tac gia = " + TENTG + ", Ma khu vuc kho = " + MKVK + ", Tien xuat = " + TIENX + ", Tien nhap = " + TIENN + ", So luong = " + SL + ", ISBN=" + ISBN + ", MKVK=" + MKVK + ", TIENX=" + TIENX + ", ISBN=" + ISBN + '}';
+        return "SanPhamDTO{" + "Ma san pham = " + MSP + ", Ten san pham = " + TEN + ", Hinh anh = " + HINHANH + ", Danh muc = " + DANHMUC + ", Nam xuat ban = " + NAMXB + ", Ma nha xuat ban = " + MNXB  + ", Ten tac gia = " + TENTG + ", Ma khu vuc sach = " + MKVS + ", Tien xuat = " + TIENX + ", Tien nhap = " + TIENN + ", So luong = " + SL + ", ISBN=" + ISBN + ", MKVS=" + MKVS + ", TIENX=" + TIENX + ", ISBN=" + ISBN + '}';
     }
 }
