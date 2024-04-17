@@ -76,6 +76,7 @@ CREATE TABLE `CTPHIEUXUAT` (
     `MPX` INT(11) NOT NULL COMMENT 'Mã phiếu xuất',
     `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
     `SL` INT(11) NOT NULL COMMENT 'Số lượng',
+    `TIENXUAT` INT(11) NOT NULL COMMENT 'Tiền xuất',
     PRIMARY KEY(MPX, MSP)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
