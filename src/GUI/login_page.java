@@ -81,7 +81,7 @@ public class login_page extends JFrame implements KeyListener{
         lb2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                lb2.setForeground(new Color(173, 216, 230));
+                lb2.setForeground(new Color(255, 48, 48));
             }
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -106,7 +106,7 @@ public class login_page extends JFrame implements KeyListener{
         bt.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bt.setBackground(new Color(138, 43, 226));
+                bt.setBackground(new Color(255, 0, 0));
             }
             public void mousePressed(MouseEvent evt) {
                 try {
