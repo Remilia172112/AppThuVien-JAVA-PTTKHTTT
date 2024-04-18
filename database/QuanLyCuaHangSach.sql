@@ -75,8 +75,27 @@ CREATE TABLE `PHIEUXUAT` (
 CREATE TABLE `CTPHIEUXUAT` (
     `MPX` INT(11) NOT NULL COMMENT 'Mã phiếu xuất',
     `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
+    `MKM` VARCHAR(255) COMMENT 'Mã khuyến mãi',
     `SL` INT(11) NOT NULL COMMENT 'Số lượng',
     `TIENXUAT` INT(11) NOT NULL COMMENT 'Tiền xuất',
+    PRIMARY KEY(MPX, MSP)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE `PHIEUTRA` (
+    `MPX` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khuyến mãi',
+    `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
+    `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
+    `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
+    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
+    PRIMARY KEY(MPX)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE `CTPHIEUTRA` (
+    `MPX` INT(11) NOT NULL COMMENT 'Mã khuyến mãi',
+    `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
+    `SL` INT(11) NOT NULL COMMENT 'Số lượng',
+    `TIENTHU` INT(11) NOT NULL COMMENT 'Tiền thu',
+    `LYDO` VARCHAR(255) NOT NULL COMMENT 'Lý do',
     PRIMARY KEY(MPX, MSP)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
@@ -108,6 +127,36 @@ CREATE TABLE `CTPHIEUNHAP` (
     `HINHTHUC` INT(11) NOT NULL DEFAULT 0 COMMENT 'Tổng tiền',
     PRIMARY KEY(MPN, MSP)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE `PHIEUKIEMKE` (
+    `MPKK` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã phiếu kiểm kê',
+    `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
+    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
+    PRIMARY KEY(MPKK)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE `CTPHIEUKIEMKE` (
+    `MPKK` INT(11) NOT NULL COMMENT 'Mã phiếu kiểm kê',
+    `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
+    `TRANGTHAISP` INT(11) NOT NULL COMMENT 'Trạng thái sản phẩm',
+    `GHICHU` VARCHAR(255) COMMENT 'Ghi chú',
+    PRIMARY KEY(MPKK, MSP)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+CREATE TABLE `MAKHUYENMAI` (
+    `MKM` VARCHAR(255) NOT NULL COMMENT 'Mã khuyến mãi',
+    `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
+    `TGBD` DATE NOT NULL COMMENT 'Thời gian bắt đầu',
+    `TGKT` DATE NOT NULL COMMENT 'Thời gian kết thúc',
+    `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
+    PRIMARY KEY(MKM)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+CREATE TABLE `CTMAKHUYENMAI` (
+    `MKM` VARCHAR(255) NOT NULL COMMENT 'Mã khuyến mãi',
+    `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
+    `PTG` INT(11) NOT NULL COMMENT 'Phần trăm giảm',
+    PRIMARY KEY(MKM, MSP)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 CREATE TABLE `SANPHAM` (
     `MSP` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã sản phẩm',
@@ -117,7 +166,7 @@ CREATE TABLE `SANPHAM` (
     `NAMXB` INT(11) NOT NULL COMMENT 'Năm xuất bản',
     `MNXB` INT(11) NOT NULL COMMENT 'Mã nhà xuất bản',
     `TENTG` VARCHAR(255) NOT NULL COMMENT 'Tên tác giả',
-    `MKVK` INT(11) NOT NULL COMMENT 'Mã khu vực kho',
+    `MKVS` INT(11) NOT NULL COMMENT 'Mã khu vực sách',
     `TIENX` INT(11) NOT NULL COMMENT 'Tiền xuất',
     `TIENN` INT(11) NOT NULL COMMENT 'Tiền nhập',
     `SL` INT(11) DEFAULT 0 COMMENT 'Số lượng',
@@ -136,12 +185,12 @@ CREATE TABLE `NHAXUATBAN` (
     PRIMARY KEY(MNXB)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-CREATE TABLE `KHUVUCKHO` (
-    `MKVK` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khu vực kho',
-    `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên khu vực kho',
+CREATE TABLE `KHUVUCSACH` (
+    `MKVS` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khu vực sách',
+    `TEN` VARCHAR(255) NOT NULL COMMENT 'Tên khu vực sách',
     `GHICHU` VARCHAR(255) DEFAULT '' COMMENT 'Ghi chú',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
-    PRIMARY KEY(MKVK)
+    PRIMARY KEY(MKVS)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 /*Thêm dữ liệu*/
@@ -155,7 +204,7 @@ VALUES
         ('nhanvien', 'Quản lý nhân viên', 0),
         ('nhaphang', 'Quản lý nhập hàng', 0),
         ('xuathang', 'Quản lý xuất hàng', 0),
-        ('khuvuckho', 'Quản lý khu vực kho', 0),
+        ('khuvucsach', 'Quản lý khu vực sách', 0),
         ('nhomquyen', 'Quản lý nhóm quyền', 0),
         ('taikhoan', 'Quản lý tài khoản', 0),
         ('thongke', 'Quản lý thống kê', 0);
@@ -166,10 +215,10 @@ VALUES
         (1, 'khachhang', 'delete'),
         (1, 'khachhang', 'update'),
         (1, 'khachhang', 'view'),
-        (1, 'khuvuckho', 'create'),
-        (1, 'khuvuckho', 'delete'),
-        (1, 'khuvuckho', 'update'),
-        (1, 'khuvuckho', 'view'),
+        (1, 'khuvucsach', 'create'),
+        (1, 'khuvucsach', 'delete'),
+        (1, 'khuvucsach', 'update'),
+        (1, 'khuvucsach', 'view'),
         (1, 'nhacungcap', 'create'),
         (1, 'nhacungcap', 'delete'),
         (1, 'nhacungcap', 'update'),
@@ -206,9 +255,9 @@ VALUES
         (1, 'xuathang', 'delete'),
         (1, 'xuathang', 'update'),
         (1, 'xuathang', 'view'),
-        (2, 'khuvuckho', 'create'),
-        (2, 'khuvuckho', 'update'),
-        (2, 'khuvuckho', 'view'),
+        (2, 'khuvucsach', 'create'),
+        (2, 'khuvucsach', 'update'),
+        (2, 'khuvucsach', 'view'),
         (2, 'nhacungcap', 'create'),
         (2, 'nhacungcap', 'update'),
         (2, 'nhacungcap', 'view'),
@@ -226,10 +275,10 @@ VALUES
         (3, 'xuathang', 'create'),
         (3, 'xuathang', 'update'),
         (3, 'xuathang', 'view'),
-        (4, 'khuvuckho', 'view'),
+        (4, 'khuvucsach', 'view'),
         (4, 'nhacungcap', 'view'),
         (5, 'khachhang', 'view'),
-        (5, 'khuvuckho', 'view');   
+        (5, 'khuvucsach', 'view');   
 
 INSERT INTO `NHOMQUYEN` (`TEN`, `TT`)
 VALUES
@@ -308,7 +357,7 @@ VALUES
         (2, 3, 2, 40000, 0),
         (2, 4, 2, 80000, 0);
 
-INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVK`, `TIENX`, `TIENN`, `SL`, `ISBN`, `TT`) 
+INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVS`, `TIENX`, `TIENN`, `SL`, `ISBN`, `TT`) 
 VALUES
         ('Ám thị tâm lý', 'kogoiob1cgjlqhndkc0dcw1hzj1kqook.png', 'Sách dành cho giới trẻ', 2022, 21,'Patrick King - Huy Nguyễn', 1, 134000, 100000, 1, 9786046863748, 1),
         ('Không gì là không thể', 'xtx0d0apioa66abawbnpybv4v8wsb54p.png', 'Sách dành cho giới trẻ', 2020, 3,'George Matthew Adams', 1, 63500, 60000, 1, 8935086837665, 1),
@@ -384,7 +433,7 @@ VALUES
         ('NXB Văn học', '18 Nguyễn Trường Tộ - Ba Đình - Hà Nội', '02437163409', 'info@nxbvanhoc.com.vn', 1),
         ('NXB Dân Trí', 'Số 9, ngõ 26, phố Hoàng Cầu, phường Ô Chợ Dừa, quận Đống Đa, Hà Nội', '02466860751', 'nxbdantri@gmail.com', 1);
         
-INSERT INTO `KHUVUCKHO` (`TEN`, `GHICHU`, `TT`)
+INSERT INTO `KHUVUCSACH` (`TEN`, `GHICHU`, `TT`)
 VALUES
         ('Khu vực A', 'Sách dành cho giới trẻ', 1),
         ('Khu vực B', 'Văn học - Nghệ thuật', 1),
@@ -404,6 +453,14 @@ ALTER TABLE `PHIEUXUAT` ADD CONSTRAINT FK_MKH_PHIEUXUAT FOREIGN KEY (MKH) REFERE
 
 ALTER TABLE `CTPHIEUXUAT` ADD CONSTRAINT FK_MPX_CTPHIEUXUAT FOREIGN KEY (MPX) REFERENCES `PHIEUXUAT`(MPX) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `CTPHIEUXUAT` ADD CONSTRAINT FK_MSP_CTPHIEUXUAT FOREIGN KEY (MSP) REFERENCES `SANPHAM`(MSP) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `CTPHIEUXUAT` ADD CONSTRAINT FK_MKM_CTPHIEUXUAT FOREIGN KEY (MKM) REFERENCES `MAKHUYENMAI`(MKM) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `PHIEUTRA` ADD CONSTRAINT FK_MPX_PHIEUTRA FOREIGN KEY (MPX) REFERENCES `PHIEUXUAT`(MPX) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `PHIEUTRA` ADD CONSTRAINT FK_MNV_PHIEUTRA FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `PHIEUTRA` ADD CONSTRAINT FK_MKH_PHIEUTRA FOREIGN KEY (MKH) REFERENCES `KHACHHANG`(MKH) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `CTPHIEUTRA` ADD CONSTRAINT FK_MPX_CTPHIEUTRA FOREIGN KEY (MPX) REFERENCES `PHIEUTRA`(MPX) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `CTPHIEUTRA` ADD CONSTRAINT FK_MSP_CTPHIEUTRA FOREIGN KEY (MSP) REFERENCES `CTPHIEUXUAT`(MSP) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `PHIEUNHAP` ADD CONSTRAINT FK_MNV_PHIEUNHAP FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `PHIEUNHAP` ADD CONSTRAINT FK_MNCC_PHIEUNHAP FOREIGN KEY (MNCC) REFERENCES `NHACUNGCAP`(MNCC) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -411,7 +468,17 @@ ALTER TABLE `PHIEUNHAP` ADD CONSTRAINT FK_MNCC_PHIEUNHAP FOREIGN KEY (MNCC) REFE
 ALTER TABLE `CTPHIEUNHAP` ADD CONSTRAINT FK_MPN_CTPHIEUNHAP FOREIGN KEY (MPN) REFERENCES `PHIEUNHAP`(MPN) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `CTPHIEUNHAP` ADD CONSTRAINT FK_MSP_CTPHIEUNHAP FOREIGN KEY (MSP) REFERENCES `SANPHAM`(MSP) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+ALTER TABLE `PHIEUKIEMKE` ADD CONSTRAINT FK_MNV_PHIEUKIEMKE FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `CTPHIEUKIEMKE` ADD CONSTRAINT FK_MPKK_CTPHIEUKIEMKE FOREIGN KEY (MPKK) REFERENCES `PHIEUKIEMKE`(MPKK) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `CTPHIEUKIEMKE` ADD CONSTRAINT FK_MSP_CTPHIEUKIEMKE FOREIGN KEY (MSP) REFERENCES `SANPHAM`(MSP) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `MAKHUYENMAI` ADD CONSTRAINT FK_MNV_MAKHUYENMAI FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `CTMAKHUYENMAI` ADD CONSTRAINT FK_MKM_CTMAKHUYENMAI FOREIGN KEY (MKM) REFERENCES `MAKHUYENMAI`(MKM) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `CTMAKHUYENMAI` ADD CONSTRAINT FK_MSP_CTMAKHUYENMAI FOREIGN KEY (MSP) REFERENCES `SANPHAM`(MSP) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MNXB_SANPHAM FOREIGN KEY (MNXB) REFERENCES `NHAXUATBAN`(MNXB) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MKVK_SANPHAM FOREIGN KEY (MKVK) REFERENCES `KHUVUCKHO`(MKVK) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `SANPHAM` ADD CONSTRAINT FK_MKVS_SANPHAM FOREIGN KEY (MKVS) REFERENCES `KHUVUCSACH`(MKVS) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 COMMIT;
