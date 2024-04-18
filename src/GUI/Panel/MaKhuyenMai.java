@@ -87,7 +87,7 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
                 int index = tableKhuvuc.getSelectedRow();
                 if (index != -1) {
                     ArrayList<SanPhamDTO> listSP = new ArrayList<SanPhamDTO>();
-                    for(int i = 0; i < listCTMKM.size(); i++) listSP.add(spBUS.getByMaSP(listCTMKM.get(i).getMSP()));
+                    for(int i = 1; i <= 3; i++) listSP.add(spBUS.getByMaSP(i));
                     ListCustomersInDePot(listSP);
                 }
             }
@@ -112,7 +112,7 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "update", "delete", "import", "export"};
-        mainFunction = new MainFunction(m.user.getMNQ(), "khuvucsach", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "makhuyenmai", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
@@ -209,7 +209,7 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
 
     public void ListCustomersInDePot(ArrayList<SanPhamDTO> result) {
         right.removeAll();
-        JLabel tit = new JLabel("Danh sách sản phẩm đang có ở khu vực");
+        JLabel tit = new JLabel("Danh sách sản phẩm áp dụng mã khuyến mãi");
         tit.setFont(new java.awt.Font(FlatRobotoFont.FAMILY, 1, 16));
         right.add(tit);
         itemTaskbar listItem[] = new itemTaskbar[result.size()];
