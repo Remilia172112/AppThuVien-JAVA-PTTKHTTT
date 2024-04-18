@@ -11,7 +11,7 @@ public class Formater {
         return formatter.format(vnd) + "đ";
     }
     
-    public static String FormatTime(Timestamp thoigian) {
+    public static String FormatTime(Timestamp thoigian) { 
         SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/YYYY HH:mm");
         return formatDate.format(thoigian);
     }
