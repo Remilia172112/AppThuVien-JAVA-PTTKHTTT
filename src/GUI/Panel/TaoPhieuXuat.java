@@ -57,7 +57,7 @@ public final class TaoPhieuXuat extends JPanel {
     DefaultTableModel tblModel, tblModelSP;
     ButtonCustom btnAddSp, btnEditSP, btnDelete, btnImport, btnNhapHang;
     InputForm txtMaphieu, txtNhanVien, txtMaSp, txtTenSp, txtMaGiamGia, txtGiaGiam;
-    // SelectForm cbxPhienBan;
+    SelectForm cbxPhienBan;
     JTextField txtTimKiem;
     Color BackgroundColor = new Color(240, 247, 250);
 
@@ -209,26 +209,33 @@ public final class TaoPhieuXuat extends JPanel {
         content_right.setBackground(Color.WHITE);
 
         content_right_top = new JPanel(new BorderLayout());
-        content_right_top.setPreferredSize(new Dimension(100, 165));
+        content_right_top.setPreferredSize(new Dimension(100, 330));
         txtMaSp = new InputForm("Mã SP");
         txtMaSp.setEditable(false);
         txtTenSp = new InputForm("Tên sản phẩm");
         txtTenSp.setEditable(false);
-        // String[] arrCauhinh = {"Chọn sản phẩm"};
-        JPanel panlePXGX = new JPanel(new GridLayout(1, 3));
-        panlePXGX.setPreferredSize(new Dimension(100, 90));
-        // cbxPhienBan = new SelectForm("Cấu hình", arrCauhinh);
+        txtTenSp.setPreferredSize(new Dimension(100, 80));
+        String[] arrCauhinh = {"Chọn danh mục"};
+        JPanel panlePXGX = new JPanel(new GridLayout(2, 2));
+        panlePXGX.setPreferredSize(new Dimension(100, 170));
+        cbxPhienBan = new SelectForm("Danh mục", arrCauhinh);
         txtGiaGiam = new InputForm("Giá giảm");
         txtGiaGiam.setEditable(false);
         txtGiaXuat = new InputForm("Giá xuất");
         txtMaGiamGia = new InputForm("Mã giảm giá");
         // txtMaGiamGia.setEditable(false);
         // panlePXGX.add(cbxPhienBan);
-        panlePXGX.add(txtGiaGiam);
         panlePXGX.add(txtGiaXuat);
+        panlePXGX.add(txtGiaGiam);
         panlePXGX.add(txtMaGiamGia);
-        content_right_top.add(txtMaSp, BorderLayout.WEST);
-        content_right_top.add(txtTenSp, BorderLayout.CENTER);
+
+        JPanel info2 = new JPanel(new GridLayout(1, 2));
+        info2.setPreferredSize(new Dimension(100, 110));
+        info2.add(txtMaSp);
+        info2.add(cbxPhienBan);
+        
+        content_right_top.add(txtTenSp, BorderLayout.NORTH);
+        content_right_top.add(info2, BorderLayout.CENTER);
         content_right_top.add(panlePXGX, BorderLayout.SOUTH);
         // cbxPhienBan.getCbb().addItemListener((ItemEvent e) -> {
         //     mapb = ch.get(cbxPhienBan.getSelectedIndex()).getMaphienbansp();
