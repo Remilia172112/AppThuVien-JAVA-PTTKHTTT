@@ -206,7 +206,6 @@ public class MyAccount extends JDialog implements ActionListener {
                             }
                     }
             else if (!check) {
-                System.out.println("1111111111111");
                 String text_phone = phone.getText(); 
                 String text_email = EMAIL.getText(); 
                 
@@ -232,7 +231,10 @@ public class MyAccount extends JDialog implements ActionListener {
                             changed = true;
                         }
                     }
-                    if(changed) JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                    if(changed) {
+                        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                        this.dispose();
+                    }
                 }
             }
         } 
