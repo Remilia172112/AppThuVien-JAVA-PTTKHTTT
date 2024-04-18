@@ -207,6 +207,7 @@ VALUES
         ('khuvucsach', 'Quản lý khu vực sách', 0),
         ('nhomquyen', 'Quản lý nhóm quyền', 0),
         ('taikhoan', 'Quản lý tài khoản', 0),
+        ('makhuyenmai', 'Quản lý mã khuyến mãi', 0),
         ('thongke', 'Quản lý thống kê', 0);
 
 INSERT INTO `CTQUYEN` (`MNQ`, `MCN`, `HANHDONG`)
@@ -247,6 +248,10 @@ VALUES
         (1, 'taikhoan', 'delete'),
         (1, 'taikhoan', 'update'),
         (1, 'taikhoan', 'view'),
+        (1, 'makhuyenmai', 'create'),
+        (1, 'makhuyenmai', 'delete'),
+        (1, 'makhuyenmai', 'update'),
+        (1, 'makhuyenmai', 'view'),
         (1, 'thongke', 'create'),
         (1, 'thongke', 'delete'),
         (1, 'thongke', 'update'),
@@ -356,6 +361,16 @@ VALUES
         (1, 2, 2, 40000, 0),
         (2, 3, 2, 40000, 0),
         (2, 4, 2, 80000, 0);
+
+INSERT INTO `MAKHUYENMAI` (`MKM`,`MNV`,`TGBD`,`TGKT`,`TT`)
+VALUES
+        ('GT2024', 1, '2024-04-01 00:00:00', '2024-05-01 00:00:00', 1);
+
+INSERT INTO `CTMAKHUYENMAI` (`MKM`, `MSP`,`PTG`)
+VALUES
+        ('GT2024', 1, 20),
+        ('GT2024', 2, 20),
+        ('GT2024', 3, 20);
 
 INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVS`, `TIENX`, `TIENN`, `SL`, `ISBN`, `TT`) 
 VALUES

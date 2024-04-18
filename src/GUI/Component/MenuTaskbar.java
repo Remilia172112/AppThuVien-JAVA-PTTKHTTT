@@ -7,11 +7,11 @@ import DTO.ChiTietQuyenDTO;
 import DTO.NhanVienDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
-import GUI.Log_In;
 import GUI.Main;
 import GUI.login_page;
 import GUI.Panel.KhachHang;
 import GUI.Panel.KhuVucSach;
+import GUI.Panel.MaKhuyenMai;
 import GUI.Panel.NhaCungCap;
 import GUI.Panel.NhaXuatBan;
 import GUI.Panel.NhanVien;
@@ -42,6 +42,7 @@ public class MenuTaskbar extends JPanel {
     NhaCungCap nhacungcap;
     NhanVien nhanVien;
     TaiKhoan taiKhoan;
+    MaKhuyenMai maKhuyenMai;
     PhanQuyen phanQuyen;
     ThongKe thongKe;
     String[][] getSt = {
@@ -55,6 +56,7 @@ public class MenuTaskbar extends JPanel {
         {"Nhà xuất bản", "nhaxb.svg", "nhaxuatban"},
         {"Nhân viên", "staff.svg", "nhanvien"},
         {"Tài khoản", "account.svg", "taikhoan"},
+        {"Mã khuyến mãi", "account.svg", "makhuyenmai"},
         {"Thống kê", "statistical.svg", "thongke"},
         {"Phân quyền", "permission.svg", "nhomquyen"},
         {"Đăng xuất", "log_out.svg", "dangxuat"},
@@ -254,12 +256,19 @@ public class MenuTaskbar extends JPanel {
         listitem[10].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
+                maKhuyenMai = new MaKhuyenMai(main);
+                main.setPanel(maKhuyenMai);
+            }
+        });
+        listitem[11].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
                 thongKe = new ThongKe();
                 main.setPanel(thongKe);
             }
         });
 
-        listitem[11].addMouseListener(new MouseAdapter() {
+        listitem[12].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
                 phanQuyen = new PhanQuyen(main);
@@ -267,7 +276,7 @@ public class MenuTaskbar extends JPanel {
             }
         });
 
-        listitem[12].addMouseListener(new MouseAdapter() {
+        listitem[13].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
 
