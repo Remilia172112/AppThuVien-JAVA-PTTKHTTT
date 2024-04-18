@@ -14,7 +14,7 @@ public class TrangChu extends JPanel {
         String[][] getSt = {
         {"Tính tiện lợi", "tinhchinhxac_128px.svg", "<html><br>Có tính năng tìm kiếm nhanh chóng <br><br>giúp người dùng dễ dàng tìm sách<br><br> theo tiêu chí cụ thể như tiêu đề, tác <br><br>giả hoặc thể loại.</html>"},
         {"Tính bảo mật", "tinhbaomat_128px.svg", "<html><br>Thông tin cá nhân và thông tin liên <br><br>quan đến sách mượn thường được <br><br>bảo mật và chỉ được truy cập bởi <br><br>người dùng hoặc những người được <br><br>ủy quyền.</html>"},
-        {"Tính hiệu quả", "tinhhieuqua_128px.svg", "<html><br>Dễ dàng xác định được thông tin <br><br>về từng cuốn sách một cách nhanh <br><br>chóng và chính xác, giúp cho việc <br><br>quản lý điện thoại được thực hiện <br><br>một cách hiệu quả hơn.</html>"},
+        {"Tính hiệu quả", "tinhhieuqua_128px.svg", "<html><br>Dễ dàng xác định được thông tin <br><br>về từng cuốn sách một cách nhanh <br><br>chóng và chính xác, giúp cho việc <br><br>quản lý sách được thực hiện một <br><br>cách hiệu quả hơn.</html>"},
     };
     Color MainColor = new Color(193,237,220);
     Color FontColor = new Color(96, 125, 139);
