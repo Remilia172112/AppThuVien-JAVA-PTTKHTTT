@@ -43,8 +43,8 @@ public class PhieuXuatBUS {
     }
 
     public void insert(PhieuXuatDTO px, ArrayList<ChiTietPhieuDTO> ct) {
-        phieuXuatDAO.insert(px);
-        chiTietPhieuXuatDAO.insert(ct);
+        phieuXuatDAO.insert(px); //ghi phieu xuat vao sql
+        chiTietPhieuXuatDAO.insert(ct); //goi updatesoluongTon cua sanphamDAO để chỉnh số lượng trong kho -> ghi váo sql
     }
 
     public ArrayList<ChiTietPhieuDTO> selectCTP(int maphieu) {

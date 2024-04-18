@@ -223,7 +223,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         content_right.setOpaque(false);
 
         content_right_top = new JPanel(new BorderLayout());
-        content_right_top.setPreferredSize(new Dimension(100, 260));
+        content_right_top.setPreferredSize(new Dimension(100, 160));
         txtMaSp = new InputForm("Mã sản phẩm");
         txtMaSp.setEditable(false);
         txtTenSp = new InputForm("Tên sản phẩm");
@@ -231,7 +231,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
 
         String[] arrCauhinh = {"Chọn sản phẩm"};
         JPanel content_right_top_cbx = new JPanel(new BorderLayout());
-        content_right_top_cbx.setPreferredSize(new Dimension(100, 180));
+        content_right_top_cbx.setPreferredSize(new Dimension(100, 80));
         // cbxCauhinh = new SelectForm("Cấu hình", arrCauhinh);
         // cbxCauhinh.cbb.addItemListener(this);
         txtDongia = new InputForm("Giá nhập");
