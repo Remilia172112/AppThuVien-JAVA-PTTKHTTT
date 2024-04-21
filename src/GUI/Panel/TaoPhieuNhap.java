@@ -257,6 +257,27 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         card_content_one_model.setPreferredSize(new Dimension(100, 90));
         // txtMaImeiTheoLo = new InputForm("Mã Imei bắt đầu");
         txtMaISBN = new InputForm("Mã ISBN");
+        txtMaISBN.getTxtForm().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ArrayList<SanPhamDTO> rs = spBUS.search(txtMaISBN.getText(), "ISBN");
+                loadDataTalbeSanPham(rs);
+
+            //thêm load lại inputform
+            }
+        });
+        
+
+        // txtMaISBN.setInputFormListener(new InputFormListener() {
+        //     @Override
+        //     public void onTextChanged(String text, KeyEvent event) {
+        //         // Xử lý khi giá trị của JTextField thay đổi
+        //         System.out.println("Tên mới: " + text);
+        //         System.out.println("Key pressed: " + event.getKeyCode());
+        //     }
+        // });
+
+
         // txtSoLuongImei = new InputForm("Số lượng");
         txtSoLuongSPnhap = new InputForm("Số lượng");
         PlainDocument soluong = (PlainDocument) txtSoLuongSPnhap.getTxtForm().getDocument();
