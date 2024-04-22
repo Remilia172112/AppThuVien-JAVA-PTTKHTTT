@@ -45,6 +45,7 @@ public class MenuTaskbar extends JPanel {
     MaKhuyenMai maKhuyenMai;
     PhanQuyen phanQuyen;
     ThongKe thongKe;
+    JScrollPane scrollPaneMenuTask ;
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
         {"Sản phẩm", "products.svg", "sanpham"},
@@ -130,7 +131,7 @@ public class MenuTaskbar extends JPanel {
         pnlCenter.setPreferredSize(new Dimension(230, 600));
         pnlCenter.setBackground(DefaultColor);
 //        pnlCenter.setBorder(new EmptyBorder(0,15,0,35));koc
-        pnlCenter.setLayout(new FlowLayout(0, 0, 5));
+        pnlCenter.setLayout(new GridLayout(0 ,1,5,0));
 
         bar3 = new JPanel();
         bar3.setBackground(new Color(204, 214, 219));

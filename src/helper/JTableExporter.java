@@ -16,9 +16,9 @@ public class JTableExporter {
         fileChooser.setDialogTitle("Chọn đường dẫn lưu file Excel");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("XLSX files", "xlsx");
         fileChooser.setFileFilter(filter);
-        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setAcceptAllFileFilterUsed(false);//Dòng này đặt cờ cho phép hiển thị tất cả các loại file trong hộp thoại chọn file.
 
-        int userChoice = fileChooser.showSaveDialog(null);
+        int userChoice = fileChooser.showSaveDialog(null);//Dòng này hiển thị hộp thoại chọn file với các cài đặt đã được cấu hình trước.   
         if (userChoice == JFileChooser.APPROVE_OPTION) {
             String filePath = fileChooser.getSelectedFile().getAbsolutePath();
             if (!filePath.toLowerCase().endsWith(".xlsx")) {

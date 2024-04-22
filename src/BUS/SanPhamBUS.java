@@ -107,6 +107,17 @@ public class SanPhamBUS {
                     }
                 }
             }
+            case "ISBN" -> {
+                if("".compareTo(text) == 0) {
+                    result = listSP;
+                }
+                for (SanPhamDTO i : this.listSP) {
+                    // if("".compareTo(text) == 0) {}
+                    if (i.getISBN().toLowerCase().compareTo(text) == 0) {
+                        result.add(i);
+                    }
+                }
+            }
         }
         
         return result;
