@@ -67,7 +67,7 @@ CREATE TABLE `PHIEUXUAT` (
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
     `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
     `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
-    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TG` DATETIME DEFAULT current_timestamp() COMMENT 'Thời gian tạo',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MPX)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -85,7 +85,7 @@ CREATE TABLE `PHIEUTRA` (
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
     `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
     `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
-    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TG` DATETIME DEFAULT current_timestamp() COMMENT 'Thời gian tạo',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MPX)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -114,7 +114,7 @@ CREATE TABLE `PHIEUNHAP` (
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
     `MNCC` INT(11) NOT NULL COMMENT 'Mã nhà cung cấp',
     `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
-    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TG` DATETIME DEFAULT current_timestamp() COMMENT 'Thời gian tạo',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MPN)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -130,7 +130,7 @@ CREATE TABLE `CTPHIEUNHAP` (
 CREATE TABLE `PHIEUKIEMKE` (
     `MPKK` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã phiếu kiểm kê',
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
-    `TG` DATETIME NOT NULL COMMENT 'Thời gian tạo',
+    `TG` DATETIME DEFAULT current_timestamp() COMMENT 'Thời gian tạo',
     `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
     PRIMARY KEY(MPKK)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
@@ -352,8 +352,8 @@ VALUES
 
 INSERT INTO `PHIEUNHAP` (`MNV`, `MNCC`, `TIEN`, `TG`, `TT`)
 VALUES
-        (1, 1, 100000, '2023-04-01 01:09:27', 1),
-        (1, 1, 200000, '2023-04-02 01:09:27', 1);
+        (1, 1, 100000, '2024-04-01 01:09:27', 1),
+        (1, 1, 200000, '2024-04-02 01:09:27', 1);
 
 INSERT INTO `CTPHIEUNHAP` (`MPN`, `MSP`, `SL`, `TIENNHAP`, `HINHTHUC`)
 VALUES

@@ -7,7 +7,6 @@ import GUI.Component.InputDate;
 import GUI.Component.InputForm;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.TableSorter;
-import GUI.Dialog.ThongKePBSPTonKho;
 import helper.JTableExporter;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -46,7 +45,7 @@ public final class ThongKeTonKho extends JPanel implements ActionListener, KeyLi
     InputForm tensanpham;
     InputDate start_date, end_date;
     ButtonCustom export, reset;
-    HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> listSp;
+    ArrayList<ThongKeTonKhoDTO> listSp;
     ThongKeBUS thongkeBUS;
 
     public ThongKeTonKho(ThongKeBUS thongkeBUS) {
@@ -105,7 +104,7 @@ public final class ThongKeTonKho extends JPanel implements ActionListener, KeyLi
         tblTonKho = new JTable();
         scrollTblTonKho = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"STT", "Mã SP", "Tên sản phẩm", "Tồn đầu kỳ", "Nhập trong kỳ", "Xuất trong kỳ", "Tồn cuối kỳ"};
+        String[] header = new String[]{"Mã SP", "Tên sản phẩm", "Tồn đầu kỳ", "Nhập trong kỳ", "Xuất trong kỳ", "Tồn cuối kỳ"};
         tblModel.setColumnIdentifiers(header);
         tblTonKho.setModel(tblModel);
         tblTonKho.setAutoCreateRowSorter(true);
@@ -116,8 +115,7 @@ public final class ThongKeTonKho extends JPanel implements ActionListener, KeyLi
         tblTonKho.setDefaultRenderer(Object.class, centerRenderer);
         tblTonKho.setFocusable(false);
         tblTonKho.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tblTonKho.getColumnModel().getColumn(1).setPreferredWidth(10);
-        tblTonKho.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tblTonKho.getColumnModel().getColumn(1).setPreferredWidth(200);
 
         TableSorter.configureTableColumnSorter(tblTonKho, 0, TableSorter.INTEGER_COMPARATOR);
         TableSorter.configureTableColumnSorter(tblTonKho, 1, TableSorter.INTEGER_COMPARATOR);
@@ -125,31 +123,12 @@ public final class ThongKeTonKho extends JPanel implements ActionListener, KeyLi
         TableSorter.configureTableColumnSorter(tblTonKho, 4, TableSorter.INTEGER_COMPARATOR);
         TableSorter.configureTableColumnSorter(tblTonKho, 5, TableSorter.INTEGER_COMPARATOR);
 
-        TableSorter.configureTableColumnSorter(tblTonKho, 6, TableSorter.INTEGER_COMPARATOR);
 
         nhapxuat_center.add(scrollTblTonKho);
 
-        tblTonKho.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTonKhoClicked(evt);
-            }
-        });
 
         this.add(nhapxuat_left, BorderLayout.WEST);
         this.add(nhapxuat_center, BorderLayout.CENTER);
-    }
-
-    private void tblTonKhoClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
-            if (tblTonKho.getSelectedRow() == -1) {
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm");
-            } else {
-                int masp = (int) tblTonKho.getModel().getValueAt(tblTonKho.getSelectedRow(), 1);
-                ThongKePBSPTonKho sppp = new ThongKePBSPTonKho((JFrame) javax.swing.SwingUtilities.getWindowAncestor(this), "Chi tiết tồn kho từng cấu hình", true, listSp.get(masp));
-            }
-        }
     }
 
     public void Fillter() throws ParseException {
@@ -192,16 +171,12 @@ public final class ThongKeTonKho extends JPanel implements ActionListener, KeyLi
         return true;
     }
 
-    private void loadDataTalbe(HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> list) {
+    private void loadDataTalbe(ArrayList<ThongKeTonKhoDTO> list) {
         tblModel.setRowCount(0);
-        int size = list.size();
-        int index = 1;
-        for (int i : list.keySet()) {
-            int[] soluong = thongkeBUS.getSoluong(list.get(i));
+        for (ThongKeTonKhoDTO i : list) {
             tblModel.addRow(new Object[]{
-                index + 1, i, list.get(i).get(0).getTensanpham(), soluong[0], soluong[1], soluong[2], soluong[3]
+                i.getMasp(), i.getTensanpham(), i.getTondauky(), i.getNhaptrongky(), i.getXuattrongky(), i.getToncuoiky()
             });
-            index++;
         }
     }
 

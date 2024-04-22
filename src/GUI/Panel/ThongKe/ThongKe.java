@@ -6,10 +6,6 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public final class ThongKe extends JPanel {
 
     JTabbedPane tabbedPane;

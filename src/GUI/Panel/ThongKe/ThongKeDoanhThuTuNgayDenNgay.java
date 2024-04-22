@@ -36,7 +36,7 @@ public final class ThongKeDoanhThuTuNgayDenNgay extends JPanel {
 
     PanelBorderRadius pnlChart;
     JPanel pnl_top;
-    HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> listSp;
+    ArrayList<ThongKeTonKhoDTO> listSp;
     ThongKeBUS thongkeBUS;
 
     Chart chart;

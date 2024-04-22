@@ -16,7 +16,7 @@ public class ThongKeBUS {
     ThongKeDAO thongkeDAO = new ThongKeDAO();
     ArrayList<ThongKeKhachHangDTO> tkkh;
     ArrayList<ThongKeNhaCungCapDTO> tkncc;
-    HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> listTonKho;
+    ArrayList<ThongKeTonKhoDTO> listTonKho;
 
     public ThongKeBUS() {
         listTonKho = ThongKeDAO.getThongKeTonKho("",new Date(0), new Date(System.currentTimeMillis()));
@@ -41,12 +41,12 @@ public class ThongKeBUS {
         return this.tkncc;
     }
 
-    public HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> getTonKho() {
+    public ArrayList<ThongKeTonKhoDTO> getTonKho() {
         return this.listTonKho;
     }
 
-    public HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> filterTonKho(String text, Date time_start, Date time_end) {
-        HashMap<Integer, ArrayList<ThongKeTonKhoDTO>> result = ThongKeDAO.getThongKeTonKho(text, time_start, time_end);
+    public ArrayList<ThongKeTonKhoDTO> filterTonKho(String text, Date time_start, Date time_end) {
+        ArrayList<ThongKeTonKhoDTO> result = ThongKeDAO.getThongKeTonKho(text, time_start, time_end);
         return result;
     }
 
