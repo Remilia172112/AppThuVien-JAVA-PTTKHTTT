@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.sql.Timestamp;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -24,11 +25,13 @@ import javax.swing.text.PlainDocument;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 
+
 import BUS.NhaCungCapBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
 import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
+import DTO.PhieuNhapDTO;
 import DTO.SanPhamDTO;
 import GUI.Main;
 import GUI.Component.ButtonCustom;
@@ -36,6 +39,9 @@ import GUI.Component.InputForm;
 import GUI.Component.NumericDocumentFilter;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.SelectForm;
+import GUI.Dialog.QRCode_Dialog;
+import helper.Formater;
+import helper.Validation;
 
 
 public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionListener {
@@ -60,7 +66,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     NhanVienDTO nvDto;
 
     ArrayList<SanPhamDTO> listSP = spBUS.getAll(); // list ben kho 
-    // ArrayList<SanPhamDTO> spdto = new ArrayList<>(); 
+    ArrayList<SanPhamDTO> listSP_tmp = new ArrayList<>(); 
     ArrayList<ChiTietPhieuNhapDTO> chitietphieu;
     HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham = new HashMap<>();
     int maphieunhap;
@@ -320,7 +326,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         contentCenter.add(left, BorderLayout.CENTER);
         contentCenter.add(right, BorderLayout.EAST);
     }
-
+    /********************************************************************************************************************************************************/
     public void actionbtn(String type) { //ẩn hiện button
         boolean val_1 = type.equals("add");
         boolean val_2 = type.equals("update");
@@ -341,6 +347,18 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         this.txtDongia.setText(Integer.toString(sp.getTIENN()));
     }
 
+    // public ArrayList<SanPhamDTO> getChiTietSanPham() {
+    //     // int ctsp = listSP_tmp.get(.getSelectedIndex()).getMSP();
+    //     ArrayList<SanPhamDTO> result = new ArrayList<>();
+
+    //     long isbn = Long.parseLong(txtMaISBN.getText());
+    //     int soluong = Integer.parseInt(txtSoLuongSPnhap.getText());
+    //     for (long i = isbn; i < isbn + soluong; i++) {
+    //         result.add(new SanPhamDTO(Long.toString(i), phienbansp, maphieunhap, 0, 1));
+    //     }
+    //     return result;
+    // }
+
     public void setFormChiTietPhieu(ChiTietPhieuNhapDTO phieu) { //set info vào inputform khi nhan ben tablephieunhap
         SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
 
@@ -351,6 +369,19 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         this.txtDongia.setText(Integer.toString(phieu.getTIEN()));
     }
     
+    public ChiTietPhieuNhapDTO getInfoChiTietPhieu() {
+        int masp = Integer.parseInt(txtMaSp.getText());
+        int gianhap = Integer.parseInt(txtDongia.getText());
+        // ArrayList<SanPhamDTO> ctSP = getChiTietSanPham();
+        // int soluong = ctSP.size();
+        // chitietsanpham.put(masp, getChiTietSanPham());
+        int soluong = Integer.parseInt(txtSoLuongSPnhap.getText());
+        
+        ChiTietPhieuNhapDTO ctphieu = new ChiTietPhieuNhapDTO(maphieunhap, masp, soluong, gianhap, 1);
+        return ctphieu;
+    }
+
+
     public void loadDataTalbeSanPham(ArrayList<SanPhamDTO> result) {
         tblModelSP.setRowCount(0);
         for (SanPhamDTO sp : result) {
@@ -358,10 +389,46 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         }
     }
 
+    public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuNhapDTO> ctPhieu) {
+        tblModel.setRowCount(0);
+        int size = ctPhieu.size();
+        for (int i = 0; i < size; i++) {
+            SanPhamDTO pb = spBUS.getByMaSP(ctPhieu.get(i).getMSP());
+            tblModel.addRow(new Object[]{
+                i + 1, pb.getMSP(), spBUS.getByMaSP(pb.getMSP()).getTEN(), 
+                Formater.FormatVND(ctPhieu.get(i).getTIEN()), ctPhieu.get(i).getSL()
+            });
+        }
+        lbltongtien.setText(Formater.FormatVND(phieunhapBus.getTIEN(ctPhieu)));
+    }
+
+    public boolean validateNhap() {
+        int phuongthuc = 0;
+        if (Validation.isEmpty(txtMaSp.getText())) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm", "Chọn sản phẩm", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else if (Validation.isEmail(txtDongia.getText())) {
+            JOptionPane.showMessageDialog(this, "Giá nhập không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else if (phuongthuc == 0) {
+            if (Validation.isEmpty(txtMaISBN.getText()) || !Validation.isNumber(txtMaISBN.getText()) || txtMaISBN.getText().length() != 13) {
+                JOptionPane.showMessageDialog(this, "Mã isbn bắt đầu không được để rỗng và phải là 13 ký tự số !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            if (Validation.isEmpty(txtSoLuongSPnhap.getText()) || !Validation.isNumber(txtSoLuongSPnhap.getText())) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được để rỗng và phải là số!", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        } 
+    
+        return true;
+    }
+
+
     public void resetForm() {
         this.txtMaSp.setText("");
         this.txtTenSp.setText("");
-        // String[] arr = {"Chọn sản phẩm"};
+        // String[] arr = {"Chọn danh muc"};
         // this.cbxDanhMuc.setArr(arr);
         this.txtDongia.setText("");
         this.txtSoLuongSPnhap.setText("");
@@ -369,22 +436,25 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     }
 
     public ChiTietPhieuNhapDTO checkTonTai() {
-        ChiTietPhieuNhapDTO p = phieunhapBus.findCT(chitietphieu, Integer.parseInt(txtMaSp.getText()) );
+        ChiTietPhieuNhapDTO p = phieunhapBus.findCT(chitietphieu, Integer.parseInt(txtMaSp.getText())); 
+            //kiểm tra coi masp này có trong chitietphieu này chưa 
         return p;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    public void addCtPhieu() { // them sp vao chitietphieu
+        ChiTietPhieuNhapDTO ctphieu = getInfoChiTietPhieu();
+        ChiTietPhieuNhapDTO p = phieunhapBus.findCT(chitietphieu, ctphieu.getMSP());
+        if (p == null) {
+            chitietphieu.add(ctphieu);
+            loadDataTableChiTietPhieu(chitietphieu);
+            resetForm();
+        } else {
+            int input = JOptionPane.showConfirmDialog(this, "Sản phẩm đã tồn tại trong phiếu !\nBạn có muốn chỉnh sửa không ?", "Sản phẩm đã tồn tại !", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (input == 0) {
+               setFormChiTietPhieu(ctphieu);
+            }
+        }
+    }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
@@ -395,7 +465,60 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        // throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+
+        Object source = e.getSource();
+        if (source == btnAddSp && validateNhap()) {
+            addCtPhieu();
+            
+        } else if (source == btnDelete) {
+            int index = tablePhieuNhap.getSelectedRow();
+            chitietphieu.remove(index);
+            actionbtn("add");
+            loadDataTableChiTietPhieu(chitietphieu);
+            resetForm();
+        } else if (source == btnEditSP) {
+            // int mapb = listSP_tmp.get(cbxDanhMuc.cbb.getSelectedIndex()).getMaphienbansp();
+            // chitietsanpham.remove(mapb);
+            // ArrayList<ChiTietSanPhamDTO> ctsp = getChiTietSanPham();
+            // chitietsanpham.put(mapb, ctsp);
+            // int ptnhap = cbxPtNhap.getSelectedIndex();
+            // chitietphieu.get(rowPhieuSelect).setPhuongthucnnhap(ptnhap);
+
+            
+            chitietphieu.get(rowPhieuSelect).setSoluong(ctsp.size());
+            loadDataTableChiTietPhieu(chitietphieu);
+        } else if (source == btnNhapHang) {
+            eventBtnNhapHang();
+        } 
     }
     
+    public void eventBtnNhapHang() {
+        if (chitietphieu.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào trong phiếu !", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn tạo phiếu nhập !", "Xác nhận tạo phiếu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (input == 0) {
+                int mancc = nccBus.getByIndex(cbxNhaCungCap.getSelectedIndex()).getMancc();
+                long now = System.currentTimeMillis();
+                Timestamp currenTime = new Timestamp(now);
+                PhieuNhapDTO pn = new PhieuNhapDTO(mancc, maphieunhap, nvDto.getMNV(), currenTime, phieunhapBus.getTIEN(chitietphieu), 1);
+                boolean result = phieunhapBus.add(pn, chitietphieu, chitietsanpham);
+                if (result) {
+                    JOptionPane.showMessageDialog(this, "Nhập hàng thành công !");
+                    PhieuNhap pnlPhieu = new PhieuNhap(m, nvDto);
+                    m.setPanel(pnlPhieu);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập hàng không thành công !", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
 }
+
+
+/*
+getInfoChiTietPhieu
+getChiTietSanPham
+
+*/
