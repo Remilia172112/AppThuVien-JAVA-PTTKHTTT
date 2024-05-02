@@ -95,7 +95,7 @@ public class login_page extends JFrame implements KeyListener{
         lb2.addMouseListener(new MouseAdapter() {
             @Override   
             public void mouseEntered(MouseEvent e) {
-                lb2.setForeground(new Color(255, 48, 48));
+                lb2.setForeground(new Color(0, 202,232));
             }
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -114,7 +114,7 @@ public class login_page extends JFrame implements KeyListener{
         bt = new JButton("Đăng nhập");
         bt.setPreferredSize(new Dimension(300, 40));
         bt.setLayout(new FlowLayout(1, 0, 15));
-        bt.setBackground(new Color(0,153,255));
+        bt.setBackground(Color.BLACK);
         bt.setFont(new Font("Tahoma", Font.BOLD, 16)); // Adjust font and size
         bt.setForeground(Color.WHITE);
         buttonPanel.add(bt);
@@ -122,7 +122,7 @@ public class login_page extends JFrame implements KeyListener{
         bt.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bt.setBackground(new Color(255, 0, 0));
+                bt.setBackground(new Color(0, 202,232));
             }
             public void mousePressed(MouseEvent evt) {
                 try {
