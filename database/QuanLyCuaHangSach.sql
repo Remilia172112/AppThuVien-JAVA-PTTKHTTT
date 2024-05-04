@@ -212,14 +212,14 @@ VALUES
 
 INSERT INTO `CTQUYEN` (`MNQ`, `MCN`, `HANHDONG`)
 VALUES
+		(1, 'sanpham', 'create'),
+        (1, 'sanpham', 'delete'),
+        (1, 'sanpham', 'update'),
+        (1, 'sanpham', 'view'),
         (1, 'khachhang', 'create'),
         (1, 'khachhang', 'delete'),
         (1, 'khachhang', 'update'),
         (1, 'khachhang', 'view'),
-        (1, 'khuvucsach', 'create'),
-        (1, 'khuvucsach', 'delete'),
-        (1, 'khuvucsach', 'update'),
-        (1, 'khuvucsach', 'view'),
         (1, 'nhacungcap', 'create'),
         (1, 'nhacungcap', 'delete'),
         (1, 'nhacungcap', 'update'),
@@ -236,14 +236,18 @@ VALUES
         (1, 'nhaphang', 'delete'),
         (1, 'nhaphang', 'update'),
         (1, 'nhaphang', 'view'),
+        (1, 'xuathang', 'create'),
+        (1, 'xuathang', 'delete'),
+        (1, 'xuathang', 'update'),
+        (1, 'xuathang', 'view'),
+        (1, 'khuvucsach', 'create'),
+        (1, 'khuvucsach', 'delete'),
+        (1, 'khuvucsach', 'update'),
+        (1, 'khuvucsach', 'view'),
         (1, 'nhomquyen', 'create'),
         (1, 'nhomquyen', 'delete'),
         (1, 'nhomquyen', 'update'),
         (1, 'nhomquyen', 'view'),
-        (1, 'sanpham', 'create'),
-        (1, 'sanpham', 'delete'),
-        (1, 'sanpham', 'update'),
-        (1, 'sanpham', 'view'),
         (1, 'taikhoan', 'create'),
         (1, 'taikhoan', 'delete'),
         (1, 'taikhoan', 'update'),
@@ -256,42 +260,36 @@ VALUES
         (1, 'thongke', 'delete'),
         (1, 'thongke', 'update'),
         (1, 'thongke', 'view'),
-        (1, 'xuathang', 'create'),
-        (1, 'xuathang', 'delete'),
-        (1, 'xuathang', 'update'),
-        (1, 'xuathang', 'view'),
-        (2, 'khuvucsach', 'create'),
-        (2, 'khuvucsach', 'update'),
-        (2, 'khuvucsach', 'view'),
-        (2, 'nhacungcap', 'create'),
-        (2, 'nhacungcap', 'update'),
-        (2, 'nhacungcap', 'view'),
-        (2, 'nhaphang', 'create'),
-        (2, 'nhaphang', 'update'),
-        (2, 'nhaphang', 'view'),
-        (2, 'sanpham', 'create'),
-        (2, 'sanpham', 'update'),
-        (2, 'sanpham', 'view'),
-        (3, 'khachhang', 'create'),
-        (3, 'khachhang', 'update'),
-        (3, 'khachhang', 'view'),
+        (2, 'khachhang', 'create'),
+        (2, 'khachhang', 'delete'),
+        (2, 'khachhang', 'update'),
+        (2, 'khachhang', 'view'),
+        (2, 'xuathang', 'create'),
+        (2, 'xuathang', 'delete'),
+        (2, 'xuathang', 'update'),
+        (2, 'xuathang', 'view'),
+        (3, 'sanpham', 'create'),
+        (3, 'sanpham', 'delete'),
         (3, 'sanpham', 'update'),
         (3, 'sanpham', 'view'),
-        (3, 'xuathang', 'create'),
-        (3, 'xuathang', 'update'),
-        (3, 'xuathang', 'view'),
-        (4, 'khuvucsach', 'view'),
-        (4, 'nhacungcap', 'view'),
-        (5, 'khachhang', 'view'),
-        (5, 'khuvucsach', 'view');   
+        (3, 'nhaphang', 'create'),
+        (3, 'nhaphang', 'delete'),
+        (3, 'nhaphang', 'update'),
+        (3, 'nhaphang', 'view'),
+        (3, 'nhacungcap', 'create'),
+        (3, 'nhacungcap', 'delete'),
+        (3, 'nhacungcap', 'update'),
+        (3, 'nhacungcap', 'view'),
+        (3, 'nhaxuatban', 'create'),
+        (3, 'nhaxuatban', 'delete'),
+        (3, 'nhaxuatban', 'update'),
+        (3, 'nhaxuatban', 'view');
 
 INSERT INTO `NHOMQUYEN` (`TEN`, `TT`)
 VALUES
-        ('Quản lý tổng', 1),
-        ('Nhân viên nhập hàng', 1),
-        ('Nhân viên xuất hàng', 1),
-        ('Thủ kho', 1),
-        ('Nhân viên kiểm kho', 1);
+        ('Quản lý cửa hàng', 1),
+        ('Nhân viên bán hàng', 1),
+        ('Nhân viên quản lý kho', 1);
 
 
 INSERT INTO `NHANVIEN` (`HOTEN`, `GIOITINH`, `NGAYSINH`, `SDT`, `EMAIL`, `TT`)
@@ -305,7 +303,9 @@ VALUES
 
 INSERT INTO `TAIKHOAN` (`MNV`, `TDN`, `MK`, `MNQ`, `TT`, `OTP`)
 VALUES
-        (1, 'admin', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 1, 1, 'null');
+        (1, 'admin', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 1, 1, 'null'),
+        (2, 'NV2', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 2, 1, 'null'),
+        (3, 'NV3', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 3, 1, 'null');
 
 INSERT INTO `KHACHHANG` (`HOTEN`, `DIACHI`, `SDT`, `TT`, `NGAYTHAMGIA`)
 VALUES

@@ -48,7 +48,7 @@ import javax.swing.table.TableColumnModel;
 
 public final class TaoPhieuXuat extends JPanel {
 
-    SanPhamBUS phienBanspBus = new SanPhamBUS();
+    SanPhamBUS spBus = new SanPhamBUS();
     JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
     PanelBorderRadius right, left;
     JPanel pnlBorder1, pnlBorder2, pnlBorder3, pnlBorder4, contentCenter, left_top, main, content_btn;
@@ -228,6 +228,8 @@ public final class TaoPhieuXuat extends JPanel {
         panlePXGX.add(txtGiaXuat);
         panlePXGX.add(txtGiaGiam);
         panlePXGX.add(txtMaGiamGia);
+        panlePXGX.setBackground(Color.white);
+
 
         JPanel info2 = new JPanel(new GridLayout(1, 2));
         info2.setPreferredSize(new Dimension(100, 110));
@@ -575,7 +577,7 @@ public final class TaoPhieuXuat extends JPanel {
         int size = ctPhieu.size();
         sum = 0;
         for (int i = 0; i < size; i++) {
-            SanPhamDTO phienban = phienBanspBus.getByMaSP(ctPhieu.get(i).getMSP());
+            SanPhamDTO phienban = spBus.getByMaSP(ctPhieu.get(i).getMSP());
             sum += ctPhieu.get(i).getTIEN() * ctPhieu.get(i).getSL();
             tblModel.addRow(new Object[]{
                 i + 1, phienban.getMSP(), spBUS.getByMaSP(phienban.getMSP()).getTEN(), 
@@ -589,7 +591,7 @@ public final class TaoPhieuXuat extends JPanel {
         this.txtMaSp.setText(Integer.toString(sp.getMSP()));
         this.txtTenSp.setText(sp.getTEN());
         // this.textAreaImei.setText("");
-        ch = phienBanspBus.getAll();
+        ch = spBus.getAll();
         // ch = phienBanspBus.getAll(sp.getMSP(), "Tất cả");
         int size = ch.size();
         // String[] arr = new String[size];
