@@ -21,7 +21,7 @@ public class ChiTietMaKhuyenMaiDAO implements DAOinterface<ChiTietMaKhuyenMaiDTO
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `CTCTMAKHUYENMAI`(`MKM`, `MSP`, `PTG`, `TT`) VALUES (?,?,?,1)";
+            String sql = "INSERT INTO `CTMAKHUYENMAI`(`MKM`, `MSP`, `PTG`) VALUES (?,?,?)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t.getMKM());
             pst.setInt(2, t.getMSP());
@@ -30,6 +30,25 @@ public class ChiTietMaKhuyenMaiDAO implements DAOinterface<ChiTietMaKhuyenMaiDTO
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(ChiTietMaKhuyenMaiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public int insert(ArrayList<ChiTietMaKhuyenMaiDTO> t) {
+        int result = 0;
+        for (int i = 0; i < t.size(); i++) {
+            try {
+                Connection con = (Connection) JDBCUtil.getConnection();
+                String sql = "INSERT INTO `CTMAKHUYENMAI`(`MKM`, `MSP`, `PTG`) VALUES (?,?,?)";
+                PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+                pst.setString(1, t.get(i).getMKM());
+                pst.setInt(2, t.get(i).getMSP());
+                pst.setInt(3, t.get(i).getPTG());
+                result = pst.executeUpdate();
+                JDBCUtil.closeConnection(con);
+            } catch (SQLException ex) {
+                Logger.getLogger(ChiTietPhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return result;
     }
@@ -58,7 +77,7 @@ public class ChiTietMaKhuyenMaiDAO implements DAOinterface<ChiTietMaKhuyenMaiDTO
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "UPDATE  `CTMAKHUYENMAI` SET TT = 0 WHERE `MKM` = ?";
+            String sql = "DELETE FROM `CTMAKHUYENMAI` WHERE `MKM` = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
@@ -74,7 +93,7 @@ public class ChiTietMaKhuyenMaiDAO implements DAOinterface<ChiTietMaKhuyenMaiDTO
         ArrayList<ChiTietMaKhuyenMaiDTO> result = new ArrayList<ChiTietMaKhuyenMaiDTO>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM CTMAKHUYENMAI WHERE TT=1";
+            String sql = "SELECT * FROM CTMAKHUYENMAI";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){
@@ -91,6 +110,27 @@ public class ChiTietMaKhuyenMaiDAO implements DAOinterface<ChiTietMaKhuyenMaiDTO
         return result;
     }
 
+    public ArrayList<ChiTietMaKhuyenMaiDTO> selectAll(String t) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> result = new ArrayList<>();
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "SELECT * FROM CTMAKHUYENMAI WHERE MKM = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                String MKM = rs.getString("MKM");
+                int MSP = rs.getInt("MSP");
+                int PTG = rs.getInt("PTG");
+                ChiTietMaKhuyenMaiDTO kh = new ChiTietMaKhuyenMaiDTO(MKM, MSP, PTG);
+                result.add(kh);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return result;
+    }
     @Override
     public ChiTietMaKhuyenMaiDTO selectById(String t) {
         ChiTietMaKhuyenMaiDTO result = null;

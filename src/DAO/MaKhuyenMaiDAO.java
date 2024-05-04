@@ -119,6 +119,22 @@ public class MaKhuyenMaiDAO implements DAOinterface<MaKhuyenMaiDTO> {
         return result;
     }
 
+    public int cancelMKM(String mkm){
+        int result = 0;
+        ChiTietMaKhuyenMaiDAO.getInstance().delete(mkm);
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "DELETE FROM MAKHUYENMAI WHERE MKM = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, mkm);
+            result = pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(MaKhuyenMaiDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
     @Override
     public int getAutoIncrement() {
         int result = -1;
