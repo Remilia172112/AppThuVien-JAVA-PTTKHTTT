@@ -1,7 +1,6 @@
 package GUI.Panel;
 
 import java.util.ArrayList;
-import java.util.Vector;
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.sql.Timestamp;
@@ -28,10 +27,7 @@ import BUS.SanPhamBUS;
 import DAO.NhanVienDAO;
 import DAO.PhieuXuatDAO;
 import DTO.ChiTietPhieuDTO;
-import DTO.ChiTietPhieuNhapDTO;
-import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
-import DTO.PhieuNhapDTO;
 import DTO.PhieuXuatDTO;
 import DTO.SanPhamDTO;
 import DTO.TaiKhoanDTO;
@@ -273,7 +269,7 @@ public final class TaoPhieuXuat extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (checkInfo()) {
-
+                    addCtPhieu();
                     //thông báo dạng popup dùng của Notification trong Compoment của Gui
                     Notification thongbaoNoi = new Notification(mainChinh,  Notification.Type.SUCCESS, Notification.Location.TOP_CENTER, "Thêm sản phẩm thành công!");
                     thongbaoNoi.showNotification();
@@ -483,10 +479,13 @@ public final class TaoPhieuXuat extends JPanel {
     public boolean checkInfo() {
         boolean check = true;
         if (txtMaSp.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm");
+            JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm","Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             check = false;
         } else if (txtGiaXuat.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Giá nhập không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+            check = false;
+        } else if (txtSoLuongSPnhap.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Số lượng không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             check = false;
         }
         return check;
