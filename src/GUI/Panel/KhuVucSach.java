@@ -62,6 +62,7 @@ public class KhuVucSach extends JPanel implements ActionListener, ItemListener {
 
     private void initComponent() {
         tableKhuvuc = new JTable();
+        tableKhuvuc.setBackground(new Color(0xA1D6E2));
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"Mã khu vực", "Tên khu vực", "Ghi chú"};

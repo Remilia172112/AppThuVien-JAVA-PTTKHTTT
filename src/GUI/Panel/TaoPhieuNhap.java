@@ -92,6 +92,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         
         //Phieu Nhap
         tablePhieuNhap = new JTable();
+        tablePhieuNhap.setBackground(new Color(0xA1D6E2));
         scrollTablePhieuNhap = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"STT", "Mã SP", "Tên sản phẩm", "Đơn giá", "Số lượng"};
