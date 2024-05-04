@@ -62,7 +62,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
     NhanVienBUS nvBUS = new NhanVienBUS();
     ArrayList<PhieuNhapDTO> listPhieu;
 
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
 
     public PhieuNhap(Main m, NhanVienDTO nv) {
         this.m = m;

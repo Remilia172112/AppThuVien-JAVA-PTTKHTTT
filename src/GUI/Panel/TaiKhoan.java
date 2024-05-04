@@ -50,7 +50,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
     MainFunction mainFunction;
     IntegratedSearch search;
     public JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
     DefaultTableModel tblModel;
     public TaiKhoanBUS taiKhoanBus = new TaiKhoanBUS();
     ArrayList<TaiKhoanDTO> listTk = taiKhoanBus.getTaiKhoanAll();

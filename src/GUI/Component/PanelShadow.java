@@ -18,7 +18,7 @@ public class PanelShadow extends JPanel {
 
     Color MainColor = new Color(255, 255, 255);
     Color FontColor = new Color(0, 151, 178);
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(0x4F6457);
     Color HowerFontColor = new Color(225, 230, 232);
 
     public PanelShadow() {
@@ -27,7 +27,7 @@ public class PanelShadow extends JPanel {
 
     public PanelShadow(String linkIcon, String title, String content) {
         this.setPreferredSize(new Dimension(450, 300));
-        this.setBackground(Color.WHITE);
+        this.setBackground(new Color(0xACD0C0));
         this.putClientProperty( FlatClientProperties.STYLE, "arc: 30" );
         this.setLayout(new FlowLayout(0 ,20 , 10));
         this.setBorder(new EmptyBorder(0,10,50,0));

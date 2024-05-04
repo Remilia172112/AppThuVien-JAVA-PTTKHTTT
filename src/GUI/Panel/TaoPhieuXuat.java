@@ -43,7 +43,7 @@ public final class TaoPhieuXuat extends JPanel {
     InputForm txtMaphieu, txtNhanVien, txtMaSp, txtTenSp, txtMaGiamGia, txtGiaGiam, txtSoLuongSPnhap;
     // SelectForm cbxDanhMuc; ko dùng nữa
     JTextField txtTimKiem;
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
     
     int sum; //do ctpxuất ko có sẵn tính tiền 
     int maphieu;

@@ -20,7 +20,7 @@ public class TrangChu extends JPanel {
     };
     Color MainColor = new Color(193,237,220);
     Color FontColor = new Color(96, 125, 139);
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(0x4F6457);
     Color HowerFontColor = new Color(225, 230, 232);
 
     private void initComponent() {

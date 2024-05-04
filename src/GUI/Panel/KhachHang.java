@@ -49,7 +49,7 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
     public ArrayList<KhachHangDTO> listkh = khachhangBUS.getAll();
     KhachHangDTO kh = new KhachHangDTO();
     Main m;
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
 
     private void initComponent() {
         this.setBackground(BackgroundColor);

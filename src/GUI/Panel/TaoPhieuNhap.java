@@ -58,7 +58,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     JLabel  lbltongtien;
 
     Main m;
-    Color BackgroundColor = new Color(240,247,250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
 
     SanPhamBUS spBUS = new SanPhamBUS();
     NhaCungCapBUS nccBus = new NhaCungCapBUS();
