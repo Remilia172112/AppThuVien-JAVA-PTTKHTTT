@@ -29,7 +29,6 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import BUS.NhaCungCapBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
-import DAO.SanPhamDAO;
 import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuNhapDTO;
@@ -66,7 +65,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     NhanVienDTO nvDto;
 
     ArrayList<SanPhamDTO> listSP = spBUS.getAll(); // list ben kho 
-    ArrayList<SanPhamDTO> listSP_tmp = new ArrayList<>(); 
+    // ArrayList<SanPhamDTO> listSP_tmp = new ArrayList<>(); 
     ArrayList<ChiTietPhieuNhapDTO> chitietphieu;
     HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham = new HashMap<>();
     int maphieunhap;
@@ -157,24 +156,25 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
             }
         });
 
-
-        left = new PanelBorderRadius();
-        left.setLayout(new BorderLayout(0, 5));
-        left.setBackground(Color.white);
-
-        //content_CENTER (content_top + content_bottom) }-> left_top
+        //content_CENTER (chứa hết tất cả left+right) 
         contentCenter = new JPanel();
         contentCenter.setPreferredSize(new Dimension(1200, 600));
         contentCenter.setBackground(BackgroundColor);
         contentCenter.setLayout(new BorderLayout(5, 5));
         this.add(contentCenter, BorderLayout.CENTER);
 
-        left_top = new JPanel(); // Chứa tất cả phần ở phía trái trên cùng
+        //LEFT
+        left = new PanelBorderRadius();
+        left.setLayout(new BorderLayout(0, 5));
+        left.setBackground(Color.white);
+
+        
+        left_top = new JPanel(); // Chứa tất cả phần ở phía trái trên cùng, chứa {content_top, content_btn}
         left_top.setLayout(new BorderLayout());
         left_top.setBorder(new EmptyBorder(5, 5, 10, 10));
         left_top.setOpaque(false);
 
-        JPanel content_top, content_left, content_right, content_right_top;
+        JPanel content_top, content_left, content_right, content_right_top; //content_top {content_left + content_right}
         content_top = new JPanel(new GridLayout(1, 2, 5, 5));
         content_top.setOpaque(false);
 
@@ -184,7 +184,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
 
         txtTimKiem = new JTextField();
         txtTimKiem.setPreferredSize(new Dimension(100, 40));
-        txtTimKiem.putClientProperty("JTextField.placeholderText", "Tên sản phẩm, mã sản phẩm ...");
+        txtTimKiem.putClientProperty("JTextField.placeholderText", "Tên sản phẩm, mã sản phẩm, ...");
         txtTimKiem.putClientProperty("JTextField.showClearButton", true);
         txtTimKiem.putClientProperty("JTextField.leadingIcon", new FlatSVGIcon("./icon/search.svg"));
 
@@ -211,6 +211,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         txtMaSp.setEditable(false);
         txtMaISBN = new InputForm("Mã ISBN");
         txtMaISBN.setEditable(false);
+        // cái này dùng để nhập isbn dô khung txtMaISBN có thể search đc sp, nhưng disable ko dùng ròi
         txtMaISBN.getTxtForm().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -219,6 +220,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
             //thêm load lại inputform
             }
         });
+
         txtDongia = new InputForm("Giá nhập");
         PlainDocument dongia = (PlainDocument) txtDongia.getTxtForm().getDocument();
         dongia.setDocumentFilter((new NumericDocumentFilter()));   //chỉ cho nhập số
@@ -412,7 +414,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         if (Validation.isEmpty(txtMaSp.getText())) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm", "Chọn sản phẩm", JOptionPane.WARNING_MESSAGE);
             return false;
-        } else if (Validation.isEmail(txtDongia.getText())) {
+        } else if (Validation.isEmpty(txtDongia.getText())) {
             JOptionPane.showMessageDialog(this, "Giá nhập không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             return false;
         } else if (phuongthuc == 0) {
@@ -483,15 +485,8 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
             loadDataTableChiTietPhieu(chitietphieu);
             resetForm();
         } else if (source == btnEditSP) {
-            // int mapb = listSP_tmp.get(cbxDanhMuc.cbb.getSelectedIndex()).getMaphienbansp();
-            // chitietsanpham.remove(mapb);
-            // ArrayList<ChiTietSanPhamDTO> ctsp = getChiTietSanPham();
-            // chitietsanpham.put(mapb, ctsp);
-            // int ptnhap = cbxPtNhap.getSelectedIndex();
-            // chitietphieu.get(rowPhieuSelect).setPhuongthucnnhap(ptnhap);
-
-            
             chitietphieu.get(rowPhieuSelect).setSL(Integer.parseInt(txtSoLuongSPnhap.getText()));
+            chitietphieu.get(rowPhieuSelect).setTIEN(Integer.parseInt(txtDongia.getText()));
             loadDataTableChiTietPhieu(chitietphieu);
         } else if (source == btnNhapHang) {
             eventBtnNhapHang();

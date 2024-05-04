@@ -4,11 +4,16 @@ import DAO.ChiTietPhieuXuatDAO;
 // import DAO.SanPhamDAO;
 import DAO.PhieuXuatDAO;
 import DTO.ChiTietPhieuDTO;
+import DTO.ChiTietPhieuNhapDTO;
+import DTO.PhieuNhapDTO;
 import DTO.PhieuXuatDTO;
+import DTO.SanPhamDTO;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class PhieuXuatBUS {
@@ -58,6 +63,27 @@ public class PhieuXuatBUS {
             if(i.getMP() > s) s = i.getMP();
         }
         return s;
+    }
+    //moi them, nó tương tự insert nhưng có check
+    // public boolean add(PhieuXuatDTO phieu, ArrayList<ChiTietPhieuDTO> ctPhieu, HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham) {
+    //     boolean check = phieuXuatDAO.insert(phieu) != 0;
+    //     if (check) {
+    //         check = chiTietPhieuXuatDAO.insert(ctPhieu) != 0;
+    //     }
+    //     return check;
+    // }
+
+    public ChiTietPhieuDTO findCT(ArrayList<ChiTietPhieuDTO> ctphieu, int masp) {
+        ChiTietPhieuDTO p = null;
+        int i = 0;
+        while (i < ctphieu.size() && p == null) {
+            if (ctphieu.get(i).getMSP() == masp) {
+                p = ctphieu.get(i);
+            } else {
+                i++;
+            }
+        }
+        return p;
     }
 
     public ArrayList<PhieuXuatDTO> fillerPhieuXuat(int type, String input, int makh, int manv, Date time_s, Date time_e, String price_minnn, String price_maxxx) {
