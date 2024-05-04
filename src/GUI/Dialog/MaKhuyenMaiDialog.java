@@ -1,17 +1,16 @@
 package GUI.Dialog;
 
-import DAO.MaKhuyenMaiDAO;
+import BUS.SanPhamBUS;
+import BUS.MaKhuyenMaiBUS;
+import DAO.NhanVienDAO;
+import DAO.SanPhamDAO;
 import DTO.ChiTietMaKhuyenMaiDTO;
-import DTO.ChiTietPhieuNhapDTO;
-import DTO.MaKhuyenMaiDTO;
 import DTO.SanPhamDTO;
+import DTO.MaKhuyenMaiDTO;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
-import GUI.Component.InputDate;
 import GUI.Component.InputForm;
-import GUI.Component.PanelBorderRadius;
-import GUI.Panel.MaKhuyenMai;
-import helper.Validation;
+import helper.Formater;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,19 +18,10 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -39,162 +29,120 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import BUS.SanPhamBUS;
+public final class MaKhuyenMaiDialog extends JDialog implements ActionListener {
 
-public final class MaKhuyenMaiDialog extends JDialog implements ItemListener, ActionListener {
+    HeaderTitle titlePage;
+    JPanel pnmain, pnmain_top, pnmain_bottom, pnmain_btn; //bỏ pnmain_bottom_right, pnmain_bottom_left 
+    InputForm txtMaPhieu, txtNhanVien, txtThoiGianBD, txtThoiGianKT;
+    DefaultTableModel tblModel;
+    JTable table, tblImei;
+    JScrollPane scrollTable;
 
-    PanelBorderRadius left, right;
-    private MaKhuyenMai jpkvk;
-    private HeaderTitle titlePage;
-    JTable tableSanPham;
-    JScrollPane scrollTableSanPham;
-    DefaultTableModel tblModelSP;
-    private JPanel pnmain, pnbottom;
-    private ButtonCustom btnThem, btnCapNhat, btnHuyBo;
-    private InputForm makhuyenmai;
-    InputDate dateStart, dateEnd;
-    private MaKhuyenMaiDTO mkm;
+    MaKhuyenMaiDTO makhuyenmai;
+    SanPhamBUS spBus = new SanPhamBUS();
+    MaKhuyenMaiBUS makhuyenmaiBus;
 
-    SanPhamBUS spBUS = new SanPhamBUS();
-    ArrayList<SanPhamDTO> listSP = spBUS.getAll(); // list ben kho 
-    ArrayList<SanPhamDTO> listSP_tmp = new ArrayList<>(); 
+    ButtonCustom btnHuyBo;
+
     ArrayList<ChiTietMaKhuyenMaiDTO> chitietmkm;
 
-    public MaKhuyenMaiDialog(MaKhuyenMai jpkvk, JFrame owner, String title, boolean modal, String type) {
+    public MaKhuyenMaiDialog(JFrame owner, String title, boolean modal, MaKhuyenMaiDTO phieunhapDTO) {
         super(owner, title, modal);
-        this.jpkvk = jpkvk;
-        initComponents(title, type);
-        loadDataTalbeSanPham(listSP);
+        this.makhuyenmai = phieunhapDTO;
+        makhuyenmaiBus = new MaKhuyenMaiBUS();
+        chitietmkm = makhuyenmaiBus.getChiTietMKM(phieunhapDTO.getMKM());
+        // chitietsanpham = ctspBus.getByMaSP(phieunhapDTO.getMP());
+        initComponent(title);
+        initPhieuNhap();
+        loadDataTable(chitietmkm);
+        this.setVisible(true);
     }
 
-    public MaKhuyenMaiDialog(MaKhuyenMai jpkvk, JFrame owner, String title, boolean modal, String type, MaKhuyenMaiDTO mkm) {
-        super(owner, title, modal);
-        this.jpkvk = jpkvk;
-        this.mkm = mkm;
-        initComponents(title, type);
-        loadDataTalbeSanPham(listSP);
+    public void initPhieuNhap() {
+        txtMaPhieu.setText(this.makhuyenmai.getMKM());
+        txtNhanVien.setText(NhanVienDAO.getInstance().selectById(makhuyenmai.getMNV() + "").getHOTEN());
+        txtThoiGianBD.setText(Formater.FormatTime(makhuyenmai.getTGBD()));
+        txtThoiGianKT.setText(Formater.FormatTime(makhuyenmai.getTGKT()));
     }
 
-    public void initComponents(String title, String type) {
-        this.setSize(new Dimension(1000, 800));
+
+    public void loadDataTable(ArrayList<ChiTietMaKhuyenMaiDTO> ctMkm) {
+        tblModel.setRowCount(0);
+        for (int i = 0; i < ctMkm.size(); i++) {
+            SanPhamDTO sp = spBus.getByMaSP(ctMkm.get(i).getMSP());
+            tblModel.addRow(new Object[]{
+                i + 1, sp.getMSP(), SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTEN(), 
+                ctMkm.get(i).getPTG() + "%"
+            });
+        }
+    }
+
+
+    public void initComponent(String title) {
+        this.setSize(new Dimension(1100, 500));
         this.setLayout(new BorderLayout(0, 0));
         titlePage = new HeaderTitle(title.toUpperCase());
-        pnmain = new JPanel(new GridLayout(2, 2, 20, 0));
-        pnmain.setBackground(Color.white);
-        makhuyenmai = new InputForm("Mã khuyến mãi");
-        dateStart = new InputDate("Từ ngày");
-        dateEnd = new InputDate("Đến ngày");
+
+        pnmain = new JPanel(new BorderLayout());
+
+        pnmain_top = new JPanel(new GridLayout(1, 4));
+        txtMaPhieu = new InputForm("Mã phiếu");
+        txtNhanVien = new InputForm("Nhân viên nhập");
+        txtThoiGianBD = new InputForm("Thời gian bắt đầu");
+        txtThoiGianKT = new InputForm("Thời gian kết thúc");
+
+        txtMaPhieu.setEditable(false);
+        txtNhanVien.setEditable(false);
+        txtThoiGianBD.setEditable(false);
+        txtThoiGianKT.setEditable(false);
+
+        pnmain_top.add(txtMaPhieu);
+        pnmain_top.add(txtNhanVien);
+        pnmain_top.add(txtThoiGianBD);
+        pnmain_top.add(txtThoiGianKT);
+
+        pnmain_bottom = new JPanel(new GridLayout(1, 5));
+        pnmain_bottom.setBorder(new EmptyBorder(5, 5, 5, 5));
+        pnmain_bottom.setBackground(Color.WHITE);
+
+        // pnmain_bottom_left = new JPanel(new GridLayout(1, 1));
+        table = new JTable();
+        scrollTable = new JScrollPane();
+        tblModel = new DefaultTableModel();
+        String[] header = new String[]{"STT", "Mã SP", "Tên SP", "Phần trăm giảm"};
+        tblModel.setColumnIdentifiers(header);
+        table.setModel(tblModel);
+        table.setFocusable(false);
+        scrollTable.setViewportView(table);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
+        table.getColumnModel().getColumn(2).setPreferredWidth(200);
+    
+        pnmain_bottom.add(scrollTable);
 
 
-        pnmain.add(makhuyenmai);
-        pnmain.add(dateStart);
-        pnmain.add(dateEnd);
-
-        pnbottom = new JPanel(new FlowLayout());
-        pnbottom.setBorder(new EmptyBorder(10, 0, 10, 0));
-        pnbottom.setBackground(Color.white);
-        btnThem = new ButtonCustom("Thêm mã khuyến mãi", "success", 14);
-        btnCapNhat = new ButtonCustom("Lưu thông tin", "success", 14);
+        pnmain_btn = new JPanel(new FlowLayout());
+        pnmain_btn.setBorder(new EmptyBorder(10, 0, 10, 0));
+        pnmain_btn.setBackground(Color.white);
         btnHuyBo = new ButtonCustom("Huỷ bỏ", "danger", 14);
-
-        //Add MouseListener btn
-        btnThem.addActionListener(this);
-        btnCapNhat.addActionListener(this);
         btnHuyBo.addActionListener(this);
+        pnmain_btn.add(btnHuyBo);
 
-        switch (type) {
-            case "create" -> pnbottom.add(btnThem);
-            case "update" -> {
-                pnbottom.add(btnCapNhat);
-                initInfo();
-            }
-            default -> throw new AssertionError();
-        }
-        pnbottom.add(btnHuyBo);
+        pnmain.add(pnmain_top, BorderLayout.NORTH);
+        pnmain.add(pnmain_bottom, BorderLayout.CENTER);
+        pnmain.add(pnmain_btn, BorderLayout.SOUTH);
+
         this.add(titlePage, BorderLayout.NORTH);
         this.add(pnmain, BorderLayout.CENTER);
-        this.add(pnbottom, BorderLayout.SOUTH);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); //phương thức để định dạng văn bản, màu sắc, căn chỉnh và các thuộc tính hiển thị khác cho các ô trong bản
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tableSanPham = new JTable();
-        scrollTableSanPham = new JScrollPane();
-        tblModelSP = new DefaultTableModel();
-        String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn"};
-        tblModelSP.setColumnIdentifiers(headerSP);
-        tableSanPham.setModel(tblModelSP);
-        scrollTableSanPham.setViewportView(tableSanPham);
-        tableSanPham.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tableSanPham.getColumnModel().getColumn(1).setPreferredWidth(300);
-        tableSanPham.setDefaultEditor(Object.class, null);
-        tableSanPham.setFocusable(false);
-        scrollTableSanPham.setViewportView(tableSanPham);
-
-        tableSanPham.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                int index = tableSanPham.getSelectedRow();
-                if (index != -1) {
-                    
-                }
-            }
-        });
-        left = new PanelBorderRadius();
-        left.setLayout(new BorderLayout(0, 5));
-        left.setBackground(Color.white);
-
-        left.add(scrollTableSanPham, BorderLayout.CENTER);
-
-        pnmain.add(left);
-
-
-    }
-
-    public void initInfo() {
-        makhuyenmai.setText(mkm.getMKM());
-    }
-
-       boolean Validation(){
-        if (Validation.isEmpty(makhuyenmai.getText())) {
-            JOptionPane.showMessageDialog(this, "Tên khu vực sách không được rỗng", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
-            return false;
-         }
-          return true;
-    }
-
-    public void loadDataTalbeSanPham(ArrayList<SanPhamDTO> result) {
-        tblModelSP.setRowCount(0);
-        for (SanPhamDTO sp : result) {
-            tblModelSP.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL()});
-        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnThem && Validation()) {
-            int makhuvuc = MaKhuyenMaiDAO.getInstance().getAutoIncrement();
-            String tenkhuvuc = this.makhuyenmai.getText();
-            String ghichu = this.ghichu.getText();
-            jpkvk.kvkBUS.add(new MaKhuyenMaiDTO(makhuvuc, tenkhuvuc, ghichu));
-            jpkvk.loadDataTable(jpkvk.listKVK);
-            dispose();
-        } else if (e.getSource() == btnHuyBo) {
-            dispose();
-        } else if (e.getSource() == btnCapNhat && Validation()) {
-            String tenkhuvuc = this.makhuyenmai.getText();
-            String ghichu = this.ghichu.getText();
-            jpkvk.kvkBUS.update(new MaKhuyenMaiDTO(mkm.getMakhuvuc(), tenkhuvuc, ghichu));
-            jpkvk.loadDataTable(jpkvk.listKVK);
+        Object source = e.getSource();
+        if (source == btnHuyBo) {
             dispose();
         }
     }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'itemStateChanged'");
-    }
-
 }

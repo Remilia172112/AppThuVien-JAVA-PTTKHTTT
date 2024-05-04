@@ -1,13 +1,16 @@
 package BUS;
 
 import DAO.MaKhuyenMaiDAO;
+import DAO.ChiTietMaKhuyenMaiDAO;
 import DTO.MaKhuyenMaiDTO;
 import DTO.ChiTietMaKhuyenMaiDTO;
+
 import java.util.ArrayList;
 
 public class MaKhuyenMaiBUS {
 
     private final MaKhuyenMaiDAO mkmDAO = new MaKhuyenMaiDAO();
+    private final ChiTietMaKhuyenMaiDAO ctmkmDAO = new ChiTietMaKhuyenMaiDAO();
     public ArrayList<MaKhuyenMaiDTO> listMKM = new ArrayList<>();
     public ArrayList<ChiTietMaKhuyenMaiDTO> listctMKM = new ArrayList<>();
 
@@ -16,6 +19,7 @@ public class MaKhuyenMaiBUS {
     }
 
     public ArrayList<MaKhuyenMaiDTO> getAll() {
+        listMKM = mkmDAO.selectAll();
         return this.listMKM;
     }
 
@@ -40,12 +44,22 @@ public class MaKhuyenMaiBUS {
         return vitri;
     }
 
+    public ArrayList<ChiTietMaKhuyenMaiDTO> getChiTietMKM(String mkm) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> arr = ctmkmDAO.selectAll(mkm);
+        return arr;
+    }
+
     public Boolean add(MaKhuyenMaiDTO kh) {
         boolean check = mkmDAO.insert(kh) != 0;
         if (check) {
             this.listMKM.add(kh);
         }
         return check;
+    }
+
+    public Boolean checkTT(String kh) {
+        for(MaKhuyenMaiDTO i : listMKM) if(i.getMKM().equals(kh)) return false;
+        return true;
     }
 
     public Boolean delete(MaKhuyenMaiDTO kh) {
@@ -79,4 +93,28 @@ public class MaKhuyenMaiBUS {
         return mkmDAO.selectById(makh + "");
     }
 
+    public ChiTietMaKhuyenMaiDTO findCT(ArrayList<ChiTietMaKhuyenMaiDTO> ctphieu, int masp) {
+        ChiTietMaKhuyenMaiDTO p = null;
+        int i = 0;
+        while (i < ctphieu.size() && p == null) {
+            if (ctphieu.get(i).getMSP() == masp) {
+                p = ctphieu.get(i);
+            } else {
+                i++;
+            }
+        }
+        return p;
+    }
+
+    public boolean add(MaKhuyenMaiDTO phieu, ArrayList<ChiTietMaKhuyenMaiDTO> ctPhieu) {
+        boolean check = mkmDAO.insert(phieu) != 0;
+        if (check) {
+            check = ctmkmDAO.insert(ctPhieu) != 0;
+        }
+        return check;
+    }
+
+    public int cancelMKM(String makm) {
+        return mkmDAO.cancelMKM(makm);
+    }
 }

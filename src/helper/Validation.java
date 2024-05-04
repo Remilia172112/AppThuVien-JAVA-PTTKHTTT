@@ -1,5 +1,6 @@
 package helper;
 
+import java.sql.Date;
 import java.util.regex.Pattern;
 
 public class Validation {
@@ -9,6 +10,13 @@ public class Validation {
             return true;
         }
         return input.equals("");
+    }
+
+    public static Boolean isEmpty(Date input) {
+        if (input == null) {
+            return true;
+        }
+        return false;
     }
 
     public static Boolean isEmail(String email) {
