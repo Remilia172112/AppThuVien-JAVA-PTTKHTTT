@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
@@ -299,20 +298,17 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
                 if (input == 0) {
                     PhieuNhapDTO pn = listPhieu.get(index);
                     System.out.println(pn);
-                    JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
-                    loadDataTalbe(phieunhapBUS.getAll());
-                    
-                    // if (!phieunhapBUS.checkCancelPn(pn.getMaphieu())) {
-                    //     JOptionPane.showMessageDialog(null, "Sản phẩm trong phiếu này đã được xuất đi không thể hủy phiếu này!");
-                    // } else {
-                    //     int c = phieunhapBUS.cancelPhieuNhap(pn.getMaphieu());
-                    //     if (c == 0) {
-                    //         JOptionPane.showMessageDialog(null, "Hủy phiếu không thành công!");
-                    //     } else {
-                    //         JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
-                    //         loadDataTalbe(phieunhapBUS.getAll());
-                    //     }
-                    // }
+                    if (!phieunhapBUS.checkCancelPn(pn.getMP())) {
+                        JOptionPane.showMessageDialog(null, "Không đủ số lượng để hủy phiếu!");
+                    } else {
+                        int c = phieunhapBUS.cancelPhieuNhap(pn.getMP());
+                        if (c == 0) {
+                            JOptionPane.showMessageDialog(null, "Hủy phiếu không thành công!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Hủy phiếu thành công!");
+                            loadDataTalbe(phieunhapBUS.getAll());
+                        }
+                    }
                     
                 }
             }

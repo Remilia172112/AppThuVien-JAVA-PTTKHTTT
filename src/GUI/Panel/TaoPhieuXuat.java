@@ -75,6 +75,7 @@ public final class TaoPhieuXuat extends JPanel {
         this.mainChinh = mainChinh;
         this.tk = tk;
         this.type = type;
+        maphieu = phieuXuatBUS.getMPMAX() + 1;
         initComponent(type);
         loadDataTalbeSanPham(listSP);
     }

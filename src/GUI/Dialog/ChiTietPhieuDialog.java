@@ -43,14 +43,14 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
     HeaderTitle titlePage;
     JPanel pnmain, pnmain_top, pnmain_bottom, pnmain_btn; //bỏ pnmain_bottom_right, pnmain_bottom_left 
     InputForm txtMaPhieu, txtNhanVien, txtNhaCungCap, txtThoiGian;
-    DefaultTableModel tblModel, tblModelImei;
+    DefaultTableModel tblModel;
     JTable table, tblImei;
-    JScrollPane scrollTable, scrollTableImei;
+    JScrollPane scrollTable;
 
     PhieuNhapDTO phieunhap;
     PhieuXuatDTO phieuxuat;
     // PhienBanSanPhamBUS phienbanBus = new PhienBanSanPhamBUS();
-    SanPhamBUS ctspBus = new SanPhamBUS();
+    SanPhamBUS spBus = new SanPhamBUS();
     PhieuNhapBUS phieunhapBus;
     PhieuXuatBUS phieuxuatBus;
 
@@ -101,9 +101,8 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
 
     public void loadDataTableChiTietPhieu(ArrayList<ChiTietPhieuDTO> ctPhieu) {
         tblModel.setRowCount(0);
-        int size = ctPhieu.size();
-        for (int i = 0; i < size; i++) {
-            SanPhamDTO sp = ctspBus.getByMaSP(ctPhieu.get(i).getMP());
+        for (int i = 0; i < ctPhieu.size(); i++) {
+            SanPhamDTO sp = spBus.getByMaSP(ctPhieu.get(i).getMSP());
             tblModel.addRow(new Object[]{
                 i + 1, sp.getMSP(), SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTEN(), 
                 Formater.FormatVND(SanPhamDAO.getInstance().selectById(sp.getMSP()+"").getTIENN()), ctPhieu.get(i).getSL()
@@ -153,7 +152,7 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         pnmain_top.add(txtThoiGian);
 
         pnmain_bottom = new JPanel(new GridLayout(1, 5));
-        // pnmain_bottom.setBorder(new EmptyBorder(5, 5, 5, 5));
+        pnmain_bottom.setBorder(new EmptyBorder(5, 5, 5, 5));
         pnmain_bottom.setBackground(Color.WHITE);
 
         // pnmain_bottom_left = new JPanel(new GridLayout(1, 1));
@@ -161,23 +160,15 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         scrollTable = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"STT", "Mã SP", "Tên SP", "Đơn giá", "Số lượng"};
-        // tblModel.setColumnIdentifiers(header);
-        // table.setModel(tblModel);
-        // table.setFocusable(false);
-        // scrollTable.setViewportView(table);
-        // DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        // centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        // table.setDefaultRenderer(Object.class, centerRenderer);
-        // table.getColumnModel().getColumn(2).setPreferredWidth(200);
-        // table.addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mousePressed(MouseEvent e) {
-        //         int index = table.getSelectedRow();
-        //         if (index != -1) {
-        //             loadDataTableImei(chitietsanpham.get(chitietphieu.get(index).getMaphienbansp()));
-        //         }
-        //     }
-        // });
+        tblModel.setColumnIdentifiers(header);
+        table.setModel(tblModel);
+        table.setFocusable(false);
+        scrollTable.setViewportView(table);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, centerRenderer);
+        table.getColumnModel().getColumn(2).setPreferredWidth(200);
+    
         pnmain_bottom.add(scrollTable);
 
         // pnmain_bottom_right = new JPanel(new GridLayout(1, 1));

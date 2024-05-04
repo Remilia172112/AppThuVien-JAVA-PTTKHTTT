@@ -51,6 +51,15 @@ public class PhieuXuatBUS {
         return chiTietPhieuXuatDAO.selectAll(Integer.toString(maphieu));
     }
 
+    public int getMPMAX() {
+        ArrayList<PhieuXuatDTO> listPhieuXuat = phieuXuatDAO.selectAll();
+        int s = 1;
+        for (PhieuXuatDTO i : listPhieuXuat) {
+            if(i.getMP() > s) s = i.getMP();
+        }
+        return s;
+    }
+
     public ArrayList<PhieuXuatDTO> fillerPhieuXuat(int type, String input, int makh, int manv, Date time_s, Date time_e, String price_minnn, String price_maxxx) {
         Long price_min = !price_minnn.equals("") ? Long.valueOf(price_minnn) : 0L;
         Long price_max = !price_maxxx.equals("") ? Long.valueOf(price_maxxx) : Long.MAX_VALUE;

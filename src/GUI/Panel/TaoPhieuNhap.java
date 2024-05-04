@@ -29,6 +29,7 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import BUS.NhaCungCapBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
+import DAO.SanPhamDAO;
 import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuNhapDTO;
@@ -39,7 +40,6 @@ import GUI.Component.InputForm;
 import GUI.Component.NumericDocumentFilter;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.SelectForm;
-import GUI.Dialog.QRCode_Dialog;
 import helper.Formater;
 import helper.Validation;
 
@@ -75,7 +75,8 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
     public TaoPhieuNhap(NhanVienDTO nv, String type, Main m ){
         this.nvDto = nv;
         this.m = m;
-        maphieunhap = phieunhapBus.phieunhapDAO.getAutoIncrement();
+        maphieunhap = phieunhapBus.getMPMAX() + 1;
+        System.out.println(maphieunhap);
         chitietphieu = new ArrayList<>();
         initComponent(type);
         loadDataTalbeSanPham(listSP);
@@ -115,6 +116,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
             public void mousePressed(MouseEvent e) {
                 int index = tablePhieuNhap.getSelectedRow();
                 if (index != -1) {
+                    tableSanPham.setSelectionMode(index);
                     setFormChiTietPhieu(chitietphieu.get(index));
                     rowPhieuSelect = index;
                     actionbtn("update");
@@ -126,7 +128,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         tableSanPham = new JTable();
         scrollTableSanPham = new JScrollPane();
         tblModelSP = new DefaultTableModel();
-        String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn"};
+        String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "SL tồn"};
         tblModelSP.setColumnIdentifiers(headerSP);
         tableSanPham.setModel(tblModelSP);
         scrollTableSanPham.setViewportView(tableSanPham);
@@ -207,6 +209,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         txtMaSp = new InputForm("Mã sản phẩm");
         txtMaSp.setEditable(false);
         txtMaISBN = new InputForm("Mã ISBN");
+        txtMaISBN.setEditable(false);
         txtMaISBN.getTxtForm().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -367,6 +370,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         // this.cbxDanhMuc.setArr(getThongTinSach(pb.getDANHMUC()));
         // this.cbxDanhMuc.setSelectedIndex(spBUS.getIndexByMaPhienBan(spdto, phieu.getMaphienbansp()));
         this.txtDongia.setText(Integer.toString(phieu.getTIEN()));
+        this.txtSoLuongSPnhap.setText(Integer.toString(phieu.getSL()));
     }
     
     public ChiTietPhieuNhapDTO getInfoChiTietPhieu() {
@@ -451,7 +455,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         } else {
             int input = JOptionPane.showConfirmDialog(this, "Sản phẩm đã tồn tại trong phiếu !\nBạn có muốn chỉnh sửa không ?", "Sản phẩm đã tồn tại !", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (input == 0) {
-               setFormChiTietPhieu(ctphieu);
+                setFormChiTietPhieu(ctphieu);
             }
         }
     }
@@ -486,7 +490,7 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
             // chitietphieu.get(rowPhieuSelect).setPhuongthucnnhap(ptnhap);
 
             
-            chitietphieu.get(rowPhieuSelect).setSoluong(ctsp.size());
+            chitietphieu.get(rowPhieuSelect).setSL(Integer.parseInt(txtSoLuongSPnhap.getText()));
             loadDataTableChiTietPhieu(chitietphieu);
         } else if (source == btnNhapHang) {
             eventBtnNhapHang();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Dialog;
 
 import DAO.KhachHangDAO;
@@ -37,10 +33,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author robot
- */
 public class ListKhachHang extends JDialog implements MouseListener {
 
     private TaoPhieuXuat taoPhieuXuat;

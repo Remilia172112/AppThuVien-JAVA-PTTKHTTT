@@ -1,7 +1,6 @@
 package BUS;
 
 import DAO.ChiTietPhieuNhapDAO;
-import DAO.SanPhamDAO;
 import DAO.PhieuNhapDAO;
 import DTO.ChiTietPhieuDTO;
 import DTO.ChiTietPhieuNhapDTO;
@@ -18,7 +17,6 @@ public class PhieuNhapBUS {
 
     public final PhieuNhapDAO phieunhapDAO = new PhieuNhapDAO();
     public final ChiTietPhieuNhapDAO ctPhieuNhapDAO = new ChiTietPhieuNhapDAO();
-    public final SanPhamDAO chitietsanphamDAO = new SanPhamDAO();
 
     NhaCungCapBUS nccBUS = new NhaCungCapBUS();
     NhanVienBUS nvBUS = new NhanVienBUS();
@@ -58,11 +56,19 @@ public class PhieuNhapBUS {
         return result;
     }
 
+    public int getMPMAX() {
+        ArrayList<PhieuNhapDTO> listPhieuNhap = phieunhapDAO.selectAll();
+        int s = 1;
+        for (PhieuNhapDTO i : listPhieuNhap) {
+            if(i.getMP() > s) s = i.getMP();
+        }
+        return s;
+    }
+
     public boolean add(PhieuNhapDTO phieu, ArrayList<ChiTietPhieuNhapDTO> ctPhieu, HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham) {
         boolean check = phieunhapDAO.insert(phieu) != 0;
         if (check) {
             check = ctPhieuNhapDAO.insert(ctPhieu) != 0;
-            check = chitietsanphamDAO.insert_mutiple(convertHashMapToArray(chitietsanpham)) != 0;
         }
         return check;
     }
@@ -142,12 +148,12 @@ public class PhieuNhapBUS {
         return result;
     }
 
-    // public boolean checkCancelPn(int maphieu) {
-    //     return phieunhapDAO.checkCancelPn(maphieu);
-    // }
+    public boolean checkCancelPn(int maphieu) {
+        return phieunhapDAO.checkSLPn(maphieu);
+    }
 
-    // public int cancelPhieuNhap(int maphieu) {
-    //     return phieunhapDAO.cancelPhieuNhap(maphieu);
-    // }
+    public int cancelPhieuNhap(int maphieu) {
+        return phieunhapDAO.cancelPhieuNhap(maphieu);
+    }
 
 }
