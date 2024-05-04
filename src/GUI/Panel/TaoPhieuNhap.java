@@ -77,14 +77,14 @@ public final class TaoPhieuNhap extends JPanel implements ItemListener, ActionLi
         this.m = m;
         maphieunhap = phieunhapBus.phieunhapDAO.getAutoIncrement();
         chitietphieu = new ArrayList<>();
-        initComponent();
+        initComponent(type);
         loadDataTalbeSanPham(listSP);
     }
 
     // public void initPadding(){
     // }
 
-    public void initComponent(){
+    public void initComponent(String type){
         this.setBackground(BackgroundColor);
         this.setLayout(new BorderLayout(0, 0));
         this.setOpaque(true);
