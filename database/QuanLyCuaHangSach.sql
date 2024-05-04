@@ -204,6 +204,8 @@ VALUES
         ('nhanvien', 'Quản lý nhân viên', 0),
         ('nhaphang', 'Quản lý nhập hàng', 0),
         ('xuathang', 'Quản lý xuất hàng', 0),
+        ('kiemke', 'Quản lý kiểm kê', 0),
+        ('trahang', 'Quản lý trả hàng', 0),
         ('khuvucsach', 'Quản lý khu vực sách', 0),
         ('nhomquyen', 'Quản lý nhóm quyền', 0),
         ('taikhoan', 'Quản lý tài khoản', 0),
@@ -240,6 +242,14 @@ VALUES
         (1, 'xuathang', 'delete'),
         (1, 'xuathang', 'update'),
         (1, 'xuathang', 'view'),
+        (1, 'kiemke', 'create'),
+        (1, 'kiemke', 'delete'),
+        (1, 'kiemke', 'update'),
+        (1, 'kiemke', 'view'),
+        (1, 'trahang', 'create'),
+        (1, 'trahang', 'delete'),
+        (1, 'trahang', 'update'),
+        (1, 'trahang', 'view'),
         (1, 'khuvucsach', 'create'),
         (1, 'khuvucsach', 'delete'),
         (1, 'khuvucsach', 'update'),
@@ -268,6 +278,10 @@ VALUES
         (2, 'xuathang', 'delete'),
         (2, 'xuathang', 'update'),
         (2, 'xuathang', 'view'),
+        (2, 'trahang', 'create'),
+        (2, 'trahang', 'delete'),
+        (2, 'trahang', 'update'),
+        (2, 'trahang', 'view'),
         (3, 'sanpham', 'create'),
         (3, 'sanpham', 'delete'),
         (3, 'sanpham', 'update'),
@@ -276,6 +290,10 @@ VALUES
         (3, 'nhaphang', 'delete'),
         (3, 'nhaphang', 'update'),
         (3, 'nhaphang', 'view'),
+        (3, 'kiemke', 'create'),
+        (3, 'kiemke', 'delete'),
+        (3, 'kiemke', 'update'),
+        (3, 'kiemke', 'view'),
         (3, 'nhacungcap', 'create'),
         (3, 'nhacungcap', 'delete'),
         (3, 'nhacungcap', 'update'),
@@ -294,12 +312,12 @@ VALUES
 
 INSERT INTO `NHANVIEN` (`HOTEN`, `GIOITINH`, `NGAYSINH`, `SDT`, `EMAIL`, `TT`)
 VALUES
-        ('Lê Thế Minh', 1, '2077-01-01', '0505555505', 'remchan.com@gmail.com', 1),
-        ('Hoàng Gia Bảo', 1, '2023-04-11', '0355374322', 'musicanime2501@gmail.com', 1),
+        ('Lê Thế Minh', 0, '2077-01-01', '0505555505', 'remchan.com@gmail.com', 1),
+        ('Huỳnh Khôi Nguyên', 1, '2023-05-06', '0123456789', 'nguyeney111@gmail.com', 1),
+        ('Trần Gia Nguyễn', 1, '2004-17-07', '0387913347', 'trangianguyen.com@gmail.com', 1),
+        ('Hoàng Gia Bảo', 1, '2003-04-11', '0355374322', 'musicanime2501@gmail.com', 1),
         ('Đỗ Nam Công Chính', 1, '2003-04-11', '0123456789', 'chinchin@gmail.com', 1),
-        ('Đinh Ngọc Ân', 1, '2003-04-03', '0123456789', 'ngocan@gmail.com', 1),
-        ('Vũ Trung Hiếu', 1, '2023-05-06', '0123456789', 'hieu@gmail.com', 1),
-        ('Trần Nhật Sinh', 1, '2003-12-20', '0387913347', 'transinh085@gmail.com', 1);
+        ('Đinh Ngọc Ân', 1, '2003-04-03', '0123456789', 'ngocan@gmail.com', 1);
 
 INSERT INTO `TAIKHOAN` (`MNV`, `TDN`, `MK`, `MNQ`, `TT`, `OTP`)
 VALUES
@@ -364,13 +382,17 @@ VALUES
 
 INSERT INTO `MAKHUYENMAI` (`MKM`,`MNV`,`TGBD`,`TGKT`,`TT`)
 VALUES
-        ('GT2024', 1, '2024-04-01 00:00:00', '2024-05-01 00:00:00', 1);
+        ('GT2024', 1, '2024-04-01 00:00:00', '2024-05-01 00:00:00', 1),
+        ('MINGEY2024', 1, '2024-05-01 00:00:00', '2024-05-10 00:00:00', 1);
 
 INSERT INTO `CTMAKHUYENMAI` (`MKM`, `MSP`,`PTG`)
 VALUES
         ('GT2024', 1, 20),
         ('GT2024', 2, 20),
-        ('GT2024', 3, 20);
+        ('GT2024', 3, 20),
+        ('MINGEY2024', 4, 80),
+        ('MINGEY2024', 5, 50),
+        ('MINGEY2024', 6, 60);
 
 INSERT INTO `SANPHAM` (`TEN`, `HINHANH`, `DANHMUC`, `NAMXB`, `MNXB`, `TENTG`, `MKVS`, `TIENX`, `TIENN`, `SL`, `ISBN`, `TT`) 
 VALUES
