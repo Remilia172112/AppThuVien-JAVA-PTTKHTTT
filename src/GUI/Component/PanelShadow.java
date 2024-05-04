@@ -26,14 +26,14 @@ public class PanelShadow extends JPanel {
     }
 
     public PanelShadow(String linkIcon, String title, String content) {
-        this.setPreferredSize(new Dimension(300, 450));
+        this.setPreferredSize(new Dimension(450, 300));
         this.setBackground(Color.WHITE);
         this.putClientProperty( FlatClientProperties.STYLE, "arc: 30" );
-        this.setLayout(new FlowLayout(1, 0, 10));
-        this.setBorder(new EmptyBorder(10,0,0,0));
+        this.setLayout(new FlowLayout(0 ,20 , 10));
+        this.setBorder(new EmptyBorder(0,10,50,0));
 
         iconBackground = new JPanel();
-        iconBackground.setPreferredSize(new Dimension(250, 150));
+        iconBackground.setPreferredSize(new Dimension(200, 125));
         iconBackground.setBackground(BackgroundColor);
         iconBackground.putClientProperty( FlatClientProperties.STYLE, "arc: 30" );
         iconBackground.setLayout(new FlowLayout(1,20,10));
@@ -44,7 +44,7 @@ public class PanelShadow extends JPanel {
 
         this.add(iconBackground);
 
-        lblTitle = new JLabel(title.toUpperCase());
+        lblTitle = new JLabel("<html>" + title.toUpperCase() + "</html>");
         lblTitle.setForeground(FontColor);
         lblTitle.putClientProperty("FlatLaf.style", "font: 190% $h4.font");
         this.add(lblTitle);
