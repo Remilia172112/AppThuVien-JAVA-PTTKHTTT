@@ -148,7 +148,7 @@ public class PhieuNhapBUS {
         return result;
     }
 
-    public boolean checkCancelPn(int maphieu) {
+    public boolean checkSLPn(int maphieu) {
         return phieunhapDAO.checkSLPn(maphieu);
     }
 

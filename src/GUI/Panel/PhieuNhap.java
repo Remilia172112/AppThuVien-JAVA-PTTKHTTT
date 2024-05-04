@@ -298,7 +298,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
                 if (input == 0) {
                     PhieuNhapDTO pn = listPhieu.get(index);
                     System.out.println(pn);
-                    if (!phieunhapBUS.checkCancelPn(pn.getMP())) {
+                    if (!phieunhapBUS.checkSLPn(pn.getMP())) {
                         JOptionPane.showMessageDialog(null, "Không đủ số lượng để hủy phiếu!");
                     } else {
                         int c = phieunhapBUS.cancelPhieuNhap(pn.getMP());
