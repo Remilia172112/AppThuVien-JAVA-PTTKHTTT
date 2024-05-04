@@ -123,7 +123,7 @@ public class ThongKeDAO {
                         )
                         SELECT 
                         years.year AS nam,
-                        COALESCE(SUM(CTPHIEUNHAP.TIENHAP), 0) AS chiphi, 
+                        COALESCE(SUM(CTPHIEUNHAP.TIENNHAP), 0) AS chiphi, 
                         COALESCE(SUM(CTPHIEUXUAT.TIENXUAT), 0) AS doanhthu
                         FROM years
                         LEFT JOIN PHIEUXUAT ON YEAR(PHIEUXUAT.TG) = years.year
@@ -364,8 +364,8 @@ public class ThongKeDAO {
                             )
                             SELECT 
                             dates.date AS ngay,
-                            COALESCE(SUM(CTPHIEUXUAT.dongia), 0) AS doanhthu,
-                            COALESCE(SUM(CTPHIEUNHAP.dongia), 0) AS chiphi
+                            COALESCE(SUM(CTPHIEUXUAT.TIENXUAT), 0) AS doanhthu,
+                            COALESCE(SUM(CTPHIEUNHAP.TIENNHAP), 0) AS chiphi
                             FROM dates
                             LEFT JOIN PHIEUXUAT ON DATE(PHIEUXUAT.TG) = dates.date
                             LEFT JOIN CTPHIEUXUAT ON PHIEUXUAT.MPX = CTPHIEUXUAT.MPX
