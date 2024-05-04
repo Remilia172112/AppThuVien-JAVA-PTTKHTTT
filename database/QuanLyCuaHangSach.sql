@@ -270,6 +270,8 @@ VALUES
         (1, 'thongke', 'delete'),
         (1, 'thongke', 'update'),
         (1, 'thongke', 'view'),
+        (2, 'sanpham', 'view'),
+        (2, 'nhaxuatban', 'view'),
         (2, 'khachhang', 'create'),
         (2, 'khachhang', 'delete'),
         (2, 'khachhang', 'update'),
