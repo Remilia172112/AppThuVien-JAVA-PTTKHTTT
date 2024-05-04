@@ -53,6 +53,7 @@ public final class NhaCungCap extends JPanel implements ActionListener, ItemList
     private void initComponent() {
         //Set model table
         tableNhaCungCap = new JTable();
+        tableNhaCungCap.setBackground(new Color(0xA1D6E2));
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"Mã NCC", "Tên nhà cung cấp", "Địa chỉ", "Email", "Số điện thoại"};

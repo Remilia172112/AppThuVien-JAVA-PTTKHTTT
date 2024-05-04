@@ -65,6 +65,7 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
 
     private void initComponent() {
         tableKhuvuc = new JTable();
+        tableKhuvuc.setBackground(new Color(0xA1D6E2));
         scrollTableSanPham = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"Mã khuyến mãi", "Thời gian bắt đầu", "Thời gian kết thúc"};

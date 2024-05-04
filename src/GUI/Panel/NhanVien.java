@@ -87,6 +87,7 @@ public final class NhanVien extends JPanel {
         contentCenter.add(main, BorderLayout.CENTER);
 
         tableNhanVien = new JTable();
+        tableNhanVien.setBackground(new Color(0xA1D6E2));
         scrollTableSanPham = new JScrollPane();
         tableNhanVien = new JTable();
         tblModel = new DefaultTableModel();

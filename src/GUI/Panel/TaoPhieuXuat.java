@@ -111,6 +111,7 @@ public final class TaoPhieuXuat extends JPanel {
 
         // Table sản phẩm
         tableSanPham = new JTable();
+        tableSanPham.setBackground(new Color(0xA1D6E2));
         scrollTableSanPham = new JScrollPane();
         tblModelSP = new DefaultTableModel();
         String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "Số lượng tồn"};
