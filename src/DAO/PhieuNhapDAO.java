@@ -177,12 +177,12 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        for (int i = 0; i < result.size(); i++) {
+        for (int i = 0; i < SP.size(); i++) {
             if(result.get(i).getSL() > SP.get(i).getSL()){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
     
     public int cancelPhieuNhap(int maphieu){
