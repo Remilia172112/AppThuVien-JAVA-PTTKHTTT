@@ -2,10 +2,6 @@ package DTO;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author robot
- */
 public class PhieuKiemKeDTO extends PhieuDTO{
     private int maphieukiemke;
     private int nguoitao;

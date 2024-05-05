@@ -1,8 +1,6 @@
 package DAO;
 
 import DTO.PhieuKiemKeDTO;
-import DTO.ChiTietKiemKeDTO;
-import DTO.SanPhamDTO;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +11,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author robot
- */
 public class PhieuKiemKeDAO implements DAOinterface<PhieuKiemKeDTO>{
     
     public static PhieuKiemKeDAO getInstance(){
@@ -28,11 +22,10 @@ public class PhieuKiemKeDAO implements DAOinterface<PhieuKiemKeDTO>{
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `PHIEUKIEMKE`(`MNV`,`TG` ,'TT') VALUES (?,?,?)";
+            String sql = "INSERT INTO `PHIEUKIEMKE`(`MNV`,`TG` ,`TT`) VALUES (?,?,1)";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMNV());
-            pst.setTimestamp(2, t.getTG());
-            pst.setInt(3 ,t.getTT());
+            pst.setInt(1, t.getNguoitao());
+            pst.setTimestamp(2, t.getThoigiantao());
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {

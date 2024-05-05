@@ -3,17 +3,12 @@ package BUS;
 import DAO.ChiTietKiemKeDAO;
 import DAO.PhieuKiemKeDAO;
 import DTO.ChiTietKiemKeDTO;
-import DTO.ChiTietPhieuNhapDTO;
 import DTO.PhieuKiemKeDTO;
-import DTO.PhieuNhapDTO;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author robot
- */
 public class PhieuKiemKeBUS {
     
     private PhieuKiemKeDAO phieuKiemKeDAO = PhieuKiemKeDAO.getInstance();
@@ -31,14 +26,16 @@ public class PhieuKiemKeBUS {
     }
 
     public ArrayList<PhieuKiemKeDTO> getDanhSachPhieu() {
-        return danhSachPhieu;
+        return phieuKiemKeDAO.selectAll();
     }
 
     public void setDanhSachPhieu(ArrayList<PhieuKiemKeDTO> danhSachPhieu) {
         this.danhSachPhieu = danhSachPhieu;
     }
     
-    
+    public ArrayList<ChiTietKiemKeDTO> getChiTietPhieu(int maphieunhap) {
+        return chiTietKiemKeDAO.selectAll(Integer.toString(maphieunhap));
+    }
     
     public int getAutoIncrement(){
         return phieuKiemKeDAO.getAutoIncrement();
@@ -105,6 +102,14 @@ public class PhieuKiemKeBUS {
         }
     }
     return p;
+    }
+
+    public boolean add(PhieuKiemKeDTO phieu, ArrayList<ChiTietKiemKeDTO> ctPhieu) {
+        boolean check = phieuKiemKeDAO.insert(phieu) != 0;
+        if (check) {
+            check = chiTietKiemKeDAO.insert(ctPhieu) != 0;
+        }
+        return check;
     }
 }
 

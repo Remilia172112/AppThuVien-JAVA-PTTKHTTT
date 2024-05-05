@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author robot
- */
 public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
     
     public static ChiTietKiemKeDAO getInstance(){
@@ -30,9 +26,8 @@ public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1,t.get(i).getMP()); 
                 pst.setInt(2, t.get(i).getMSP());
-                pst.setInt(3, t.get(i).getMSP());
-                pst.setInt(4, t.get(i).getChenhlech());
-                pst.setString(5, t.get(i).getGhichu());
+                pst.setInt(3, t.get(i).getTRANGTHAISP());
+                pst.setString(4, t.get(i).getGHICHU());
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
             } catch (SQLException ex) {
@@ -47,7 +42,7 @@ public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "DELETE FROM ctkiemke WHERE maphieukiemke = ?";
+            String sql = "DELETE FROM CTPHIEUKIEMKE WHERE MPKK = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, maphieu);
             result = pst.executeUpdate();
@@ -68,17 +63,16 @@ public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
         ArrayList<ChiTietKiemKeDTO> result = new ArrayList<>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM ctkiemke WHERE maphieukiemke = ?";
+            String sql = "SELECT * FROM CTPHIEUKIEMKE WHERE MPKK = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while (rs.next()) {
-                int maphieukiemke = rs.getInt("maphieukiemke");
-                int maphienban = rs.getInt("maphienban");
-                int soluong = rs.getInt("soluong");
-                int chenhlech = rs.getInt("chenhlech");
-                String ghichu = rs.getString("ghichu");
-                ChiTietKiemKeDTO ctphieu = new ChiTietKiemKeDTO(maphieukiemke, maphienban, soluong, chenhlech, ghichu);
+                int MPKK = rs.getInt("MPKK");
+                int MSP = rs.getInt("MSP");
+                int TTSP = rs.getInt("TRANGTHAISP");
+                String ghichu = rs.getString("GHICHU");
+                ChiTietKiemKeDTO ctphieu = new ChiTietKiemKeDTO(MPKK, MSP,TTSP,ghichu);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);

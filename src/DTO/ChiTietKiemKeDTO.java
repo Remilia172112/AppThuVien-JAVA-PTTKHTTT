@@ -1,70 +1,92 @@
 package DTO;
 
-/**
- *
- * @author robot
- */
-public class ChiTietKiemKeDTO extends ChiTietPhieuDTO {
-    private int maphieukiemke;
-    private int maphienban;
-    private int soluong;
-    private int chenhlech;
-    private String ghichu;
+public class ChiTietKiemKeDTO {
+    private int MP;
+    private int MSP;
+    private int TRANGTHAISP; 
+    private String GHICHU;
     
     public ChiTietKiemKeDTO(){
         
     }
 
-    public ChiTietKiemKeDTO(int maphieukiemke, int maphienban, int soluong, int chenhlech, String ghichu) {
-        this.maphieukiemke = maphieukiemke;
-        this.maphienban = maphienban;
-        this.soluong = soluong;
-        this.chenhlech = chenhlech;
-        this.ghichu = ghichu;
+    public ChiTietKiemKeDTO(int mP, int mSP, int tRANGTHAISP, String gHICHU) {
+        MP = mP;
+        MSP = mSP;
+        TRANGTHAISP = tRANGTHAISP;
+        GHICHU = gHICHU;
     }
 
-    public int getMaphieukiemke() {
-        return maphieukiemke;
+    public int getMP() {
+        return MP;
     }
 
-    public void setMaphieukiemke(int maphieukiemke) {
-        this.maphieukiemke = maphieukiemke;
+    public void setMP(int mP) {
+        MP = mP;
     }
 
-    public int getMaphienban() {
-        return maphienban;
+    public int getMSP() {
+        return MSP;
     }
 
-    public void setMaphienban(int maphienban) {
-        this.maphienban = maphienban;
+    public void setMSP(int mSP) {
+        MSP = mSP;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public int getTRANGTHAISP() {
+        return TRANGTHAISP;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setTRANGTHAISP(int tRANGTHAISP) {
+        TRANGTHAISP = tRANGTHAISP;
     }
 
-    public int getChenhlech() {
-        return chenhlech;
+    public String getGHICHU() {
+        return GHICHU;
     }
 
-    public void setChenhlech(int chenhlech) {
-        this.chenhlech = chenhlech;
+    public void setGHICHU(String gHICHU) {
+        GHICHU = gHICHU;
     }
 
-    public String getGhichu() {
-        return ghichu;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + MP;
+        result = prime * result + MSP;
+        result = prime * result + TRANGTHAISP;
+        result = prime * result + ((GHICHU == null) ? 0 : GHICHU.hashCode());
+        return result;
     }
 
-    public void setGhichu(String ghichu) {
-        this.ghichu = ghichu;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ChiTietKiemKeDTO other = (ChiTietKiemKeDTO) obj;
+        if (MP != other.MP)
+            return false;
+        if (MSP != other.MSP)
+            return false;
+        if (TRANGTHAISP != other.TRANGTHAISP)
+            return false;
+        if (GHICHU == null) {
+            if (other.GHICHU != null)
+                return false;
+        } else if (!GHICHU.equals(other.GHICHU))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "ChiTietKiemKeDTO{" + "maphieukiemke=" + maphieukiemke + ", maphienban=" + maphienban + ", soluong=" + soluong + ", chenhlech=" + chenhlech + ", ghichu=" + ghichu + '}';
+        return "ChiTietKiemKeDTO [MP=" + MP + ", MSP=" + MSP + ", TRANGTHAISP=" + TRANGTHAISP + ", GHICHU=" + GHICHU
+                + "]";
     }
+
 }

@@ -2,10 +2,8 @@ package GUI.Panel;
 
 import BUS.NhaCungCapBUS;
 import BUS.PhieuKiemKeBUS;
-import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
 import DTO.ChiTietKiemKeDTO;
-import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuKiemKeDTO;
 import DTO.SanPhamDTO;
@@ -16,7 +14,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.SelectForm;
-import GUI.Dialog.QRCode_Dialog;
+import helper.Validation;
 import GUI.Main;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.event.ActionEvent;
@@ -25,10 +23,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -41,7 +37,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
     JScrollPane scrollTablePhieuKK, scrollTableSanPham;
     DefaultTableModel tblModel, tblModelSP;
     ButtonCustom btnAddSp, btnEditSP, btnDelete, btnImport, btnXacNhan;
-    InputForm txtMaphieu, txtNhanVien, txtMaSp, txtTrangThai, txtTenSp, txtMaImeiTheoLo, txtSoLuongImei;
+    InputForm txtMaphieu, txtNhanVien, txtMaSp, txtTrangThai, txtTenSp, txtMaImeiTheoLo, txtSoLuong;
     SelectForm cbxNhaCungCap, cbxTrangThai, cbxPtNhap;
     JTextField txtTimKiem;
     JLabel labelImei, lbltongtien;
@@ -60,8 +56,6 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
     ArrayList<ChiTietKiemKeDTO> danhSachKiemke = new ArrayList<>();
     int maphieukiemke;
     int rowPhieuSelect = -1;
-    private ButtonCustom scanImei;
-    private ButtonCustom btnChonImei;
     private JTextArea jTextAreaGhiChu;
 
     public TaoPhieuKiemKe(NhanVienDTO nv, String type, Main m) {
@@ -102,7 +96,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         tablePhieuKiemKe.setBackground(new Color(0xA1D6E2));
         scrollTablePhieuKK = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"STT", "Mã SP", "Tên sản phẩm", "RAM", "ROM", "Màu sắc", "Số lượng", "Chênh lệch"};
+        String[] header = new String[]{"STT", "Mã SP", "Tên sản phẩm", "Trạng thái"};
         tblModel.setColumnIdentifiers(header);
         tablePhieuKiemKe.setModel(tblModel);
         tablePhieuKiemKe.setFocusable(false);
@@ -110,7 +104,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         TableColumnModel columnModel = tablePhieuKiemKe.getColumnModel();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             if (i != 2) {
                 columnModel.getColumn(i).setCellRenderer(centerRenderer);
             }
@@ -155,7 +149,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
                     setInfoSanPham(listSP.get(index));
                     ChiTietKiemKeDTO ctp = checkTonTai();
                     if (ctp == null) {
-                         actionbtn("add");
+                        actionbtn("add");
                     } else {
                         actionbtn("update");
                         setFormChiTietPhieu(ctp);
@@ -203,7 +197,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         content_right.setOpaque(false);
 
         content_right_top = new JPanel(new BorderLayout());
-        content_right_top.setPreferredSize(new Dimension(100, 260));
+        content_right_top.setPreferredSize(new Dimension(100, 180));
         txtMaSp = new InputForm("Mã SP");
         txtMaSp.setEditable(false);
         txtTenSp = new InputForm("Tên sản phẩm");
@@ -212,10 +206,10 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         txtTrangThai = new InputForm("Trạng thái");
         txtTrangThai.setEditable(false);
         JPanel content_right_top_cbx = new JPanel(new BorderLayout());
-        content_right_top_cbx.setPreferredSize(new Dimension(100, 180));
-        txtSoLuongImei = new InputForm("Số lượng hiện tại");
-        txtSoLuongImei.setEditable(false);
-        txtSoLuongImei.setPreferredSize(new Dimension(50, 80));
+        content_right_top_cbx.setPreferredSize(new Dimension(100, 90));
+        txtSoLuong = new InputForm("Số lượng hiện tại");
+        txtSoLuong.setEditable(false);
+        txtSoLuong.setPreferredSize(new Dimension(50, 80));
         JPanel jPanelGhiChu = new JPanel(new BorderLayout());
         jPanelGhiChu.setBackground(Color.WHITE);
         jPanelGhiChu.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -231,7 +225,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         JPanel jpDonGia = new JPanel();
         jpDonGia.setBackground(Color.WHITE);
         content_right_top_cbx.add(txtTrangThai, BorderLayout.WEST);
-        content_right_top_cbx.add(txtSoLuongImei, BorderLayout.CENTER);
+        content_right_top_cbx.add(txtSoLuong, BorderLayout.CENTER);
         content_right_top.add(txtMaSp, BorderLayout.WEST);
         content_right_top.add(txtTenSp, BorderLayout.CENTER);
         content_right_top.add(content_right_top_cbx, BorderLayout.SOUTH);
@@ -279,7 +273,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         right.setBorder(new EmptyBorder(5, 5, 5, 5));
         right.setLayout(new BorderLayout());
 
-        JPanel right_top, right_center, right_bottom, pn_tongtien;
+        JPanel right_top, right_center, right_bottom;
         right_top = new JPanel(new GridLayout(4, 1, 0, 0));
         right_top.setPreferredSize(new Dimension(300, 360));
         right_top.setOpaque(false);
@@ -323,30 +317,18 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
     public void setInfoSanPham(SanPhamDTO sp) { //set info vào inputform khi nhan ben tablesanpham
         this.txtMaSp.setText(Integer.toString(sp.getMSP()));
         this.txtTenSp.setText(sp.getTEN());
-        this.txtSoLuongImei.setText(Integer.toString(sp.getSL()));
-        if(Integer.parseInt(txtSoLuongImei.getText()) <= 0){
+        this.txtSoLuong.setText(Integer.toString(sp.getSL()));
+        if(Integer.parseInt(txtSoLuong.getText()) <= 0){
             this.txtTrangThai.setText("Hết hàng");
         } else {
             this.txtTrangThai.setText("Còn hàng");
         }
     }
 
-    public void setFormChiTietPhieu(ChiTietPhieuNhapDTO phieu) { //set info vào inputform khi nhan ben table
-        SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
-        this.txtMaSp.setText(Integer.toString(ctsp.getMSP()));
-        this.txtTenSp.setText(spBUS.getByMaSP(ctsp.getMSP()).getTEN());
-        this.txtSoLuongImei.setText(Integer.toString(sp.getSL()));
-        if(Integer.parseInt(txtSoLuongImei.getText()) <= 0){
-            this.txtTrangThai.setText("Hết hàng");
-        } else {
-            this.txtTrangThai.setText("Còn hàng");
-        }
-    }   
-
     public void resetForm() {
         this.txtMaSp.setText("");
         this.txtTenSp.setText("");
-        this.txtSoLuongImei.setText("");
+        this.txtSoLuong.setText("");
         this.txtTrangThai.setText("");
     }
     public void loadDsSanPham() {
@@ -375,14 +357,10 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         return p;
     }
 
-    public void setFormChiTietPhieu(ChiTietKiemKeDTO phieu) { //set info vào inputform khi nhan ben tablephieunhap
+    public void setFormChiTietPhieu(ChiTietKiemKeDTO phieu) {
         SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
         this.txtMaSp.setText(Integer.toString(ctsp.getMSP()));
         this.txtTenSp.setText(spBUS.getByMaSP(ctsp.getMSP()).getTEN());
-        // this.cbxDanhMuc.setArr(getThongTinSach(pb.getDANHMUC()));
-        // this.cbxDanhMuc.setSelectedIndex(spBUS.getIndexByMaPhienBan(spdto, phieu.getMaphienbansp()));
-        // this.txtDongia.setText(Integer.toString(phieu.getTIEN()));
-        // this.txtSoLuongSPnhap.setText(Integer.toString(phieu.getSL()));
     }
 
     @Override
@@ -393,9 +371,92 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
         // }
     }
 
+    public boolean validateNhap() {
+        if (Validation.isEmpty(txtMaSp.getText())) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm", "Chọn sản phẩm", JOptionPane.WARNING_MESSAGE);
+            return false;
+        } else if (Validation.isEmpty(txtTrangThai.getText())) {
+            JOptionPane.showMessageDialog(this, "Trạng thái không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+    
+        return true;
+    }
+
+    public ChiTietKiemKeDTO getInfoChiTietPhieu() {
+        int masp = Integer.parseInt(txtMaSp.getText());        
+        ChiTietKiemKeDTO ctphieu = new ChiTietKiemKeDTO(maphieukiemke, masp, 1, "");
+        return ctphieu;
+    }
+    
+    public void loadDataTableChiTietPhieu(ArrayList<ChiTietKiemKeDTO> ctPhieu) {
+        tblModel.setRowCount(0);
+        int size = ctPhieu.size();
+        for (int i = 0; i < size; i++) {
+            SanPhamDTO pb = spBUS.getByMaSP(ctPhieu.get(i).getMSP());
+            tblModel.addRow(new Object[]{
+                i + 1, pb.getMSP(), spBUS.getByMaSP(pb.getMSP()).getTEN(), 
+                "Tốt"
+            });
+        }
+    }
+
+    public void addCtPhieu() { // them sp vao chitietphieu
+        ChiTietKiemKeDTO ct = getInfoChiTietPhieu();
+        ChiTietKiemKeDTO p = phieuKiemKeBUS.findCT(danhSachKiemke, ct.getMSP());
+        if (p == null) {
+            danhSachKiemke.add(ct);
+            loadDataTableChiTietPhieu(danhSachKiemke);
+            resetForm();
+        } else {
+            int input = JOptionPane.showConfirmDialog(this, "Sản phẩm đã tồn tại trong phiếu !\nBạn có muốn chỉnh sửa không ?", "Sản phẩm đã tồn tại !", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (input == 0) {
+                setFormChiTietPhieu(ct);
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+
         Object source = e.getSource();
-        
+        if (source == btnAddSp && validateNhap()) {
+            addCtPhieu();
+            
+        } else if (source == btnDelete) {
+            int index = tablePhieuKiemKe.getSelectedRow();
+            danhSachKiemke.remove(index);
+            actionbtn("add");
+            loadDataTableChiTietPhieu(danhSachKiemke);
+            resetForm();
+        } else if (source == btnEditSP) {
+            danhSachKiemke.get(rowPhieuSelect).setTRANGTHAISP(1);
+            loadDataTableChiTietPhieu(danhSachKiemke);
+        } else if (source == btnXacNhan) {
+            eventBtnNhapHang();
+        } 
+    }
+
+    public void eventBtnNhapHang() {
+        if (danhSachKiemke.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa có sản phẩm nào trong phiếu !", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn tạo phiếu kiểm kê !", "Xác nhận tạo phiếu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if (input == 0) {
+                long now = System.currentTimeMillis();
+                Timestamp currenTime = new Timestamp(now);
+                PhieuKiemKeDTO pkk = new PhieuKiemKeDTO(maphieukiemke, nhanVien.getMNV(), currenTime);
+                boolean result = phieuKiemKeBUS.add(pkk, danhSachKiemke);
+                if (result) {
+                    JOptionPane.showMessageDialog(this, "Kiểm kê hàng thành công !");
+                    PhieuNhap pnlPhieu = new PhieuNhap(m, nhanVien);
+                    m.setPanel(pnlPhieu);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Kiểm kê hàng không thành công !", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }
 }

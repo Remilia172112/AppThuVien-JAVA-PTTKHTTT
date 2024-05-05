@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.SelectForm;
+import GUI.Dialog.ChiTietPhieuKiemKeDialog;
 import GUI.Main;
 import helper.Formater;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import javax.swing.text.PlainDocument;
 
 public class PhieuKiemKe extends JPanel implements ActionListener, PropertyChangeListener ,ItemListener, KeyListener {
 
@@ -201,7 +201,7 @@ public class PhieuKiemKe extends JPanel implements ActionListener, PropertyChang
         } else if (source == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                
+                ChiTietPhieuKiemKeDialog dialog = new ChiTietPhieuKiemKeDialog(m, "Thông tin phiếu kiểm kê", true, listPhieu.get(index));
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn phiếu cần xem!");
             }
