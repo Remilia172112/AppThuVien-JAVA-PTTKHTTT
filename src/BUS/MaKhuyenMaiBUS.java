@@ -106,16 +106,10 @@ public class MaKhuyenMaiBUS {
         return p;
     }
 
-    public ArrayList<ChiTietMaKhuyenMaiDTO> listCTofSP(ArrayList<ChiTietMaKhuyenMaiDTO> ctphieu, int masp) {
-        ArrayList<ChiTietMaKhuyenMaiDTO> p = null;
-        int i = 0;
-        while (i < ctphieu.size() ) {
-            if (ctphieu.get(i).getMSP() == masp) {
-                p.add(ctphieu.get(i));
-            } else {
-                i++;
-            }
-        }
+    public ArrayList<ChiTietMaKhuyenMaiDTO> Getctmkm(int masp) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> p = new ArrayList<ChiTietMaKhuyenMaiDTO>();
+        listctMKM = ctmkmDAO.selectAll();
+        for(ChiTietMaKhuyenMaiDTO i : listctMKM) if(i.getMSP() == masp) p.add(i);
         return p;
     } 
     public boolean add(MaKhuyenMaiDTO phieu, ArrayList<ChiTietMaKhuyenMaiDTO> ctPhieu) {

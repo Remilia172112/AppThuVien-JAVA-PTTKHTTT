@@ -39,7 +39,6 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import javax.swing.text.PlainDocument;
 
 public final class PhieuXuat extends JPanel implements ActionListener, KeyListener, PropertyChangeListener, ItemListener {
