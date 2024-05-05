@@ -123,6 +123,47 @@ public class SanPhamBUS {
         return result;
     }
 
+    public ArrayList<SanPhamDTO> search(ArrayList<SanPhamDTO> listSP, String text, String type) {
+        text = text.toLowerCase();
+        ArrayList<SanPhamDTO> result = new ArrayList<>();
+        switch (type) {
+            case "Tất cả" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (Integer.toString(i.getMSP()).toLowerCase().contains(text) || i.getTEN().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Mã sản phẩm" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (Integer.toString(i.getMSP()).toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Tên sản phẩm" -> {
+                for (SanPhamDTO i : this.listSP) {
+                    if (i.getTEN().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "ISBN" -> {
+                if("".compareTo(text) == 0) {
+                    result = listSP;
+                }
+                for (SanPhamDTO i : this.listSP) {
+                    // if("".compareTo(text) == 0) {}
+                    if (i.getISBN().toLowerCase().compareTo(text) == 0) {
+                        result.add(i);
+                    }
+                }
+            }
+        }
+        
+        return result;
+    }
+
     public SanPhamDTO getSp(int danhmuc) {
         return spDAO.selectByDanhMuc(danhmuc + "");
     }

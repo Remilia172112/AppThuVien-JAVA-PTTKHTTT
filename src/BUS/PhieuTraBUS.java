@@ -1,10 +1,10 @@
 package BUS;
 
-import DAO.ChiTietPhieuXuatDAO;
-// import DAO.SanPhamDAO;
-import DAO.PhieuXuatDAO;
+import DAO.ChiTietPhieuTraDAO;
+import DAO.PhieuTraDAO;
 import DTO.ChiTietPhieuDTO;
-import DTO.PhieuXuatDTO;
+import DTO.ChiTietPhieuTraDTO;
+import DTO.PhieuTraDTO;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,65 +12,56 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class PhieuXuatBUS {
+public class PhieuTraBUS {
 
-    private final PhieuXuatDAO phieuXuatDAO = PhieuXuatDAO.getInstance();
+    private final PhieuTraDAO phieuTraDAO = PhieuTraDAO.getInstance();
 
-    private final ChiTietPhieuXuatDAO chiTietPhieuXuatDAO = ChiTietPhieuXuatDAO.getInstance();
-    // private final SanPhamDAO chiTietSanPhamDAO = SanPhamDAO.getInstance();
-    private final ArrayList<PhieuXuatDTO> listPhieuXuat;
+    private final ChiTietPhieuTraDAO chiTietPhieuTraDAO = ChiTietPhieuTraDAO.getInstance();
+    private final ArrayList<PhieuTraDTO> listPhieuTra;
 
     NhanVienBUS nvBUS = new NhanVienBUS();
     KhachHangBUS khBUS = new KhachHangBUS();
 
-    public PhieuXuatBUS() {
-        this.listPhieuXuat = phieuXuatDAO.selectAll();
+    public PhieuTraBUS() {
+        this.listPhieuTra = phieuTraDAO.selectAll();
     }
 
-    public ArrayList<PhieuXuatDTO> getAll() {
-        return this.listPhieuXuat;
+    public ArrayList<PhieuTraDTO> getAll() {
+        return this.listPhieuTra;
     }
 
-    public PhieuXuatDTO getSelect(int index) {
-        return listPhieuXuat.get(index);
+    public PhieuTraDTO getSelect(int index) {
+        return listPhieuTra.get(index);
     }
 
     public void cancel(int px) {
-        phieuXuatDAO.cancel(px);
+        phieuTraDAO.cancel(px);
     }
 
     public void remove(int px) {
-        listPhieuXuat.remove(px);
+        listPhieuTra.remove(px);
     }
 
-    public void insert(PhieuXuatDTO px, ArrayList<ChiTietPhieuDTO> ct) {
-        phieuXuatDAO.insert(px); //ghi phieu xuat vao sql
-        chiTietPhieuXuatDAO.insert(ct); //goi updatesoluongTon cua sanphamDAO để chỉnh số lượng trong kho -> ghi váo sql
+    public void insert(PhieuTraDTO px, ArrayList<ChiTietPhieuTraDTO> ct) {
+        phieuTraDAO.insert(px); //ghi phieu xuat vao sql
+        chiTietPhieuTraDAO.insert(ct); //goi updatesoluongTon cua sanphamDAO để chỉnh số lượng trong kho -> ghi váo sql
     }
 
-    public ArrayList<ChiTietPhieuDTO> selectCTP(int maphieu) {
-        return chiTietPhieuXuatDAO.selectAll(Integer.toString(maphieu));
+    public ArrayList<ChiTietPhieuTraDTO> selectCTP(int maphieu) {
+        return chiTietPhieuTraDAO.selectAll(Integer.toString(maphieu));
     }
 
     public int getMPMAX() {
-        ArrayList<PhieuXuatDTO> listPhieuXuat = phieuXuatDAO.selectAll();
+        ArrayList<PhieuTraDTO> listPhieuTra = phieuTraDAO.selectAll();
         int s = 1;
-        for (PhieuXuatDTO i : listPhieuXuat) {
+        for (PhieuTraDTO i : listPhieuTra) {
             if(i.getMP() > s) s = i.getMP();
         }
         return s;
     }
-    //moi them, nó tương tự insert nhưng có check
-    // public boolean add(PhieuXuatDTO phieu, ArrayList<ChiTietPhieuDTO> ctPhieu, HashMap<Integer, ArrayList<SanPhamDTO>> chitietsanpham) {
-    //     boolean check = phieuXuatDAO.insert(phieu) != 0;
-    //     if (check) {
-    //         check = chiTietPhieuXuatDAO.insert(ctPhieu) != 0;
-    //     }
-    //     return check;
-    // }
 
-    public ChiTietPhieuDTO findCT(ArrayList<ChiTietPhieuDTO> ctphieu, int masp) {
-        ChiTietPhieuDTO p = null;
+    public ChiTietPhieuTraDTO findCT(ArrayList<ChiTietPhieuTraDTO> ctphieu, int masp) {
+        ChiTietPhieuTraDTO p = null;
         int i = 0;
         while (i < ctphieu.size() && p == null) {
             if (ctphieu.get(i).getMSP() == masp) {
@@ -82,7 +73,16 @@ public class PhieuXuatBUS {
         return p;
     }
 
-    public ArrayList<PhieuXuatDTO> fillerPhieuXuat(int type, String input, int makh, int manv, Date time_s, Date time_e, String price_minnn, String price_maxxx) {
+    public ArrayList<ChiTietPhieuDTO> getChiTietPhieu_Type(int maphieunhap) {
+        ArrayList<ChiTietPhieuTraDTO> arr = chiTietPhieuTraDAO.selectAll(Integer.toString(maphieunhap));
+        ArrayList<ChiTietPhieuDTO> result = new ArrayList<>();
+        for (ChiTietPhieuDTO i : arr) {
+            result.add(i);
+        }
+        return result;
+    }
+
+    public ArrayList<PhieuTraDTO> fillerPhieuTra(int type, String input, int makh, int manv, Date time_s, Date time_e, String price_minnn, String price_maxxx) {
         Long price_min = !price_minnn.equals("") ? Long.valueOf(price_minnn) : 0L;
         Long price_max = !price_maxxx.equals("") ? Long.valueOf(price_maxxx) : Long.MAX_VALUE;
         Timestamp time_start = new Timestamp(time_s.getTime());
@@ -98,8 +98,8 @@ public class PhieuXuatBUS {
 
         Timestamp time_end = new Timestamp(calendar.getTimeInMillis());
 
-        ArrayList<PhieuXuatDTO> result = new ArrayList<>();
-        for (PhieuXuatDTO phieuXuat : getAll()) {
+        ArrayList<PhieuTraDTO> result = new ArrayList<>();
+        for (PhieuTraDTO phieuXuat : getAll()) {
             boolean match = false;
             switch (type) {
                 case 0 -> {
@@ -139,17 +139,27 @@ public class PhieuXuatBUS {
         return result;
     }
 
-    public String[] getArrMPX() {
-        int size = listPhieuXuat.size();
-        String[] result = new String[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = Integer.toString(listPhieuXuat.get(i).getMP());
+    public boolean checkSLPt(int maphieu) {
+        return phieuTraDAO.checkSLPt(maphieu);
+    }
+
+    public int cancelPhieuTra(int maphieu) {
+        return phieuTraDAO.cancelPhieuTra(maphieu);
+    }
+
+    public long getTIEN(ArrayList<ChiTietPhieuTraDTO> ctphieu) {
+        long result = 0;
+        for (ChiTietPhieuTraDTO item : ctphieu) {
+            result += item.getTIEN() * item.getSL();
         }
         return result;
     }
 
-    public PhieuXuatDTO getByIndex(int index) {
-        return this.listPhieuXuat.get(index);
+    public boolean add(PhieuTraDTO phieu, ArrayList<ChiTietPhieuTraDTO> ctPhieu) {
+        boolean check = phieuTraDAO.insert(phieu) != 0;
+        if (check) {
+            check = chiTietPhieuTraDAO.insert(ctPhieu) != 0;
+        }
+        return check;
     }
-
 }
