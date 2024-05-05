@@ -361,6 +361,13 @@ VALUES
         (2, 3, 2, 300000),
         (2, 4, 2, 400000);
 
+INSERT INTO `PHIEUTRA` (`MPX`, `MNV`, `MKH`, `TIEN`, `TG`, `TT`)
+VALUES
+        (1, 1, 1, 100000, '2024-04-20 17:34:12', 1);
+
+INSERT INTO `CTPHIEUTRA` (`MPX`, `MSP`, `SL`, `TIENTHU`, `LYDO`)       
+VALUES
+        (1, 1, 2, 100000, 'Hư');
 INSERT INTO `NHACUNGCAP` (`TEN`, `DIACHI`, `SDT`, `EMAIL`, `TT`)
 VALUES
         ('MINH LONG BOOK', '33 Đỗ Thừa Tự, Tân Quý, Tân Phú, Thành phố Hồ Chí Minh', '02866751142', 'cskh@minhlongbook.vn', 1),
@@ -382,14 +389,14 @@ VALUES
         (2, 3, 2, 40000, 0),
         (2, 4, 2, 80000, 0);
 
-INSERT INTO 'PHIEUKIEMKE' ('MNV' , 'TG' , 'TT') 
+INSERT INTO `PHIEUKIEMKE` (`MNV` , `TG` , `TT`) 
 VALUES
-        (1 , '2024-04-01 01:09:27' , 1)
-        (2 , '2024-04-02 01:09:27' , 1)
+        (1 , '2024-04-01 01:09:27' , 1),
+        (2 , '2024-04-02 01:09:27' , 1);
 
-INSERT INTO 'CTPHIEUKIEMKE' (`MPKK`,`MSP` ,`TRANGTHAISP`, `GHICHU`)
+INSERT INTO `CTPHIEUKIEMKE` (`MPKK`,`MSP` ,`TRANGTHAISP`, `GHICHU`)
 VALUES 
-        (1, 1, 1 ,"Nguyen gey" )
+        (1, 1, 1 ,'Hư' );
 
 INSERT INTO `MAKHUYENMAI` (`MKM`,`MNV`,`TGBD`,`TGKT`,`TT`)
 VALUES
