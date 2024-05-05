@@ -382,6 +382,15 @@ VALUES
         (2, 3, 2, 40000, 0),
         (2, 4, 2, 80000, 0);
 
+INSERT INTO 'PHIEUKIEMKE' ('MNV' , 'TG' , 'TT') 
+VALUES
+        (1 , '2024-04-01 01:09:27' , 1)
+        (2 , '2024-04-02 01:09:27' , 1)
+
+INSERT INTO 'CTPHIEUKIEMKE' (`MPKK`,`MSP` ,`TRANGTHAISP`, `GHICHU`)
+VALUES 
+        (1, 1, 1 ,"Nguyen gey" )
+
 INSERT INTO `MAKHUYENMAI` (`MKM`,`MNV`,`TGBD`,`TGKT`,`TT`)
 VALUES
         ('GT2024', 1, '2024-04-01 00:00:00', '2024-05-01 00:00:00', 1),
