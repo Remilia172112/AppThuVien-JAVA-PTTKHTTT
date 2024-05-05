@@ -54,7 +54,8 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1, t.get(i).getMP());
                 pst.setInt(2, t.get(i).getMSP());
-                ChiTietMaKhuyenMaiDTO mkm = MaKhuyenMaiBUS.class.findCT(ctmkm, t.get(i).getMSP());
+                MaKhuyenMaiBUS mkmbus = new MaKhuyenMaiBUS();
+                ChiTietMaKhuyenMaiDTO mkm = mkmbus.findCT(ctmkm, t.get(i).getMSP());
                 pst.setString(4, mkm.getMKM());
                 int SL = -(t.get(i).getSL());
                 pst.setInt(4, t.get(i).getSL());
