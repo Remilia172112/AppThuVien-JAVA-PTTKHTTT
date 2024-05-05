@@ -5,7 +5,6 @@ import BUS.PhieuKiemKeBUS;
 import BUS.PhieuNhapBUS;
 import BUS.SanPhamBUS;
 import DTO.ChiTietKiemKeDTO;
-import DTO.ChiTietKiemKeSanPhamDTO;
 import DTO.ChiTietPhieuNhapDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuKiemKeDTO;
@@ -48,18 +47,17 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
     JLabel labelImei, lbltongtien;
     public JTextArea textAreaImei;
     Main m;
-    Color BackgroundColor = new Color(240, 247, 250);
+    Color BackgroundColor = new Color(193 ,237 ,220);
     JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     SanPhamBUS spBUS = new SanPhamBUS();
     NhaCungCapBUS nccBus = new NhaCungCapBUS();
     PhieuKiemKeBUS phieuKiemKeBUS = new PhieuKiemKeBUS();
     NhanVienDTO nhanVien;
+    SanPhamDTO sp;
 
     ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
     ArrayList<ChiTietKiemKeDTO> danhSachKiemke = new ArrayList<>();
-    ArrayList<ChiTietKiemKeSanPhamDTO> danhSachKiemKeSanPham = new ArrayList<>();
-    HashMap<ChiTietKiemKeDTO, ArrayList<ChiTietKiemKeSanPhamDTO>> chiTietPhieu;
     int maphieukiemke;
     int rowPhieuSelect = -1;
     private ButtonCustom scanImei;
@@ -101,6 +99,7 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
 
         // Phiếu nhập
         tablePhieuKiemKe = new JTable();
+        tablePhieuKiemKe.setBackground(new Color(0xA1D6E2));
         scrollTablePhieuKK = new JScrollPane();
         tblModel = new DefaultTableModel();
         String[] header = new String[]{"STT", "Mã SP", "Tên sản phẩm", "RAM", "ROM", "Màu sắc", "Số lượng", "Chênh lệch"};
@@ -124,6 +123,12 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
             @Override
             public void mousePressed(MouseEvent e) {
                 int index = tablePhieuKiemKe.getSelectedRow();
+                if (index != -1) {
+                    tableSanPham.setSelectionMode(index);
+                    setFormChiTietPhieu(danhSachKiemke.get(index));
+                    rowPhieuSelect = index;
+                    actionbtn("update");
+                }
             }
         });
 
@@ -144,8 +149,18 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
             @Override
             public void mousePressed(MouseEvent e) {
                 int index = tableSanPham.getSelectedRow();
-                if (index >= 0) {
-                    SanPhamDTO sp = spBUS.getByIndex(index);
+                if (index != -1) {
+                    resetForm();
+                    sp = spBUS.getByIndex(index);
+                    setInfoSanPham(listSP.get(index));
+                    ChiTietKiemKeDTO ctp = checkTonTai();
+                    if (ctp == null) {
+                         actionbtn("add");
+                    } else {
+                        actionbtn("update");
+                        setFormChiTietPhieu(ctp);
+                    }
+
                 }
             }
         });
@@ -308,17 +323,31 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
     public void setInfoSanPham(SanPhamDTO sp) { //set info vào inputform khi nhan ben tablesanpham
         this.txtMaSp.setText(Integer.toString(sp.getMSP()));
         this.txtTenSp.setText(sp.getTEN());
+        this.txtSoLuongImei.setText(Integer.toString(sp.getSL()));
+        if(Integer.parseInt(txtSoLuongImei.getText()) <= 0){
+            this.txtTrangThai.setText("Hết hàng");
+        } else {
+            this.txtTrangThai.setText("Còn hàng");
+        }
     }
 
     public void setFormChiTietPhieu(ChiTietPhieuNhapDTO phieu) { //set info vào inputform khi nhan ben table
         SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
         this.txtMaSp.setText(Integer.toString(ctsp.getMSP()));
         this.txtTenSp.setText(spBUS.getByMaSP(ctsp.getMSP()).getTEN());
-    }
+        this.txtSoLuongImei.setText(Integer.toString(sp.getSL()));
+        if(Integer.parseInt(txtSoLuongImei.getText()) <= 0){
+            this.txtTrangThai.setText("Hết hàng");
+        } else {
+            this.txtTrangThai.setText("Còn hàng");
+        }
+    }   
 
     public void resetForm() {
         this.txtMaSp.setText("");
         this.txtTenSp.setText("");
+        this.txtSoLuongImei.setText("");
+        this.txtTrangThai.setText("");
     }
     public void loadDsSanPham() {
         tblModelSP.setRowCount(0);
@@ -327,6 +356,33 @@ public final class TaoPhieuKiemKe extends JPanel implements ItemListener, Action
                 sanPhamDTO.getMSP(), sanPhamDTO.getTEN()
             });
         }
+    }
+
+    public void actionbtn(String type) { //ẩn hiện button
+        boolean val_1 = type.equals("add");
+        boolean val_2 = type.equals("update");
+        btnAddSp.setEnabled(val_1);
+        // btnImport.setEnabled(val_1);
+        btnEditSP.setEnabled(val_2);
+        btnDelete.setEnabled(val_2);
+        content_btn.revalidate();
+        content_btn.repaint();
+    }
+
+    public ChiTietKiemKeDTO checkTonTai() {
+        ChiTietKiemKeDTO p = phieuKiemKeBUS.findCT(danhSachKiemke, Integer.parseInt(txtMaSp.getText())); 
+            //kiểm tra coi masp này có trong chitietphieu này chưa 
+        return p;
+    }
+
+    public void setFormChiTietPhieu(ChiTietKiemKeDTO phieu) { //set info vào inputform khi nhan ben tablephieunhap
+        SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
+        this.txtMaSp.setText(Integer.toString(ctsp.getMSP()));
+        this.txtTenSp.setText(spBUS.getByMaSP(ctsp.getMSP()).getTEN());
+        // this.cbxDanhMuc.setArr(getThongTinSach(pb.getDANHMUC()));
+        // this.cbxDanhMuc.setSelectedIndex(spBUS.getIndexByMaPhienBan(spdto, phieu.getMaphienbansp()));
+        // this.txtDongia.setText(Integer.toString(phieu.getTIEN()));
+        // this.txtSoLuongSPnhap.setText(Integer.toString(phieu.getSL()));
     }
 
     @Override

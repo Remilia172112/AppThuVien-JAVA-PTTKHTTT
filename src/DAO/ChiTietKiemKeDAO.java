@@ -30,7 +30,7 @@ public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1,t.get(i).getMP()); 
                 pst.setInt(2, t.get(i).getMSP());
-                pst.setInt(3, t.get(i).get());
+                pst.setInt(3, t.get(i).getMSP());
                 pst.setInt(4, t.get(i).getChenhlech());
                 pst.setString(5, t.get(i).getGhichu());
                 result = pst.executeUpdate();
