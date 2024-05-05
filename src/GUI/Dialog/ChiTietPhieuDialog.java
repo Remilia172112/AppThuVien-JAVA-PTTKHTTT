@@ -85,7 +85,7 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
     public ChiTietPhieuDialog(JFrame owner, String title, boolean modal, PhieuTraDTO phieutraDTO) {
         super(owner, title, modal);
         this.phieutra = phieutraDTO;
-        phieuxuatBus = new PhieuXuatBUS();
+        phieutraBus = new PhieuTraBUS();
         chitietphieu = phieutraBus.getChiTietPhieu_Type(phieutraDTO.getMP());
         initComponent(title);
         initPhieuTra();

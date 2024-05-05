@@ -90,7 +90,7 @@ public class ChiTietPhieuTraDAO implements ChiTietInterface<ChiTietPhieuTraDTO> 
                 int maphieu = rs.getInt("MPX");
                 int MSP = rs.getInt("MSP");
                 int SL = rs.getInt("SL");
-                int tienxuat = rs.getInt("TIENXUAT");
+                int tienxuat = rs.getInt("TIENTHU");
                 String lydo = rs.getString("LYDO");
                 ChiTietPhieuTraDTO ctphieu = new ChiTietPhieuTraDTO(maphieu, MSP, SL, tienxuat, lydo);
                 result.add(ctphieu);

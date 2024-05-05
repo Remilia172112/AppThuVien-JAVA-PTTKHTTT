@@ -64,7 +64,7 @@ public class NhanVienDAO implements DAOinterface<NhanVienDTO>{
         int result = 0 ;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "Update NHANVIEN set `TT` = -1 WHERE MNV = ?";
+            String sql = "UPDATE NHANVIEN SET `TT` = -1 WHERE MNV = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
@@ -80,10 +80,10 @@ public class NhanVienDAO implements DAOinterface<NhanVienDTO>{
         ArrayList<NhanVienDTO> result = new ArrayList<NhanVienDTO>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM NHANVIEN WHERE TT = '1'";
+            String sql = "SELECT * FROM NHANVIEN WHERE `TT` = 1";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 int MNV = rs.getInt("MNV");
                 String HOTEN = rs.getString("HOTEN");
                 int GIOITINH = rs.getInt("GIOITINH");

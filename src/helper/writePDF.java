@@ -72,7 +72,7 @@ public class writePDF {
             document.close();
             document = new Document();
             file = new FileOutputStream(url);
-            PdfWriter writer = PdfWriter.getInstance(document, file);
+            PdfWriter.getInstance(document, file);
             document.open();
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Khong tim thay duong dan file " + url);

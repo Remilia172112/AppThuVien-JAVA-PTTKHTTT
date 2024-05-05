@@ -17,7 +17,7 @@ public class PhieuTraBUS {
     private final PhieuTraDAO phieuTraDAO = PhieuTraDAO.getInstance();
 
     private final ChiTietPhieuTraDAO chiTietPhieuTraDAO = ChiTietPhieuTraDAO.getInstance();
-    private final ArrayList<PhieuTraDTO> listPhieuTra;
+    private ArrayList<PhieuTraDTO> listPhieuTra;
 
     NhanVienBUS nvBUS = new NhanVienBUS();
     KhachHangBUS khBUS = new KhachHangBUS();
@@ -27,6 +27,7 @@ public class PhieuTraBUS {
     }
 
     public ArrayList<PhieuTraDTO> getAll() {
+        this.listPhieuTra = phieuTraDAO.selectAll();
         return this.listPhieuTra;
     }
 
@@ -161,5 +162,15 @@ public class PhieuTraBUS {
             check = chiTietPhieuTraDAO.insert(ctPhieu) != 0;
         }
         return check;
+    }
+
+    public String[] getArrMPX() {
+        this.listPhieuTra = phieuTraDAO.selectAll();
+        int size = listPhieuTra.size();
+        String[] result = new String[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = Integer.toString(listPhieuTra.get(i).getMP());
+        }
+        return result;
     }
 }

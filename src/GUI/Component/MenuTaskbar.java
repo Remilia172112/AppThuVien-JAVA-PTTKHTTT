@@ -17,6 +17,7 @@ import GUI.Panel.NhaXuatBan;
 import GUI.Panel.NhanVien;
 import GUI.Panel.PhanQuyen;
 import GUI.Panel.PhieuKiemKe;
+import GUI.Panel.PhieuTra;
 import GUI.Panel.PhieuNhap;
 import GUI.Panel.PhieuXuat;
 import GUI.Panel.SanPham;
@@ -44,6 +45,7 @@ public class MenuTaskbar extends JPanel {
     NhanVien nhanVien;
     TaiKhoan taiKhoan;
     MaKhuyenMai maKhuyenMai;
+    PhieuTra phieutra;
     PhieuKiemKe phieuKiemKe;
     PhanQuyen phanQuyen;
     ThongKe thongKe;
@@ -60,6 +62,7 @@ public class MenuTaskbar extends JPanel {
         {"Nhà xuất bản", "nhaxb.svg", "nhaxuatban"},
         {"Phiếu nhập", "import.svg", "nhaphang"},
         {"Phiếu xuất", "export.svg", "xuathang"},
+        {"Phiếu trả", "export.svg", "trahang"},
         {"Phiếu kiểm kê" , "export.svg", "kiemke"},
         {"Phân quyền", "protect.svg", "nhomquyen"},
         {"Tài khoản", "account.svg", "taikhoan"},
@@ -268,25 +271,32 @@ public class MenuTaskbar extends JPanel {
         listitem[11].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
+                phieutra = new PhieuTra(main , nhanVienDTO);
+                main.setPanel(phieutra);
+            }
+        });
+        listitem[12].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
                 phieuKiemKe = new PhieuKiemKe(main , nhanVienDTO);
                 main.setPanel(phieuKiemKe);
             }
         });
-        listitem[12].addMouseListener(new MouseAdapter() {
+        listitem[13].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
                 phanQuyen = new PhanQuyen(main);
                 main.setPanel(phanQuyen);
             }
         });
-        listitem[13].addMouseListener(new MouseAdapter() {
+        listitem[14].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
                 taiKhoan = new TaiKhoan(main);
                 main.setPanel(taiKhoan);
             }
         });
-        listitem[14].addMouseListener(new MouseAdapter() {
+        listitem[15].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
 
@@ -364,7 +374,7 @@ public class MenuTaskbar extends JPanel {
         lblIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                MyAccount ma = new MyAccount(owner, MenuTaskbar.this, "Chỉnh sửa thông tin tài khoản", true);
+                new MyAccount(owner, MenuTaskbar.this, "Chỉnh sửa thông tin tài khoản", true);
             }
         });
     }

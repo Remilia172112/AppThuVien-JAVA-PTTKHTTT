@@ -66,9 +66,10 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
     PhieuXuatBUS phieuxuatBus = new PhieuXuatBUS();
     NhanVienDTO nvDto;
 
-    ArrayList<SanPhamDTO> listSP; 
+    ArrayList<SanPhamDTO> listSP = new ArrayList<SanPhamDTO>(); 
     ArrayList<ChiTietPhieuTraDTO> chitietphieu;
     int rowPhieuSelect = -1;
+    int slmax = 0;
 
     public TaoPhieuTra(NhanVienDTO nv, String type, Main m ){
         this.nvDto = nv;
@@ -123,7 +124,7 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
         tableSanPham = new JTable();
         scrollTableSanPham = new JScrollPane();
         tblModelSP = new DefaultTableModel();
-        String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "SL tồn"};
+        String[] headerSP = new String[]{"Mã SP", "Tên sản phẩm", "SL đơn"};
         tblModelSP.setColumnIdentifiers(headerSP);
         tableSanPham.setModel(tblModelSP);
         scrollTableSanPham.setViewportView(tableSanPham);
@@ -280,8 +281,9 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
         right_top.setPreferredSize(new Dimension(300, 360));
         right_top.setOpaque(false);
 
-        cbxMaphieu = new SelectForm("Mã phiếu xuất muốn lập", phieuxuatBus.getArrMPX());
+        cbxMaphieu = new SelectForm("Mã phiếu xuất muốn lập", getMPX());
         cbxMaphieu.getCbb().addItemListener(this);
+        cbxMaphieu.setSelectedIndex(0);
         txtNhanVien = new InputForm("Nhân viên nhập");
         txtNhanVien.setText(nvDto.getHOTEN());
         txtNhanVien.setEditable(false);
@@ -311,7 +313,7 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
         pn_tongtien.add(lbltongtien);
         right_bottom.add(pn_tongtien);
 
-        btnTraHang = new ButtonCustom("Nhập hàng", "excel", 14);
+        btnTraHang = new ButtonCustom("Trả hàng", "excel", 14);
         btnTraHang.addActionListener(this);
         right_bottom.add(btnTraHang);
 
@@ -321,6 +323,39 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
 
         contentCenter.add(left, BorderLayout.CENTER);
         contentCenter.add(right, BorderLayout.EAST);
+    }
+
+    public String[] getMPX() {
+        String[] mpx = phieuxuatBus.getArrMPX();
+        String[] mpt = phieutraBus.getArrMPX();
+        if(mpt == null || mpt.length == 0) return mpx;
+        else if(mpx == null || mpx.length == 0) {
+            JOptionPane.showMessageDialog(this, "Chưa có hóa đơn để lập phiếu!", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+            PhieuTra pnlPhieu = new PhieuTra(m, nvDto);
+            m.setPanel(pnlPhieu);
+        }
+        else {
+            int size = 0;
+            for(int i = 0; i < mpt.length; i++) {
+                for(int j = 0; j < mpx.length; j++) if(mpt[i].equals(mpx[j])) {
+                    mpx[j] = "0";
+                    size++;
+                }
+            }
+            if(size == mpx.length) {
+                JOptionPane.showMessageDialog(this, "Tất cả hóa đơn đã lập phiếu!", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
+                PhieuTra pnlPhieu = new PhieuTra(m, nvDto);
+                m.setPanel(pnlPhieu);
+            }
+            else {
+                String[] tmp = new String[size];
+                size = 0;
+                for(int j = 0; j < mpx.length; j++) if(!mpx[j].equals("0")) tmp[size++] = mpx[j];
+                return tmp;
+            }
+            
+        }
+        return null;
     }
 
     public void actionbtn(String type) { //ẩn hiện button
@@ -337,10 +372,10 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
     public void setInfoSanPham(SanPhamDTO sp) { //set info vào inputform khi nhan ben tablesanpham
         this.txtMaSp.setText(Integer.toString(sp.getMSP()));
         this.txtTenSp.setText(sp.getTEN());
-        // ArrayList<SanPhamDTO> spdto = spBUS.getAll();;
-        // cbxDanhMuc.setArr(getThongTinSach(sp.getMSP()));
+        this.txtSoLuongSPtra.setText(Integer.toString(sp.getSL()));
         this.txtMaISBN.setText(sp.getISBN());
         this.txtDongia.setText(Integer.toString(sp.getTIENN()));
+        slmax = sp.getSL();
     }
 
     public void setFormChiTietPhieu(ChiTietPhieuTraDTO phieu) { //set info vào inputform khi nhan ben tablephieunhap
@@ -366,6 +401,7 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
         tblModelSP.setRowCount(0);
         for (int i = 0; i < ctPt.size(); i++) {
             SanPhamDTO sp = spBUS.getByMaSP(ctPt.get(i).getMSP());
+            sp.setSL(ctPt.get(i).getSL());
             listSP.add(sp);
             tblModelSP.addRow(new Object[]{sp.getMSP(), sp.getTEN(), sp.getSL()});
         }
@@ -404,8 +440,8 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
                 JOptionPane.showMessageDialog(this, "Ly dó không được để rỗng!", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            if (Validation.isEmpty(txtSoLuongSPtra.getText()) || !Validation.isNumber(txtSoLuongSPtra.getText())) {
-                JOptionPane.showMessageDialog(this, "Số lượng không được để rỗng và phải là số!", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
+            if (Validation.isEmpty(txtSoLuongSPtra.getText()) || !Validation.isNumber(txtSoLuongSPtra.getText()) || Integer.parseInt(txtSoLuongSPtra.getText()) > slmax ) {
+                JOptionPane.showMessageDialog(this, "Số lượng không được để rỗng, phải là số và không lớn hơn số lượng trong đơn hàng!", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
         } 
@@ -444,9 +480,10 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
     }
 
     public void Fillter() {
-        PhieuXuatDTO tmppx= phieuxuatBus.getByIndex(cbxMaphieu.getSelectedIndex() - 1);
+        PhieuXuatDTO tmppx = phieuxuatBus.getByIndex(cbxMaphieu.getSelectedIndex());
         String name = khBus.getTenKhachHang(tmppx.getMKH());
         txtKhachHang.setText(name);
+        resetForm();
         int mpx = tmppx.getMP();
         ArrayList <ChiTietPhieuDTO> tmp = phieuxuatBus.selectCTP(mpx);
         loadDataTalbeSanPham(tmp);
