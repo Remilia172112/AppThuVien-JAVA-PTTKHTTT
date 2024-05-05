@@ -106,6 +106,18 @@ public class MaKhuyenMaiBUS {
         return p;
     }
 
+    public ArrayList<ChiTietMaKhuyenMaiDTO> listCTofSP(ArrayList<ChiTietMaKhuyenMaiDTO> ctphieu, int masp) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> p = null;
+        int i = 0;
+        while (i < ctphieu.size() ) {
+            if (ctphieu.get(i).getMSP() == masp) {
+                p.add(ctphieu.get(i));
+            } else {
+                i++;
+            }
+        }
+        return p;
+    } 
     public boolean add(MaKhuyenMaiDTO phieu, ArrayList<ChiTietMaKhuyenMaiDTO> ctPhieu) {
         boolean check = mkmDAO.insert(phieu) != 0;
         if (check) {

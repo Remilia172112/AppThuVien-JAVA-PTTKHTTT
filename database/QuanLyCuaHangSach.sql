@@ -81,7 +81,7 @@ CREATE TABLE `CTPHIEUXUAT` (
     PRIMARY KEY(MPX, MSP)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 CREATE TABLE `PHIEUTRA` (
-    `MPX` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khuyến mãi',
+    `MPX` INT(11) NOT NULL COMMENT 'Mã phiếu xuất',
     `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
     `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
     `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
@@ -91,7 +91,7 @@ CREATE TABLE `PHIEUTRA` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 CREATE TABLE `CTPHIEUTRA` (
-    `MPX` INT(11) NOT NULL COMMENT 'Mã khuyến mãi',
+    `MPX` INT(11) NOT NULL COMMENT 'Mã phiếu xuất',
     `MSP` INT(11) NOT NULL COMMENT 'Mã sản phẩm',
     `SL` INT(11) NOT NULL COMMENT 'Số lượng',
     `TIENTHU` INT(11) NOT NULL COMMENT 'Tiền thu',

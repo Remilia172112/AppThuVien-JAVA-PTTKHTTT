@@ -21,6 +21,19 @@ public class KhachHangBUS {
         return this.listKhachHang.get(index);
     }
 
+    public int getByTen(String index) {
+        int i = 0;
+        int vitri = -1;
+        while (i < this.listKhachHang.size() && vitri == -1) {
+            if (listKhachHang.get(i).getHoten().equals(index)) {
+                vitri = i;
+            } else {
+                i++;
+            }
+        }
+        return vitri;
+    }
+
     public int getIndexByMaDV(int makhachhang) {
         int i = 0;
         int vitri = -1;

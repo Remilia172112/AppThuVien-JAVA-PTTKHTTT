@@ -70,7 +70,6 @@ public class ThongKeKhachHangDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ThongKeKhachHangDTO other = (ThongKeKhachHangDTO) obj;
         return true;
     }
 

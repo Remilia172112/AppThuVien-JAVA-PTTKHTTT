@@ -1,6 +1,8 @@
 package DAO;
 
+import DTO.ChiTietMaKhuyenMaiDTO;
 import DTO.ChiTietPhieuDTO;
+import DTO.MaKhuyenMaiDTO;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import BUS.MaKhuyenMaiBUS;
+
 import java.sql.ResultSet;
 
 
@@ -30,6 +35,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
                 int SL = -(t.get(i).getSL());
                 pst.setInt(3, t.get(i).getSL());
                 int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
+                pst.setInt(4, t.get(i).getTIEN());
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
             } catch (SQLException ex) {
@@ -39,6 +45,31 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
         return result;
     }
     
+    public int insert(ArrayList<ChiTietPhieuDTO> t, ArrayList<ChiTietMaKhuyenMaiDTO> ctmkm) {
+        int result = 0;
+        for (int i = 0; i < t.size(); i++) {
+            try {
+                Connection con = (Connection) JDBCUtil.getConnection();
+                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `MKM`, SL`,  `TIENXUAT`) VALUES (?,?,?,?.?)";
+                PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+                pst.setInt(1, t.get(i).getMP());
+                pst.setInt(2, t.get(i).getMSP());
+                MaKhuyenMaiBUS mkmbus = new MaKhuyenMaiBUS();
+                ChiTietMaKhuyenMaiDTO mkm = mkmbus.findCT(ctmkm, t.get(i).getMSP());
+                pst.setString(4, mkm.getMKM());
+                int SL = -(t.get(i).getSL());
+                pst.setInt(4, t.get(i).getSL());
+                int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
+                pst.setInt(5, t.get(i).getTIEN());
+                result = pst.executeUpdate();
+                JDBCUtil.closeConnection(con);
+            } catch (SQLException ex) {
+                Logger.getLogger(ChiTietPhieuXuatDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
+    }
+
     public int reset(ArrayList<ChiTietPhieuDTO> t){
         int result = 0;
         for (int i = 0; i < t.size(); i++) {

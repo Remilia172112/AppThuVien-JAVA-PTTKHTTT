@@ -10,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,11 +24,14 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 
 import BUS.KhachHangBUS;
+import BUS.MaKhuyenMaiBUS;
 import BUS.PhieuXuatBUS;
 import BUS.SanPhamBUS;
 import DAO.NhanVienDAO;
 import DAO.PhieuXuatDAO;
+import DTO.ChiTietMaKhuyenMaiDTO;
 import DTO.ChiTietPhieuDTO;
+import DTO.MaKhuyenMaiDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuXuatDTO;
 import DTO.SanPhamDTO;
@@ -37,6 +42,7 @@ import GUI.Component.InputForm;
 import GUI.Component.Notification;
 import GUI.Component.NumericDocumentFilter;
 import GUI.Component.PanelBorderRadius;
+import GUI.Component.SelectForm;
 import GUI.Dialog.ListKhachHang;
 import helper.Formater;
 
@@ -50,7 +56,7 @@ public final class TaoPhieuXuat extends JPanel {
     DefaultTableModel tblModel, tblModelSP; //table co san 
     ButtonCustom btnAddSp, btnEditSP, btnDelete, btnNhapHang;
     InputForm txtMaphieu, txtNhanVien, txtTenSp, txtMaSp, txtMaISBN, txtSoLuongSPnhap, txtMaGiamGia, txtGiaGiam;
-    // SelectForm cbxDanhMuc; ko dùng nữa
+    SelectForm cbxMaKM; 
     JTextField txtTimKiem;
     Color BackgroundColor = new Color(193 ,237 ,220);
     
@@ -62,12 +68,14 @@ public final class TaoPhieuXuat extends JPanel {
 
     ArrayList<SanPhamDTO> ctpb;
     SanPhamBUS spBUS = new SanPhamBUS();
+    MaKhuyenMaiBUS mkmBUS = new MaKhuyenMaiBUS();
     PhieuXuatBUS phieuXuatBUS = new PhieuXuatBUS();
     SanPhamBUS chiTietSanPhamBUS = new SanPhamBUS();
     KhachHangBUS khachHangBUS = new KhachHangBUS();
     ArrayList<ChiTietPhieuDTO> chitietphieu = new ArrayList<>();
     ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
-    
+    ArrayList<DTO.ChiTietMaKhuyenMaiDTO> listMKM = new ArrayList<>();
+
     TaiKhoanDTO tk;
     private JLabel lbltongtien;
     private JTextField txtKh;
@@ -230,9 +238,28 @@ public final class TaoPhieuXuat extends JPanel {
         txtSoLuongSPnhap = new InputForm("Số lượng");
         PlainDocument soluong = (PlainDocument) txtSoLuongSPnhap.getTxtForm().getDocument();
         soluong.setDocumentFilter((new NumericDocumentFilter())); //chỉ cho nhập số
-        txtMaGiamGia = new InputForm("Mã giảm giá");
+        // txtMaGiamGia = new InputForm("Mã giảm giá");
+        cbxMaKM = new SelectForm("Mã giảm giá", null);
         txtGiaGiam = new InputForm("Giá giảm");
         txtGiaGiam.setEditable(false);
+        cbxMaKM.cbb.addItemListener((ItemListener) new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                int index = cbxMaKM.cbb.getSelectedIndex();
+                int giaxuat = Integer.parseInt(txtMaSp.getText());
+                int phantramgiam = 
+                this.txtGiaGiam.setText(Integer.toString(giaxuat*));
+            }
+            
+        });
+        // txtMaGiamGia.getTxtForm().addKeyListener(new KeyAdapter() {
+        //         @Override
+        //         public void keyReleased(java.awt.event.KeyEvent evt) {
+        //             ArrayList<MaKhuyenMaiDTO> rs = mkmBUS.search(txtMaGiamGia.getText());
+        //     // hhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+        //         }
+        //     });
+
             
         JPanel merge1 = new JPanel(new BorderLayout());
         merge1.setPreferredSize(new Dimension(100, 50));
@@ -243,7 +270,8 @@ public final class TaoPhieuXuat extends JPanel {
         merge2.setPreferredSize(new Dimension(100, 160));
         merge2.add(txtGiaXuat);
         merge2.add(txtSoLuongSPnhap);
-        merge2.add(txtMaGiamGia);
+        // merge2.add(txtMaGiamGia);
+        merge2.add(cbxMaKM);
         merge2.add(txtGiaGiam);
 
         content_right_top.add(txtTenSp, BorderLayout.NORTH);
@@ -431,20 +459,52 @@ public final class TaoPhieuXuat extends JPanel {
         this.txtGiaGiam.setText("");
     }
 
+    public String[] getMaGiamGiaTableSp(int masp) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> listmkmTMP = mkmBUS.getAllct();
+        ArrayList<ChiTietMaKhuyenMaiDTO> listctMKMsp = mkmBUS.listCTofSP(listmkmTMP, masp);
+        // ArrayList<MaKhuyenMaiDTO> rs = mkmBUS.search();
+        int size = listctMKMsp.size();
+        String[] arr = new String[size];
+        for (int i = 0; i < size; i++) {
+            ;
+            arr[i] = listmkmTMP.get(i).getMKM() + " - " + listmkmTMP.get(i).getPTG();
+        }
+        return arr;
+    }
+    public String[] getMaGiamGiaTablePx(int masp) {
+        ArrayList<ChiTietMaKhuyenMaiDTO> listmkmTMP = mkmBUS.getAllct();
+        ArrayList<ChiTietMaKhuyenMaiDTO> listctMKMsp = mkmBUS.listCTofSP(listmkmTMP, masp);
+        // ArrayList<MaKhuyenMaiDTO> rs = mkmBUS.search();
+        int size = listctMKMsp.size();
+        String[] arr = new String[size];
+        for (int i = 0; i < size; i++) {
+            ;
+            arr[i] = listmkmTMP.get(i).getMKM() + " - " + listmkmTMP.get(i).getPTG();
+        }
+        return arr;
+    }
+
     public void setInfoSanPham(SanPhamDTO sp) {
         this.txtMaSp.setText(Integer.toString(sp.getMSP()));
         this.txtTenSp.setText(sp.getTEN());
         this.txtMaISBN.setText(sp.getISBN());
         this.txtGiaXuat.setText(Integer.toString(sp.getTIENX()));
+
+        cbxMaKM.setArr(getMaGiamGiaTableSp(sp.getMSP()));
+        
     }
 
     public void setFormChiTietPhieu(ChiTietPhieuDTO phieu) { //set info vào inputform khi nhan ben tablephieunhap
         SanPhamDTO ctsp = spBUS.getByMaSP(phieu.getMSP());
-
+        ChiTietMaKhuyenMaiDTO ctmkm = mkmBUS.findCT(listMKM, ctsp.getMSP());
         this.txtMaSp.setText(Integer.toString(ctsp.getMSP()));
         this.txtTenSp.setText(spBUS.getByMaSP(ctsp.getMSP()).getTEN());
         this.txtGiaXuat.setText(Integer.toString(phieu.getTIEN()));
         this.txtSoLuongSPnhap.setText(Integer.toString(phieu.getSL()));
+        // this.txtMaGiamGia.setText(ctmkm.getMKM());
+        cbxMaKM.setArr(getMaGiamGiaTablePx(ctsp.getMSP()));
+        cbxMaKM.setSelectedIndex(hdhdtht);
+        
     }
 
     public void loadDataTalbeSanPham(ArrayList<DTO.SanPhamDTO> result) {
@@ -469,6 +529,8 @@ public final class TaoPhieuXuat extends JPanel {
         lbltongtien.setText(Formater.FormatVND(sum));
     }
 
+    
+
     public boolean checkTonTai() {
         ChiTietPhieuDTO p = phieuXuatBUS.findCT(chitietphieu, Integer.parseInt(txtMaSp.getText())); 
             //kiểm tra coi masp này có trong chitietphieu này chưa 
@@ -487,7 +549,7 @@ public final class TaoPhieuXuat extends JPanel {
         } else if (txtSoLuongSPnhap.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Số lượng không được để rỗng !", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             check = false;
-        }
+        } 
         return check;
     }
 
