@@ -73,7 +73,6 @@ public class ThongKeNhaCungCapDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ThongKeNhaCungCapDTO other = (ThongKeNhaCungCapDTO) obj;
         return true;
     }
 

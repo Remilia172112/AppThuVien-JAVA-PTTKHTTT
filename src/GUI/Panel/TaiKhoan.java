@@ -231,7 +231,6 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
         JFileChooser jf = new JFileChooser();
         int result = jf.showOpenDialog(null);
         jf.setDialogTitle("Open file");
-        Workbook workbook = null;
         int k = 0;
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
