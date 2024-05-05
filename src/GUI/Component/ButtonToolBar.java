@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Component;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -10,10 +6,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JButton;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ButtonToolBar extends JButton{
     String permisson;
     

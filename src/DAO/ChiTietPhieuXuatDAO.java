@@ -2,7 +2,6 @@ package DAO;
 
 import DTO.ChiTietMaKhuyenMaiDTO;
 import DTO.ChiTietPhieuDTO;
-import DTO.MaKhuyenMaiDTO;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

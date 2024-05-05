@@ -13,9 +13,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-// import java.util.Date;
-
-
 
 public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
 

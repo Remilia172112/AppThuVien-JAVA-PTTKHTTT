@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI.Component;
 
 import java.awt.event.ActionEvent;
@@ -11,10 +7,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
-/**
- *
- * @author robot
- */
 public final class CustomComboCheck extends JComboBox {
     private Object firstItem;
     JTextArea text;

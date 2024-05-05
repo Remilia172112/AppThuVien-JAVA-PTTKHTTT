@@ -9,7 +9,6 @@ import DTO.ThongKe.ThongKeTonKhoDTO;
 import DTO.ThongKe.ThongKeTungNgayTrongThangDTO;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class ThongKeBUS {
 
