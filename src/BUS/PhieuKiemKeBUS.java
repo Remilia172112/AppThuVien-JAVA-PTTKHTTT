@@ -1,10 +1,9 @@
 package BUS;
 
 import DAO.ChiTietKiemKeDAO;
-import DAO.ChiTietKiemKeSanPhamDAO;
 import DAO.PhieuKiemKeDAO;
 import DTO.ChiTietKiemKeDTO;
-import DTO.ChiTietKiemKeSanPhamDTO;
+import DTO.ChiTietPhieuNhapDTO;
 import DTO.PhieuKiemKeDTO;
 import DTO.PhieuNhapDTO;
 import java.sql.Timestamp;
@@ -19,7 +18,6 @@ public class PhieuKiemKeBUS {
     
     private PhieuKiemKeDAO phieuKiemKeDAO = PhieuKiemKeDAO.getInstance();
     private ChiTietKiemKeDAO chiTietKiemKeDAO = ChiTietKiemKeDAO.getInstance();
-    private ChiTietKiemKeSanPhamDAO chiTietKiemKeSanPhamDAO = ChiTietKiemKeSanPhamDAO.getInstance();
     private NhanVienBUS nvBUS = new NhanVienBUS();
     private ArrayList<PhieuKiemKeDTO> danhSachPhieu;
     
@@ -27,10 +25,9 @@ public class PhieuKiemKeBUS {
         danhSachPhieu = phieuKiemKeDAO.selectAll();
     }
     
-    public void insert(PhieuKiemKeDTO phieuKiemKeDTO, ArrayList<ChiTietKiemKeDTO> dsPhieu, ArrayList<ChiTietKiemKeSanPhamDTO> ctPhieu){
+    public void insert(PhieuKiemKeDTO phieuKiemKeDTO, ArrayList<ChiTietKiemKeDTO> dsPhieu){
         phieuKiemKeDAO.insert(phieuKiemKeDTO);
         chiTietKiemKeDAO.insert(dsPhieu);
-        chiTietKiemKeSanPhamDAO.insert(ctPhieu);
     }
 
     public ArrayList<PhieuKiemKeDTO> getDanhSachPhieu() {
@@ -53,7 +50,6 @@ public class PhieuKiemKeBUS {
     
     public void cancel(int index){
         PhieuKiemKeDTO phieuKiemKeDTO = danhSachPhieu.get(index);
-        chiTietKiemKeSanPhamDAO.delete(phieuKiemKeDTO.getMaphieukiemke()+"");
         chiTietKiemKeDAO.delete(phieuKiemKeDTO.getMaphieukiemke()+"");
         phieuKiemKeDAO.delete(phieuKiemKeDTO.getMaphieukiemke()+"");
         danhSachPhieu.remove(index);
@@ -96,6 +92,19 @@ public class PhieuKiemKeBUS {
             }
         }
         return result;
+    }
+
+    public ChiTietKiemKeDTO findCT(ArrayList<ChiTietKiemKeDTO> ctphieu, int masp) {
+        ChiTietKiemKeDTO p = null;
+    int i = 0;
+    while (i < ctphieu.size() && p == null) {
+        if (ctphieu.get(i).getMSP() == masp) {
+            p = ctphieu.get(i);
+        } else {
+            i++;
+        }
+    }
+    return p;
     }
 }
 
