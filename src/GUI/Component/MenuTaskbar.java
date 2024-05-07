@@ -8,7 +8,7 @@ import DTO.NhanVienDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.Main;
-import GUI.login_page;
+// import GUI.login_page;
 import GUI.Panel.KhachHang;
 import GUI.Panel.KhuVucSach;
 import GUI.Panel.MaKhuyenMai;
@@ -21,6 +21,7 @@ import GUI.Panel.PhieuTra;
 import GUI.Panel.PhieuNhap;
 import GUI.Panel.PhieuXuat;
 import GUI.Panel.SanPham;
+import GUI.login_page;
 import GUI.Panel.TaiKhoan;
 import GUI.Panel.TrangChu;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
@@ -34,6 +35,7 @@ import GUI.Dialog.MyAccount;
 import GUI.Panel.ThongKe.ThongKe;
 public class MenuTaskbar extends JPanel {
 
+    login_page login ;
     TrangChu trangChu;
     SanPham sanPham;
     NhaXuatBan Nhaxuatban;
@@ -90,6 +92,7 @@ public class MenuTaskbar extends JPanel {
 
     public MenuTaskbar(Main main) {
         this.main = main;
+        this.user = null ;
         initComponent();
     }
 
@@ -121,7 +124,8 @@ public class MenuTaskbar extends JPanel {
         pnlTop.add(info, BorderLayout.CENTER);
 
         // Cái info này bỏ vô cho đẹp tí, mai mốt có gì xóa đi đê hiển thị thông tin tài khoản và quyền
-        in4(info);
+        if(user != null) in4(info);
+        else in4_default(info);
 
         bar1 = new JPanel();
         bar1.setBackground(new Color(204, 214, 219));
@@ -160,21 +164,31 @@ public class MenuTaskbar extends JPanel {
 
         this.add(pnlBottom, BorderLayout.SOUTH);
 
-        for (int i = 0; i < getSt.length; i++) {
-            if (i + 1 == getSt.length) {
-                listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
-                pnlBottom.add(listitem[i]);
-            } else {
-                listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
-                pnlCenter.add(listitem[i]);
-                if (i != 0) {
-                    if (!checkRole(getSt[i][2])) {
-                        listitem[i].setVisible(false);
+                for (int i = 0; i < getSt.length; i++) {
+                    if (i + 1 == getSt.length) {
+                        if(user == null) {
+                            listitem[i] = new itemTaskbar("log_out.svg", "Đăng nhập");
+                        } else {
+                            listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
+                        }
+                    pnlBottom.add(listitem[i]);
+                } else {
+                    listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
+                    pnlCenter.add(listitem[i]);
+                    if (i != 0) {
+                        if( user == null) {
+                            if(i != 0 && i != 1 && i != (getSt.length - 1) ) {
+                               listitem[i].setVisible(false);                
+                            } 
+                        } else {
+                            if (!checkRole(getSt[i][2])) {
+                                listitem[i].setVisible(false);
+                            }
+                        }
                     }
                 }
             }
-        }
-
+        
         listitem[0].setBackground(HowerBackgroundColor);
         listitem[0].setForeground(HowerFontColor);
         listitem[0].isSelected = true;
@@ -296,20 +310,30 @@ public class MenuTaskbar extends JPanel {
                 main.setPanel(taiKhoan);
             }
         });
-        listitem[15].addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent evt) {
-
-                int input = JOptionPane.showConfirmDialog(null,
-                        "Bạn có chắc chắn muốn đăng xuất?", "Đăng xuất",
-                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                if (input == 0) {
-                    login_page login = new login_page();
-                    main.dispose();
-                    login.setVisible(true);
+        if(user == null ) {
+            listitem[15].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent evt) {
+                    login = new login_page();
                 }
-            }
-        });
+            });
+        }
+        else {
+                listitem[15].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent evt) {
+                    
+                    int input = JOptionPane.showConfirmDialog(null,
+                            "Bạn có chắc chắn muốn đăng xuất?", "Đăng xuất",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    if (input == 0) {
+                        // login_page login = new login_page();
+                        main.dispose();
+                        // login.setVisible(true);
+                    }
+                }
+            });
+        }
     }
 
     public boolean checkRole(String s) {
@@ -342,6 +366,32 @@ public class MenuTaskbar extends JPanel {
     public void resetChange(){
         this.nhanVienDTO = new NhanVienDAO().selectById(String.valueOf(nhanVienDTO.getMNV()));
     }
+    public void in4_default(JPanel info) {
+        JPanel pnlIcon = new JPanel(new FlowLayout());
+        pnlIcon.setPreferredSize(new Dimension(60, 0));
+        pnlIcon.setOpaque(false);
+        info.add(pnlIcon, BorderLayout.WEST);
+        JLabel lblIcon = new JLabel();
+        lblIcon.setPreferredSize(new Dimension(50, 70));
+        lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
+
+        pnlIcon.add(lblIcon);
+
+        JPanel pnlInfo = new JPanel();
+        pnlInfo.setOpaque(false);
+        pnlInfo.setLayout(new FlowLayout(0, 10, 5));
+        pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
+        info.add(pnlInfo, BorderLayout.CENTER);
+        lblUsername = new JLabel("Unknow");
+        lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
+        pnlInfo.add(lblUsername);
+
+        lblTenNhomQuyen = new JLabel("Chế độ xem");
+        lblTenNhomQuyen.putClientProperty("FlatLaf.style", "font: 120% $light.font");
+        lblTenNhomQuyen.setForeground(Color.GRAY);
+        pnlInfo.add(lblTenNhomQuyen);
+    }
+
     public void in4(JPanel info) {
         JPanel pnlIcon = new JPanel(new FlowLayout());
         pnlIcon.setPreferredSize(new Dimension(60, 0));

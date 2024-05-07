@@ -46,7 +46,6 @@ public class TrangChu extends JPanel {
         center.setPreferredSize(new Dimension(1100, 800));
         center.setLayout(new GridLayout(3 , 1 ,0,20));
         center.setBorder(new EmptyBorder(30,110,30,220));
-        // center.setLayout(new FlowLayout(1, 50, 50));
 
 
         content = new PanelShadow[getSt.length];
@@ -55,49 +54,12 @@ public class TrangChu extends JPanel {
         objDetail = new JLabel[3];
         objDetail1 = new JLabel[3];
 
-        // infoIcon = new JLabel[3];
 
         for (int i = 0; i < getSt.length; i++) {
-            //   infoDetail[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(getSt[i][1])));
-            //   objDetail[i].setText(getSt[i][0]);
-            //   objDetail1[i].setText(getSt[i][2]);
-            //   info[i].setLayout(getLayout());
             content[i] = new PanelShadow();
             content[i] = new PanelShadow(getSt[i][1], getSt[i][0], getSt[i][2]);
 
             center.add(content[i]);
-//            content[i].setPreferredSize(new Dimension(300, 450));
-//            content[i].setBackground(MainColor);
-//            content[i].setLayout(new FlowLayout(1, 0, 10));
-//
-//            info[i] = new JPanel();
-//            info[i].setPreferredSize(new Dimension(250, 150));
-//            info[i].setBackground(BackgroundColor);
-//            info[i].setLayout(null);
-//
-//            infoIcon[i] = new JLabel();
-//            infoIcon[i].setBounds(60, 20, 120, 120);
-//            infoIcon[i].setIcon(new javax.swing.ImageIcon(getClass().getResource(iconArr[i])));
-//            info[i].add(infoIcon[i]);
-//
-//            content[i].add(info[i]);
-//
-//            infoDetail[i] = new JLabel(tkArr[i]);
-//            infoDetail[i].setPreferredSize(new Dimension(190, 60));
-//            infoDetail[i].setFont(new Font("Segoe UI", Font.BOLD, 16));
-//            content[i].add(infoDetail[i]);
-//
-//            objDetail[i] = new JLabel(obj1Arr[i]);
-//            objDetail[i].setPreferredSize(new Dimension(220, 20));
-//            objDetail[i].setFont(new Font("Segoe UI", Font.PLAIN, 15));
-//            content[i].add(objDetail[i]);
-//
-//            objDetail[i] = new JLabel(obj2Arr[i]);
-//            objDetail[i].setPreferredSize(new Dimension(220, 20));
-//            objDetail[i].setFont(new Font("Segoe UI", Font.PLAIN, 15));
-//            content[i].add(objDetail[i]);
-//
-        //    center.add(content[i]);
 
         }
 
