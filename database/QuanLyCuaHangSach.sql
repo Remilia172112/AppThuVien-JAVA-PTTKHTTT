@@ -51,6 +51,16 @@ CREATE TABLE `TAIKHOAN` (
     PRIMARY KEY(MNV, TDN)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
+CREATE TABLE `TAIKHOANKH` (
+    `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
+    `MK` VARCHAR(255) NOT NULL COMMENT 'Mật khẩu',
+    `TDN` VARCHAR(255) NOT NULL UNIQUE COMMENT 'Tên đăng nhập',
+    `MNQ` INT(11) NOT NULL COMMENT 'Mã nhóm quyền',
+    `TT` INT(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái',
+    `OTP` VARCHAR(50) DEFAULT NULL COMMENT 'Mã OTP',
+    PRIMARY KEY(MKH, TDN)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 CREATE TABLE `KHACHHANG` (
     `MKH` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã khách hàng',
     `HOTEN` VARCHAR(255) NOT NULL COMMENT 'Họ và tên KH',
@@ -64,7 +74,7 @@ CREATE TABLE `KHACHHANG` (
 
 CREATE TABLE `PHIEUXUAT` (
     `MPX` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã phiếu xuất',
-    `MNV` INT(11) NOT NULL COMMENT 'Mã nhân viên',
+    `MNV` INT(11) DEFAULT 1 COMMENT 'Mã nhân viên',
     `MKH` INT(11) NOT NULL COMMENT 'Mã khách hàng',
     `TIEN` INT(11) NOT NULL COMMENT 'Tổng tiền',
     `TG` DATETIME DEFAULT current_timestamp() COMMENT 'Thời gian tạo',
@@ -197,20 +207,23 @@ CREATE TABLE `KHUVUCSACH` (
 
 INSERT INTO `DANHMUCCHUCNANG`(`MCN`, `TEN`, `TT`)
 VALUES 
-        ('sanpham', 'Quản lý sản phẩm', 0),
-        ('khachhang', 'Quản lý khách hàng', 0),
-        ('nhacungcap', 'Quản lý nhà cung cấp', 0),
-        ('nhaxuatban', 'Quản lý nhà xuất bản', 0),
-        ('nhanvien', 'Quản lý nhân viên', 0),
-        ('nhaphang', 'Quản lý nhập hàng', 0),
-        ('xuathang', 'Quản lý xuất hàng', 0),
-        ('kiemke', 'Quản lý kiểm kê', 0),
-        ('trahang', 'Quản lý trả hàng', 0),
-        ('khuvucsach', 'Quản lý khu vực sách', 0),
-        ('nhomquyen', 'Quản lý nhóm quyền', 0),
-        ('taikhoan', 'Quản lý tài khoản', 0),
-        ('makhuyenmai', 'Quản lý mã khuyến mãi', 0),
-        ('thongke', 'Quản lý thống kê', 0);
+        ('sanpham', 'Quản lý sản phẩm', 1),
+        ('khachhang', 'Quản lý khách hàng', 1),
+        ('nhacungcap', 'Quản lý nhà cung cấp', 1),
+        ('nhaxuatban', 'Quản lý nhà xuất bản', 1),
+        ('nhanvien', 'Quản lý nhân viên', 1),
+        ('nhaphang', 'Quản lý nhập hàng', 1),
+        ('xuathang', 'Quản lý xuất hàng', 1),
+        ('kiemke', 'Quản lý kiểm kê', 1),
+        ('trahang', 'Quản lý trả hàng', 1),
+        ('khuvucsach', 'Quản lý khu vực sách', 1),
+        ('nhomquyen', 'Quản lý nhóm quyền', 1),
+        ('taikhoan', 'Quản lý tài khoản', 1),
+        ('makhuyenmai', 'Quản lý mã khuyến mãi', 1),
+        ('thongke', 'Quản lý thống kê', 1),
+        ('xemhang', 'Chức năng xem hàng', 1),
+        ('giohang', 'Chức năng xem giỏ hàng', 1),
+        ('donhang', 'Chức năng xem đơn hàng', 1);
 
 INSERT INTO `CTQUYEN` (`MNQ`, `MCN`, `HANHDONG`)
 VALUES
@@ -303,13 +316,23 @@ VALUES
         (3, 'nhaxuatban', 'create'),
         (3, 'nhaxuatban', 'delete'),
         (3, 'nhaxuatban', 'update'),
-        (3, 'nhaxuatban', 'view');
+        (3, 'nhaxuatban', 'view'),
+        (4, 'xemhang', 'view'),
+        (4, 'giohang', 'create'),
+        (4, 'giohang', 'delete'),
+        (4, 'giohang', 'update'),
+        (4, 'giohang', 'view'),
+        (4, 'donhang', 'create'),
+        (4, 'donhang', 'delete'),
+        (4, 'donhang', 'update'),
+        (4, 'donhang', 'view');
 
 INSERT INTO `NHOMQUYEN` (`TEN`, `TT`)
 VALUES
         ('Quản lý cửa hàng', 1),
         ('Nhân viên bán hàng', 1),
-        ('Nhân viên quản lý kho', 1);
+        ('Nhân viên quản lý kho', 1),
+        ('Khách hàng', 1);
 
 
 INSERT INTO `NHANVIEN` (`HOTEN`, `GIOITINH`, `NGAYSINH`, `SDT`, `EMAIL`, `TT`)
@@ -326,6 +349,10 @@ VALUES
         (1, 'admin', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 1, 1, 'null'),
         (2, 'NV2', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 2, 1, 'null'),
         (3, 'NV3', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 3, 1, 'null');
+
+INSERT INTO `TAIKHOANKH` (`MKH`, `TDN`, `MK`, `MNQ`, `TT`, `OTP`)
+VALUES
+        (1, 'KH1', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 4, 1, 'null');
 
 INSERT INTO `KHACHHANG` (`HOTEN`, `DIACHI`, `SDT`, `TT`, `NGAYTHAMGIA`)
 VALUES
@@ -501,6 +528,9 @@ ALTER TABLE `CTQUYEN` ADD CONSTRAINT FK_MCN_CTQUYEN FOREIGN KEY (MCN) REFERENCES
 
 ALTER TABLE `TAIKHOAN` ADD CONSTRAINT FK_MNV_TAIKHOAN FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `TAIKHOAN` ADD CONSTRAINT FK_MNQ_TAIKHOAN FOREIGN KEY (MNQ) REFERENCES `NHOMQUYEN`(MNQ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `TAIKHOANKH` ADD CONSTRAINT FK_MKH_TAIKHOANKH FOREIGN KEY (MKH) REFERENCES `KHACHHANG`(MKH) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `TAIKHOANKH` ADD CONSTRAINT FK_MNQ_TAIKHOANKH FOREIGN KEY (MNQ) REFERENCES `NHOMQUYEN`(MNQ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 ALTER TABLE `PHIEUXUAT` ADD CONSTRAINT FK_MNV_PHIEUXUAT FOREIGN KEY (MNV) REFERENCES `NHANVIEN`(MNV) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE `PHIEUXUAT` ADD CONSTRAINT FK_MKH_PHIEUXUAT FOREIGN KEY (MKH) REFERENCES `KHACHHANG`(MKH) ON DELETE NO ACTION ON UPDATE NO ACTION;

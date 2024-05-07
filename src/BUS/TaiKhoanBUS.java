@@ -15,6 +15,7 @@ public class TaiKhoanBUS {
     }
     
     public ArrayList<TaiKhoanDTO> getTaiKhoanAll(){
+        this.listTaiKhoan  = TaiKhoanDAO.getInstance().selectAll();
         return listTaiKhoan;
     }
     
@@ -39,11 +40,11 @@ public class TaiKhoanBUS {
     }
     
     public void addAcc(TaiKhoanDTO tk){
-        listTaiKhoan.add(tk);
+        TaiKhoanDAO.getInstance().insert(tk);
     }
     
-    public void updateAcc(int index, TaiKhoanDTO tk){
-        listTaiKhoan.set(index, tk);
+    public void updateAcc(TaiKhoanDTO tk){
+        TaiKhoanDAO.getInstance().update(tk);
     }
     
     public void deleteAcc(int manv){

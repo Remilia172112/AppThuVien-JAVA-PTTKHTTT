@@ -327,7 +327,7 @@ public class MenuTaskbar extends JPanel {
 
     public void pnlMenuTaskbarMousePress(MouseEvent evt) {
 
-        for (int i = 0; i < getSt.length; i++) {
+        for (int i = 0; i < listitem.length; i++) {
             if (evt.getSource() == listitem[i]) {
                 listitem[i].isSelected = true;
                 listitem[i].setBackground(HowerBackgroundColor);

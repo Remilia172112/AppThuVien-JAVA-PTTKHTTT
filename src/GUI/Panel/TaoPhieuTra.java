@@ -339,8 +339,8 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
             for(int i = 0; i < mpt.length; i++) {
                 for(int j = 0; j < mpx.length; j++) if(mpt[i].equals(mpx[j])) {
                     mpx[j] = "0";
-                    size++;
                 }
+                else size++;
             }
             if(size == mpx.length) {
                 JOptionPane.showMessageDialog(this, "Tất cả hóa đơn đã lập phiếu!", "Cảnh báo !", JOptionPane.ERROR_MESSAGE);
@@ -374,7 +374,7 @@ public final class TaoPhieuTra extends JPanel implements ItemListener, ActionLis
         this.txtTenSp.setText(sp.getTEN());
         this.txtSoLuongSPtra.setText(Integer.toString(sp.getSL()));
         this.txtMaISBN.setText(sp.getISBN());
-        this.txtDongia.setText(Integer.toString(sp.getTIENN()));
+        this.txtDongia.setText(Integer.toString(sp.getTIENN()/2));
         slmax = sp.getSL();
     }
 

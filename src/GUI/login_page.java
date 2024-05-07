@@ -65,7 +65,6 @@ public class login_page extends JFrame implements KeyListener{
         paneldn.setBackground(Color.BLACK);
         paneldn.setPreferredSize(new Dimension(400, 200));
         paneldn.setLayout(new GridLayout(2, 1));
- 
     
         txtUsername = new InputForm(" Tên đăng nhập");
         // txtUsername.setPreferredSize(new Dimension(400, 200)); // Adjust dimensions
@@ -91,7 +90,6 @@ public class login_page extends JFrame implements KeyListener{
         lb2 = new JLabel("<html><u><i style='font-size: 12px;'>Quên mật khẩu ?</i></u></html>", JLabel.RIGHT);
         lb2.setPreferredSize(new Dimension(400,50));
         lb2.setForeground(Color.BLACK); // Set text color
-        // lb2.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
         lb2.addMouseListener(new MouseAdapter() {
             @Override   
             public void mouseEntered(MouseEvent e) {
@@ -139,20 +137,6 @@ public class login_page extends JFrame implements KeyListener{
 
         login_nhap.add(buttonPanel); 
         this.add(login_nhap , BorderLayout.EAST);
-
-        // lb_img_1 = new JLabel(new ImageIcon("./src/img/23.png"));
-        // // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
-        // lb_img_1.setBackground(Color.WHITE);
-        // lb_img_1.setPreferredSize(new Dimension(400,150));
-        // // lb_img_1.setAlignmentX(Component.CENTER_ALIGNMENT); // Centerr
-        // this.add(lb_img_1 , BorderLayout.WEST);
-
-        // lb_img_2 = new JLabel(new ImageIcon("./src/img/tra.png"));
-        // // lb_img_2.setBorder(new EmptyBorder(30,300,30,1));
-        // lb_img_2.setBackground(Color.WHITE);
-        // lb_img_2.setPreferredSize(new Dimension(300,50));
-        // this.add(lb_img_2 , BorderLayout.EAST);
-
     }
         public void checkLogin() throws UnsupportedLookAndFeelException {
         String usernameCheck = txtUsername.getText();
@@ -204,10 +188,6 @@ public class login_page extends JFrame implements KeyListener{
         this.add(bo, BorderLayout.WEST);
 
         lb_img_1 = new JLabel(new ImageIcon("./src/img/1.png"));
-        // lb_img_1.setBorder(new EmptyBorder(30,0,30,80));
-        // lb_img_1.setBackground(Color.WHITE);
-        // lb_img_1.setPreferredSize(new Dimension(400,150));
-        // lb_img_1.setAlignmentX(Component.CENTER_ALIGNMENT); // Centerr
         bo.add(lb_img_1);
     }
 
