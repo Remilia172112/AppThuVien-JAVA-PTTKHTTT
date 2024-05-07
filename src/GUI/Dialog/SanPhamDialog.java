@@ -101,7 +101,7 @@ public final class SanPhamDialog extends JDialog implements ActionListener {
         namXB = new InputForm("Năm xuất bản");
         tenTG = new InputForm("Tên tác giả");
         cbNXB = new SelectForm("Nhà xuất bản", arrnxb);
-        khuvuc = new SelectForm("Khu vực kho", arrkhuvuc);
+        khuvuc = new SelectForm("Khu vực sách", arrkhuvuc);
         PlainDocument NamXB = (PlainDocument)namXB.getTxtForm().getDocument();
         NamXB.setDocumentFilter((new NumericDocumentFilter()));
         txtgianhap = new InputForm("Giá nhập");

@@ -72,7 +72,8 @@ public class ChiTietKiemKeDAO implements ChiTietInterface<ChiTietKiemKeDTO>{
                 int MSP = rs.getInt("MSP");
                 int TTSP = rs.getInt("TRANGTHAISP");
                 String ghichu = rs.getString("GHICHU");
-                ChiTietKiemKeDTO ctphieu = new ChiTietKiemKeDTO(MPKK, MSP,TTSP,ghichu);
+                int tien = rs.getInt("TIEN");
+                ChiTietKiemKeDTO ctphieu = new ChiTietKiemKeDTO(MPKK, MSP,TTSP,ghichu,tien);
                 result.add(ctphieu);
             }
             JDBCUtil.closeConnection(con);

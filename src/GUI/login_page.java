@@ -33,11 +33,20 @@ public class login_page extends JFrame implements KeyListener{
     }
 
     private void init() { 
+        FlatRobotoFont.install();
+        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+        FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        FlatIntelliJLaf.setup();
+        UIManager.put("PasswordField.showRevealButton", true);
+
+
         this.setTitle("Đăng nhập" );
         this.setSize(new Dimension(900 , 500));
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setLayout(new BorderLayout(0 , 0));
         JFrame jf = this ;
 
@@ -184,17 +193,17 @@ public class login_page extends JFrame implements KeyListener{
     }
     
 
-    public static void main(String[] args) {
-        FlatRobotoFont.install();
-        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
-        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
-        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
-        FlatIntelliJLaf.registerCustomDefaultsSource("style");
-        FlatIntelliJLaf.setup();
+    // public static void main(String[] args) {
+        // FlatRobotoFont.install();
+        // FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+        // FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+        // FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+        // FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        // FlatIntelliJLaf.setup();
 
-        UIManager.put("PasswordField.showRevealButton", true);
-        new login_page();
-    }
+        // UIManager.put("PasswordField.showRevealButton", true);
+        // new login_page();
+    // }
 
     public void imgIntro() {
         JPanel bo = new JPanel();

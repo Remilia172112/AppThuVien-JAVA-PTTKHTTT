@@ -41,6 +41,7 @@ public class Main extends JFrame {
         MainContent.setLayout(new BorderLayout(0, 0));
 
         this.add(MainContent, BorderLayout.CENTER);
+        this.setVisible(true);
 
         trangChu = new TrangChu();
         MainContent.add(trangChu).setVisible(true);
@@ -83,5 +84,16 @@ public class Main extends JFrame {
         MainContent.add(pn).setVisible(true);
         MainContent.repaint();
         MainContent.validate();
+    }
+
+    public static void main(String[] args) {
+        FlatRobotoFont.install();
+        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+        FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        FlatIntelliJLaf.setup();
+        UIManager.put("PasswordField.showRevealButton", true);
+        new Main();
     }
 }
