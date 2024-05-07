@@ -67,11 +67,11 @@ public class ListNhanVien extends JDialog implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(getRow()<0){
-                    int input = JOptionPane.showConfirmDialog(null, 
+                    JOptionPane.showConfirmDialog(null, 
                 "Vui lòng chọn nhân viên!:)", "Thông báo", JOptionPane.DEFAULT_OPTION);
                 } else{
                     dispose();
-                    TaiKhoanDialog tkd = new TaiKhoanDialog(guiTaiKhoan, guiTaiKhoan.owner, "Thêm nhân viên", true, "create", listnv.get(getRow()).getMNV());
+                    new TaiKhoanDialog(guiTaiKhoan, guiTaiKhoan.owner, "Thêm nhân viên", true, "create", listnv.get(getRow()).getMNV());
                 }
             }
             

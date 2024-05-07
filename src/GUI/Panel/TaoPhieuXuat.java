@@ -2,6 +2,7 @@ package GUI.Panel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.stream.Stream;
 import java.awt.*;
 import java.awt.event.MouseListener;
@@ -33,6 +34,7 @@ import DAO.NhanVienDAO;
 import DAO.PhieuXuatDAO;
 import DTO.ChiTietPhieuDTO;
 import DTO.KhachHangDTO;
+import DTO.MaKhuyenMaiDTO;
 import DTO.NhanVienDTO;
 import DTO.PhieuXuatDTO;
 import DTO.SanPhamDTO;
@@ -82,7 +84,7 @@ public final class TaoPhieuXuat extends JPanel {
     private JLabel lbltongtien;
     private JTextField txtKh;
     private Main mainChinh;
-    private ButtonCustom btnQuayLai; //chua use
+    // private ButtonCustom btnQuayLai; //chua use
     private InputForm txtGiaXuat;
 
     public TaoPhieuXuat(Main mainChinh, TaiKhoanDTO tk, String type) {
@@ -385,7 +387,7 @@ public final class TaoPhieuXuat extends JPanel {
         ButtonCustom btnKh = new ButtonCustom("Chọn khách hàng", "success", 14);
         kJPanelLeft.add(btnKh);
         btnKh.addActionListener((ActionEvent e) -> {
-            ListKhachHang listkh = new ListKhachHang(TaoPhieuXuat.this, owner, "Chọn khách hàng", true);
+            new ListKhachHang(TaoPhieuXuat.this, owner, "Chọn khách hàng", true);
         });
 
         txtKh = new JTextField("");
@@ -417,7 +419,7 @@ public final class TaoPhieuXuat extends JPanel {
         pn_tongtien.add(lbltongtien);
         right_bottom.add(pn_tongtien);
 
-        btnNhapHang = new ButtonCustom("Nhập hàng", "excel", 14);
+        btnNhapHang = new ButtonCustom("Xuất hàng", "excel", 14);
         btnNhapHang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -457,12 +459,31 @@ public final class TaoPhieuXuat extends JPanel {
     public String[] getMaGiamGiaTable(int masp) {
         listctMKM = mkmBUS.Getctmkm(masp);
         int size = listctMKM.size();
-        String[] arr = new String[size];
+        ArrayList<String> arr = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            arr[i] = listctMKM.get(i).getMKM();
+            if(!validateSelectDate(listctMKM.get(i))) arr.add(listctMKM.get(i).getMKM());
         }
-        arr = Stream.concat(Stream.of("Chọn"), Arrays.stream(arr)).toArray(String[]::new);
-        return arr;
+        String[] tmp = new String[arr.size()];
+        for (int i = 0; i < tmp.length; i++) tmp[i] = arr.get(i);
+        tmp = Stream.concat(Stream.of("Chọn"), Arrays.stream(tmp)).toArray(String[]::new);
+        return tmp;
+    }
+
+    public boolean validateSelectDate(DTO.ChiTietMaKhuyenMaiDTO tmp) {
+        MaKhuyenMaiDTO a = mkmBUS.selectMkm(tmp.getMKM());
+        Date time_start = a.getTGBD();
+        Date time_end = a.getTGKT();
+        Date current_date = new Date();
+        if (time_start != null && time_start.after(current_date)) {
+            return false;
+        }
+        if (time_end != null && time_end.after(current_date)) {
+            return false;
+        }
+        if (time_start != null && time_end != null && time_start.after(time_end)) {
+            return false;
+        }
+        return true;
     }
 
     public void setInfoSanPham(SanPhamDTO sp) {

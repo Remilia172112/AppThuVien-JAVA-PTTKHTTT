@@ -97,14 +97,14 @@ public class NhanVienBUS implements ActionListener, DocumentListener {
         String btn = e.getActionCommand();
         switch (btn) {
             case "THÊM" -> {
-                NhanVienDialog nvthem = new NhanVienDialog(this, nv.owner, true, "Thêm nhân viên", "create");
+                new NhanVienDialog(this, nv.owner, true, "Thêm nhân viên", "create");
             }
             case "SỬA" -> {
                 int index = nv.getRow();
                 if (index < 0) {
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên cần sửa");
                 } else {
-                    NhanVienDialog nvsua = new NhanVienDialog(this, nv.owner, true, "Sửa nhân viên", "update", nv.getNhanVien());
+                    new NhanVienDialog(this, nv.owner, true, "Sửa nhân viên", "update", nv.getNhanVien());
                 }
             }
             case "XÓA" -> {
@@ -118,7 +118,7 @@ public class NhanVienBUS implements ActionListener, DocumentListener {
                 if (nv.getRow() < 0) {
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn nhân viên cần xóa");
                 } else {
-                    NhanVienDialog nvsua = new NhanVienDialog(this, nv.owner, true, "Xem nhân viên", "detail", nv.getNhanVien());
+                    new NhanVienDialog(this, nv.owner, true, "Xem nhân viên", "detail", nv.getNhanVien());
                 }
             }
             case "NHẬP EXCEL" -> {
@@ -327,7 +327,6 @@ public class NhanVienBUS implements ActionListener, DocumentListener {
         JFileChooser jf = new JFileChooser();
         int result = jf.showOpenDialog(null);
         jf.setDialogTitle("Open file");
-        Workbook workbook = null;
         int k = 0;
         if (result == JFileChooser.APPROVE_OPTION) {
             try {

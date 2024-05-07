@@ -70,7 +70,7 @@ public class ListKhachHang extends JDialog implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(getRow()<0){
-                    int input = JOptionPane.showConfirmDialog(null, 
+                    JOptionPane.showConfirmDialog(null, 
                 "Vui lòng chọn khách hàng!:)", "Thông báo", JOptionPane.DEFAULT_OPTION);
                 } else{
                     taoPhieuXuat.setKhachHang(listKh.get(getRow()).getMaKH());

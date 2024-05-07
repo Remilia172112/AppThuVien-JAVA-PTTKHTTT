@@ -201,7 +201,7 @@ public class PhieuKiemKe extends JPanel implements ActionListener, PropertyChang
         } else if (source == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                ChiTietPhieuKiemKeDialog dialog = new ChiTietPhieuKiemKeDialog(m, "Thông tin phiếu kiểm kê", true, listPhieu.get(index));
+                new ChiTietPhieuKiemKeDialog(m, "Thông tin phiếu kiểm kê", true, listPhieu.get(index));
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn phiếu cần xem!");
             }

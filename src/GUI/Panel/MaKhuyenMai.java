@@ -156,7 +156,7 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                MaKhuyenMaiDialog ctsp = new MaKhuyenMaiDialog(m, "Thông tin mã khuyến mãi", true, listMKM.get(index));
+                new MaKhuyenMaiDialog(m, "Thông tin mã khuyến mãi", true, listMKM.get(index));
             }
         }
         else if (e.getSource() == mainFunction.btn.get("delete")) {
@@ -191,7 +191,6 @@ public class MaKhuyenMai extends JPanel implements ActionListener, ItemListener 
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        String type = (String) search.cbxChoose.getSelectedItem();
         String txt = search.txtSearchForm.getText();
         listMKM = mkmBUS.search(txt);
         loadDataTable(listMKM);

@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -167,11 +166,9 @@ public final class NhaXuatBan extends JPanel implements ActionListener, ItemList
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelJTableImport = null;
-        ArrayList<DTO.NhaXuatBanDTO> listExcel = new ArrayList<DTO.NhaXuatBanDTO>();
         JFileChooser jf = new JFileChooser();
         int result = jf.showOpenDialog(null);
         jf.setDialogTitle("Open file");
-        Workbook workbook = null;
         int k = 0;
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
@@ -225,11 +222,11 @@ public final class NhaXuatBan extends JPanel implements ActionListener, ItemList
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mainFunction.btn.get("create")) {
-            NhaXuatBanDialog dvtDialog = new NhaXuatBanDialog(this, owner, "Thêm nhà xuất bản", true, "create");
+            new NhaXuatBanDialog(this, owner, "Thêm nhà xuất bản", true, "create");
         } else if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                NhaXuatBanDialog nxbDialog = new NhaXuatBanDialog(this, owner, "Chỉnh sửa nhà xuất bản", true, "update", listnxb.get(index));
+                new NhaXuatBanDialog(this, owner, "Chỉnh sửa nhà xuất bản", true, "update", listnxb.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("delete")) {
             int index = getRowSelected();
@@ -245,7 +242,7 @@ public final class NhaXuatBan extends JPanel implements ActionListener, ItemList
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                NhaXuatBanDialog nxbDialog = new NhaXuatBanDialog(this, owner, "Chi tiết nhà xuất bản", true, "view", listnxb.get(index));
+                new NhaXuatBanDialog(this, owner, "Chi tiết nhà xuất bản", true, "view", listnxb.get(index));
             }
         } else if (e.getSource() == search.btnReset) {
             search.txtSearchForm.setText("");

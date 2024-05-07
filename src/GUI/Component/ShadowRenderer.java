@@ -1,6 +1,5 @@
 package GUI.Component;
 
-import GUI.Component.GraphicsUtilities;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 

@@ -33,7 +33,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
                 pst.setInt(2, t.get(i).getMSP());
                 int SL = -(t.get(i).getSL());
                 pst.setInt(3, t.get(i).getSL());
-                int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
+                SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
                 pst.setInt(4, t.get(i).getTIEN());
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);
@@ -58,7 +58,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
                 pst.setString(4, mkm.getMKM());
                 int SL = -(t.get(i).getSL());
                 pst.setInt(4, t.get(i).getSL());
-                int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
+                SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
                 pst.setInt(5, t.get(i).getTIEN());
                 result = pst.executeUpdate();
                 JDBCUtil.closeConnection(con);

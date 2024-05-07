@@ -290,7 +290,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
             if (index != -1) {
 //                nhapKho = new TaoPhieuNhap(nv, "view", listPhieu.get(index), m);
 //                m.setPanel(nhapKho);
-                ChiTietPhieuDialog ctsp = new ChiTietPhieuDialog(m, "Thông tin phiếu nhập", true, listPhieu.get(index));
+                new ChiTietPhieuDialog(m, "Thông tin phiếu nhập", true, listPhieu.get(index));
             }
         } else if (source == mainFunction.btn.get("cancel")) {
             int index = getRowSelected();

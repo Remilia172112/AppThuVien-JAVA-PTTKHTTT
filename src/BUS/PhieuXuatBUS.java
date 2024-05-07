@@ -17,8 +17,7 @@ public class PhieuXuatBUS {
     private final PhieuXuatDAO phieuXuatDAO = PhieuXuatDAO.getInstance();
 
     private final ChiTietPhieuXuatDAO chiTietPhieuXuatDAO = ChiTietPhieuXuatDAO.getInstance();
-    // private final SanPhamDAO chiTietSanPhamDAO = SanPhamDAO.getInstance();
-    private final ArrayList<PhieuXuatDTO> listPhieuXuat;
+    private ArrayList<PhieuXuatDTO> listPhieuXuat;
 
     NhanVienBUS nvBUS = new NhanVienBUS();
     KhachHangBUS khBUS = new KhachHangBUS();
@@ -28,6 +27,7 @@ public class PhieuXuatBUS {
     }
 
     public ArrayList<PhieuXuatDTO> getAll() {
+        this.listPhieuXuat = phieuXuatDAO.selectAll();
         return this.listPhieuXuat;
     }
 

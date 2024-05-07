@@ -100,7 +100,6 @@ public class TaiKhoanDialog extends JDialog {
                         int manhom = listNq.get(maNhomQuyen.getSelectedIndex()).getManhomquyen();
                         int tt = trangthai.getSelectedIndex();
                         TaiKhoanDTO tk = new TaiKhoanDTO(manv, tendangnhap, pass, manhom, tt);
-                        TaiKhoanDAO.getInstance().insert(tk);
                         taiKhoan.taiKhoanBus.addAcc(tk);
                         taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
                         JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!");
@@ -124,8 +123,7 @@ public class TaiKhoanDialog extends JDialog {
                     int manhom = listNq.get(maNhomQuyen.getSelectedIndex()).getManhomquyen();
                     int tt = trangthai.getSelectedIndex();
                     TaiKhoanDTO tk = new TaiKhoanDTO(manv, tendangnhap, pass, manhom, tt);
-                    TaiKhoanDAO.getInstance().update(tk);
-                    taiKhoan.taiKhoanBus.updateAcc(taiKhoan.getRowSelected(), tk);
+                    taiKhoan.taiKhoanBus.updateAcc(tk);
                     taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
                     JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
                     dispose();

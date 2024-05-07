@@ -36,7 +36,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -173,11 +172,9 @@ public class KhuVucSach extends JPanel implements ActionListener, ItemListener {
         FileInputStream excelFIS = null;
         BufferedInputStream excelBIS = null;
         XSSFWorkbook excelJTableImport = null;
-        ArrayList<KhuVucSachDTO> listExcel = new ArrayList<KhuVucSachDTO>();
         JFileChooser jf = new JFileChooser();
         int result = jf.showOpenDialog(null);
         jf.setDialogTitle("Open file");
-        Workbook workbook = null;
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
                 excelFile = jf.getSelectedFile();
@@ -245,11 +242,11 @@ public class KhuVucSach extends JPanel implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mainFunction.btn.get("create")) {
-            KhuVucSachDialog kvkDialog = new KhuVucSachDialog(this, owner, "Thêm khu vực sách", true, "create");
+            new KhuVucSachDialog(this, owner, "Thêm khu vực sách", true, "create");
         } else if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                KhuVucSachDialog kvkDialog = new KhuVucSachDialog(this, owner, "Chỉnh sửa khu vực sách", true, "update", listKVK.get(index));
+                new KhuVucSachDialog(this, owner, "Chỉnh sửa khu vực sách", true, "update", listKVK.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("delete")) {
             int index = getRowSelected();

@@ -4,14 +4,12 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
 
 public class PanelShadow extends JPanel {
 
     int shadowSize = 3;
     float shadowOpacity = 0.3f;
-    private Color shadowColor = Color.BLACK;
     JPanel iconBackground;
     JLabel lblIcon, lblTitle, lblContent;
     Color HowerBackgroundColor = new Color(187, 222, 251);

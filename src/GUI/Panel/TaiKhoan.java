@@ -35,7 +35,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -189,11 +188,11 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mainFunction.btn.get("create")) {
-            ListNhanVien listNV = new ListNhanVien(this, owner, "Chọn tài khoản", true);
+            new ListNhanVien(this, owner, "Chọn tài khoản", true);
         } else if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                TaiKhoanDialog add = new TaiKhoanDialog(this, owner, "Cập nhật tài khoản", true, "update", listTk.get(index));
+                new TaiKhoanDialog(this, owner, "Cập nhật tài khoản", true, "update", listTk.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("delete")) {
             int index = getRowSelected();
@@ -209,7 +208,7 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                TaiKhoanDialog add = new TaiKhoanDialog(this, owner, "Thêm tài khoản", true, "view", listTk.get(index));
+                new TaiKhoanDialog(this, owner, "Thêm tài khoản", true, "view", listTk.get(index));
             }
         } else if (e.getSource() == mainFunction.btn.get("export")) {
             try {
@@ -240,7 +239,6 @@ public class TaiKhoan extends JPanel implements ActionListener, ItemListener {
                 XSSFSheet excelSheet = excelJTableImport.getSheetAt(0);
                 for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                     XSSFRow excelRow = excelSheet.getRow(row);
-                    Cell cell0=excelRow.getCell(0);
                     int manv = (int)excelRow.getCell(0).getNumericCellValue();
                     String tendangnhap = excelRow.getCell(1).getStringCellValue();
                     String matkhau = excelRow.getCell(2).getStringCellValue();

@@ -89,8 +89,8 @@ public class MaKhuyenMaiBUS {
         return result;
     }
 
-    public MaKhuyenMaiDTO selectKh(int makh) {
-        return mkmDAO.selectById(makh + "");
+    public MaKhuyenMaiDTO selectMkm(String makh) {
+        return mkmDAO.selectById(makh);
     }
 
     public ChiTietMaKhuyenMaiDTO findCT(ArrayList<ChiTietMaKhuyenMaiDTO> ctphieu, int masp) {
