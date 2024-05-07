@@ -167,7 +167,7 @@ public class MenuTaskbar extends JPanel {
                 for (int i = 0; i < getSt.length; i++) {
                     if (i + 1 == getSt.length) {
                         if(user == null) {
-                            listitem[i] = new itemTaskbar("log_out.svg", "Đăng nhập");
+                            listitem[i] = new itemTaskbar("login.svg", "Đăng nhập");
                         } else {
                             listitem[i] = new itemTaskbar(getSt[i][1], getSt[i][0]);
                         }
@@ -373,7 +373,7 @@ public class MenuTaskbar extends JPanel {
         info.add(pnlIcon, BorderLayout.WEST);
         JLabel lblIcon = new JLabel();
         lblIcon.setPreferredSize(new Dimension(50, 70));
-        lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
+        lblIcon.setIcon(new FlatSVGIcon("./icon/account_default.svg"));
 
         pnlIcon.add(lblIcon);
 
