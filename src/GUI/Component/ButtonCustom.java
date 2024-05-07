@@ -24,6 +24,9 @@ public class ButtonCustom extends JButton {
             case "excel":
                 color = "Actions.Green";
                 break;
+            case  "resgiter":
+                color = "Actions.Green";
+                break;
             case "return":
                 color = "Actions.Orange";
                 break;

@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GUI.Dialog.QuenMatKhau;
+import GUI.Dialog.RegisterDialog;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.InputForm;
 import helper.BCrypt;
@@ -21,7 +22,7 @@ import DTO.TaiKhoanDTO;
 public class login_page extends JFrame implements KeyListener{
 
     private JPanel login_nhap;
-    private JLabel lb1 , lb2, lb_img_1;
+    private JLabel lb1 , lb2, lb3, lb_img_1;
     private InputForm txtUsername, txtPassword;
     private JButton bt;
 
@@ -97,8 +98,8 @@ public class login_page extends JFrame implements KeyListener{
         
         login_nhap.add(paneldn);
 
-        lb2 = new JLabel("<html><u><i style='font-size: 12px;'>Quên mật khẩu ?</i></u></html>", JLabel.RIGHT);
-        lb2.setPreferredSize(new Dimension(400,50));
+        lb2 = new JLabel("<html><u><i style='font-size: 12px;'>Quên mật khẩu ?</i></u></html>", JLabel.LEFT);
+        lb2.setPreferredSize(new Dimension(200,50));
         lb2.setForeground(Color.BLACK); // Set text color
         // lb2.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
         lb2.addMouseListener(new MouseAdapter() {
@@ -117,6 +118,24 @@ public class login_page extends JFrame implements KeyListener{
         });
 
         login_nhap.add(lb2);
+
+        lb3 = new JLabel("<html><u><i style='font-size: 12px;'>Đăng kí tài khoản ?</i></u></html>", JLabel.RIGHT);
+        lb3.setPreferredSize(new Dimension(200,50));
+        lb3.setForeground(Color.BLACK); // Set text color
+        lb3.addMouseListener(new MouseAdapter() {
+            @Override   
+            public void mouseEntered(MouseEvent e) {
+                lb3.setForeground(Color.GREEN);
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                new RegisterDialog(jf, true);
+            }
+            public void mouseExited(MouseEvent e) {
+                lb3.setForeground(Color.BLACK);
+            }
+        });
+        login_nhap.add(lb3);
 
         JPanel buttonPanel = new JPanel(); 
         buttonPanel.setBackground(Color.WHITE);   
