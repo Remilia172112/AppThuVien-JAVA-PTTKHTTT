@@ -218,7 +218,6 @@ public class Notification extends JComponent {
         return new ShadowRendererNotification(shadowSize, 0.3f, new Color(100, 100, 100)).createShadow(img);
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

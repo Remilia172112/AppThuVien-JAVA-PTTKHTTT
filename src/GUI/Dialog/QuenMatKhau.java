@@ -2,7 +2,7 @@ package GUI.Dialog;
 
 import DAO.TaiKhoanDAO;
 import DTO.TaiKhoanDTO;
-import helper.SendEmailSMTP;
+// import helper.SendEmailSMTP;
 import helper.BCrypt;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -170,6 +170,7 @@ public class QuenMatKhau extends JDialog implements ActionListener {
                 }
             }
         } else if (e.getSource() == btnChangePass){
+            @SuppressWarnings("deprecation")
             String pass = txtPassword.getText().trim();
             if(pass.equals("")){
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu");

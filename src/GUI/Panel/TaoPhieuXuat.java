@@ -387,7 +387,7 @@ public final class TaoPhieuXuat extends JPanel {
         ButtonCustom btnKh = new ButtonCustom("Chọn khách hàng", "success", 14);
         kJPanelLeft.add(btnKh);
         btnKh.addActionListener((ActionEvent e) -> {
-            ListKhachHang listkh = new ListKhachHang(TaoPhieuXuat.this, owner, "Chọn khách hàng", true);
+            new ListKhachHang(TaoPhieuXuat.this, owner, "Chọn khách hàng", true);
         });
 
         txtKh = new JTextField("");

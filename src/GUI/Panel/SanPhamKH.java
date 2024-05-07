@@ -139,7 +139,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                SanPhamKHDialog spDialog = new SanPhamKHDialog(this, owner, "Xem chi tiết sản phẩm", true, "view", listSP.get(index));
+                new SanPhamKHDialog(this, owner, "Xem chi tiết sản phẩm", true, "view", listSP.get(index));
             }
         }
     }

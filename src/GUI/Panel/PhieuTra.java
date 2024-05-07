@@ -288,7 +288,7 @@ public final class PhieuTra extends JPanel implements ActionListener, KeyListene
         } else if (source == mainFunction.btn.get("detail")) {
             int index = getRowSelected();
             if (index != -1) {
-                ChiTietPhieuDialog ctsp = new ChiTietPhieuDialog(m, "Thông tin phiếu trả", true, listPhieu.get(index));
+                new ChiTietPhieuDialog(m, "Thông tin phiếu trả", true, listPhieu.get(index));
             }
         } else if (source == mainFunction.btn.get("cancel")) {
             int index = getRowSelected();

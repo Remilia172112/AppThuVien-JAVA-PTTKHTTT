@@ -40,7 +40,7 @@ public final class ThongKeDoanhThuTrongThang extends JPanel{
     private JScrollPane scrollTableThongKe;
     private DefaultTableModel tblModel;
     private JYearChooser yearchooser;
-    private JButton btnThongKe, btnReset, btnExport;
+    private JButton btnThongKe, btnExport;
 
     public ThongKeDoanhThuTrongThang(ThongKeBUS thongkeBUS) {
         this.thongkeBUS = thongkeBUS;

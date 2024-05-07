@@ -5,18 +5,16 @@ public class ChiTietKiemKeDTO {
     private int MSP;
     private int TRANGTHAISP; 
     private String GHICHU;
-    private int TIEN;
     
     public ChiTietKiemKeDTO(){
         
     }
 
-    public ChiTietKiemKeDTO(int mP, int mSP, int tRANGTHAISP, String gHICHU , int tIEN) {
+    public ChiTietKiemKeDTO(int mP, int mSP, int tRANGTHAISP, String gHICHU ) {
         MP = mP;
         MSP = mSP;
         TRANGTHAISP = tRANGTHAISP;
         GHICHU = gHICHU;
-        TIEN = tIEN;
     }
 
     public int getMP() {
@@ -49,13 +47,6 @@ public class ChiTietKiemKeDTO {
 
     public void setGHICHU(String gHICHU) {
         GHICHU = gHICHU;
-    }
-    public int getTIEN() {
-        return this.TIEN;
-    }
-
-    public void setTIEN(int TIEN) {
-        this.TIEN = TIEN;
     }
 
     @Override
@@ -94,7 +85,7 @@ public class ChiTietKiemKeDTO {
 
     @Override
     public String toString() {
-        return "ChiTietKiemKeDTO [MP=" + MP + ", MSP=" + MSP + ", TRANGTHAISP=" + TRANGTHAISP + ", GHICHU=" + GHICHU +", TIEN=" + TIEN + "]";
+        return "ChiTietKiemKeDTO [MP=" + MP + ", MSP=" + MSP + ", TRANGTHAISP=" + TRANGTHAISP + ", GHICHU=" + GHICHU +"]";
     }
 
 }

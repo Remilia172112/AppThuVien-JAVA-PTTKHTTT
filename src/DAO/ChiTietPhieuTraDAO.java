@@ -30,7 +30,7 @@ public class ChiTietPhieuTraDAO implements ChiTietInterface<ChiTietPhieuTraDTO> 
                 pst.setInt(2, t.get(i).getMSP());
                 int SL = -(t.get(i).getSL());
                 pst.setInt(3, t.get(i).getSL());
-                int change = SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
+                SanPhamDAO.getInstance().updateSoLuongTon(t.get(i).getMSP(), SL);
                 pst.setInt(4, t.get(i).getTIEN());
                 pst.setString(5, t.get(i).getLYDO());
                 result = pst.executeUpdate();

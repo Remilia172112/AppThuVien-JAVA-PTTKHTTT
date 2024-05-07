@@ -85,7 +85,6 @@ public final class ThongKeDoanhThuTuNgayDenNgay extends JPanel {
         });
 
         dateFrom.addPropertyChangeListener("date", e -> {
-            Date date = (Date) e.getNewValue();
             try {
                 if (validateSelectDate()) {
                 }
@@ -95,7 +94,6 @@ public final class ThongKeDoanhThuTuNgayDenNgay extends JPanel {
         });
 
         dateTo.addPropertyChangeListener("date", e -> {
-            Date date = (Date) e.getNewValue();
             try {
                 if (validateSelectDate()) {
                 }
