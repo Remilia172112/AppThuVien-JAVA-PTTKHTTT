@@ -193,12 +193,13 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
                     String tenkh = excelRow.getCell(0).getStringCellValue();
                     String sdt = excelRow.getCell(1).getStringCellValue();
                     String diachi = excelRow.getCell(2).getStringCellValue();
+                    String email = excelRow.getCell(3).getStringCellValue();
                     if (Validation.isEmpty(tenkh) || Validation.isEmpty(sdt)
                             || !isPhoneNumber(sdt) || sdt.length() != 10 || Validation.isEmpty(diachi)) {
                         check = 0;
                     }
                     if (check == 1) {
-                        khachhangBUS.add(new KhachHangDTO(id, tenkh, sdt, diachi));
+                        khachhangBUS.add(new KhachHangDTO(id, tenkh, sdt, diachi, email));
                     } else {
                         k += 1;
                     }
@@ -235,7 +236,6 @@ public class KhachHang extends JPanel implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mainFunction.btn.get("create")) {
-            System.out.println("ok");
             new KhachHangDialog(this, owner, "Thêm khách hàng", true, "create");
         } else if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();

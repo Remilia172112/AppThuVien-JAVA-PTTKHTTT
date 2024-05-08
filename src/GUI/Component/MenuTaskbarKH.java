@@ -1,29 +1,16 @@
 package GUI.Component;
 
 import DAO.ChiTietQuyenDAO;
-import DAO.NhanVienDAO;
+import DAO.KhachHangDAO;
 import DAO.NhomQuyenDAO;
 import DTO.ChiTietQuyenDTO;
-import DTO.NhanVienDTO;
+import DTO.KhachHangDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.MainKH;
 // import GUI.login_page;
-import GUI.Panel.KhachHang;
-import GUI.Panel.KhuVucSach;
-import GUI.Panel.MaKhuyenMai;
-import GUI.Panel.NhaCungCap;
-import GUI.Panel.NhaXuatBan;
-import GUI.Panel.NhanVien;
-import GUI.Panel.PhanQuyen;
-import GUI.Panel.PhieuKiemKe;
-import GUI.Panel.PhieuTra;
-import GUI.Panel.PhieuNhap;
-import GUI.Panel.PhieuXuat;
-import GUI.Panel.SanPham;
 import GUI.Panel.SanPhamKH;
 import GUI.login_page;
-import GUI.Panel.TaiKhoan;
 import GUI.Panel.TrangChu;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.*;
@@ -32,8 +19,6 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import GUI.Dialog.MyAccount;
-import GUI.Panel.ThongKe.ThongKe;
 public class MenuTaskbarKH extends JPanel {
 
     login_page login ;
@@ -63,7 +48,7 @@ public class MenuTaskbarKH extends JPanel {
     Color HowerBackgroundColor = new Color(193,237,220);
     private ArrayList<ChiTietQuyenDTO> listQuyen;
     NhomQuyenDTO nhomQuyenDTO;
-    public NhanVienDTO nhanVienDTO;
+    public KhachHangDTO khachHangDTO;
     JFrame owner = (JFrame) SwingUtilities.getWindowAncestor(this);
 
     public MenuTaskbarKH(MainKH main) {
@@ -77,7 +62,7 @@ public class MenuTaskbarKH extends JPanel {
         this.main = main;
         this.user = tk;
         this.nhomQuyenDTO = NhomQuyenDAO.getInstance().selectById(Integer.toString(tk.getMNQ()));
-        this.nhanVienDTO = NhanVienDAO.getInstance().selectById(Integer.toString(tk.getMNV()));
+        this.khachHangDTO = KhachHangDAO.getInstance().selectById(Integer.toString(tk.getMNV()));
         listQuyen = ChiTietQuyenDAO.getInstance().selectAll(Integer.toString(tk.getMNQ()));
         initComponent();
     }
@@ -249,7 +234,7 @@ public class MenuTaskbarKH extends JPanel {
         }
     }
     public void resetChange(){
-        this.nhanVienDTO = new NhanVienDAO().selectById(String.valueOf(nhanVienDTO.getMNV()));
+        this.khachHangDTO = new KhachHangDAO().selectById(String.valueOf(khachHangDTO.getMaKH()));
     }
     public void in4_default(JPanel info) {
         JPanel pnlIcon = new JPanel(new FlowLayout());
@@ -284,11 +269,7 @@ public class MenuTaskbarKH extends JPanel {
         info.add(pnlIcon, BorderLayout.WEST);
         JLabel lblIcon = new JLabel();
         lblIcon.setPreferredSize(new Dimension(50, 70));
-        if (nhanVienDTO.getGIOITINH() == 1) {
-            lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
-        } else {
-            lblIcon.setIcon(new FlatSVGIcon("./icon/women_50px.svg"));
-        }
+        lblIcon.setIcon(new FlatSVGIcon("./icon/man_50px.svg"));
 
         pnlIcon.add(lblIcon);
 
@@ -297,7 +278,7 @@ public class MenuTaskbarKH extends JPanel {
         pnlInfo.setLayout(new FlowLayout(0, 10, 5));
         pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
         info.add(pnlInfo, BorderLayout.CENTER);
-        lblUsername = new JLabel(nhanVienDTO.getHOTEN());
+        lblUsername = new JLabel(khachHangDTO.getHoten());
         lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
         pnlInfo.add(lblUsername);
 

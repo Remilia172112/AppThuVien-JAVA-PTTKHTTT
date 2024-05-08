@@ -21,7 +21,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
     private HeaderTitle titlePage;
     private JPanel pnlMain, pnlButtom;
     private ButtonCustom btnThem, btnCapNhat, btnHuyBo;
-    private InputForm tenKH, sdtKH, diachiKH;
+    private InputForm tenKH, sdtKH, diachiKH, emailKH;
     private JTextField maKH;
     KhachHangDTO kh;
 
@@ -33,6 +33,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         PlainDocument phonex = (PlainDocument)sdtKH.getTxtForm().getDocument();
         phonex.setDocumentFilter((new NumericDocumentFilter()));
         diachiKH = new InputForm("Địa chỉ");
+        emailKH = new InputForm("Email");
         initComponents(title, type);
     }
 
@@ -47,6 +48,8 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         setSdtKH(kh.getSdt());
         diachiKH = new InputForm("Địa chỉ");
         setDiaChiKH(kh.getDiachi());
+        emailKH = new InputForm("Email");
+        setEmailKH(kh.getEMAIL());
         this.jpKH = jpKH;
         initComponents(title, type);
     }
@@ -61,6 +64,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         pnlMain.add(tenKH);
         pnlMain.add(sdtKH);
         pnlMain.add(diachiKH);
+        pnlMain.add(emailKH);
 
         pnlButtom = new JPanel(new FlowLayout());
         pnlButtom.setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -83,6 +87,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
                 tenKH.setDisable();
                 sdtKH.setDisable();
                 diachiKH.setDisable();
+                emailKH.setDisable();
             }
             default ->
                 throw new AssertionError();
@@ -128,6 +133,14 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         this.diachiKH.setText(id);
     }
 
+    public String getEmailKH() {
+        return emailKH.getText();
+    }
+
+    public void setEmailKH(String id) {
+        this.emailKH.setText(id);
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -146,20 +159,24 @@ public class KhachHangDialog extends JDialog implements MouseListener {
             JOptionPane.showMessageDialog(this, "Địa chỉ không được rỗng", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             return false;
          }
+         else if(Validation.isEmpty(emailKH.getText()) || Validation.isEmail(emailKH.getText())) {
+            JOptionPane.showMessageDialog(this, "Email không được rỗng và đúng định dạng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            return false;
+         }
           return true;
     }
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == btnThem && Validation()) {
                 int id=KhachHangDAO.getInstance().getAutoIncrement();
-                jpKH.khachhangBUS.add(new DTO.KhachHangDTO(id, tenKH.getText(),sdtKH.getText(), diachiKH.getText()));
+                jpKH.khachhangBUS.add(new DTO.KhachHangDTO(id, tenKH.getText(),sdtKH.getText(), diachiKH.getText(), emailKH.getText()));
                 jpKH.loadDataTable(jpKH.listkh);
                 dispose();
 
         } else if (e.getSource() == btnHuyBo) {
             dispose();
         } else if (e.getSource() == btnCapNhat && Validation()) {
-            jpKH.khachhangBUS.update(new KhachHangDTO(kh.getMaKH(), tenKH.getText(), sdtKH.getText(), diachiKH.getText()));
+            jpKH.khachhangBUS.update(new KhachHangDTO(kh.getMaKH(), tenKH.getText(), sdtKH.getText(), diachiKH.getText(), emailKH.getText()));
             jpKH.loadDataTable(jpKH.listkh);
             dispose();
         }

@@ -41,4 +41,20 @@ public class Validation {
         }
         return result;
     }
+
+    public static boolean isPhoneNumber(String str) {
+        // Loại bỏ khoảng trắng và dấu ngoặc đơn nếu có
+        str = str.replaceAll("\\s+", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("\\-", "");
+
+        // Kiểm tra xem chuỗi có phải là một số điện thoại hợp lệ hay không
+        if (str.matches("\\d{10}")) { // Kiểm tra số điện thoại 10 chữ số
+            return true;
+        } else if (str.matches("\\d{3}-\\d{3}-\\d{4}")) { // Kiểm tra số điện thoại có dấu gạch ngang
+            return true;
+        } else if (str.matches("\\(\\d{3}\\)\\d{3}-\\d{4}")) { // Kiểm tra số điện thoại có dấu ngoặc đơn
+            return true;
+        } else {
+            return false; // Trả về false nếu chuỗi không phải là số điện thoại hợp lệ
+        }
+    }
 }

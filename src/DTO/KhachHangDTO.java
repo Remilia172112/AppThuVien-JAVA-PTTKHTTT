@@ -1,7 +1,6 @@
 package DTO;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class KhachHangDTO {
 
@@ -9,23 +8,26 @@ public class KhachHangDTO {
     private String HOTEN;
     private String SDT;
     private String DIACHI;
+    private String EMAIL;
     private Date NGAYTHAMGIA;
 
     public KhachHangDTO() {
     }
 
-    public KhachHangDTO(int MKH, String HOTEN, String SDT, String DIACHI) {
+    public KhachHangDTO(int MKH, String HOTEN, String SDT, String DIACHI, String EMAIL) {
         this.MKH = MKH;
         this.HOTEN = HOTEN;
         this.SDT = SDT;
         this.DIACHI = DIACHI;
+        this.EMAIL = EMAIL;
     }
     
-    public KhachHangDTO(int MKH, String HOTEN, String SDT, String DIACHI,Date NGAYTHAMGIA) {
+    public KhachHangDTO(int MKH, String HOTEN, String SDT, String DIACHI, String EMAIL,Date NGAYTHAMGIA) {
         this.MKH = MKH;
         this.HOTEN = HOTEN;
         this.SDT = SDT;
         this.DIACHI = DIACHI;
+        this.EMAIL = EMAIL;
         this.NGAYTHAMGIA = NGAYTHAMGIA;
     }
 
@@ -69,46 +71,71 @@ public class KhachHangDTO {
         this.DIACHI = DIACHI;
     }
 
+    public String getEMAIL() {
+        return EMAIL;
+    }
+
+    public void setEMAIL(String eMAIL) {
+        EMAIL = eMAIL;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.MKH);
-        hash = 79 * hash + Objects.hashCode(this.HOTEN);
-        hash = 79 * hash + Objects.hashCode(this.SDT);
-        hash = 79 * hash + Objects.hashCode(this.DIACHI);
-        return hash;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + MKH;
+        result = prime * result + ((HOTEN == null) ? 0 : HOTEN.hashCode());
+        result = prime * result + ((SDT == null) ? 0 : SDT.hashCode());
+        result = prime * result + ((DIACHI == null) ? 0 : DIACHI.hashCode());
+        result = prime * result + ((EMAIL == null) ? 0 : EMAIL.hashCode());
+        result = prime * result + ((NGAYTHAMGIA == null) ? 0 : NGAYTHAMGIA.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        }
-        if (obj == null) {
+        if (obj == null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
             return false;
-        }
-        final KhachHangDTO other = (KhachHangDTO) obj;
-        if (other.getMaKH() != this.getMaKH()) {
+        KhachHangDTO other = (KhachHangDTO) obj;
+        if (MKH != other.MKH)
             return false;
-        }
-        if (!Objects.equals(other.getHoten(), this.getHoten())) {
+        if (HOTEN == null) {
+            if (other.HOTEN != null)
+                return false;
+        } else if (!HOTEN.equals(other.HOTEN))
             return false;
-        }
-        if (!Objects.equals(other.getSdt(), this.getSdt())) {
+        if (SDT == null) {
+            if (other.SDT != null)
+                return false;
+        } else if (!SDT.equals(other.SDT))
             return false;
-        }
-        if (!Objects.equals(other.getDiachi(),this.getDiachi())) {
+        if (DIACHI == null) {
+            if (other.DIACHI != null)
+                return false;
+        } else if (!DIACHI.equals(other.DIACHI))
             return false;
-        }
+        if (EMAIL == null) {
+            if (other.EMAIL != null)
+                return false;
+        } else if (!EMAIL.equals(other.EMAIL))
+            return false;
+        if (NGAYTHAMGIA == null) {
+            if (other.NGAYTHAMGIA != null)
+                return false;
+        } else if (!NGAYTHAMGIA.equals(other.NGAYTHAMGIA))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "KhachHang{" + "Ma khach hang = " + MKH + ", Ho ten = " + HOTEN + ", So dien thoai=" + SDT + ", Dia chi=" + DIACHI + '}';
+        return "KhachHangDTO [MKH=" + MKH + ", HOTEN=" + HOTEN + ", SDT=" + SDT + ", DIACHI=" + DIACHI + ", EMAIL="
+                + EMAIL + ", NGAYTHAMGIA=" + NGAYTHAMGIA + "]";
     }
+
 
 }

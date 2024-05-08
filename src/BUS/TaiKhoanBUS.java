@@ -2,6 +2,7 @@ package BUS;
 
 import DAO.NhomQuyenDAO;
 import DAO.TaiKhoanDAO;
+import DAO.TaiKhoanKHDAO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import java.util.ArrayList;
@@ -43,6 +44,10 @@ public class TaiKhoanBUS {
         TaiKhoanDAO.getInstance().insert(tk);
     }
     
+    public void addAccKH(TaiKhoanDTO tk){
+        TaiKhoanKHDAO.getInstance().insert(tk);
+    }
+
     public void updateAcc(TaiKhoanDTO tk){
         TaiKhoanDAO.getInstance().update(tk);
     }

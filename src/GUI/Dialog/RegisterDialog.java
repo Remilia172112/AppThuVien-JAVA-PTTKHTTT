@@ -1,17 +1,17 @@
 package GUI.Dialog;
 
+import BUS.KhachHangBUS;
 import BUS.NhanVienBUS;
 import BUS.TaiKhoanBUS;
-import DAO.NhanVienDAO;
-import DAO.TaiKhoanDAO;
+import DTO.KhachHangDTO;
 import DTO.NhanVienDTO;
 import DTO.TaiKhoanDTO;
+import GUI.MainKH;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
 import GUI.Component.InputForm;
 import GUI.Component.MenuTaskbar;
 import GUI.Component.NumericDocumentFilter;
-import helper.BCrypt;
 import helper.Validation;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PlainDocument;
@@ -38,7 +39,7 @@ public class RegisterDialog extends JDialog implements ActionListener {
     ButtonCustom save, cancel;
     HeaderTitle title;
     JPanel top, center, bottom;
-    InputForm  phone, EMAIL, password, confirm;
+    InputForm  tnd, hoten, phone, email, password, confirm;
     NhanVienDTO nv;
     TaiKhoanBUS tkbus;
     NhanVienBUS nvbus;
@@ -47,22 +48,19 @@ public class RegisterDialog extends JDialog implements ActionListener {
     JPanel[] panel;
     JLabel change;
     JPanel pn_1 , pn_2 , pn_3;
-    InputForm current_pass , new_pass, confirm_pass;
+    Frame tmp;
     public RegisterDialog(Frame parent, boolean modal) {
         super(parent, modal);
+        tmp = parent;
         initComponent();
         setLocationRelativeTo(null);
     }
 
     public void initComponent() {
-        // tkbus = new TaiKhoanBUS();
-        // nvbus = new NhanVienBUS();
-        // this.menuTaskbar = menutaskbar;
-        this.setSize(400, 550);
+        this.setSize(400, 600);
         this.setLayout(new BorderLayout(0, 0));
         this.setBackground(Color.WHITE);
         this.setResizable(false);
-        // nv = menuTaskbar.nhanVienDTO;
         top = new JPanel();
         top.setBackground(new Color(0x279C40));
         top.setLayout(new FlowLayout(0, 0, 0));
@@ -74,36 +72,47 @@ public class RegisterDialog extends JDialog implements ActionListener {
         center = new JPanel(new GridLayout(4,1));
         center.setBorder(new EmptyBorder(20, 10,20, 10));
         center.setBackground(Color.WHITE);
-        String opt[] = {"Số điện thoại", "Email", "Mật khẩu", "Xác nhận mật khẩu"};
-        panel = new JPanel[4];
+        String opt[] = {"Tên đăng nhập", "Họ tên", "Số điện thoại", "Email", "Mật khẩu", "Xác nhận mật khẩu"};
+        panel = new JPanel[opt.length];
         panel[0] = new JPanel(new GridLayout(1, 1));
         panel[0].setPreferredSize(new Dimension(400, 100));
-        phone = new InputForm(opt[0]);
-        PlainDocument phonex = (PlainDocument) phone.getTxtForm().getDocument();
-        phonex.setDocumentFilter((new NumericDocumentFilter())); // dòng này và trên để chỉ nhập số
-        panel[0].add(phone);
-        // for(int i = 1 ; i < opt.length ; i++) {
-            // panel[i] = new JPanel(new GridLayout(1,1));
-            // panel[i].setPreferredSize(new Dimension(400,100));
-        // }
+        tnd = new InputForm(opt[0]);
+        panel[0].add(tnd);
+
         panel[1] = new JPanel(new GridLayout(1, 1));
         panel[1].setPreferredSize(new Dimension(400, 100));
-        EMAIL = new InputForm(opt[1]);
-        panel[1].add(EMAIL);
+        hoten = new InputForm(opt[1]);
+        panel[1].add(hoten);
+
         panel[2] = new JPanel(new GridLayout(1, 1));
         panel[2].setPreferredSize(new Dimension(400, 100));
-        password = new InputForm(opt[2], "password");
-        panel[2].add(password);
-        panel[3] = new JPanel(new GridLayout(1 , 1));
+        phone = new InputForm(opt[2]);
+        PlainDocument phonex = (PlainDocument) phone.getTxtForm().getDocument();
+        phonex.setDocumentFilter((new NumericDocumentFilter())); // dòng này và trên để chỉ nhập số
+        panel[2].add(phone);
+
+        panel[3] = new JPanel(new GridLayout(1, 1));
         panel[3].setPreferredSize(new Dimension(400, 100));
-        confirm = new InputForm(opt[3],"password");
-        panel[3].add(confirm);
+        email = new InputForm(opt[3]);
+        panel[3].add(email);
+
+        panel[4] = new JPanel(new GridLayout(1, 1));
+        panel[4].setPreferredSize(new Dimension(400, 100));
+        password = new InputForm(opt[4], "password");
+        panel[4].add(password);
+
+        panel[5] = new JPanel(new GridLayout(1 , 1));
+        panel[5].setPreferredSize(new Dimension(400, 100));
+        confirm = new InputForm(opt[5],"password");
+        panel[5].add(confirm);
 
 
         center.add(panel[0]);
         center.add(panel[1]);
         center.add(panel[2]);
         center.add(panel[3]);
+        center.add(panel[4]);
+        center.add(panel[5]);
         this.add(center, BorderLayout.CENTER);
 
         bottom = new JPanel(new GridLayout(1,1));
@@ -120,61 +129,38 @@ public class RegisterDialog extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == save) {
-                            TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(nv.getMNV()));
-                            if (Validation.isEmpty(current_pass.getPass())) {
-                                JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                            } else if (Validation.isEmpty(new_pass.getPass())||new_pass.getPass().length()<6) {
-                                JOptionPane.showMessageDialog(this, "Mật khẩu mới không được rỗng và có ít nhất 6 ký tự", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                            } else if (Validation.isEmpty(confirm_pass.getPass())) {
-                                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                return;
-                            } else if (!new_pass.getPass().equals(confirm_pass.getPass()) ) {
-                                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp với mật khẩu mới", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                return;
-                            } else {
-                                if (BCrypt.checkpw(current_pass.getPass(), tkdto.getMK())) {
-                                    String pass = BCrypt.hashpw(confirm_pass.getPass(), BCrypt.gensalt(12));
-                                    TaiKhoanDAO.getInstance().updatePass(nv.getEMAIL(), pass);
-                                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                                    current_pass.setPass("");
-                                    new_pass.setPass("");
-                                    confirm_pass.setPass("");
-                                    center.removeAll();
-                                } else {
-                                    JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                }
-                            }
-                String text_phone = phone.getText(); 
-                String text_email = EMAIL.getText(); 
-                
-                if(text_phone.equals(nv.getSDT()) &&  text_email.equals(nv.getEMAIL()) ) JOptionPane.showMessageDialog(this, "Đã sửa gì đâu mà lưu ?" , "Chỉnh sửa PHONE and EMAIL", JOptionPane.WARNING_MESSAGE);
-                else {
-                    boolean changed = false;
-                    if (!text_phone.equals(nv.getSDT()) ) {
-                        if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
-                        JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và phải có 10 ký tự sô", "Chỉnh sửa số điện thoại", JOptionPane.WARNING_MESSAGE);
-                    } else {
-                        NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), text_phone, nv.getTT(), nv.getEMAIL());
-                        NhanVienDAO.getInstance().update(nvdto);
-                        changed = true;
-                        }
-                    }
-
-                    if (!text_email.equals(nv.getEMAIL()) ) {
-                        if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
-                        JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
-                        } else {
-                            NhanVienDTO nvdto = new NhanVienDTO(nv.getMNV(), nv.getHOTEN(), nv.getGIOITINH(), nv.getNGAYSINH(), nv.getSDT(), nv.getTT(), text_email);
-                            NhanVienDAO.getInstance().update(nvdto);
-                            changed = true;
-                        }
-                    }
-                    if(changed) {
-                        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                        this.dispose();
-                    }
-                }
+            
+            if(Validation.isEmpty(tnd.getText()) || tnd.getText().length() <= 3) {
+                JOptionPane.showMessageDialog(this, "Tên đăng nhập không được rỗng và dưới 3 kí tự", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             }
-        menuTaskbar.resetChange();
+            else if(Validation.isEmpty(hoten.getText())) JOptionPane.showMessageDialog(this, "Họ tên không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            else if(Validation.isEmpty(phone.getText()) || phone.getText().length() != 10 || !Validation.isNumber(phone.getText())) JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và có 10 số", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            else if(!Validation.isEmail(email.getText())) JOptionPane.showMessageDialog(this, "Email không được rỗng và đúng định dạng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            else if(Validation.isEmpty(password.getPass()) || password.getPass().length() <= 3) JOptionPane.showMessageDialog(this, "Mật khẩu không được rỗng và ít hơn 3 kí tự", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            else if(!password.getPass().equals(confirm.getPass())) JOptionPane.showMessageDialog(this, "Mật khẩu không trùng nhau", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+            else {
+                KhachHangBUS khBUS = new KhachHangBUS();
+                TaiKhoanBUS tkBUS = new TaiKhoanBUS();
+                String TDN = tnd.getText();
+                String HOTEN = hoten.getText();
+                String SDT = phone.getText();
+                String EMAIL = email.getText();
+                String PASSWORD = password.getPass();
+                KhachHangDTO kh = new KhachHangDTO(khBUS.getMKHMAX(), HOTEN, SDT, null, EMAIL);
+                TaiKhoanDTO tk = new TaiKhoanDTO(khBUS.getMKHMAX(), TDN, PASSWORD, 4, 1);
+                khBUS.add(kh);
+                tkBUS.addAccKH(tk);
+                this.dispose();
+                tmp.dispose();
+                MainKH main;
+                try {
+                    main = new MainKH(tk);
+                    main.setVisible(true);
+                } catch (UnsupportedLookAndFeelException e1) {
+                    e1.printStackTrace();
+                }
+                menuTaskbar.resetChange();
+            }
+        }
     }
 }

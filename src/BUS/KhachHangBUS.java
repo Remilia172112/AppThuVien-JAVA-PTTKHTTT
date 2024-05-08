@@ -2,6 +2,7 @@ package BUS;
 
 import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
+
 import java.util.ArrayList;
 
 public class KhachHangBUS {
@@ -136,6 +137,15 @@ public class KhachHangBUS {
 
     public KhachHangDTO selectKh(int makh) {
         return khDAO.selectById(makh + "");
+    }
+
+    public int getMKHMAX() {
+        int s = 1;
+        listKhachHang = khDAO.selectAll();
+        for (KhachHangDTO i : listKhachHang) {
+            if(i.getMaKH() > s) s = i.getMaKH();
+        }
+        return s;
     }
 
 }
