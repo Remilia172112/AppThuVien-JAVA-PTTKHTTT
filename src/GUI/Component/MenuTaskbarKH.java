@@ -8,6 +8,7 @@ import DTO.KhachHangDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.MainKH;
+import GUI.Panel.GioHang;
 // import GUI.login_page;
 import GUI.Panel.SanPhamKH;
 import GUI.login_page;
@@ -174,6 +175,15 @@ public class MenuTaskbarKH extends JPanel {
 
             }
         });
+
+        listitem.get(2).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                gioHang = new GioHang(main, user);
+                main.setPanel(gioHang);
+
+            }
+        });
         if(user.getMNV() == 0) {
             listitem.get(2).addMouseListener(new MouseAdapter() {
                 @Override
@@ -184,7 +194,7 @@ public class MenuTaskbarKH extends JPanel {
             });
         }
         else {
-                listitem.get(2).addMouseListener(new MouseAdapter() {
+                listitem.get(3).addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent evt) {
                     
