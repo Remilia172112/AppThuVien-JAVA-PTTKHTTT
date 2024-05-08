@@ -3,13 +3,13 @@ package GUI.Dialog;
 import BUS.KhachHangBUS;
 import BUS.TaiKhoanBUS;
 import DAO.KhachHangDAO;
-import DAO.TaiKhoanDAO;
+import DAO.TaiKhoanKHDAO;
 import DTO.KhachHangDTO;
 import DTO.TaiKhoanDTO;
 import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
 import GUI.Component.InputForm;
-import GUI.Component.MenuTaskbar;
+import GUI.Component.MenuTaskbarKH;
 import GUI.Component.NumericDocumentFilter;
 import helper.BCrypt;
 import helper.Validation;
@@ -44,7 +44,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
     KhachHangDTO kh;
     TaiKhoanBUS tkbus;
     KhachHangBUS khbus;
-    MenuTaskbar menuTaskbar;
+    MenuTaskbarKH menuTaskbar;
     JLabel[] jl;
     JPanel[] panel;
     JLabel change;
@@ -52,13 +52,13 @@ public class MyAccountKH extends JDialog implements ActionListener {
     InputForm current_pass , new_pass, confirm_pass;
     Boolean check  = false ;
 
-    public MyAccountKH(JFrame owner, MenuTaskbar menutaskbar, String title, boolean modal) {
+    public MyAccountKH(JFrame owner, MenuTaskbarKH menutaskbar, String title, boolean modal) {
         super(owner, title, modal);
         initComponent(menutaskbar);
         this.setLocationRelativeTo(null);
     }
 
-    public void initComponent(MenuTaskbar menutaskbar) {
+    public void initComponent(MenuTaskbarKH menutaskbar) {
         tkbus = new TaiKhoanBUS();
         khbus = new KhachHangBUS();
         this.menuTaskbar = menutaskbar;
@@ -66,7 +66,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
         this.setLayout(new BorderLayout(0, 0));
         this.setBackground(Color.WHITE);
         this.setResizable(false);
-        kh = menuTaskbar.nhanVienDTO; // ????
+        kh = menuTaskbar.khachHangDTO; // ????
         top = new JPanel();
         top.setBackground(Color.WHITE);
         top.setLayout(new FlowLayout(0, 0, 0));
@@ -97,7 +97,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
         center.setBorder(new EmptyBorder(20, 10, 0, 10));
         center.setBackground(Color.WHITE);
         String opt[] = {"Số điện thoại","Địa chỉ", "Email", "Mật khẩu"};
-        panel = new JPanel[3];
+        panel = new JPanel[4];
         panel[0] = new JPanel(new GridLayout(1, 1));
         panel[0].setPreferredSize(new Dimension(400, 100));
         phone = new InputForm(opt[0]);
@@ -109,6 +109,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
         panel[1].setPreferredSize(new Dimension(400, 100));
         address = new InputForm(opt[1]);
         address.setText(kh.getDiachi());
+        panel[1].add(address);
         panel[2] = new JPanel(new GridLayout(1, 1));
         panel[2].setPreferredSize(new Dimension(400, 100));
         EMAIL = new InputForm(opt[2]);
@@ -131,7 +132,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
             @Override 
             public void mouseClicked(MouseEvent e) { 
                 center_2();
-           }
+            }
             @Override
             public void mouseExited(MouseEvent e) {
                 change.setForeground(Color.BLACK);
@@ -140,6 +141,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
         center.add(panel[0]);
         center.add(panel[1]);
         center.add(panel[2]);
+        center.add(panel[3]);
         center.add(change);
         this.add(center, BorderLayout.CENTER);
     }
@@ -172,76 +174,86 @@ public class MyAccountKH extends JDialog implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        // if (e.getSource() == cancel) {
-            // if(check ) {
-                // center.removeAll();
-                // center_1();
-            // } else {
-                // this.dispose();
-            // }
-        // }
-        // if(e.getSource() == save) {
-            // if(check)  {
-                // System.out.println("22222222222222");
-                            // TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(kh.getMNV()));
-                            // if (Validation.isEmpty(current_pass.getPass())) {
-                                // JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                            // } else if (Validation.isEmpty(new_pass.getPass())||new_pass.getPass().length()<6) {
-                                // JOptionPane.showMessageDialog(this, "Mật khẩu mới không được rỗng và có ít nhất 6 ký tự", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                            // } else if (Validation.isEmpty(confirm_pass.getPass())) {
-                                // JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                // return;
-                            // } else if (!new_pass.getPass().equals(confirm_pass.getPass()) ) {
-                                // JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp với mật khẩu mới", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                // return;
-                            // } else {
-                                // if (BCrypt.checkpw(current_pass.getPass(), tkdto.getMK())) {
-                                    // String pass = BCrypt.hashpw(confirm_pass.getPass(), BCrypt.gensalt(12));
-                                    // TaiKhoanDAO.getInstance().updatePass(kh.getEMAIL(), pass);
-                                    // JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                                    // current_pass.setPass("");
-                                    // new_pass.setPass("");
-                                    // confirm_pass.setPass("");
-                                    // center.removeAll();
-                                    // center_1();
-                                // } else {
-                                    // JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
-                                // }
-                            // }
-                    // }
-            // else if (!check) {
-                // String text_phone = phone.getText(); 
-                // String text_email = EMAIL.getText(); 
-                // 
-                // if(text_phone.equals(kh.getSDT()) &&  text_email.equals(kh.getEMAIL()) ) JOptionPane.showMessageDialog(this, "Đã sửa gì đâu mà lưu ?" , "Chỉnh sửa PHONE and EMAIL", JOptionPane.WARNING_MESSAGE);
-                // else {
-                    // boolean changed = false;
-                    // if (!text_phone.equals(kh.getSDT()) ) {
-                        // if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
-                        // JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và phải có 10 ký tự sô", "Chỉnh sửa số điện thoại", JOptionPane.WARNING_MESSAGE);
-                    // } else {
-                        // KhachHangDTO khdto = new KhachHangDTO(kh.getMNV(), kh.getHOTEN(), kh.getGIOITINH(), kh.getNGAYSINH(), text_phone, kh.getTT(), kh.getEMAIL());
-                        // KhachHangDAO.getInstance().update(khdto);
-                        // changed = true;
-                        // }
-                    // }
-// 
-                    // if (!text_email.equals(kh.getEMAIL()) ) {
-                        // if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
-                        // JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
-                        // } else {
-                            // KhachHangDTO khdto = new KhachHangDTO(kh.getMNV(), kh.getHOTEN(), kh.getGIOITINH(), kh.getNGAYSINH(), kh.getSDT(), kh.getTT(), text_email);
-                            // KhachHangDAO.getInstance().update(khdto);
-                            // changed = true;
-                        // }
-                    // }
-                    // if(changed) {
-                        // JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                        // this.dispose();
-                    // }
-                // }
-            // }
-        // } 
-        // menuTaskbar.resetChange();
+        if (e.getSource() == cancel) {
+            if(check ) {
+                center.removeAll();
+                center_1();
+            } else {
+                this.dispose();
+            }
+        }
+        if(e.getSource() == save) {
+            if(check)  {
+                            TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaKH(kh.getMaKH()));
+                            if (Validation.isEmpty(current_pass.getPass())) {
+                                JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                            } else if (Validation.isEmpty(new_pass.getPass())||new_pass.getPass().length()<6) {
+                                JOptionPane.showMessageDialog(this, "Mật khẩu mới không được rỗng và có ít nhất 6 ký tự", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                            } else if (Validation.isEmpty(confirm_pass.getPass())) {
+                                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            } else if (!new_pass.getPass().equals(confirm_pass.getPass()) ) {
+                                JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không khớp với mật khẩu mới", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                                return;
+                            } else {
+                                if (BCrypt.checkpw(current_pass.getPass(), tkdto.getMK())) {
+                                    String pass = BCrypt.hashpw(confirm_pass.getPass(), BCrypt.gensalt(12));
+                                    TaiKhoanKHDAO.getInstance().updatePass(kh.getEMAIL(), pass);
+                                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                                    current_pass.setPass("");
+                                    new_pass.setPass("");
+                                    confirm_pass.setPass("");
+                                    center.removeAll();
+                                    center_1();
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                                }
+                            }
+                    }
+            else if (!check) {
+                String text_phone = phone.getText(); 
+                String text_email = EMAIL.getText(); 
+                String text_diachi = address.getText();
+                if(text_phone.equals(kh.getSdt()) &&  text_email.equals(kh.getEMAIL()) && text_diachi.equals(kh.getDiachi())) JOptionPane.showMessageDialog(this, "Đã sửa gì đâu mà lưu ?" , "Chỉnh sửa", JOptionPane.WARNING_MESSAGE);
+                else {
+                    boolean changed = false;
+                    if (!text_phone.equals(kh.getSdt()) ) {
+                        if (Validation.isEmpty(phone.getText()) || phone.getText().length() != 10) {
+                        JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng và phải có 10 ký tự sô", "Chỉnh sửa số điện thoại", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        KhachHangDTO khdto = new KhachHangDTO(kh.getMaKH(), kh.getHoten(), text_phone, kh.getDiachi(), kh.getEMAIL());
+                        KhachHangDAO.getInstance().update(khdto);
+                        changed = true;
+                        }
+                    }
+
+                    if (!text_diachi.equals(kh.getDiachi())) {
+                        if (Validation.isEmpty(address.getText())) {
+                        JOptionPane.showMessageDialog(this, "Địa chỉ không được rỗng", "Chỉnh sửa", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            KhachHangDTO khdto = new KhachHangDTO(kh.getMaKH(), kh.getHoten(), text_phone, text_diachi, kh.getEMAIL());
+                            KhachHangDAO.getInstance().update(khdto);
+                            changed = true;
+                        }
+                    }
+
+                    if (!text_email.equals(kh.getEMAIL()) ) {
+                        if (Validation.isEmpty(EMAIL.getText()) || !Validation.isEmail(EMAIL.getText())) {
+                        JOptionPane.showMessageDialog(this, "Email không được rỗng và phải đúng định dạng", "Chỉnh sửa EMAIL", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            KhachHangDTO khdto = new KhachHangDTO(kh.getMaKH(), kh.getHoten(), text_phone, kh.getDiachi(), text_email);
+                            KhachHangDAO.getInstance().update(khdto);
+                            changed = true;
+                        }
+                    }
+
+                    if(changed) {
+                        JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                        this.dispose();
+                    }
+                }
+            }
+        } 
+        menuTaskbar.resetChange();
     }
 }

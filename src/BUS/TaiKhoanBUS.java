@@ -41,6 +41,19 @@ public class TaiKhoanBUS {
         }
         return vitri;
     }
+
+    public int getTaiKhoanByMaKH(int manv){
+        int i = 0;
+        int vitri = -1;
+        while (i < this.listTaikhoanKH.size() && vitri == -1) {
+            if (listTaikhoanKH.get(i).getMNV()== manv) {
+                vitri = i;
+            } else {
+                i++;
+            }
+        }
+        return vitri;
+    }
     
     public NhomQuyenDTO getNhomQuyenDTO(int manhom){
         return nhomQuyenDAO.selectById(manhom+"");
