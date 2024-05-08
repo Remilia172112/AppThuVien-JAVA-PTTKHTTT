@@ -58,7 +58,7 @@ public class RegisterDialog extends JDialog implements ActionListener {
         // tkbus = new TaiKhoanBUS();
         // nvbus = new NhanVienBUS();
         // this.menuTaskbar = menutaskbar;
-        this.setSize(400, 500);
+        this.setSize(400, 550);
         this.setLayout(new BorderLayout(0, 0));
         this.setBackground(Color.WHITE);
         this.setResizable(false);
@@ -72,7 +72,7 @@ public class RegisterDialog extends JDialog implements ActionListener {
         this.add(top, BorderLayout.NORTH);
 
         center = new JPanel(new GridLayout(4,1));
-        center.setBorder(new EmptyBorder(20, 10, 0, 10));
+        center.setBorder(new EmptyBorder(20, 10,20, 10));
         center.setBackground(Color.WHITE);
         String opt[] = {"Số điện thoại", "Email", "Mật khẩu", "Xác nhận mật khẩu"};
         panel = new JPanel[4];

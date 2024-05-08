@@ -195,7 +195,7 @@ public class login_page extends JFrame implements KeyListener{
                         if (BCrypt.checkpw(passwordCheck, tkkh.getMK())) {
                             try {
                                 this.dispose();
-                                MainKH main = new MainKH(tk);
+                                MainKH main = new MainKH(tkkh);
                                 main.setVisible(true);
                             } catch (UnsupportedLookAndFeelException ex) {
                                 Logger.getLogger(login_page.class.getName()).log(Level.SEVERE, null, ex);

@@ -164,7 +164,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
         ArrayList<TaiKhoanDTO> result = new ArrayList<TaiKhoanDTO>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM taikhoan WHERE TT = '0' OR TT = '1' OR TT = '2'";
+            String sql = "SELECT * FROM TAIKHOANKH WHERE TT = '0' OR TT = '1' OR TT = '2'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){
@@ -210,7 +210,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
         TaiKhoanDTO result = null;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM taikhoan WHERE TDN = ?";
+            String sql = "SELECT * FROM TAIKHOANKH WHERE TDN = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();
