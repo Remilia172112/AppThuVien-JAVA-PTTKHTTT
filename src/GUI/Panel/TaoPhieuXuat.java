@@ -70,11 +70,11 @@ public final class TaoPhieuXuat extends JPanel {
     int makh = -1;
     String type;
 
-    ArrayList<SanPhamDTO> ctpb;
+    // ArrayList<SanPhamDTO> ctpb;
     SanPhamBUS spBUS = new SanPhamBUS();
     MaKhuyenMaiBUS mkmBUS = new MaKhuyenMaiBUS();
     PhieuXuatBUS phieuXuatBUS = new PhieuXuatBUS();
-    SanPhamBUS chiTietSanPhamBUS = new SanPhamBUS();
+    // SanPhamBUS chiTietSanPhamBUS = new SanPhamBUS();
     KhachHangBUS khachHangBUS = new KhachHangBUS();
     ArrayList<ChiTietPhieuDTO> chitietphieu = new ArrayList<>();
     ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
