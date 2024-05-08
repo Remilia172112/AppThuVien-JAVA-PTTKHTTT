@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class MainKH extends JFrame {
 
     public JPanel MainContent;
-    public TaiKhoanDTO user = new TaiKhoanDTO(0,"","",5,1);
+    public TaiKhoanDTO user;
     Color MainColor = new Color(250, 250, 250);
 
     private MenuTaskbarKH menuTaskbar;
@@ -94,6 +94,11 @@ public class MainKH extends JFrame {
         FlatIntelliJLaf.registerCustomDefaultsSource("style");
         FlatIntelliJLaf.setup();
         UIManager.put("PasswordField.showRevealButton", true);
-        new MainKH();
+        try {
+            new MainKH(new TaiKhoanDTO(0,"","",5,1));
+        } catch (UnsupportedLookAndFeelException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

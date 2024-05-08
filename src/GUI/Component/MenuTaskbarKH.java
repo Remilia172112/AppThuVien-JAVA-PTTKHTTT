@@ -217,6 +217,7 @@ public class MenuTaskbarKH extends JPanel {
 
         int count = 0;
         for (Integer i : check) listitem.remove((int) i - count++);
+        if(listitem.size() - 1 <= 12) pnlCenter.setPreferredSize(new Dimension(230, listitem.size() - 1));
         for (int i = 0; i < listitem.size() - 1; i++) pnlCenter.add(listitem.get(i));
     }
 
@@ -266,7 +267,7 @@ public class MenuTaskbarKH extends JPanel {
         pnlInfo.setLayout(new FlowLayout(0, 10, 5));
         pnlInfo.setBorder(new EmptyBorder(15, 0, 0, 0));
         info.add(pnlInfo, BorderLayout.CENTER);
-        lblUsername = new JLabel("Unknow");
+        lblUsername = new JLabel("Xin chào quý khách!");
         lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
         pnlInfo.add(lblUsername);
 

@@ -9,7 +9,6 @@ import GUI.Dialog.RegisterDialog;
 import javax.swing.border.EmptyBorder;
 import GUI.Component.InputForm;
 import helper.BCrypt;
-import java.awt.event.MouseAdapter;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
@@ -48,7 +47,18 @@ public class login_page extends JFrame implements KeyListener{
         this.setSize(new Dimension(900 , 500));
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                MainKH main;
+                try {
+                    main = new MainKH(new TaiKhoanDTO(0,"","",5,1));
+                    main.setVisible(true);
+                } catch (UnsupportedLookAndFeelException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
         this.setLayout(new BorderLayout(0 , 0));
         JFrame jf = this ;
 
@@ -238,7 +248,7 @@ public class login_page extends JFrame implements KeyListener{
         lb_img_1 = new JLabel(new ImageIcon("./src/img/1.png"));
         bo.add(lb_img_1);
     }
-
+    
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -249,7 +259,6 @@ public class login_page extends JFrame implements KeyListener{
             }
         }
     }
-
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
 }

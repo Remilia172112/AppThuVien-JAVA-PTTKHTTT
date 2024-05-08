@@ -2,8 +2,9 @@ package GUI;
 
 import DTO.TaiKhoanDTO;
 import GUI.Panel.TrangChu;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import GUI.Component.MenuTaskbar;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
@@ -24,7 +25,18 @@ public class Main extends JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout(0, 0));
         this.setTitle("Hệ thống quản lý cửa hàng sách");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                MainKH main;
+                try {
+                    main = new MainKH(new TaiKhoanDTO(0,"","",5,1));
+                    main.setVisible(true);
+                } catch (UnsupportedLookAndFeelException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         if (user != null) {
             menuTaskbar = new MenuTaskbar(this, user);

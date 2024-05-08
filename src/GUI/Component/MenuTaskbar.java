@@ -135,10 +135,10 @@ public class MenuTaskbar extends JPanel {
         pnlTop.add(bar2, BorderLayout.SOUTH);
 
         pnlCenter = new JPanel();
-        pnlCenter.setPreferredSize(new Dimension(230, 600));
+        pnlCenter.setPreferredSize(new Dimension(230, 680));
         pnlCenter.setBackground(DefaultColor);
         // pnlCenter.setBorder(new EmptyBorder(0,15,0,35));
-        pnlCenter.setLayout(new FlowLayout());
+        pnlCenter.setLayout(new FlowLayout(0,0,0));
 
         bar3 = new JPanel();
         bar3.setBackground(new Color(204, 214, 219));
@@ -313,6 +313,7 @@ public class MenuTaskbar extends JPanel {
         });
         int count = 0;
         for (Integer i : check) listitem.remove((int) i - count++);
+        if(listitem.size() - 1 <= 12) pnlCenter.setPreferredSize(new Dimension(230, listitem.size() - 1));
         for (int i = 0; i < listitem.size() - 1; i++) pnlCenter.add(listitem.get(i));
     }
 

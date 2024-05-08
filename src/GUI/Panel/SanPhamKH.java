@@ -76,7 +76,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
         functionBar.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         String[] action = {"create", "detail"};
-        mainFunction = new MainFunction(m.user.getMNQ(), "sanpham", action);
+        mainFunction = new MainFunction(m.user.getMNQ(), "xemhang", action);
         for (String ac : action) {
             mainFunction.btn.get(ac).addActionListener(this);
         }
