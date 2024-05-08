@@ -7,7 +7,7 @@ import GUI.Component.ButtonCustom;
 import GUI.Component.HeaderTitle;
 import GUI.Component.InputForm;
 import GUI.Component.SelectForm;
-import GUI.Panel.TaiKhoan;
+import GUI.Panel.TaiKhoanKH;
 import helper.BCrypt;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,9 +23,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class TaiKhoanDialog extends JDialog {
+public class TaiKhoanKHDialog extends JDialog {
 
-    private TaiKhoan taiKhoan;
+    private TaiKhoanKH taiKhoan;
     private HeaderTitle titlePage;
     private JPanel pnmain, pnbottom;
     private ButtonCustom btnThem, btnCapNhat, btnHuyBo;
@@ -37,7 +37,7 @@ public class TaiKhoanDialog extends JDialog {
     private ArrayList<NhomQuyenDTO> listNq = NhomQuyenDAO.getInstance().selectAll();
     TaiKhoanDTO tk;
 
-    public TaiKhoanDialog(TaiKhoan taiKhoan, JFrame owner, String title, boolean modal, String type, int manv) {
+    public TaiKhoanKHDialog(TaiKhoanKH taiKhoan, JFrame owner, String title, boolean modal, String type, int manv) {
         super(owner, title, modal);
         init(title, type);
         this.manv = manv;
@@ -46,7 +46,7 @@ public class TaiKhoanDialog extends JDialog {
         setVisible(true);
     }
 
-    public TaiKhoanDialog(TaiKhoan taiKhoan, JFrame owner, String title, boolean modal, String type, TaiKhoanDTO tk) {
+    public TaiKhoanKHDialog(TaiKhoanKH taiKhoan, JFrame owner, String title, boolean modal, String type, TaiKhoanDTO tk) {
         super(owner, title, modal);
         init(title, type);
         this.tk = tk;
@@ -93,8 +93,8 @@ public class TaiKhoanDialog extends JDialog {
                         int manhom = listNq.get(maNhomQuyen.getSelectedIndex()).getManhomquyen();
                         int tt = trangthai.getSelectedIndex();
                         TaiKhoanDTO tk = new TaiKhoanDTO(manv, tendangnhap, pass, manhom, tt);
-                        taiKhoan.taiKhoanBus.addAcc(tk);
-                        taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
+                        taiKhoan.taiKhoanBus.addAccKH(tk);
+                        taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAllKH());
                         JOptionPane.showMessageDialog(null, "Thêm tài khoản thành công!");
                         dispose();
                     } else {
@@ -116,8 +116,8 @@ public class TaiKhoanDialog extends JDialog {
                     int manhom = listNq.get(maNhomQuyen.getSelectedIndex()).getManhomquyen();
                     int tt = trangthai.getSelectedIndex();
                     TaiKhoanDTO tk = new TaiKhoanDTO(manv, tendangnhap, pass, manhom, tt);
-                    taiKhoan.taiKhoanBus.updateAcc(tk);
-                    taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAll());
+                    taiKhoan.taiKhoanBus.updateAccKH(tk);
+                    taiKhoan.loadTable(taiKhoan.taiKhoanBus.getTaiKhoanAllKH());
                     JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
                     dispose();
                 } else {
