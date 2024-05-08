@@ -16,6 +16,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 
 import DAO.TaiKhoanDAO;
+import DAO.TaiKhoanKHDAO;
 import DTO.TaiKhoanDTO;
 
 
@@ -174,7 +175,26 @@ public class login_page extends JFrame implements KeyListener{
         } else {
             TaiKhoanDTO tk = TaiKhoanDAO.getInstance().selectByUser(usernameCheck);
             if (tk == null) {
-                JOptionPane.showMessageDialog(this, "Tài khoản của bạn không tồn tại trên hệ thống", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                    TaiKhoanDTO tkkh = TaiKhoanKHDAO.getInstance().selectByUser(usernameCheck);
+                if (tkkh == null) {
+                    JOptionPane.showMessageDialog(this, "Tài khoản của bạn không tồn tại trên hệ thống", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    if (tkkh.getTT() == 0) {
+                        JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        if (BCrypt.checkpw(passwordCheck, tkkh.getMK())) {
+                            try {
+                                this.dispose();
+                                MainKH main = new MainKH(tk);
+                                main.setVisible(true);
+                            } catch (UnsupportedLookAndFeelException ex) {
+                                Logger.getLogger(login_page.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Mật khẩu không khớp", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
+                }
             } else {
                 if (tk.getTT() == 0) {
                     JOptionPane.showMessageDialog(this, "Tài khoản của bạn đang bị khóa", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);

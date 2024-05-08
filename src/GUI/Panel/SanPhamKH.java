@@ -4,7 +4,7 @@ import BUS.SanPhamBUS;
 import DAO.NhaXuatBanDAO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
-import GUI.Main;
+import GUI.MainKH;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -30,7 +30,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
     MainFunction mainFunction;
     IntegratedSearch search;
     DefaultTableModel tblModel;
-    Main m;
+    MainKH m;
     public SanPhamBUS spBUS = new SanPhamBUS();
     
     public ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
@@ -112,7 +112,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
         main.add(scrollTableSanPham);
     }
 
-    public SanPhamKH(Main m) {
+    public SanPhamKH(MainKH m) {
         this.m = m;
         initComponent();
         loadDataTalbe(listSP);
@@ -134,7 +134,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
         if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                
+                // TODO Auto
             }
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();

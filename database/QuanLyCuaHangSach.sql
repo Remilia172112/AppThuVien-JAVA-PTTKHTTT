@@ -290,7 +290,6 @@ VALUES
         (2, 'khachhang', 'update'),
         (2, 'khachhang', 'view'),
         (2, 'xuathang', 'create'),
-        (2, 'xuathang', 'delete'),
         (2, 'xuathang', 'update'),
         (2, 'xuathang', 'view'),
         (2, 'trahang', 'create'),
@@ -302,7 +301,6 @@ VALUES
         (3, 'sanpham', 'update'),
         (3, 'sanpham', 'view'),
         (3, 'nhaphang', 'create'),
-        (3, 'nhaphang', 'delete'),
         (3, 'nhaphang', 'update'),
         (3, 'nhaphang', 'view'),
         (3, 'kiemke', 'create'),
@@ -325,14 +323,17 @@ VALUES
         (4, 'donhang', 'create'),
         (4, 'donhang', 'delete'),
         (4, 'donhang', 'update'),
-        (4, 'donhang', 'view');
+        (4, 'donhang', 'view'),
+        (5, 'xemhang', 'view'),
+        (5, 'giohang', 'view');
 
 INSERT INTO `NHOMQUYEN` (`TEN`, `TT`)
 VALUES
         ('Quản lý cửa hàng', 1),
         ('Nhân viên bán hàng', 1),
         ('Nhân viên quản lý kho', 1),
-        ('Khách hàng', 1);
+        ('Khách hàng', 1),
+        ('Người xem', 1);
 
 
 INSERT INTO `NHANVIEN` (`HOTEN`, `GIOITINH`, `NGAYSINH`, `SDT`, `EMAIL`, `TT`)

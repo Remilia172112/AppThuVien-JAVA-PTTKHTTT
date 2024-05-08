@@ -210,7 +210,7 @@ public class TaiKhoanDAO implements DAOinterface<TaiKhoanDTO>{
         TaiKhoanDTO result = null;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM taikhoan WHERE TDN = ?";
+            String sql = "SELECT * FROM TAIKHOAN WHERE TDN = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             ResultSet rs = (ResultSet) pst.executeQuery();

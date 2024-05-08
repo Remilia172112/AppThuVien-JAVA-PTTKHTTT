@@ -4,19 +4,19 @@ import DTO.TaiKhoanDTO;
 import GUI.Panel.TrangChu;
 import java.awt.*;
 import javax.swing.*;
-import GUI.Component.MenuTaskbar;
+import GUI.Component.MenuTaskbarKH;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import javax.swing.border.EmptyBorder;
 
-public class Main extends JFrame {
+public class MainKH extends JFrame {
 
     public JPanel MainContent;
-    public TaiKhoanDTO user;
+    public TaiKhoanDTO user = new TaiKhoanDTO(0,"","",5,1);
     Color MainColor = new Color(250, 250, 250);
 
-    private MenuTaskbar menuTaskbar;
+    private MenuTaskbarKH menuTaskbar;
     private TrangChu trangChu;
 
     private void initComponent() {
@@ -27,9 +27,9 @@ public class Main extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         if (user != null) {
-            menuTaskbar = new MenuTaskbar(this, user);
+            menuTaskbar = new MenuTaskbarKH(this, user);
         } else {
-            menuTaskbar = new MenuTaskbar(this);
+            menuTaskbar = new MenuTaskbarKH(this);
         }
 
         menuTaskbar.setPreferredSize(new Dimension(250, 1400));
@@ -47,11 +47,11 @@ public class Main extends JFrame {
         MainContent.add(trangChu).setVisible(true);
     }
 
-    public Main() {
+    public MainKH() {
         initComponent();
     }
 
-    public Main(TaiKhoanDTO user) throws UnsupportedLookAndFeelException {
+    public MainKH(TaiKhoanDTO user) throws UnsupportedLookAndFeelException {
         this.user = user;
         initComponent();
         FlatRobotoFont.install();
@@ -86,4 +86,14 @@ public class Main extends JFrame {
         MainContent.validate();
     }
 
+    public static void main(String[] args) {
+        FlatRobotoFont.install();
+        FlatLaf.setPreferredFontFamily(FlatRobotoFont.FAMILY);
+        FlatLaf.setPreferredLightFontFamily(FlatRobotoFont.FAMILY_LIGHT);
+        FlatLaf.setPreferredSemiboldFontFamily(FlatRobotoFont.FAMILY_SEMIBOLD);
+        FlatIntelliJLaf.registerCustomDefaultsSource("style");
+        FlatIntelliJLaf.setup();
+        UIManager.put("PasswordField.showRevealButton", true);
+        new MainKH();
+    }
 }

@@ -1,6 +1,7 @@
 package GUI.Dialog;
 
 import DAO.TaiKhoanDAO;
+import DAO.TaiKhoanKHDAO;
 import DTO.TaiKhoanDTO;
 // import helper.SendEmailSMTP;
 import helper.BCrypt;
@@ -137,7 +138,12 @@ public class QuenMatKhau extends JDialog implements ActionListener {
                 } else {
                     TaiKhoanDTO tk = TaiKhoanDAO.getInstance().selectByEmail(email);
                     if (tk == null) {
-                        JOptionPane.showMessageDialog(this, "Tài khoản của email này không tồn tại trên hệ thống");
+                        tk = TaiKhoanKHDAO.getInstance().selectByEmail(email);
+                        if (tk == null) JOptionPane.showMessageDialog(this, "Tài khoản của email này không tồn tại trên hệ thống");
+                        else {
+                            TaiKhoanKHDAO.getInstance().updateTTCXL(email);
+                            JOptionPane.showMessageDialog(this, "Đã gửi thông tin đến admin! Hãy chờ phản hồi từ gmail.");
+                        }
                     } else {
                         // CardLayout c = (CardLayout) jpMain.getLayout();
                         // c.next(jpMain);
