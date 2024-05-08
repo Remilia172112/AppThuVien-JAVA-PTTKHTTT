@@ -37,4 +37,8 @@ public class HeaderTitle extends JPanel{
     public void setText (String title) {
         lblTitle.setText(title);
     }
+    public void setColor(String color) {
+        int hexColor  = Integer.parseInt(color ,16);
+        this.setBackground(new Color(hexColor));
+    }
 }

@@ -48,8 +48,6 @@ public class RegisterDialog extends JDialog implements ActionListener {
     JLabel change;
     JPanel pn_1 , pn_2 , pn_3;
     InputForm current_pass , new_pass, confirm_pass;
-    Boolean check  = false ;
-
     public RegisterDialog(Frame parent, boolean modal) {
         super(parent, modal);
         initComponent();
@@ -66,13 +64,13 @@ public class RegisterDialog extends JDialog implements ActionListener {
         this.setResizable(false);
         // nv = menuTaskbar.nhanVienDTO;
         top = new JPanel();
-        top.setBackground(Color.BLACK);
+        top.setBackground(new Color(0x279C40));
         top.setLayout(new FlowLayout(0, 0, 0));
-        title = new HeaderTitle("CHỈNH SỬA THÔNG TIN");
+        title = new HeaderTitle("ĐĂNG KÍ TÀI KHOẢN");
+        title.setColor("279C40");
         top.add(title);
         this.add(top, BorderLayout.NORTH);
 
-        check =  false;
         center = new JPanel(new GridLayout(4,1));
         center.setBorder(new EmptyBorder(20, 10, 0, 10));
         center.setBackground(Color.WHITE);
@@ -109,11 +107,11 @@ public class RegisterDialog extends JDialog implements ActionListener {
         this.add(center, BorderLayout.CENTER);
 
         bottom = new JPanel(new GridLayout(1,1));
-        bottom.setBackground(Color.WHITE);
+        bottom.setBackground(new Color(0x66F284));
 
-        cancel = new ButtonCustom("Đăng kí", "rregister", 15);
-        cancel.addActionListener(this);
-        bottom.add(cancel);
+        save = new ButtonCustom("Đăng kí", "register", 15);
+        save.addActionListener(this);
+        bottom.add(save);
         this.add(bottom, BorderLayout.SOUTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -121,16 +119,7 @@ public class RegisterDialog extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == cancel) {
-            if(check ) {
-                center.removeAll();
-            } else {
-                this.dispose();
-            }
-        }
         if(e.getSource() == save) {
-            if(check)  {
-                System.out.println("22222222222222");
                             TaiKhoanDTO tkdto = tkbus.getTaiKhoan(tkbus.getTaiKhoanByMaNV(nv.getMNV()));
                             if (Validation.isEmpty(current_pass.getPass())) {
                                 JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không được rỗng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
@@ -155,8 +144,6 @@ public class RegisterDialog extends JDialog implements ActionListener {
                                     JOptionPane.showMessageDialog(this, "Mật khẩu hiện tại không đúng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
                                 }
                             }
-                    }
-            else if (!check) {
                 String text_phone = phone.getText(); 
                 String text_email = EMAIL.getText(); 
                 
@@ -188,7 +175,6 @@ public class RegisterDialog extends JDialog implements ActionListener {
                     }
                 }
             }
-        } 
         menuTaskbar.resetChange();
     }
 }
