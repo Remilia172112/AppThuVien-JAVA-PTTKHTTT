@@ -64,7 +64,7 @@ public class RegisterDialog extends JDialog implements ActionListener {
         top = new JPanel();
         top.setBackground(new Color(0x279C40));
         top.setLayout(new FlowLayout(0, 0, 0));
-        title = new HeaderTitle("ĐĂNG KÍ TÀI KHOẢN");
+        title = new HeaderTitle("ĐĂNG KÍ TÀI KHOẢN KHÁCH HÀNG");
         title.setColor("279C40");
         top.add(title);
         this.add(top, BorderLayout.NORTH);

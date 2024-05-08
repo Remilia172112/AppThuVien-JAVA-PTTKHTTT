@@ -175,15 +175,6 @@ public class MenuTaskbarKH extends JPanel {
 
             }
         });
-
-        listitem.get(2).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent evt) {
-                gioHang = new GioHang(main, user);
-                main.setPanel(gioHang);
-
-            }
-        });
         if(user.getMNV() == 0) {
             listitem.get(2).addMouseListener(new MouseAdapter() {
                 @Override
