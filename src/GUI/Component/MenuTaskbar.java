@@ -22,6 +22,7 @@ import GUI.Panel.PhieuNhap;
 import GUI.Panel.PhieuXuat;
 import GUI.Panel.SanPham;
 import GUI.Panel.TaiKhoan;
+import GUI.Panel.TaiKhoanKH;
 import GUI.Panel.TrangChu;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.*;
@@ -44,6 +45,7 @@ public class MenuTaskbar extends JPanel {
     NhaCungCap nhacungcap;
     NhanVien nhanVien;
     TaiKhoan taiKhoan;
+    TaiKhoanKH taiKhoankh;
     MaKhuyenMai maKhuyenMai;
     PhieuTra phieutra;
     PhieuKiemKe phieuKiemKe;
@@ -66,6 +68,7 @@ public class MenuTaskbar extends JPanel {
         {"Phiếu kiểm kê" , "inventory.svg", "kiemke"},
         {"Phân quyền", "protect.svg", "nhomquyen"},
         {"Tài khoản", "account.svg", "taikhoan"},
+        {"Tài khoản khách hàng", "account.svg", "taikhoankh"},
         {"Đăng xuất", "log_out.svg", "dangxuat"},
     };
 
@@ -135,7 +138,7 @@ public class MenuTaskbar extends JPanel {
         pnlTop.add(bar2, BorderLayout.SOUTH);
 
         pnlCenter = new JPanel();
-        pnlCenter.setPreferredSize(new Dimension(230, 680));
+        pnlCenter.setPreferredSize(new Dimension(230, 720));
         pnlCenter.setBackground(DefaultColor);
         // pnlCenter.setBorder(new EmptyBorder(0,15,0,35));
         pnlCenter.setLayout(new FlowLayout(0,0,0));
@@ -298,6 +301,13 @@ public class MenuTaskbar extends JPanel {
             }
         });
         listitem.get(15).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                taiKhoankh = new TaiKhoanKH(main);
+                main.setPanel(taiKhoankh);
+            }
+        });
+        listitem.get(16).addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
 

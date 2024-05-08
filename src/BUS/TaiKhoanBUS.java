@@ -20,6 +20,11 @@ public class TaiKhoanBUS {
         this.listTaiKhoan  = TaiKhoanDAO.getInstance().selectAll();
         return listTaiKhoan;
     }
+
+    public ArrayList<TaiKhoanDTO> getTaiKhoanAllKH(){
+        this.listTaikhoanKH = TaiKhoanKHDAO.getInstance().selectAll();
+        return listTaikhoanKH ;
+    }
     
     public TaiKhoanDTO getTaiKhoan(int index){
         return listTaiKhoan.get(index);
@@ -45,12 +50,25 @@ public class TaiKhoanBUS {
         TaiKhoanDAO.getInstance().insert(tk);
     }
     
+    
     public void addAccKH(TaiKhoanDTO tk){
         TaiKhoanKHDAO.getInstance().insert(tk);
     }
 
     public void updateAcc(TaiKhoanDTO tk){
         TaiKhoanDAO.getInstance().update(tk);
+    }
+
+    public void updateAccKH(TaiKhoanDTO tk){
+        TaiKhoanKHDAO.getInstance().update(tk);
+    }
+
+    public boolean checkTDN(String TDN){
+        TaiKhoanDTO tk = TaiKhoanDAO.getInstance().selectByUser(TDN);
+        if(tk != null) return false;
+        tk = TaiKhoanKHDAO.getInstance().selectByUser(TDN);
+        if(tk != null) return false;
+        return true;
     }
     
     public void deleteAcc(int manv){
@@ -76,6 +94,35 @@ public class TaiKhoanBUS {
             }
             case "Username" -> {
                 for (TaiKhoanDTO i : listTaiKhoan) {
+                    if (i.getTDN().toLowerCase().contains(txt)) {
+                        result.add(i);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<TaiKhoanDTO> searchKH(String txt, String type) {
+        ArrayList<TaiKhoanDTO> result = new ArrayList<>();
+        txt = txt.toLowerCase();
+        switch (type) {
+            case "Tất cả" -> {
+                for (TaiKhoanDTO i : listTaikhoanKH) {
+                    if (Integer.toString(i.getMNV()).contains(txt) || i.getTDN().contains(txt) ) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Mã nhân viên" -> {
+                for (TaiKhoanDTO i : listTaikhoanKH) {
+                    if (Integer.toString(i.getMNV()).contains(txt)) {
+                        result.add(i);
+                    }
+                }
+            }
+            case "Username" -> {
+                for (TaiKhoanDTO i : listTaikhoanKH) {
                     if (i.getTDN().toLowerCase().contains(txt)) {
                         result.add(i);
                     }
