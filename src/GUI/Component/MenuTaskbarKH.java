@@ -13,6 +13,7 @@ import GUI.Panel.GioHang;
 import GUI.Panel.SanPhamKH;
 import GUI.login_page;
 import GUI.Panel.TrangChu;
+import GUI.Dialog.MyAccountKH;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -185,7 +186,7 @@ public class MenuTaskbarKH extends JPanel {
             });
         }
         else {
-                listitem.get(3).addMouseListener(new MouseAdapter() {
+                listitem.get(2).addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent evt) {
                     
@@ -291,7 +292,7 @@ public class MenuTaskbarKH extends JPanel {
         lblIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                new MyAccount(owner, MenuTaskbar.this, "Chỉnh sửa thông tin tài khoản", true);
+                new MyAccountKH(owner, MenuTaskbarKH.this, "Chỉnh sửa thông tin tài khoản", true);
             }
         });
     }
