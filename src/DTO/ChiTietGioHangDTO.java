@@ -5,14 +5,18 @@ import java.util.Objects;
 public class ChiTietGioHangDTO {
     int MKH;
     int MSP;
+    String MKM;
     int SL;
-    Long TIENGIO;
+    int TIENGIO;
 
-    public ChiTietGioHangDTO (int MKH, int MSP, int SL, Long TIENGIO){
-        this.MKH = MKH;
-        this.MSP = MSP;
-        this.SL = SL;
-        this.TIENGIO = TIENGIO;
+    
+
+    public ChiTietGioHangDTO(int mKH, int mSP, String mKM, int sL, int tIENGIO) {
+        MKH = mKH;
+        MSP = mSP;
+        MKM = mKM;
+        SL = sL;
+        TIENGIO = tIENGIO;
     }
 
     public ChiTietGioHangDTO(){}
@@ -41,11 +45,11 @@ public class ChiTietGioHangDTO {
         SL = sL;
     }
 
-    public Long getTIENGIO() {
+    public int getTIENGIO() {
         return TIENGIO;
     }
 
-    public void setTIENGIO(Long tIEN) {
+    public void setTIENGIO(int tIEN) {
         TIENGIO = tIEN;
     };
 
@@ -70,6 +74,20 @@ public class ChiTietGioHangDTO {
         }
     
         return Objects.equals(this.SL, other.SL);
+    }
+
+    public String getMKM() {
+        return MKM;
+    }
+
+    public void setMKM(String mKM) {
+        MKM = mKM;
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietGioHangDTO [MKH=" + MKH + ", MSP=" + MSP + ", MKM=" + MKM + ", SL=" + SL + ", TIENGIO=" + TIENGIO
+                + "]";
     }
 
 }

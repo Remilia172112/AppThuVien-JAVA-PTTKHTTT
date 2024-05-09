@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import DTO.GioHangDTO;
-import DTO.GioHangDTO;
 import config.JDBCUtil;
 
 public class GioHangDAO implements DAOinterface<GioHangDTO> {
@@ -60,7 +59,7 @@ public class GioHangDAO implements DAOinterface<GioHangDTO> {
         int result = 0 ;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "UPDATE GIOHANG SET TT = 0 WHERE MKH = ?";
+            String sql = "DELETE FROM GIOHANG WHERE MKH = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -53,7 +54,7 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
     PhieuXuatBUS phieuxuatBus;
     PhieuTraBUS phieutraBus;
 
-    ButtonCustom btnPdf, btnHuyBo;
+    ButtonCustom btnPdf, btnHuyBo, btnDuyet;
 
     ArrayList<ChiTietPhieuDTO> chitietphieu;
 
@@ -65,6 +66,9 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         phieunhapBus = new PhieuNhapBUS();
         chitietphieu = phieunhapBus.getChiTietPhieu_Type(phieunhapDTO.getMP());
         initComponent(title);
+        if(phieunhapDTO.getTT() != 2) {
+            btnDuyet.setEnabled(false);
+        }
         initPhieuNhap();
         loadDataTableChiTietPhieu(chitietphieu);
         this.setVisible(true);
@@ -75,8 +79,10 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         this.phieuxuat = phieuxuatDTO;
         phieuxuatBus = new PhieuXuatBUS();
         chitietphieu = phieuxuatBus.selectCTP(phieuxuatDTO.getMP());
-        // chitietsanpham = ctspBus.getChiTietSanPhamFromMaPX(phieuxuatDTO.getMaphieu());
         initComponent(title);
+        if(phieuxuatDTO.getTT() != 2) {
+            btnDuyet.setEnabled(false);
+        }
         initPhieuXuat();
         loadDataTableChiTietPhieu(chitietphieu);
         this.setVisible(true);
@@ -88,6 +94,9 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         phieutraBus = new PhieuTraBUS();
         chitietphieu = phieutraBus.getChiTietPhieu_Type(phieutraDTO.getMP());
         initComponent(title);
+        if(phieutraDTO.getTT() != 2) {
+            btnDuyet.setEnabled(false);
+        }
         initPhieuTra();
         loadDataTableChiTietPhieu(chitietphieu);
         this.setVisible(true);
@@ -175,8 +184,11 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
         pnmain_btn.setBackground(Color.white);
         btnPdf = new ButtonCustom("Xuất file PDF", "success", 14);
         btnHuyBo = new ButtonCustom("Huỷ bỏ", "danger", 14);
+        btnDuyet = new ButtonCustom("Duyệt phiếu", "success", 14);
+        btnDuyet.addActionListener(this);
         btnPdf.addActionListener(this);
         btnHuyBo.addActionListener(this);
+        pnmain_btn.add(btnDuyet);
         pnmain_btn.add(btnPdf);
         pnmain_btn.add(btnHuyBo);
 
@@ -205,6 +217,19 @@ public final class ChiTietPhieuDialog extends JDialog implements ActionListener 
             }
             if (this.phieutra != null) {
                 w.writePT(phieutra.getMP());
+            }
+        }
+        if(source == btnDuyet) {
+            if (this.phieuxuat != null) {
+                if(!phieuxuatBus.checkSLPx(phieuxuat.getMP())) JOptionPane.showMessageDialog(null, "Không đủ số lượng để tạo phiếu!");
+                else {
+                    phieuxuat.setTT(1);
+                    phieuxuatBus.update(phieuxuat);
+                }
+
+            }
+            if (this.phieunhap != null) {
+
             }
         }
     }

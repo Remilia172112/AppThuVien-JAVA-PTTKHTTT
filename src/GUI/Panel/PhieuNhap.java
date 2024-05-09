@@ -103,7 +103,7 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
         tablePhieuNhap.setBackground(new Color(0xA1D6E2));
         scrollTablePhieuNhap = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"STT", "Mã phiếu nhập", "Nhà cung cấp", "Nhân viên nhập", "Thời gian", "Tổng tiền"};
+        String[] header = new String[]{"STT", "Mã phiếu nhập", "Nhà cung cấp", "Nhân viên nhập", "Thời gian", "Tổng tiền", "Trạng thái"};
         tblModel.setColumnIdentifiers(header);
         tablePhieuNhap.setModel(tblModel);
         tablePhieuNhap.setDefaultEditor(Object.class, null);
@@ -210,12 +210,25 @@ public final class PhieuNhap extends JPanel implements ActionListener, KeyListen
         tblModel.setRowCount(0);
         int size = listphieunhap.size();
         for (int i = 0; i < size; i++) {
+            String trangthaiString = "";
+            switch (listphieunhap.get(i).getTT()) {
+                case 1 -> {
+                    trangthaiString = "Đã duyệt";
+                }
+                case 0 -> {
+                    trangthaiString = "Đã hủy";
+                }
+                case 2 -> {
+                    trangthaiString = "Chờ xử lý";
+                }
+            }
             tblModel.addRow(new Object[]{
                 i + 1, (int) listphieunhap.get(i).getMP(),
                 nccBUS.getTenNhaCungCap(listphieunhap.get(i).getMNCC()),
                 nvBUS.getNameById(listphieunhap.get(i).getMNV()),
                 Formater.FormatTime(listphieunhap.get(i).getTG()),
-                Formater.FormatVND(listphieunhap.get(i).getTIEN())
+                Formater.FormatVND(listphieunhap.get(i).getTIEN()),
+                trangthaiString
             });
         }
     }

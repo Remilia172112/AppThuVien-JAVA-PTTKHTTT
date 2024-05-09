@@ -314,7 +314,10 @@ public final class TaoPhieuXuat extends JPanel {
                     JOptionPane.showMessageDialog(null, "Vui lòng chọn cấu hình cần chỉnh");
                 } else {
                     chitietphieu.get(index).setSL(Integer.parseInt(txtSoLuongSPxuat.getText()));
-                    chitietphieu.get(index).setTIEN(Integer.parseInt(txtGiaXuat.getText())); //có thể sửa thành giá đã giảm
+                    if(!txtGiaGiam.getText().equals(" ")) 
+                        chitietphieu.get(index).setTIEN(Integer.parseInt(txtGiaGiam.getText()));
+                    else
+                        chitietphieu.get(index).setTIEN(Integer.parseInt(txtGiaXuat.getText()));                    
                     loadDataTableChiTietPhieu(chitietphieu);
                 }
             }
@@ -585,14 +588,18 @@ public final class TaoPhieuXuat extends JPanel {
         } else {
             int input = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn tạo phiếu xuất !", "Xác nhận tạo phiếu", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
             if (input == 0) {
-                long now = System.currentTimeMillis();
-                Timestamp currenTime = new Timestamp(now);
-                PhieuXuatDTO phieuXuat = new PhieuXuatDTO(makh, maphieu, tk.getMNV(), currenTime, sum, 1);
+                if (!phieuXuatBUS.checkSLPx(chitietphieu)) {
+                    JOptionPane.showMessageDialog(null, "Không đủ số lượng để tạo phiếu!");
+                } else {
+                    long now = System.currentTimeMillis();
+                    Timestamp currenTime = new Timestamp(now);
+                    PhieuXuatDTO phieuXuat = new PhieuXuatDTO(makh, maphieu, tk.getMNV(), currenTime, sum, 1);
                     phieuXuatBUS.insert(phieuXuat, chitietphieu); //update số lượng trong kho
                     /// gọi BUS, BUS gọi DAO, DAO chỉnh trong sql 
                     // SanPhamBUS.updateXuat(chitietsanpham); 
                     JOptionPane.showMessageDialog(null, "Xuất hàng thành công !");
                     mainChinh.setPanel(new PhieuXuat(mainChinh, tk));
+                }
             }
         }
     }

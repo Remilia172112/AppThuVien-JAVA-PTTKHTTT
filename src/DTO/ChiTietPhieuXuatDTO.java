@@ -1,47 +1,53 @@
-// package DTO;
+package DTO;
 
 
 
-// public class ChiTietPhieuXuatDTO extends ChiTietPhieuDTO{
-//     private int HINHTHUC;
+public class ChiTietPhieuXuatDTO extends ChiTietPhieuDTO{
+    private int MKM;
 
-//     public ChiTietPhieuXuatDTO(int TIENNHAP, int HINHTHUC) {
-//         this.HINHTHUC = HINHTHUC;
-//     }
+    public ChiTietPhieuXuatDTO(int MKM) {
+        this.MKM = MKM;
+    }
 
-//     public ChiTietPhieuXuatDTO(int MP, int MSP, int SL, int TIENXUAT, int HINHTHUC) {
-//         super(MP, MSP, SL, TIENXUAT);
-//         this.HINHTHUC = HINHTHUC;
-//     }
+    public ChiTietPhieuXuatDTO(int MP, int MSP, int SL, int TIENXUAT, int MKM) {
+        super(MP, MSP, SL, TIENXUAT);
+        this.MKM = MKM;
+    }
 
-//     public int getHINHTHUC() {
-//         return HINHTHUC;
-//     }
+    public int getMKM() {
+        return MKM;
+    }
 
-//     public void setHINHTHUC(int HINHTHUC) {
-//         this.HINHTHUC = HINHTHUC;
-//     }
+    public void setMKM(int MKM) {
+        this.MKM = MKM;
+    }
 
-//     @Override
-//     public int hashCode() {
-//         int hash = 7;
-//         hash = 59 * hash + this.HINHTHUC;
-//         return hash;
-//     }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.MKM;
+        return hash;
+    }
 
-//     @Override
-//     public boolean equals(Object obj) {
-//         if (this == obj) {
-//             return true;
-//         }
-//         if (obj == null) {
-//             return false;
-//         }
-//         if (getClass() != obj.getClass()) {
-//             return false;
-//         }
-//         final ChiTietPhieuXuatDTO other = (ChiTietPhieuXuatDTO) obj;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ChiTietPhieuXuatDTO other = (ChiTietPhieuXuatDTO) obj;
     
-//         return this.HINHTHUC == other.HINHTHUC;
-//     }
-// } 
+        return this.MKM == other.MKM;
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietPhieuXuatDTO [MKM=" + MKM + "]";
+    }
+
+} 

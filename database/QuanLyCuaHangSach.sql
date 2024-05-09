@@ -346,8 +346,7 @@ VALUES
         (4, 'donhang', 'delete'),
         (4, 'donhang', 'update'),
         (4, 'donhang', 'view'),
-        (5, 'xemhang', 'view'),
-        (5, 'giohang', 'view');
+        (5, 'xemhang', 'view');
 
 INSERT INTO `NHOMQUYEN` (`TEN`, `TT`)
 VALUES

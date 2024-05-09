@@ -78,4 +78,9 @@ public class GioHangDTO {
         return Objects.equals(this.TG, other.TG);
     }
 
+    @Override
+    public String toString() {
+        return "GioHangDTO [MKH=" + MKH + ", TIEN=" + TIEN + ", TG=" + TG + ", TT=" + TT + "]";
+    }
+
 }

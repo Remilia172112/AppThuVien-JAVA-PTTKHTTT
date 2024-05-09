@@ -6,6 +6,7 @@ import DTO.MaKhuyenMaiDTO;
 import DTO.ChiTietMaKhuyenMaiDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MaKhuyenMaiBUS {
 
@@ -109,9 +110,26 @@ public class MaKhuyenMaiBUS {
     public ArrayList<ChiTietMaKhuyenMaiDTO> Getctmkm(int masp) {
         ArrayList<ChiTietMaKhuyenMaiDTO> p = new ArrayList<ChiTietMaKhuyenMaiDTO>();
         listctMKM = ctmkmDAO.selectAll();
-        for(ChiTietMaKhuyenMaiDTO i : listctMKM) if(i.getMSP() == masp) p.add(i);
+        for(ChiTietMaKhuyenMaiDTO i : listctMKM) if(i.getMSP() == masp && !validateSelectDate(i)) p.add(i);
         return p;
     } 
+
+    public boolean validateSelectDate(DTO.ChiTietMaKhuyenMaiDTO tmp) {
+        MaKhuyenMaiDTO a = selectMkm(tmp.getMKM());
+        Date time_start = a.getTGBD();
+        Date time_end = a.getTGKT();
+        Date current_date = new Date();
+        if (time_start != null && time_start.after(current_date)) {
+            return false;
+        }
+        if (time_end != null && time_end.after(current_date)) {
+            return false;
+        }
+        if (time_start != null && time_end != null && time_start.after(time_end)) {
+            return false;
+        }
+        return true;
+    }
     public boolean add(MaKhuyenMaiDTO phieu, ArrayList<ChiTietMaKhuyenMaiDTO> ctPhieu) {
         boolean check = mkmDAO.insert(phieu) != 0;
         if (check) {

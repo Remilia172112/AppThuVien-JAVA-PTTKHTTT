@@ -5,6 +5,7 @@ import DAO.ChiTietPhieuXuatDAO;
 import DAO.PhieuXuatDAO;
 import DTO.ChiTietPhieuDTO;
 import DTO.PhieuXuatDTO;
+import DTO.SanPhamDTO;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,6 +32,12 @@ public class PhieuXuatBUS {
         return this.listPhieuXuat;
     }
 
+    public ArrayList<PhieuXuatDTO> getAll(int mkh) {
+        this.listPhieuXuat = phieuXuatDAO.selectByMKH(mkh+"");
+        
+        return this.listPhieuXuat;
+    }
+
     public PhieuXuatDTO getSelect(int index) {
         return listPhieuXuat.get(index);
     }
@@ -43,9 +50,19 @@ public class PhieuXuatBUS {
         listPhieuXuat.remove(px);
     }
 
+    public void update(PhieuXuatDTO px) {
+        phieuXuatDAO.update(px);
+        chiTietPhieuXuatDAO.updateSL(px.getMP()+"");
+    }
+
     public void insert(PhieuXuatDTO px, ArrayList<ChiTietPhieuDTO> ct) {
         phieuXuatDAO.insert(px); //ghi phieu xuat vao sql
         chiTietPhieuXuatDAO.insert(ct); //goi updatesoluongTon cua sanphamDAO để chỉnh số lượng trong kho -> ghi váo sql
+    }
+
+    public void insertgh(PhieuXuatDTO px, ArrayList<ChiTietPhieuDTO> ct) {
+        phieuXuatDAO.insert(px); //ghi phieu xuat vao sql
+        chiTietPhieuXuatDAO.insertGH(ct); //goi updatesoluongTon cua sanphamDAO để chỉnh số lượng trong kho -> ghi váo sql
     }
 
     public ArrayList<ChiTietPhieuDTO> selectCTP(int maphieu) {
@@ -150,6 +167,26 @@ public class PhieuXuatBUS {
 
     public PhieuXuatDTO getByIndex(int index) {
         return this.listPhieuXuat.get(index);
+    }
+
+    public boolean checkSLPx(ArrayList <ChiTietPhieuDTO> listctpx) {
+        SanPhamBUS spBus = new SanPhamBUS();
+        ArrayList<SanPhamDTO> SP = new ArrayList<SanPhamDTO>();
+        for(ChiTietPhieuDTO i : listctpx) SP.add(spBus.spDAO.selectById(i.getMSP() + ""));
+        for (int i = 0; i < SP.size(); i++) {
+            if(listctpx.get(i).getSL() > SP.get(i).getSL()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkSLPx(int maphieu) {
+        return phieuXuatDAO.checkSLPx(maphieu);
+    }
+
+    public int cancelPhieuNhap(int maphieu) {
+        return phieuXuatDAO.cancelPhieuXuat(maphieu);
     }
 
 }

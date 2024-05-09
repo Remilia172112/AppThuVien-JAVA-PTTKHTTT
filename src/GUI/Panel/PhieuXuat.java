@@ -120,7 +120,7 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
         tablePhieuXuat.setBackground(new Color(0xA1D6E2));
         scrollTablePhieuXuat = new JScrollPane();
         tblModel = new DefaultTableModel();
-        String[] header = new String[]{"STT", "Mã phiếu xuất", "Khách hàng", "Nhân viên nhập", "Thời gian", "Tổng tiền"};
+        String[] header = new String[]{"STT", "Mã phiếu xuất", "Khách hàng", "Nhân viên", "Thời gian", "Tổng tiền", "Trạng thái"};
         tblModel.setColumnIdentifiers(header);
         tablePhieuXuat.setModel(tblModel);
         tablePhieuXuat.setFocusable(false);
@@ -244,14 +244,27 @@ public final class PhieuXuat extends JPanel implements ActionListener, KeyListen
     public void loadDataTalbe(ArrayList<PhieuXuatDTO> listphieuxuat) {
         tblModel.setRowCount(0);
         int size = listphieuxuat.size();
+
         for (int i = 0; i < size; i++) {
+            String trangthaiString = "";
+            switch (listphieuxuat.get(i).getTT()) {
+                case 1 -> {
+                    trangthaiString = "Đã duyệt";
+                }
+                case 0 -> {
+                    trangthaiString = "Đã hủy";
+                }
+                case 2 -> {
+                    trangthaiString = "Chờ xử lý";
+                }
+            }
             tblModel.addRow(new Object[]{
                 i + 1,
                 listphieuxuat.get(i).getMP(),
                 khachHangBUS.getTenKhachHang(listphieuxuat.get(i).getMKH()),
                 nvBUS.getNameById(listphieuxuat.get(i).getMNV()),
                 Formater.FormatTime(listphieuxuat.get(i).getTG()),
-                Formater.FormatVND(listphieuxuat.get(i).getTIEN()),});
+                Formater.FormatVND(listphieuxuat.get(i).getTIEN()), trangthaiString});
         }
     }
 

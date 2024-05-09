@@ -8,6 +8,7 @@ import DTO.KhachHangDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.MainKH;
+import GUI.Panel.DonHang;
 import GUI.Panel.GioHang;
 // import GUI.login_page;
 import GUI.Panel.SanPhamKH;
@@ -26,10 +27,14 @@ public class MenuTaskbarKH extends JPanel {
     login_page login ;
     TrangChu trangChu;
     SanPhamKH sanPham;
+    GioHang gioHang;
+    DonHang donHang;
     JScrollPane scrollPaneMenuTask ;
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
         {"Sản phẩm", "book.svg", "xemhang"},
+        {"Giỏ hàng", "book.svg", "giohang"},
+        {"Đơn hàng", "export.svg", "donhang"},
         {"Đăng xuất", "log_out.svg", "dangxuat"},
     };
 
@@ -176,8 +181,24 @@ public class MenuTaskbarKH extends JPanel {
 
             }
         });
+        listitem.get(2).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                gioHang = new GioHang(main, user, "create");
+                main.setPanel(gioHang);
+
+            }
+        });
+        listitem.get(3).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                donHang = new DonHang(main, user);
+                main.setPanel(donHang);
+
+            }
+        });
         if(user.getMNV() == 0) {
-            listitem.get(2).addMouseListener(new MouseAdapter() {
+            listitem.get(4).addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent evt) {
                     login = new login_page();
@@ -186,7 +207,7 @@ public class MenuTaskbarKH extends JPanel {
             });
         }
         else {
-                listitem.get(2).addMouseListener(new MouseAdapter() {
+                listitem.get(4).addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent evt) {
                     

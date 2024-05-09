@@ -2,6 +2,7 @@ package DAO;
 
 import DTO.ChiTietPhieuDTO;
 import DTO.PhieuXuatDTO;
+import DTO.SanPhamDTO;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import BUS.SanPhamBUS;
+
 
 
 public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
@@ -125,6 +129,30 @@ public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
         }
         return result;
     }
+
+    public ArrayList<PhieuXuatDTO> selectByMKH(String t) {
+        ArrayList<PhieuXuatDTO> result = new ArrayList<>();
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "SELECT * FROM PHIEUXUAT WHERE MKH=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while(rs.next()){
+                int MP = rs.getInt("MPX");
+                Timestamp TG = rs.getTimestamp("TG");
+                int MKH = rs.getInt("MKH");
+                int MNV = rs.getInt("MNV");
+                long TIEN = rs.getLong("TIEN");
+                int TT = rs.getInt("TT");
+                PhieuXuatDTO tmp = new PhieuXuatDTO(MKH, MP, MNV, TG, TIEN, TT);
+                result.add(tmp);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+        }
+        return result;
+    }
     
     public PhieuXuatDTO cancel(int phieu) {
         PhieuXuatDTO result = null;
@@ -136,6 +164,21 @@ public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
             deletePhieu(phieu);
         } catch (Exception e) {
             System.out.println(e);
+        }
+        return result;
+    }
+
+    public int updateDP(String t) {
+        int result = 0 ;
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "UPDATE PHIEUXUAT SET TT = 1 WHERE MPX = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            result = pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -178,6 +221,55 @@ public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
             System.out.println(e);
         }
         return result;
+    }
+    public int cancelPhieuXuat(int maphieu){
+        int result = 0;
+        ArrayList<ChiTietPhieuDTO> arrCt = ChiTietPhieuXuatDAO.getInstance().selectAll(Integer.toString(maphieu));
+        for (ChiTietPhieuDTO chiTietPhieuNhapDTO : arrCt) {
+            SanPhamDAO.getInstance().updateSoLuongTon(chiTietPhieuNhapDTO.getMSP(), -(chiTietPhieuNhapDTO.getSL()));
+        }
+        ChiTietPhieuNhapDAO.getInstance().delete(Integer.toString(maphieu));
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "DELETE FROM PHIEUXUAT WHERE MPX = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setInt(1, maphieu);
+            result = pst.executeUpdate();
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(PhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public boolean checkSLPx(int maphieu) {
+        SanPhamBUS spBus = new SanPhamBUS();
+        ArrayList<SanPhamDTO> SP = new ArrayList<SanPhamDTO>();
+        ArrayList<ChiTietPhieuDTO> result = new ArrayList<>();
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "SELECT * FROM CTPHIEUXUAT WHERE MPX=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, maphieu);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while (rs.next()) {
+                int masp = rs.getInt("MSP");
+                int soluong = rs.getInt("SL");
+                int tiennhap = rs.getInt("TIENXUAT");
+                ChiTietPhieuDTO ct = new ChiTietPhieuDTO(maphieu, masp,  soluong, tiennhap);
+                result.add(ct);
+                SP.add(spBus.spDAO.selectById(ct.getMSP() + ""));
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        for (int i = 0; i < SP.size(); i++) {
+            if(result.get(i).getSL() > SP.get(i).getSL()){
+                return false;
+            }
+        }
+        return true;
     }
     @Override
     public int getAutoIncrement() {
