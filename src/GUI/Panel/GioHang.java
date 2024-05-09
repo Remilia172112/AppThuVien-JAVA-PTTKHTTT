@@ -222,7 +222,8 @@ public final class GioHang extends JPanel {
         txtMaSp.setEditable(false);
         txtMaISBN = new InputForm("Mã ISBN");
         txtMaISBN.setEditable(false);
-        txtGiaXuat = new InputForm("Giá xuất");
+        txtGiaXuat = new InputForm("Giá bán");
+        txtGiaXuat.setEditable(false);
         PlainDocument dongia = (PlainDocument) txtGiaXuat.getTxtForm().getDocument();
         dongia.setDocumentFilter((new NumericDocumentFilter()));   //chỉ cho nhập số
         txtSoLuongSPxuat = new InputForm("Số lượng");

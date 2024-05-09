@@ -60,7 +60,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
         int result = 0 ;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "UPDATE TAIKHOANKH TK JOIN NHANVIEN NV ON TK.MKH = NV.MKH SET TK.TT = 2 WHERE `EMAIL` = ?";
+            String sql = "UPDATE TAIKHOANKH KH JOIN KHACHHANG KH ON KH.MKH = KH.MKH SET KH.TT = 2 WHERE `EMAIL` = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
@@ -75,7 +75,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
     public void updatePass(String email, String password){
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "UPDATE TAIKHOANKH TK JOIN NHANVIEN NV ON TK.MKH = NV.MKH SET `MK` = ? WHERE `EMAIL` = ?";
+            String sql = "UPDATE TAIKHOANKH KH JOIN KHACHHANG KH ON KH.MKH = NV.MKH SET `MK` = ? WHERE `EMAIL` = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, BCrypt.hashpw(password, BCrypt.gensalt(12)));
             pst.setString(2, email);
@@ -90,7 +90,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
         TaiKhoanDTO tk = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM TAIKHOANKH TK JOIN NHANVIEN NV ON TK.MKH = NV.MKH WHERE NV.EMAIL = ?";
+            String sql = "SELECT * FROM TAIKHOANKH KH JOIN KHACHHANG KH ON KH.MKH = NV.MKH WHERE NV.EMAIL = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1,t);
             ResultSet rs = pst.executeQuery();
@@ -113,7 +113,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
     public void sendOpt(String email, String opt){
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "UPDATE TAIKHOANKH TK JOIN NHANVIEN NV ON TK.MKH = NV.MKH SET `OTP` = ? WHERE `EMAIL` = ?";
+            String sql = "UPDATE TAIKHOANKH KH JOIN KHACHHANG KH ON KH.MKH = NV.MKH SET `OTP` = ? WHERE `EMAIL` = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, opt);
             pst.setString(2, email);
@@ -128,7 +128,7 @@ public class TaiKhoanKHDAO implements DAOinterface<TaiKhoanDTO>{
         boolean check = false;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM TAIKHOANKH TK JOIN NHANVIEN NV ON TK.MKH = NV.MKH WHERE NV.EMAIL = ? AND TK.OTP = ?";
+            String sql = "SELECT * FROM TAIKHOANKH KH JOIN KHACHHANG KH ON KH.MKH = NV.MKH WHERE NV.EMAIL = ? AND KH.OTP = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, email);
             pst.setString(2, otp);
