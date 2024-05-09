@@ -371,9 +371,6 @@ public final class GioHang extends JPanel {
         JPanel khPanel = new JPanel(new GridLayout(2, 1, 5, 0));
         khPanel.setBackground(Color.WHITE);
         khPanel.setPreferredSize(new Dimension(0, 80));
-        JLabel khachKhangJLabel = new JLabel("Khách hàng");
-        khachKhangJLabel.setBorder(new EmptyBorder(0, 10, 0, 10));
-        khPanel.add(khachKhangJLabel);
         khPanel.add(khachJPanel);
         right_center.add(khPanel, BorderLayout.NORTH);
 

@@ -33,7 +33,7 @@ public class MenuTaskbarKH extends JPanel {
     String[][] getSt = {
         {"Trang chủ", "home.svg", "trangchu"},
         {"Sản phẩm", "book.svg", "xemhang"},
-        {"Giỏ hàng", "book.svg", "giohang"},
+        {"Giỏ hàng", "shopping_cart_icon.svg", "giohang"},
         {"Đơn hàng", "export.svg", "donhang"},
         {"Đăng xuất", "log_out.svg", "dangxuat"},
     };
