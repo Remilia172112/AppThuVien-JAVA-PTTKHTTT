@@ -49,7 +49,7 @@ public class ChiTietPhieuXuatDAO implements ChiTietInterface<ChiTietPhieuDTO> {
         for (int i = 0; i < t.size(); i++) {
             try {
                 Connection con = (Connection) JDBCUtil.getConnection();
-                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`,  `TIENXUAT`) VALUES (?,?,?,?)";
+                String sql = "INSERT INTO `CTPHIEUXUAT` (`MPX`, `MSP`, `SL`, `TIENXUAT`) VALUES (?,?,?,?)";
                 PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
                 pst.setInt(1, t.get(i).getMP());
                 pst.setInt(2, t.get(i).getMSP());

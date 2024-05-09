@@ -147,8 +147,8 @@ public class RegisterDialog extends JDialog implements ActionListener {
                 String SDT = phone.getText();
                 String EMAIL = email.getText();
                 String PASSWORD = password.getPass();
-                KhachHangDTO kh = new KhachHangDTO(khBUS.getMKHMAX(), HOTEN, SDT, null, EMAIL);
-                TaiKhoanDTO tk = new TaiKhoanDTO(khBUS.getMKHMAX(), TDN, PASSWORD, 4, 1);
+                KhachHangDTO kh = new KhachHangDTO(khBUS.getMKHMAX() + 1, HOTEN, SDT, null, EMAIL);
+                TaiKhoanDTO tk = new TaiKhoanDTO(khBUS.getMKHMAX() + 1, TDN, PASSWORD, 4, 1);
                 khBUS.add(kh);
                 tkBUS.addAccKH(tk);
                 this.dispose();

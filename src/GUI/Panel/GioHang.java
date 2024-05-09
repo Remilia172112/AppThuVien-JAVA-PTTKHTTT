@@ -67,6 +67,8 @@ public final class GioHang extends JPanel {
     SanPhamBUS spBUS = new SanPhamBUS();
     MaKhuyenMaiBUS mkmBUS = new MaKhuyenMaiBUS();
     GioHangBUS giohangBUS = new GioHangBUS();
+    PhieuXuatBUS pxbus = new PhieuXuatBUS();
+
     // SanPhamBUS chiTietSanPhamBUS = new SanPhamBUS();
     KhachHangBUS khachHangBUS = new KhachHangBUS();
     ArrayList<ChiTietGioHangDTO> chitietgiohang = new ArrayList<>();
@@ -83,7 +85,7 @@ public final class GioHang extends JPanel {
         this.mainChinh = mainChinh;
         this.tk = tk;
         this.type = type;
-        maphieu = giohangBUS.getMPMAX() + 1;
+        maphieu = pxbus.getMPMAX() + 1;
         long now = System.currentTimeMillis();
         Timestamp currenTime = new Timestamp(now);
         giohangBUS.add(new GioHangDTO(tk.getMNV(), 0, currenTime, 1));
@@ -513,7 +515,7 @@ public final class GioHang extends JPanel {
     public void addCtGioHang() { // them sp vao chitietphieu
         int masp = Integer.parseInt(txtMaSp.getText());
         int giaxuat;
-        String mkm = null;
+        String mkm = "";
         if(!txtGiaGiam.getText().equals(" ")) {
             giaxuat = Integer.parseInt(txtGiaGiam.getText());
             mkm = txtMaKM.getText();
@@ -521,7 +523,7 @@ public final class GioHang extends JPanel {
         else
             giaxuat = Integer.parseInt(txtGiaXuat.getText());
         int soluong = Integer.parseInt(txtSoLuongSPxuat.getText());
-        ChiTietGioHangDTO ctphieu = new ChiTietGioHangDTO(maphieu, masp, mkm, soluong, giaxuat);
+        ChiTietGioHangDTO ctphieu = new ChiTietGioHangDTO(tk.getMNV(), masp, mkm, soluong, giaxuat);
         ChiTietGioHangDTO p = giohangBUS.findCT(chitietgiohang, ctphieu.getMSP());
         if (p == null) {
             chitietgiohang.add(ctphieu);
@@ -545,12 +547,12 @@ public final class GioHang extends JPanel {
                     long now = System.currentTimeMillis();
                     Timestamp currenTime = new Timestamp(now);
                     PhieuXuatDTO phieuXuat = new PhieuXuatDTO(tk.getMNV(), maphieu, 1, currenTime, sum, 2);
-                    PhieuXuatBUS pxbus = new PhieuXuatBUS();
                     ArrayList <ChiTietPhieuDTO> ctpx = new ArrayList<ChiTietPhieuDTO>();
+                    chitietgiohang = giohangBUS.getAllct(tk.getMNV());
                     for(ChiTietGioHangDTO i : chitietgiohang) {
                         ctpx.add(new ChiTietPhieuDTO(maphieu, i.getMSP(), i.getSL(), i.getTIENGIO()));
                     }
-                    pxbus.insert(phieuXuat, ctpx); //update số lượng trong kho
+                    pxbus.insertGH(phieuXuat, ctpx); //update số lượng trong kho
                     JOptionPane.showMessageDialog(null, "Tạo đơn hàng thành công !");
                     giohangBUS.delete(tk.getMNV());
                     chitietgiohang = giohangBUS.getAllct(tk.getMNV());

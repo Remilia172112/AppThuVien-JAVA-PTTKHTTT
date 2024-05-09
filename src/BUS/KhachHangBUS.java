@@ -141,7 +141,7 @@ public class KhachHangBUS {
 
     public int getMKHMAX() {
         int s = 1;
-        listKhachHang = khDAO.selectAll();
+        listKhachHang = khDAO.selectAlll();
         for (KhachHangDTO i : listKhachHang) {
             if(i.getMaKH() > s) s = i.getMaKH();
         }

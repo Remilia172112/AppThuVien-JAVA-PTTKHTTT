@@ -387,7 +387,7 @@ VALUES
         ('Trần Đức Minh', '789 Đường Lê Hồng Phong, Thành phố Đà Nẵng', '0983456789', 1, '2024-04-16 18:08:12'),
         ('Lê Hải Yến', '456 Tôn Thất Thuyết, Quận 4, Thành phố Hồ Chí Minh', '0977234567', 1, '2024-04-16 18:08:47'),
         ('Phạm Thanh Hằng', '102 Lê Duẩn, Thành phố Hải Phòng', '0965876543', 1, '2024-04-16 18:12:59'),
-        ('Hoàng Đức Anh', '321 Lý Thường Kiệt, Thành phố Cần Thơ', '0946789012', 1, '2024-04-316 18:13:47'),
+        ('Hoàng Đức Anh', '321 Lý Thường Kiệt, Thành phố Cần Thơ', '0946789012', 1, '2024-04-16 18:13:47'),
         ('Ngô Thanh Tùng', '987 Trần Hưng Đạo, Quận 1, Thành phố Hồ Chí Minh', '0912345678', 1, '2024-04-16 18:14:12'),
         ('Võ Thị Kim Ngân', '555 Nguyễn Văn Linh, Quận Nam Từ Liêm, Hà Nội', '0916789123', 1, '2024-04-16 18:15:11'),
         ('Đỗ Văn Tú', '777 Hùng Vương, Thành phố Huế', '0982345678', 1, '2024-04-30 18:15:56'),
@@ -450,7 +450,7 @@ VALUES
 INSERT INTO `MAKHUYENMAI` (`MKM`,`MNV`,`TGBD`,`TGKT`,`TT`)
 VALUES
         ('GT2024', 1, '2024-04-01 00:00:00', '2024-05-01 00:00:00', 1),
-        ('MINGEY2024', 1, '2024-05-01 00:00:00', '2024-05-10 00:00:00', 1);
+        ('MINGEY2024', 1, '2024-05-01 00:00:00', '2024-05-20 00:00:00', 1);
 
 INSERT INTO `CTMAKHUYENMAI` (`MKM`, `MSP`,`PTG`)
 VALUES

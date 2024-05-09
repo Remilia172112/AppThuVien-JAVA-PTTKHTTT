@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import GUI.Component.PanelBorderRadius;
 import GUI.Component.SelectForm;
 import GUI.Component.TableSorter;
-import GUI.Dialog.ChiTietPhieuDialog;
+import GUI.Dialog.ChiTietPhieuKHDialog;
 import helper.Formater;
 import helper.JTableExporter;
 import java.awt.event.ActionEvent;
@@ -162,7 +162,7 @@ public final class DonHang extends JPanel implements ActionListener, KeyListener
             if (getRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Vui lòng chọn phiếu cần xem!");
             } else {
-                new ChiTietPhieuDialog(m, "Thông tin phiếu xuất", true, pxBUS.getSelect(getRow()));
+                new ChiTietPhieuKHDialog(m, "Thông tin phiếu xuất", true, pxBUS.getSelect(getRow()));
             }
         } else if (source == search.btnReset) {
             resetForm();

@@ -137,7 +137,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == mainFunction.btn.get("update")) {
+        if (e.getSource() == mainFunction.btn.get("create")) {
             int index = getRowSelected();
             if (index != -1) {
                 long now = System.currentTimeMillis();
@@ -150,6 +150,7 @@ public final class SanPhamKH extends JPanel implements ActionListener {
                 }
                 else {
                     tmp = new ChiTietGioHangDTO(m.user.getMNV(), listSP.get(index).getMSP(), "", 1, listSP.get(index).getTIENX());
+                    giohangBUS.addCT(tmp);
                 }
                 JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công !");
             }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import config.JDBCUtil;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,13 +23,16 @@ public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `KHACHHANG`(`MKH`, `HOTEN`, `DIACHI`,`SDT`, `EMAIL`, `TT`) VALUES (?,?,?,?,?,1)";
+            String sql = "INSERT INTO `KHACHHANG`(`MKH`, `HOTEN`, `DIACHI`,`SDT`, `EMAIL`,`NGAYTHAMGIA` , `TT`) VALUES (?,?,?,?,?,?,1)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setInt(1, t.getMaKH());
             pst.setString(2, t.getHoten());
             pst.setString(3, t.getDiachi());
             pst.setString(4, t.getSdt());
+            long now = System.currentTimeMillis();
+            Timestamp currenTime = new Timestamp(now);
             pst.setString(5, t.getEMAIL());
+            pst.setTimestamp(6, currenTime);
             result = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -80,7 +84,31 @@ public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
         ArrayList<KhachHangDTO> result = new ArrayList<KhachHangDTO>();
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM KHACHHANG WHERE TT=1";
+            String sql = "SELECT * FROM KHACHHANG WHERE TT = 1";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while(rs.next()){
+                int MKH = rs.getInt("MKH");
+                String HOTEN = rs.getString("HOTEN");
+                String DIACHI = rs.getString("DIACHI");
+                String SDT = rs.getString("SDT");
+                Date ngaythamgia = rs.getDate("NGAYTHAMGIA");
+                String EMAIL = rs.getString("EMAIL");
+                KhachHangDTO kh = new KhachHangDTO(MKH, HOTEN, SDT, DIACHI, EMAIL,ngaythamgia);
+                result.add(kh);
+            }
+            JDBCUtil.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    public ArrayList<KhachHangDTO> selectAlll() {
+        ArrayList<KhachHangDTO> result = new ArrayList<KhachHangDTO>();
+        try {
+            Connection con = (Connection) JDBCUtil.getConnection();
+            String sql = "SELECT * FROM KHACHHANG";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = (ResultSet) pst.executeQuery();
             while(rs.next()){

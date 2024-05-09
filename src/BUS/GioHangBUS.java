@@ -62,6 +62,8 @@ public class GioHangBUS {
     }
 
     public boolean add(GioHangDTO phieu) {
+        this.listGioHang = giohangDAO.selectAll();
+        for(GioHangDTO i : listGioHang) if(i.getMKH() == phieu.getMKH()) return false;
         boolean check = giohangDAO.insert(phieu) != 0;
         return check;
     }
@@ -73,7 +75,9 @@ public class GioHangBUS {
     }
 
     public boolean addCT(ChiTietGioHangDTO ctPhieu) {
-        boolean check = ctGioHangDAO.insert(ctPhieu) != 0;
+        boolean check;
+        if(ctPhieu.getMKM().equals("")) check = ctGioHangDAO.insertNoMKM(ctPhieu) != 0;
+        else check = ctGioHangDAO.insert(ctPhieu) != 0;
         return check;
     }
 

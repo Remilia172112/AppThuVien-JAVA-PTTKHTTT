@@ -11,6 +11,8 @@ import helper.Validation;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Timestamp;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PlainDocument;
@@ -159,7 +161,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
             JOptionPane.showMessageDialog(this, "Địa chỉ không được rỗng", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             return false;
          }
-         else if(Validation.isEmpty(emailKH.getText()) || Validation.isEmail(emailKH.getText())) {
+         else if(Validation.isEmpty(emailKH.getText()) || !Validation.isEmail(emailKH.getText())) {
             JOptionPane.showMessageDialog(this, "Email không được rỗng và đúng định dạng", "Cảnh báo!", JOptionPane.WARNING_MESSAGE);
             return false;
          }
@@ -169,7 +171,9 @@ public class KhachHangDialog extends JDialog implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == btnThem && Validation()) {
                 int id=KhachHangDAO.getInstance().getAutoIncrement();
-                jpKH.khachhangBUS.add(new DTO.KhachHangDTO(id, tenKH.getText(),sdtKH.getText(), diachiKH.getText(), emailKH.getText()));
+                long now = System.currentTimeMillis();
+                Timestamp currenTime = new Timestamp(now);
+                jpKH.khachhangBUS.add(new DTO.KhachHangDTO(id, tenKH.getText(),sdtKH.getText(), diachiKH.getText(), emailKH.getText(), currenTime));
                 jpKH.loadDataTable(jpKH.listkh);
                 dispose();
 
