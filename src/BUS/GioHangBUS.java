@@ -66,6 +66,12 @@ public class GioHangBUS {
         return check;
     }
 
+    public ChiTietGioHangDTO checkTT(int mkh, int msp) {
+        this.listctGioHang = ctGioHangDAO.selectAll(mkh+"");
+        for (ChiTietGioHangDTO phieu : listctGioHang) if(phieu.getMSP() == msp) return phieu;
+        return null;
+    }
+
     public boolean addCT(ChiTietGioHangDTO ctPhieu) {
         boolean check = ctGioHangDAO.insert(ctPhieu) != 0;
         return check;

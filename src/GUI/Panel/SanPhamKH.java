@@ -1,7 +1,10 @@
 package GUI.Panel;
 
+import BUS.GioHangBUS;
 import BUS.SanPhamBUS;
 import DAO.NhaXuatBanDAO;
+import DTO.ChiTietGioHangDTO;
+import DTO.GioHangDTO;
 import GUI.Component.IntegratedSearch;
 import GUI.Component.MainFunction;
 import GUI.MainKH;
@@ -16,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +36,8 @@ public final class SanPhamKH extends JPanel implements ActionListener {
     DefaultTableModel tblModel;
     MainKH m;
     public SanPhamBUS spBUS = new SanPhamBUS();
+    GioHangBUS giohangBUS = new GioHangBUS();
+
     
     public ArrayList<DTO.SanPhamDTO> listSP = spBUS.getAll();
 
@@ -134,7 +140,18 @@ public final class SanPhamKH extends JPanel implements ActionListener {
         if (e.getSource() == mainFunction.btn.get("update")) {
             int index = getRowSelected();
             if (index != -1) {
-                // TODO Auto
+                long now = System.currentTimeMillis();
+                Timestamp currenTime = new Timestamp(now);
+                giohangBUS.add(new GioHangDTO(m.user.getMNV(), 0, currenTime, 1));
+                ChiTietGioHangDTO tmp = giohangBUS.checkTT(m.user.getMNV(), listSP.get(index).getMSP());
+                if(tmp != null) {
+                    tmp.setSL(tmp.getSL()+1);
+                    giohangBUS.updateCT(tmp);
+                }
+                else {
+                    tmp = new ChiTietGioHangDTO(m.user.getMNV(), listSP.get(index).getMSP(), "", 1, listSP.get(index).getTIENX());
+                }
+                JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công !");
             }
         } else if (e.getSource() == mainFunction.btn.get("detail")) {
             int index = getRowSelected();

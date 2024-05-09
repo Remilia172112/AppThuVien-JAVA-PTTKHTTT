@@ -338,6 +338,7 @@ VALUES
         (3, 'nhaxuatban', 'update'),
         (3, 'nhaxuatban', 'view'),
         (4, 'xemhang', 'view'),
+        (4, 'xemhang', 'create'),
         (4, 'giohang', 'create'),
         (4, 'giohang', 'delete'),
         (4, 'giohang', 'update'),
