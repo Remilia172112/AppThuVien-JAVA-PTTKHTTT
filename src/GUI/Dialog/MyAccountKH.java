@@ -93,7 +93,7 @@ public class MyAccountKH extends JDialog implements ActionListener {
     public void center_1() {
         check =  false;
         title.setText("CHỈNH SỬA THÔNG TIN");
-        center = new JPanel(new GridLayout(4,1));
+        center = new JPanel(new GridLayout(5,1));
         center.setBorder(new EmptyBorder(20, 10, 0, 10));
         center.setBackground(Color.WHITE);
         String opt[] = {"Số điện thoại","Địa chỉ", "Email", "Mật khẩu"};
